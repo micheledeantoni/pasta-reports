@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>PASTA · Player Analysis System for Transfer Assessment</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="PASTA — Player Analysis System for Transfer Assessment. Analisi calcistiche data-driven costruite attorno a contesto, ruolo e compatibilità tattica." />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="assets/css/pasta-theme.css" />
+
+		<style>
+			/* ── Reset banner per layout custom ─────────────────────────── */
+			#banner.pasta-hero {
+				background:
+					radial-gradient(ellipse at 0% 50%, rgba(74,222,128,.07) 0%, transparent 50%),
+					linear-gradient(160deg, #0b0f1e 0%, #080c18 100%);
+				min-height: 0;
+				padding: 5rem 0 4.5rem;
+				display: flex;
+				align-items: center;
+			}
+			#banner.pasta-hero .inner { width: 100%; }
+
+			.pasta-hero-inner {
+				max-width: 72rem;
+				margin: 0 auto;
+				padding: 0 3rem;
+			}
+
+			.pasta-hero-label {
+				font-size: .72rem;
+				font-weight: 700;
+				letter-spacing: .28em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.28);
+				margin: 0 0 1.1rem;
+			}
+
+			.pasta-wordmark {
+				font-size: clamp(3.8rem, 9vw, 6.5rem);
+				font-weight: 900;
+				line-height: 1;
+				letter-spacing: -.03em;
+				color: #fff;
+				margin: 0 0 1.4rem;
+			}
+
+			.pasta-hero-desc {
+				font-size: 1.05rem;
+				line-height: 1.7;
+				color: rgba(255,255,255,.5);
+				margin: 0 0 2.2rem;
+				max-width: 38rem;
+			}
+
+			/* ── Club sections ───────────────────────────────────────────── */
+			.pasta-club-section {
+				padding: 4.5rem 0 0;
+			}
+
+			.pasta-club-header {
+				max-width: 72rem;
+				margin: 0 auto;
+				padding: 0 3rem 1.8rem;
+				display: grid;
+				grid-template-columns: auto 1fr auto;
+				align-items: center;
+				gap: 1.2rem;
+				border-bottom: 1px solid rgba(255,255,255,.06);
+				margin-bottom: 2.4rem;
+			}
+
+			.pasta-club-name {
+				font-size: 2rem;
+				font-weight: 800;
+				letter-spacing: -.02em;
+				line-height: 1;
+				margin: 0;
+			}
+			.pasta-club-name .club-accent {
+				display: block;
+				width: 3px;
+				height: 2rem;
+				border-radius: 2px;
+				margin-right: .8rem;
+				display: inline-block;
+				vertical-align: middle;
+				margin-bottom: .15rem;
+			}
+
+			.pasta-club-divider {
+				height: 1px;
+				background: rgba(255,255,255,.06);
+			}
+
+			.pasta-club-meta {
+				display: flex;
+				align-items: center;
+				gap: .75rem;
+				flex-shrink: 0;
+			}
+			.pasta-club-count {
+				font-size: .72rem;
+				font-weight: 700;
+				letter-spacing: .14em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.28);
+			}
+			.pasta-club-dot {
+				width: 7px; height: 7px;
+				border-radius: 50%;
+				background: rgba(255,255,255,.15);
+			}
+			.pasta-club-dot.active {
+				background: #4ade80;
+				box-shadow: 0 0 6px rgba(74,222,128,.5);
+			}
+
+			/* ── Card grid ───────────────────────────────────────────────── */
+			.pasta-cards {
+				max-width: 72rem;
+				margin: 0 auto;
+				padding: 0 3rem 2.5rem;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.1rem;
+			}
+
+			.pasta-card {
+				background:
+					linear-gradient(160deg, rgba(255,255,255,.055) 0%, rgba(255,255,255,.018) 100%),
+					rgba(12,16,28,.92);
+				border: 1px solid rgba(255,255,255,.085);
+				border-radius: 1rem;
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				transition: transform .18s, box-shadow .18s;
+			}
+			.pasta-card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 1.2rem 2.8rem rgba(0,0,0,.35);
+			}
+			.pasta-card a { text-decoration: none; color: inherit; }
+
+			.pasta-card-img {
+				width: 100%;
+				aspect-ratio: 16/9;
+				object-fit: cover;
+				object-position: center;
+				filter: grayscale(40%) brightness(.75) contrast(1.05);
+				display: block;
+			}
+
+			.pasta-card-body {
+				padding: 1.1rem 1.2rem 1.3rem;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: .55rem;
+			}
+
+			.pasta-card-label {
+				font-size: .78rem;
+				font-weight: 700;
+				letter-spacing: .14em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.52);
+			}
+
+			.pasta-card-name {
+				font-size: 1.15rem;
+				font-weight: 700;
+				color: #fff;
+				line-height: 1.2;
+				margin: 0;
+			}
+
+			.pasta-card-clubs {
+				font-size: .76rem;
+				color: rgba(255,255,255,.42);
+				letter-spacing: .04em;
+			}
+
+			.pasta-card-insight {
+				font-size: .8rem;
+				color: rgba(255,255,255,.58);
+				line-height: 1.55;
+				margin: 0;
+				flex: 1;
+			}
+
+			.pasta-card-footer {
+				margin-top: .6rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.pasta-card-role {
+				font-size: .76rem;
+				font-weight: 600;
+				letter-spacing: .1em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.44);
+			}
+
+			.pasta-card-cta {
+				font-size: .82rem;
+				font-weight: 700;
+				letter-spacing: .1em;
+				text-transform: uppercase;
+				color: #4ade80;
+				display: flex;
+				align-items: center;
+				gap: .3rem;
+			}
+			.pasta-card-cta::after {
+				content: '→';
+				font-size: .9rem;
+			}
+
+			/* Active card has club-colored top border */
+			.pasta-card.active {
+				border-top: 2px solid var(--club-color, #4ade80);
+			}
+
+			/* Mini radar preview (5 dots on a pentagon path) */
+			.pasta-radar-mini {
+				width: 48px;
+				height: 48px;
+				flex-shrink: 0;
+				opacity: .85;
+			}
+
+			/* TBA card */
+			.pasta-card.tba {
+				opacity: .38;
+				pointer-events: none;
+				border-style: dashed;
+			}
+			.pasta-card.tba .pasta-card-name {
+				color: rgba(255,255,255,.35);
+				font-size: 1rem;
+			}
+			.pasta-card.tba .pasta-card-img {
+				filter: grayscale(100%) brightness(.4);
+			}
+
+			/* ── Bio section ─────────────────────────────────────────────── */
+			.pasta-bio {
+				max-width: 72rem;
+				margin: 4rem auto 0;
+				padding: 3rem;
+				border-top: 1px solid rgba(255,255,255,.06);
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+				gap: 3rem;
+				align-items: start;
+			}
+
+			.pasta-bio-heading {
+				font-size: .72rem;
+				font-weight: 700;
+				letter-spacing: .2em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.3);
+				margin-bottom: .75rem;
+			}
+
+			.pasta-bio-name {
+				font-size: 1.6rem;
+				font-weight: 800;
+				color: #fff;
+				margin: 0 0 .5rem;
+				line-height: 1.1;
+			}
+
+			.pasta-bio-sub {
+				font-size: .82rem;
+				color: rgba(255,255,255,.35);
+				line-height: 1.5;
+			}
+
+			.pasta-bio-text {
+				color: rgba(255,255,255,.65);
+				font-size: .92rem;
+				line-height: 1.75;
+			}
+			.pasta-bio-text p { margin: 0 0 1em; }
+			.pasta-bio-text p:last-child { margin: 0; }
+
+			/* ── Header double-line ─────────────────────────────────────── */
+			#header {
+				flex-direction: column !important;
+				height: auto !important;
+				background: #080c18 !important;
+				box-shadow: none !important;
+				border-bottom: 1px solid rgba(255,255,255,.07) !important;
+				line-height: normal !important;
+			}
+
+			.header-topbar {
+				width: 100%;
+				text-align: center;
+				font-size: .58rem;
+				font-weight: 600;
+				letter-spacing: .3em;
+				text-transform: uppercase;
+				color: rgba(255,255,255,.22);
+				padding: .55rem 1.5rem;
+				border-bottom: 1px solid rgba(255,255,255,.05);
+				line-height: 1;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.header-mainbar {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				height: 3.25em;
+				padding: 0;
+				line-height: 3.25em;
+			}
+			.header-mainbar nav {
+				height: 3.25em;
+				display: flex;
+				align-items: center;
+			}
+			.header-mainbar nav a[href="#menu"] {
+				line-height: 3.25em;
+				display: flex;
+				align-items: center;
+				gap: .55em;
+			}
+
+			/* Remove the white box from logo */
+			#header .logo {
+				display: flex;
+				align-items: center;
+				gap: .4rem;
+				letter-spacing: .12em;
+			}
+			#header .logo strong {
+				background: none !important;
+				color: #4ade80 !important;
+				font-size: 1rem !important;
+				letter-spacing: .15em;
+				padding: 0 !important;
+				margin: 0 !important;
+				line-height: normal !important;
+			}
+			#header .logo span {
+				color: rgba(255,255,255,.25);
+				font-size: .62rem;
+				letter-spacing: .18em;
+				text-transform: uppercase;
+				font-weight: 600;
+			}
+
+			/* Compensate for taller header in hero */
+			#banner.pasta-hero {
+				padding-top: 8.5rem !important;
+			}
+
+			/* ── Responsive ──────────────────────────────────────────────── */
+			@media screen and (max-width: 980px) {
+				.pasta-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+				.pasta-hero-right { border-left: none; border-top: 1px solid rgba(255,255,255,.07); padding-left: 0; padding-top: 2rem; }
+				.pasta-cards { grid-template-columns: repeat(2, 1fr); }
+				.pasta-bio { grid-template-columns: 1fr; gap: 1.5rem; }
+				.pasta-club-header, .pasta-cards, .pasta-bio { padding-left: 1.5rem; padding-right: 1.5rem; }
+				.pasta-hero-grid { padding: 0 1.5rem; }
+			}
+			@media screen and (max-width: 600px) {
+				.pasta-cards { grid-template-columns: 1fr; }
+				.pasta-wordmark { font-size: 4rem; }
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header" class="alt style1">
+				<div class="header-topbar">Player Analysis System for Transfer Assessment</div>
+				<div class="header-mainbar">
+					<a href="index.html" class="logo"><strong>PASTA</strong> <span>Michele Deantoni</span></a>
+					<nav><a href="#menu">Menu</a></nav>
+				</div>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="#inter">Inter</a></li>
+					<li><a href="method.html">Metodo</a></li>
+				</ul>
+				<ul class="actions stacked">
+					<li><a href="#inter" class="button primary fit scrolly">Esplora le analisi</a></li>
+					<li><a href="method.html" class="button fit">Il metodo</a></li>
+				</ul>
+			</nav>
+
+			<!-- Hero -->
+			<section id="banner" class="pasta-hero">
+				<div class="inner">
+					<div class="pasta-hero-inner">
+						<p class="pasta-hero-label">Player Analysis System for Transfer Assessment</p>
+						<h1 class="pasta-wordmark">PASTA</h1>
+						<p class="pasta-hero-desc">Scouting data-driven per leggere il mercato calcistico.<br />
+						Metriche avanzate, confronto visivo e logica replicabile.</p>
+						<ul class="actions">
+							<li><a href="#inter" class="button primary scrolly">Esplora le analisi</a></li>
+							<li><a href="method.html" class="button">Il metodo</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Main -->
+			<div id="main" style="background: #080c18; padding-bottom: 3rem;">
+
+				<!-- INTER -->
+				<div class="pasta-club-section" id="inter">
+					<div class="pasta-club-header">
+						<h2 class="pasta-club-name">
+							<span class="club-accent" style="background: #0070b9;"></span>
+							Inter
+						</h2>
+						<div class="pasta-club-divider"></div>
+						<div class="pasta-club-meta">
+							<span class="pasta-club-count">1 report attivo</span>
+							<span class="pasta-club-dot active"></span>
+						</div>
+					</div>
+					<div class="pasta-cards">
+
+						<!-- Curtis Jones — report attivo -->
+						<a href="curtis_jones.html" class="pasta-card active" style="--club-color: #0070b9;">
+							<img class="pasta-card-img" src="images/cards/curtis-jones.png" alt="Curtis Jones" style="filter: none; opacity: 1;" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Centrocampista · Inter scouting view</span>
+								<div class="pasta-card-footer">
+									<span class="pasta-card-role">MID · 2025–26</span>
+									<span class="pasta-card-cta">Leggi l'analisi</span>
+								</div>
+							</div>
+						</a>
+
+						<!-- Aleksandar Stankovic — in preparazione -->
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic05.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- MILAN -->
+				<div class="pasta-club-section" id="milan">
+					<div class="pasta-club-header">
+						<h2 class="pasta-club-name">
+							<span class="club-accent" style="background: #e4002b;"></span>
+							Milan
+						</h2>
+						<div class="pasta-club-divider"></div>
+						<div class="pasta-club-meta">
+							<span class="pasta-club-count">0 report attivi</span>
+							<span class="pasta-club-dot"></span>
+						</div>
+					</div>
+					<div class="pasta-cards">
+
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic02.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic03.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- NAPOLI -->
+				<div class="pasta-club-section" id="napoli">
+					<div class="pasta-club-header">
+						<h2 class="pasta-club-name">
+							<span class="club-accent" style="background: #00a0dc;"></span>
+							Napoli
+						</h2>
+						<div class="pasta-club-divider"></div>
+						<div class="pasta-club-meta">
+							<span class="pasta-club-count">0 report attivi</span>
+							<span class="pasta-club-dot"></span>
+						</div>
+					</div>
+					<div class="pasta-cards">
+
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic04.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic05.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- JUVENTUS -->
+				<div class="pasta-club-section" id="juventus">
+					<div class="pasta-club-header">
+						<h2 class="pasta-club-name">
+							<span class="club-accent" style="background: #e8e8e8;"></span>
+							Juventus
+						</h2>
+						<div class="pasta-club-divider"></div>
+						<div class="pasta-club-meta">
+							<span class="pasta-club-count">0 report attivi</span>
+							<span class="pasta-club-dot"></span>
+						</div>
+					</div>
+					<div class="pasta-cards">
+
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic06.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+						<div class="pasta-card tba">
+							<img class="pasta-card-img" src="images/pic01.jpg" alt="" />
+							<div class="pasta-card-body">
+								<span class="pasta-card-label">Profilo · In arrivo</span>
+								<h3 class="pasta-card-name">TBA</h3>
+								<p class="pasta-card-insight">Report in preparazione.</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Bio -->
+				<div class="pasta-bio">
+					<div>
+						<div class="pasta-bio-heading">Chi sono</div>
+						<h2 class="pasta-bio-name">Michele<br/>Deantoni</h2>
+						<p class="pasta-bio-sub">Analisi calcistica<br/>data-driven</p>
+					</div>
+					<div class="pasta-bio-text">
+						<p>PASTA raccoglie analisi di giocatori legate al mercato, organizzate attorno a ruolo, contesto e compatibilità tattica. Ogni report risponde alla stessa domanda: che tipo di giocatore è, cosa produce davvero in campo e perché il fit con un determinato club può essere credibile.</p>
+						<p>L'obiettivo non è vendere un giocatore ma spiegare un'idea con dati, confronto visivo e logica replicabile — utile per analisti, creator e tifosi che vogliono capire meglio il mercato.</p>
+						<ul class="actions" style="margin-top:1.5rem;">
+							<li><a href="method.html" class="button next">Il metodo</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="https://x.com/macnonesiste" class="icon brands alt fa-twitter" target="_blank" rel="noopener noreferrer"><span class="label">X</span></a></li>
+						<li><a href="https://www.linkedin.com/in/mdeantoni/" class="icon brands alt fa-linkedin-in" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+						<li><a href="mailto:michele.deantoni.MD@gmail.com?subject=PASTA%20-%20contact" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="method.html" class="icon solid alt fa-book"><span class="label">Metodo</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+					</ul>
+				</div>
+			</footer>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Manu Koné – Scouting Report | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        .sr-club-logo.roma  { background: linear-gradient(135deg, #c8102e, #8b0000); }
+
+        .sr-pca-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    display: grid;
+                    gap: .6rem;
+                }
+                .sr-pca-row {
+                    padding: .75rem .9rem;
+                    border-radius: .9rem;
+                    background: rgba(255,255,255,.03);
+                    border: 1px solid rgba(255,255,255,.065);
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    gap: .5rem;
+                    align-items: start;
+                }
+                .sr-pca-row strong {
+                    display: block;
+                    font-size: .84rem;
+                    line-height: 1.3;
+                    color: #e2e8f0;
+                }
+                .sr-pca-row span {
+                    display: block;
+                    font-size: .73rem;
+                    color: rgba(255,255,255,.48);
+                    margin-top: .18rem;
+                    line-height: 1.4;
+                }
+                .sr-pca-score {
+                    font-size: .74rem;
+                    font-weight: 700;
+                    padding: .22rem .5rem;
+                    border-radius: .45rem;
+                    background: rgba(74,222,128,.12);
+                    color: #4ade80;
+                    letter-spacing: .05em;
+                    white-space: nowrap;
+                }
+                .sr-pca-score.neg { background: rgba(251,146,60,.1);  color: #fb923c; }
+                .sr-pca-score.mid { background: rgba(148,163,184,.1); color: #94a3b8; }
+
+        @media screen and (max-width: 768px) {
+            .sr-heatmap-grid { grid-template-columns: 1fr; }
+            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+        }
+        @media screen and (max-width: 480px) {
+            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Documentazione</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="style2">
+        <div class="inner">
+            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
+            <header class="major"><h1>Scouting Report</h1></header>
+            <div class="content">
+                <p>Centrocampisti · Mercato invernale 2025–26 · Analisi compatibilità Inter</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+    <section class="sr-inner">
+
+        <!-- ── 1. HEADER ──────────────────────────────────────────────── -->
+        <div class="sr-card">
+            <div class="sr-header-top">
+                <div class="sr-header-left">
+                    <!-- Foto giocatore – sostituire src con immagine reale -->
+                    <div class="sr-player-photo">
+                        <div class="sr-photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="sr-player-name">Manu Koné</h2>
+                        <span class="sr-clubs-line">Roma &nbsp;·&nbsp; Valutazione per Inter</span>
+                        <div class="sr-club-flow" aria-label="Percorso valutazione club">
+                            <div class="sr-club-node">
+                                <div class="sr-club-logo roma">ROM</div>
+                                <span>Roma</span>
+                            </div>
+                            <span class="sr-club-arrow">→</span>
+                            <div class="sr-club-node">
+                                <div class="sr-club-logo inter">INT</div>
+                                <span>Inter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="sr-role-pill">Centrocampista</span>
+            </div>
+            <div class="sr-meta-row">
+                <span class="sr-meta-chip">ITA – Serie A</span>
+                <span class="sr-meta-chip">Stagione 2025–26</span>
+                <span class="sr-meta-chip">2 311 minuti</span>
+            </div>
+            <div class="sr-badges">
+                <div class="sr-badge"><span class="sr-badge-k">Pass completion</span><span class="sr-badge-v">90.6%</span></div>
+                <div class="sr-badge"><span class="sr-badge-k">Minuti</span><span class="sr-badge-v">2 311</span></div>
+                <div class="sr-badge"><span class="sr-badge-k">Carry progressivi</span><span class="sr-badge-v">1.99 p90</span></div>
+            </div>
+        </div>
+
+        <!-- ── 2. LETTURA DEL PROFILO ─────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <p class="sr-narrative">
+                Koné entra nel confronto come centrocampista di volume e conduzione, con una pulizia di passaggio alta
+                (<strong>90.6%</strong>) e una presenza territoriale piuttosto centrale. Rispetto alla media Inter,
+                porta meno produzione offensiva diretta e meno ricezioni, ma tiene un profilo interessante
+                nella progressione palla al piede (<strong>1.99 carry progressivi per90</strong>) e nella
+                protezione tecnica del possesso.
+            </p>
+        </div>
+
+        <!-- ── 3. PROFILO PCA ─────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Profilo sintetico · assi MID interpretativi</p>
+            <!-- Toolbar: custom legend (JS-populated) + comparison selector -->
+            <div class="sr-radar-tools">
+                <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="radarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
+                </div>
+            </div>
+            <!-- Full-width radar canvas -->
+            <div class="sr-radar-wrap-full">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <!-- Cross-league context note (quiet, below radar) -->
+            <div class="sr-radar-context-note">
+                Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
+            </div>
+            <!-- Axis guide accordion (collapsed by default) -->
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
+                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+            </details>
+        </div>
+
+        <!-- ── 4. CONFRONTO INDIVIDUALE VS INTER ─────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Confronto individuale vs centrocampisti Inter · 2025–26</p>
+            <p class="sr-raw-bars-note">
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze di profilo, ma non sono corrette per la difficoltà del campionato.
+                Passa il cursore su una barra per nome e valore esatto.
+            </p>
+            <div class="sr-player-tags" id="interLegend"></div>
+            <div id="interComparison"></div>
+        </div>
+
+        <!-- ── 5. SPATIAL 2×2 ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
+
+            <!-- Toggle giocatore -->
+            <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
+
+            <div class="sr-heatmap-grid">
+                <!-- Panel 1 — Positional heatmap -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#86efac;">Impronta posizionale</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
+                    <span class="sr-pitch-note" id="pitchPosNote"></span>
+                </div>
+                <!-- Panel 2 — Carry direction -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#6ee7b7;">Direzione conduzioni</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
+                    <span class="sr-pitch-note" id="pitchCarryNote"></span>
+                </div>
+                <!-- Panel 3 — Pass distribution -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#fbbf24;">Distribuzione passaggi</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
+                    <span class="sr-pitch-note" id="pitchPassNote"></span>
+                </div>
+                <!-- Panel 4 — Progressive passes -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#7dd3fc;">Progressione via passaggio</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
+                    <span class="sr-pitch-note" id="pitchProgNote"></span>
+                </div>
+            </div>
+
+            <!-- Defensive summary -->
+            <div class="sr-def-summary" id="defSummaryBlock"></div>
+
+            <p style="margin-top:.55rem; font-size:.68rem; color:rgba(255,255,255,.28);">
+                Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
+            </p>
+        </div>
+
+        <!-- ── 6. CONTESTO CLUB ATTUALE ───────────────────────────────── -->
+        <div class="sr-card compact">
+            <p class="sr-section-label">Contesto Roma · pari ruolo MID qualificati</p>
+            <p style="font-size:.74rem; color:rgba(255,255,255,.38); margin-bottom:1rem; line-height:1.5;">
+                Confronto interno con i pari ruolo Roma qualificati nel dataset 2025–26: Cristante, Soulé, Pellegrini e Pisilli.</p>
+            <div class="sr-player-tags" id="bruggeLegend"></div>
+            <div id="bruggeComparison"></div>
+        </div>
+
+        <!-- ── 7. SIMILARITY ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Similarità target-team vs centrocampisti Inter · tre spazi indipendenti</p>
+            <div class="sr-sim-grid" id="similarityGrid"></div>
+        </div>
+
+        <!-- ── 8. FOOTER ─────────────────────────────────────────────── -->
+        <div>
+            <div class="sr-footnotes" id="footnotes"></div>
+        </div>
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="generic.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+            </ul>
+        </div>
+    </footer>
+
+</div><!-- /wrapper -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Live page now uses external legacy payload only. Inline fallback archived. -->
+<script>
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/kone.legacy_role_payload.json";
+</script>
+<script src="assets/js/sr-report-loader.js"></script>
+<script src="assets/js/sr-role-runtime.js"></script>
+</body>
+</html>

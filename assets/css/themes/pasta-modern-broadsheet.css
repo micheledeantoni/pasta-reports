@@ -1,0 +1,400 @@
+/*
+ * PASTA Theme — Modern Broadsheet
+ * Sprint 6B visual prototype. Override layer only.
+ *
+ * Palette: near-white · white cards · strong black typography · minimal accents
+ * Mood: data journalism; serious analysis; long-form sports writing.
+ * Dark visualization panels (radar, pitch) preserved as editorial figures.
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    --mb-bg:          #f6f6f4;
+    --mb-surface:     #ffffff;
+    --mb-surface-2:   #f0f0ee;
+    --mb-ink:         #111111;
+    --mb-ink-2:       #2d2d2d;
+    --mb-ink-muted:   #6b7280;
+    --mb-ink-faint:   #9ca3af;
+    --mb-border:      #e2e2df;
+    --mb-border-2:    #eaeae8;
+    --mb-accent:      #111111;   /* strong black */
+    --mb-accent-rgb:  17,17,17;
+    --mb-accent-2:    #374151;   /* slate */
+    --mb-accent-2-rgb:55,65,81;
+    --mb-red:         #c0392b;   /* only for key figures */
+    --mb-bar-subject: #111111;
+    --mb-bar-comp:    #6b7280;
+    --mb-viz-bg:      #1a1a1a;   /* near-black panel */
+    --mb-pitch-bg:    #183018;   /* pitch green */
+    --mb-shadow:      rgba(17, 17, 17, 0.06);
+}
+
+/* ── Test banner ────────────────────────────────────────────────────────── */
+body::after {
+    content: "PASTA theme test — Modern Broadsheet · not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--mb-ink);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .45rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ── Global / body ──────────────────────────────────────────────────────── */
+html, body {
+    background-color: var(--mb-bg) !important;
+    color: var(--mb-ink) !important;
+}
+
+body.sr-page {
+    background: var(--mb-bg) !important;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+#header,
+#header.alt {
+    background: var(--mb-surface) !important;
+    box-shadow: 0 1px 0 var(--mb-border) !important;
+}
+
+#header a,
+#header a.logo strong,
+#header a.logo span,
+#header nav a {
+    color: var(--mb-ink) !important;
+    background: none !important;
+}
+
+#header a.logo strong {
+    color: var(--mb-ink) !important;
+    font-size: 1rem !important;
+    letter-spacing: .15em;
+}
+
+.header-topbar {
+    color: var(--mb-ink-faint) !important;
+    border-bottom-color: var(--mb-border-2) !important;
+}
+
+/* ── Report banner / hero ───────────────────────────────────────────────── */
+#banner,
+#banner.style2 {
+    background:
+        linear-gradient(180deg, var(--mb-surface) 0%, var(--mb-bg) 100%) !important;
+    border-bottom: 1px solid var(--mb-border) !important;
+}
+
+#banner .inner header h1,
+#banner .inner h1,
+#banner h1 {
+    color: var(--mb-ink) !important;
+    text-shadow: none !important;
+    font-weight: 900;
+    letter-spacing: -.02em;
+}
+
+#banner .content p,
+#banner p {
+    color: var(--mb-ink-muted) !important;
+    text-shadow: none !important;
+}
+
+/* Homepage hero */
+#banner.pasta-hero {
+    background:
+        linear-gradient(160deg, var(--mb-surface) 0%, var(--mb-bg) 100%) !important;
+}
+
+.pasta-wordmark {
+    color: var(--mb-ink) !important;
+    letter-spacing: -.04em;
+}
+
+.pasta-hero-label { color: var(--mb-ink-faint) !important; }
+.pasta-hero-desc  { color: var(--mb-ink-muted) !important; }
+
+/* ── Main container ─────────────────────────────────────────────────────── */
+#main, #wrapper {
+    background: var(--mb-bg) !important;
+}
+
+/* ── Report cards ───────────────────────────────────────────────────────── */
+.sr-card {
+    background: var(--mb-surface) !important;
+    border: 1px solid var(--mb-border) !important;
+    border-radius: .5rem !important;
+    box-shadow: 0 1px 2px var(--mb-shadow) !important;
+}
+
+/* ── Section labels ─────────────────────────────────────────────────────── */
+.sr-section-label {
+    color: var(--mb-ink-muted) !important;
+    letter-spacing: .22em;
+    border-bottom: 2px solid var(--mb-ink);
+    padding-bottom: .45rem;
+    margin-bottom: 1.1rem !important;
+}
+
+/* ── Player header ──────────────────────────────────────────────────────── */
+.sr-player-name {
+    color: var(--mb-ink) !important;
+    font-weight: 900;
+    letter-spacing: -.02em;
+}
+
+.sr-clubs-line { color: var(--mb-ink-muted) !important; }
+.sr-club-node  { color: var(--mb-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink) !important;
+}
+
+.sr-club-arrow { color: var(--mb-ink-faint) !important; }
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: transparent !important;
+    border: 1.5px solid var(--mb-ink) !important;
+    color: var(--mb-ink) !important;
+}
+
+/* ── Metadata chips and badges ──────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+}
+
+.sr-badge-k { color: var(--mb-ink-faint) !important; }
+.sr-badge-v { color: var(--mb-ink) !important; }
+
+/* ── Player tags ────────────────────────────────────────────────────────── */
+.sr-player-tag {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink-2) !important;
+}
+
+/* ── Narrative ──────────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--mb-ink-2) !important;
+    line-height: 1.8;
+    font-size: .97rem;
+}
+
+/* ── Radar — dark figure panel ──────────────────────────────────────────── */
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--mb-viz-bg) !important;
+    border-radius: .35rem;
+    padding: .5rem;
+    border: 1px solid var(--mb-border);
+}
+
+.sr-radar-select-label { color: var(--mb-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink) !important;
+}
+
+.sr-radar-select option { background: var(--mb-surface); color: var(--mb-ink); }
+
+.sr-rcl-item { color: var(--mb-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--mb-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--mb-ink-faint) !important;
+    border-left-color: var(--mb-ink) !important;
+    border-left-width: 2px !important;
+    background: none !important;
+    font-style: italic;
+}
+
+/* ── Axis guide and accordion ───────────────────────────────────────────── */
+.sr-radar-guide {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--mb-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--mb-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--mb-ink-muted) !important; }
+
+.sr-axis-accordion {
+    border: 1px solid var(--mb-border) !important;
+    border-radius: .35rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--mb-surface-2) !important;
+    color: var(--mb-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+}
+
+.sr-axis-card strong { color: var(--mb-ink) !important; }
+.sr-axis-card span   { color: var(--mb-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--mb-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--mb-red) !important; }
+
+/* ── Metric dot rows ────────────────────────────────────────────────────── */
+.sr-legend      { color: var(--mb-ink-muted) !important; }
+.sr-legend-item { color: var(--mb-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--mb-ink-faint) !important;
+    border-bottom: 2px solid var(--mb-ink) !important;
+}
+
+.sr-dot-label { color: var(--mb-ink-2) !important; }
+.sr-dot-val   { color: var(--mb-ink) !important; font-weight: 800; }
+.sr-dot-axis  { background: var(--mb-border) !important; }
+.sr-dot.main  { border-color: var(--mb-ink) !important; }
+
+/* ── Comparison bars ────────────────────────────────────────────────────── */
+.sr-bar-track      { background: var(--mb-border-2) !important; }
+.sr-bar-track.main { background: var(--mb-border) !important; }
+.sr-bar-fill       { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--mb-ink-muted) !important;
+    background: var(--mb-surface-2) !important;
+    border-left: 2px solid var(--mb-ink) !important;
+    font-style: italic;
+}
+
+/* ── Heatmap / spatial ──────────────────────────────────────────────────── */
+.sr-heatmap-btn {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--mb-surface) !important;
+    color: var(--mb-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: var(--mb-ink) !important;
+    border-color: var(--mb-ink) !important;
+    color: var(--mb-surface) !important;
+}
+
+.sr-pitch-svg {
+    background: var(--mb-pitch-bg) !important;
+    border: 1px solid var(--mb-border) !important;
+}
+
+.sr-pitch-title { color: var(--mb-ink-muted) !important; }
+.sr-pitch-note  { color: var(--mb-ink-faint) !important; }
+
+.sr-def-summary {
+    background: var(--mb-surface-2) !important;
+    border-color: var(--mb-border) !important;
+}
+
+.sr-def-stat { color: var(--mb-ink-2) !important; }
+.sr-def-stat strong { color: var(--mb-ink) !important; }
+
+/* ── Similarity ─────────────────────────────────────────────────────────── */
+.sr-sim-space {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    border-radius: .35rem !important;
+}
+
+.sr-sim-space-title { color: var(--mb-ink-muted) !important; }
+.sr-sim-desc  { color: var(--mb-ink-muted) !important; }
+.sr-sim-name  { color: var(--mb-ink) !important; }
+.sr-sim-score { color: var(--mb-ink) !important; font-weight: 800; }
+
+.sr-sim-match  { border-bottom-color: var(--mb-border-2) !important; }
+.sr-sim-bar    { background: var(--mb-border-2) !important; }
+.sr-sim-bar-fill {
+    background: var(--mb-ink) !important;
+    border-radius: 999px;
+}
+
+/* ── Footnotes ──────────────────────────────────────────────────────────── */
+.sr-footnote-chip {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+    color: var(--mb-ink-muted) !important;
+}
+
+/* ── GK-specific ────────────────────────────────────────────────────────── */
+.sr-gk-goal-frame {
+    background: var(--mb-viz-bg) !important;
+    border-color: rgba(255,255,255,.2) !important;
+}
+
+.sr-gk-room-row {
+    background: var(--mb-surface-2) !important;
+    border: 1px solid var(--mb-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--mb-ink-muted) !important; }
+
+.sr-gk-sample { border-color: var(--mb-border) !important; }
+
+/* ── Toggle ─────────────────────────────────────────────────────────────── */
+.sr-toggle { color: var(--mb-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--mb-border) !important;
+    border-color: var(--mb-border) !important;
+}
+
+/* ── Homepage cards ─────────────────────────────────────────────────────── */
+.pasta-card {
+    background: var(--mb-surface) !important;
+    border: 1px solid var(--mb-border) !important;
+    box-shadow: none !important;
+    border-radius: .4rem !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 2px 12px var(--mb-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label   { color: var(--mb-ink-faint) !important; }
+.pasta-card-name    { color: var(--mb-ink) !important; }
+.pasta-card-clubs   { color: var(--mb-ink-muted) !important; }
+.pasta-card-insight { color: var(--mb-ink-2) !important; }
+.pasta-card-cta     { color: var(--mb-ink) !important; }
+
+.pasta-club-name    { color: var(--mb-ink) !important; }
+.pasta-club-count   { color: var(--mb-ink-faint) !important; }
+.pasta-club-dot.active { background: var(--mb-ink) !important; box-shadow: none !important; }
+.pasta-club-divider { background: var(--mb-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--mb-ink) !important; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#footer {
+    background: var(--mb-ink) !important;
+    border-top: 1px solid var(--mb-border) !important;
+}

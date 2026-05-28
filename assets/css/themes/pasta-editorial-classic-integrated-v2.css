@@ -1,0 +1,666 @@
+/*
+ * PASTA Theme — Editorial Classic Integrated v2
+ * Sprint 6F — radar editorial figure treatment.
+ *
+ * Base: pasta-editorial-classic-integrated.css (Sprint 6D + 6E).
+ *
+ * Changes from v1:
+ *   1. Radar wrapper — inner vignette, warm parchment border, depth overlay.
+ *      Goal: panel reads as "printed figure", not "monitor screen".
+ *   2. Radar palette — copper/olive refined; grid/label slightly warmer.
+ *   3. Radar caption — editorial figure caption: left rule, ink-muted italic.
+ *   4. Player hero — violet suppression carried over from v1; no regressions.
+ *   5. All other elements — identical to v1.
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CUSTOM PROPERTIES  (prefix --ei2-*)
+   ═════════════════════════════════════════════════════════════════════════ */
+:root {
+    /* Paper */
+    --ei2-bg:          #f6f2ec;
+    --ei2-surface:     #ffffff;
+    --ei2-surface-2:   #f2ede6;
+    --ei2-surface-3:   #ece5db;
+
+    /* Ink scale */
+    --ei2-ink:         #1c1917;
+    --ei2-ink-2:       #44403c;
+    --ei2-ink-muted:   #78716c;
+    --ei2-ink-faint:   #a8a29e;
+
+    /* Borders */
+    --ei2-border:      #ddd6cc;
+    --ei2-border-2:    #e7e2db;
+
+    /* Accents */
+    --ei2-accent:      #831843;
+    --ei2-accent-rgb:  131,24,67;
+    --ei2-accent-2:    #14532d;
+    --ei2-accent-2-rgb:20,83,45;
+
+    /* Bars */
+    --ei2-bar-subject: #9f1239;
+    --ei2-bar-comp:    #166534;
+
+    /* Visualization panels */
+    --ei2-viz-bg:      #14201a;   /* deep charcoal-green — radar base */
+    --ei2-pitch-bg:    #162918;   /* football pitch */
+
+    /* Shadows */
+    --ei2-shadow:      rgba(28, 25, 23, 0.06);
+    --ei2-rule:        #1c1917;
+
+    /* ── Sprint 6E/6F: Chart.js radar palette bridge ─────────────────────
+     * Read by getCssVar() in sr-role-runtime.js.
+     * v2 refinements: copper slightly deeper, fill a touch more opaque for shape
+     * presence; comparison brightened for readability; grid/label unchanged.
+     * ─────────────────────────────────────────────────────────────────── */
+    --sr-radar-subject-border:    rgba(196, 116, 52, 0.94);   /* deep copper */
+    --sr-radar-subject-fill:      rgba(196, 116, 52, 0.17);
+
+    --sr-radar-comparison-border: rgba(110, 140, 94, 0.82);   /* brighter sage-olive */
+    --sr-radar-comparison-fill:   rgba(110, 140, 94, 0.10);
+
+    --sr-radar-grid-color:        rgba(225, 215, 196, 0.10);  /* warmer ivory */
+    --sr-radar-angle-color:       rgba(225, 215, 196, 0.14);
+    --sr-radar-label-color:       rgba(242, 236, 222, 0.84);  /* warm off-white */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEST BANNER
+   ═════════════════════════════════════════════════════════════════════════ */
+body::after {
+    content: "PASTA Integrated v2 — not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--ei2-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .3rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL / BODY
+   ═════════════════════════════════════════════════════════════════════════ */
+html, body {
+    background-color: var(--ei2-bg) !important;
+    color: var(--ei2-ink) !important;
+}
+
+body.sr-page {
+    background:
+        radial-gradient(ellipse at 0% 0%,   rgba(131,24,67,.03),  transparent 35%),
+        radial-gradient(ellipse at 100% 0%,  rgba(20,83,45,.02),   transparent 30%),
+        var(--ei2-bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SITE HEADER
+   ═════════════════════════════════════════════════════════════════════════ */
+#header,
+#header.alt {
+    background: var(--ei2-surface) !important;
+    box-shadow: 0 1px 0 var(--ei2-border) !important;
+}
+
+#header a,
+#header nav a {
+    color: var(--ei2-ink) !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+#header a.logo strong {
+    color: var(--ei2-accent) !important;
+    background: none !important;
+    font-size: 1rem !important;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+#header a.logo span {
+    color: var(--ei2-ink-faint) !important;
+    font-size: .6rem !important;
+    letter-spacing: .16em;
+}
+
+.header-topbar {
+    background: var(--ei2-surface) !important;
+    color: var(--ei2-ink-faint) !important;
+    border-bottom-color: var(--ei2-border-2) !important;
+    font-size: .55rem !important;
+    letter-spacing: .3em;
+}
+
+.header-mainbar {
+    background: var(--ei2-surface) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE HERO — EDITORIAL MASTHEAD
+   ═════════════════════════════════════════════════════════════════════════ */
+#banner,
+section#banner,
+#banner.pasta-hero,
+section.pasta-hero {
+    background: var(--ei2-bg) !important;
+    box-shadow: none !important;
+    color: var(--ei2-ink) !important;
+}
+
+#banner.pasta-hero {
+    padding-bottom: .5rem !important;
+    border-bottom: 2px solid var(--ei2-rule) !important;
+    min-height: 0 !important;
+}
+
+.pasta-hero-inner {
+    padding-top: 4rem !important;
+    padding-bottom: 3.5rem !important;
+}
+
+.pasta-wordmark {
+    font-size: clamp(4.5rem, 11vw, 8rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.04em !important;
+    color: var(--ei2-ink) !important;
+    line-height: .95 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.pasta-hero-label {
+    font-size: .67rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .3em !important;
+    text-transform: uppercase !important;
+    color: var(--ei2-ink-faint) !important;
+    margin-bottom: 1.3rem !important;
+    padding-top: .8rem !important;
+    border-top: 1px solid var(--ei2-border) !important;
+    display: block !important;
+}
+
+.pasta-hero-desc {
+    color: var(--ei2-ink-muted) !important;
+    font-size: 1rem !important;
+    line-height: 1.72 !important;
+    max-width: 33rem !important;
+    margin-bottom: 2rem !important;
+    text-shadow: none !important;
+}
+
+#banner .actions .button,
+.pasta-hero-inner .actions .button {
+    border-radius: .25rem !important;
+    font-size: .76rem !important;
+    letter-spacing: .13em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: .72rem 1.55rem !important;
+    box-shadow: none !important;
+    transition: background .12s, border-color .12s !important;
+}
+
+#banner .actions .button.primary,
+.pasta-hero-inner .actions .button.primary {
+    background: var(--ei2-ink) !important;
+    color: var(--ei2-surface) !important;
+    border: 1.5px solid var(--ei2-ink) !important;
+}
+
+#banner .actions .button.primary:hover,
+.pasta-hero-inner .actions .button.primary:hover {
+    background: var(--ei2-accent) !important;
+    border-color: var(--ei2-accent) !important;
+}
+
+#banner .actions .button:not(.primary),
+.pasta-hero-inner .actions .button:not(.primary) {
+    background: transparent !important;
+    color: var(--ei2-ink) !important;
+    border: 1.5px solid var(--ei2-border) !important;
+}
+
+#banner .actions .button:not(.primary):hover,
+.pasta-hero-inner .actions .button:not(.primary):hover {
+    border-color: var(--ei2-ink-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PLAYER PAGE HERO — VIOLET SUPPRESSED, EDITORIAL REPORT HEADING
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Kill the violet ::after overlay entirely */
+#banner.style2::after,
+#banner.style2:after {
+    display: none !important;
+    opacity: 0 !important;
+    background-color: transparent !important;
+}
+
+#banner.style2 {
+    background: var(--ei2-bg) !important;
+    background-image: none !important;
+    border-bottom: 2px solid var(--ei2-rule) !important;
+    box-shadow: none !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    padding: 6.5rem 0 2.25rem !important;
+}
+
+#banner.style2 > .inner::before {
+    display: none !important;
+    background: none !important;
+    opacity: 0 !important;
+}
+
+#banner.style2 > .inner {
+    padding: 0 !important;
+}
+
+#banner.style2 > .inner .image,
+#banner.style2 > .inner .image img {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+#banner.style2 .inner header.major h1,
+#banner.style2 .inner h1,
+#banner.style2 h1 {
+    color: var(--ei2-ink) !important;
+    font-size: clamp(2.2rem, 5.5vw, 4rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.025em !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+    margin-bottom: .55rem !important;
+}
+
+#banner.style2 header.major::before {
+    content: "Scouting Report · PASTA";
+    display: block;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--ei2-accent);
+    margin-bottom: .7rem;
+}
+
+#banner.style2 .content p,
+#banner.style2 .inner .content p,
+#banner.style2 p {
+    font-size: .87rem !important;
+    color: var(--ei2-ink-muted) !important;
+    text-shadow: none !important;
+    letter-spacing: .04em !important;
+    margin-top: .4rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN CONTAINER
+   ═════════════════════════════════════════════════════════════════════════ */
+#main {
+    background: var(--ei2-bg) !important;
+}
+
+#main[style] {
+    background: var(--ei2-bg) !important;
+}
+
+#wrapper {
+    background: var(--ei2-bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REPORT CARDS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-card {
+    background: var(--ei2-surface) !important;
+    border: 1px solid var(--ei2-border) !important;
+    border-radius: .75rem !important;
+    box-shadow:
+        0 1px 2px var(--ei2-shadow),
+        0 3px 10px var(--ei2-shadow) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION LABELS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-section-label {
+    color: var(--ei2-accent) !important;
+    letter-spacing: .2em;
+    border-bottom: 1px solid var(--ei2-border-2);
+    padding-bottom: .5rem;
+    margin-bottom: 1.1rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PLAYER CARD HEADER
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-player-name {
+    color: var(--ei2-ink) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.015em !important;
+}
+
+.sr-clubs-line  { color: var(--ei2-ink-muted) !important; }
+.sr-club-node   { color: var(--ei2-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink) !important;
+}
+
+.sr-club-arrow { color: var(--ei2-ink-faint) !important; }
+
+.sr-role-pill {
+    background: rgba(var(--ei2-accent-rgb), .07) !important;
+    border: 1px solid rgba(var(--ei2-accent-rgb), .26) !important;
+    color: var(--ei2-accent) !important;
+    border-radius: .25rem !important;
+}
+
+.sr-meta-chip {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+}
+
+.sr-badge-k { color: var(--ei2-ink-faint) !important; }
+.sr-badge-v { color: var(--ei2-ink) !important; }
+
+.sr-player-tag {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-narrative {
+    color: var(--ei2-ink-2) !important;
+    line-height: 1.82 !important;
+    font-size: .95rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RADAR — EDITORIAL FIGURE TREATMENT
+   ─────────────────────────────────────────────────────────────────────────
+   v2 key change: the dark panel gets depth via inner radial gradient and a
+   warm parchment border. Reads as a printed figure inset, not a screen.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    /* Depth vignette: centre is lifted (lighter greenish), edges fade to near-black.
+       The perceptible contrast needs the centre to be BRIGHTER, not just
+       the edges to be darker — both can't start from the same dark base. */
+    background:
+        radial-gradient(ellipse at 50% 42%,
+            rgba(42, 72, 50, 0.62)  0%,
+            rgba(26, 42, 28, 0.00) 45%,
+            rgba(4,   8,  5, 0.80) 100%),
+        var(--ei2-viz-bg) !important;
+    border-radius: .5rem !important;
+    padding: .65rem !important;
+    /* Warm parchment border — frames the figure like a print plate */
+    border: 1px solid rgba(196, 172, 128, 0.25) !important;
+    /* Inner vignette reinforces the gradient depth */
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.14),
+        inset 0 0 56px rgba(0, 0, 0, 0.42) !important;
+}
+
+/* Radar legend and selector — on the paper surface, not inside the dark panel */
+.sr-radar-select-label { color: var(--ei2-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink) !important;
+}
+
+.sr-radar-select option { background: var(--ei2-surface); color: var(--ei2-ink); }
+
+.sr-rcl-item { color: var(--ei2-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--ei2-bar-subject) !important; }
+
+/* ── Editorial figure caption ────────────────────────────────────────────
+   The context note below the radar is styled as a traditional figure caption:
+   left rule (2px warm stone), ink-muted italic, slightly smaller than body.
+   Visually it anchors the figure to the card below it.             ──── */
+.sr-radar-context-note {
+    color: var(--ei2-ink-muted) !important;
+    border-left: 2px solid var(--ei2-border) !important;
+    padding-left: .85rem !important;
+    background: none !important;
+    font-style: italic !important;
+    font-size: .78rem !important;
+    line-height: 1.58 !important;
+    margin-top: .65rem !important;
+}
+
+/* Axis guide */
+.sr-radar-guide {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--ei2-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--ei2-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--ei2-ink-muted) !important; }
+
+/* Axis accordion */
+.sr-axis-accordion {
+    border: 1px solid var(--ei2-border) !important;
+    border-radius: .55rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--ei2-surface-2) !important;
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+}
+
+.sr-axis-card strong { color: var(--ei2-ink) !important; }
+.sr-axis-card span   { color: var(--ei2-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--ei2-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--ei2-accent) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   METRICS — BARS AND DOTS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-legend      { color: var(--ei2-ink-muted) !important; }
+.sr-legend-item { color: var(--ei2-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--ei2-ink-faint) !important;
+    border-bottom-color: var(--ei2-border-2) !important;
+}
+
+.sr-dot-label { color: var(--ei2-ink-2) !important; }
+.sr-dot-val   { color: var(--ei2-accent) !important; }
+.sr-dot-axis  { background: var(--ei2-border) !important; }
+.sr-dot.main  { border-color: var(--ei2-border) !important; }
+
+.sr-bar-track      { background: var(--ei2-border-2) !important; }
+.sr-bar-track.main { background: var(--ei2-border) !important; }
+.sr-bar-fill       { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--ei2-ink-muted) !important;
+    background: var(--ei2-surface-2) !important;
+    border-left: 1px solid var(--ei2-border) !important;
+    font-style: italic !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEATMAP / SPATIAL
+   ─────────────────────────────────────────────────────────────────────────
+   Pitch uses the same warm-green-family border as the radar. Consistent
+   "editorial figure" framing across both visualization panels.
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-heatmap-btn {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--ei2-surface-3) !important;
+    color: var(--ei2-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--ei2-accent-rgb), .07) !important;
+    border-color: rgba(var(--ei2-accent-rgb), .28) !important;
+    color: var(--ei2-accent) !important;
+}
+
+/* Pitch — same warm-border treatment as radar (consistent visual family) */
+.sr-pitch-svg {
+    background: var(--ei2-pitch-bg) !important;
+    border: 1px solid rgba(196, 172, 128, 0.20) !important;  /* matches radar border */
+    box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.20) !important;
+}
+
+.sr-pitch-title { color: var(--ei2-ink-muted) !important; }
+.sr-pitch-note  { color: var(--ei2-ink-faint) !important; }
+
+.sr-def-summary {
+    background: rgba(var(--ei2-accent-2-rgb), .05) !important;
+    border-color: rgba(var(--ei2-accent-2-rgb), .18) !important;
+}
+
+.sr-def-stat { color: var(--ei2-ink-2) !important; }
+.sr-def-stat strong { color: var(--ei2-accent-2) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SIMILARITY
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-sim-space {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    border-radius: .5rem !important;
+}
+
+.sr-sim-space-title { color: var(--ei2-accent) !important; }
+.sr-sim-desc  { color: var(--ei2-ink-muted) !important; }
+.sr-sim-name  { color: var(--ei2-ink) !important; }
+.sr-sim-score { color: var(--ei2-accent) !important; font-weight: 800 !important; }
+
+.sr-sim-match  { border-bottom-color: var(--ei2-border-2) !important; }
+.sr-sim-bar    { background: var(--ei2-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--ei2-accent), rgba(var(--ei2-accent-rgb),.45)) !important;
+    border-radius: 999px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTNOTES / TOGGLE / GK
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-footnote-chip {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-toggle { color: var(--ei2-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--ei2-border) !important;
+    border-color: var(--ei2-border) !important;
+}
+
+.sr-gk-goal-frame {
+    background: var(--ei2-viz-bg) !important;
+    border-color: rgba(196, 172, 128, 0.16) !important;
+}
+
+.sr-gk-room-row {
+    background: var(--ei2-surface-2) !important;
+    border: 1px solid var(--ei2-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--ei2-ink-muted) !important; }
+.sr-gk-sample { border-color: var(--ei2-border) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE CARDS
+   ═════════════════════════════════════════════════════════════════════════ */
+.pasta-card {
+    background: var(--ei2-surface) !important;
+    border: 1px solid var(--ei2-border) !important;
+    box-shadow: 0 1px 3px var(--ei2-shadow) !important;
+    border-radius: .55rem !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 4px 16px var(--ei2-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label   { color: var(--ei2-ink-faint) !important; }
+.pasta-card-name    { color: var(--ei2-ink) !important; }
+.pasta-card-clubs   { color: var(--ei2-ink-muted) !important; }
+.pasta-card-insight { color: var(--ei2-ink-2) !important; }
+.pasta-card-cta     { color: var(--ei2-accent) !important; }
+.pasta-card-cta::after { color: var(--ei2-accent) !important; }
+
+.pasta-club-name    { color: var(--ei2-ink) !important; }
+.pasta-club-count   { color: var(--ei2-ink-faint) !important; }
+.pasta-club-dot.active {
+    background: var(--ei2-accent) !important;
+    box-shadow: none !important;
+}
+.pasta-club-divider { background: var(--ei2-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--ei2-border) !important; }
+
+.pasta-bio-heading  { color: var(--ei2-ink-faint) !important; }
+.pasta-bio-name     { color: var(--ei2-ink) !important; }
+.pasta-bio-sub      { color: var(--ei2-ink-muted) !important; }
+.pasta-bio-text     { color: var(--ei2-ink-2) !important; }
+
+.pasta-card.tba {
+    border-style: dashed !important;
+    opacity: .32 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER / MENU
+   ═════════════════════════════════════════════════════════════════════════ */
+#footer {
+    background: var(--ei2-ink) !important;
+    border-top: 2px solid var(--ei2-rule) !important;
+}
+
+#menu {
+    background: var(--ei2-ink) !important;
+}
+
+#menu a {
+    color: rgba(255,255,255,.75) !important;
+    border-color: rgba(255,255,255,.1) !important;
+}
+
+#menu a:hover { color: #fff !important; }

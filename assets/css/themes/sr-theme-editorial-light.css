@@ -1,0 +1,432 @@
+/* ============================================================================
+   sr-theme-editorial-light.css — Experimental editorial theme — Sprint 4B
+   ============================================================================
+   EXPERIMENTAL / NON-PRODUCTION.
+   Loaded only by style test pages (*. style_test.html).
+   NOT loaded by live role pages or gk_report.html.
+   Override layer: loaded after sr-report-common.css and sr-role-report.css.
+   ============================================================================
+
+   Design direction
+   ─────────────────
+   - Warm off-white newsprint feel; more magazine / analysis readability.
+   - Reduced visual weight: lighter backgrounds, less heavy shadow.
+   - Dark-on-light text instead of light-on-dark.
+   - Accent colours preserved (green #22c55e → slightly deeper for contrast on
+     light; orange accent retained where readable).
+   - Layout, grid, chart containers, and SVG structures are UNTOUCHED.
+
+   Override philosophy
+   ─────────────────────
+   Overrides use the exact same selectors as the production CSS so the cascade
+   replaces values cleanly.  No new HTML structure is introduced.  Canvas
+   dimensions and Chart.js containers are not modified.
+   ============================================================================ */
+
+
+/* ── 0. Palette tokens (not CSS variables — explicit values below) ──────────
+
+   Page bg:      #f5f1ea  (warm cream / newsprint)
+   Card bg:      #ffffff
+   Card border:  #e0dcd4
+   Surface 2:    #f0ece4  (slightly darker cream for nested surfaces)
+   Text primary: #1a1825
+   Text 2:       #5a5670
+   Text 3:       #8c88a4
+   Green accent: #16a34a  (darker green for readable contrast on light)
+   Green tint:   rgba(22,163,74,.08)
+   Orange:       #c2410c
+   Orange soft:  rgba(194,65,12,.08)
+   Shadow:       rgba(30,24,48,.06)
+   ──────────────────────────────────────────────────────────────────────────*/
+
+
+/* ── 1. Page background ──────────────────────────────────────────────────── */
+
+.sr-page {
+    background:
+        radial-gradient(circle at 12% 0%,  rgba(22,163,74,.05),  transparent 28%),
+        radial-gradient(circle at 88% 0%,  rgba(194,65,12,.04),  transparent 26%),
+        linear-gradient(180deg, #f5f1ea, #f0ece4);
+}
+
+
+/* ── 2. Cards ────────────────────────────────────────────────────────────── */
+
+.sr-card {
+    background: #ffffff;
+    border: 1px solid #e0dcd4;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 12px rgba(30,24,48,.06), 0 0 0 0 transparent;
+}
+
+.sr-card.compact {
+    padding: 1.1rem 1.4rem;
+    background: #faf8f5;
+}
+
+
+/* ── 3. Section labels ───────────────────────────────────────────────────── */
+
+.sr-section-label {
+    color: #8c88a4;
+    font-size: .7rem;
+    letter-spacing: .17em;
+}
+
+
+/* ── 4. Player header ────────────────────────────────────────────────────── */
+
+.sr-player-name {
+    color: #1a1825;
+}
+
+.sr-clubs-line {
+    color: #8c88a4;
+}
+
+.sr-club-node {
+    color: #5a5670;
+}
+
+.sr-club-logo {
+    border: 1px solid #e0dcd4;
+    background: #f5f1ea;
+    color: #1a1825;
+}
+
+.sr-club-arrow {
+    color: #b8b4cc;
+}
+
+.sr-role-pill {
+    border: 1px solid rgba(22,163,74,.28);
+    color: #16a34a;
+    background: rgba(22,163,74,.07);
+}
+
+
+/* ── 5. Metadata chips and badges ────────────────────────────────────────── */
+
+.sr-meta-chip {
+    background: #f0ece4;
+    border: 1px solid #e0dcd4;
+    color: #5a5670;
+}
+
+.sr-badge {
+    background: #faf8f5;
+    border: 1px solid #e0dcd4;
+}
+
+.sr-badge-k {
+    color: #8c88a4;
+}
+
+.sr-badge-v {
+    color: #1a1825;
+}
+
+.sr-meta-row .sr-meta-chip {
+    font-size: .79rem;
+}
+
+
+/* ── 6. Narrative / profile reading ─────────────────────────────────────── */
+
+.sr-narrative {
+    color: #3d3a52;
+    line-height: 1.8;
+}
+
+
+/* ── 7. Radar block ──────────────────────────────────────────────────────── */
+
+/* The canvas itself is rendered by Chart.js — keep it dark (dark canvas
+   looks better editorially, like a diagram on a light page). */
+
+.sr-radar-col .sr-card {
+    background: #1a1a2e;
+    border-color: rgba(255,255,255,.09);
+}
+
+/* Axis cards within the radar column stay dark too */
+.sr-radar-col .sr-axis-card {
+    background: rgba(255,255,255,.03);
+    border-color: rgba(255,255,255,.065);
+}
+
+.sr-radar-col .sr-axis-card strong {
+    color: rgba(255,255,255,.84);
+}
+
+.sr-radar-col .sr-axis-card span {
+    color: rgba(255,255,255,.46);
+}
+
+/* Axis accordion inside radar column */
+.sr-radar-col .sr-axis-accordion {
+    border-color: rgba(255,255,255,.07);
+}
+
+.sr-radar-col .sr-axis-accordion-summary {
+    color: rgba(255,255,255,.35);
+    background: rgba(255,255,255,.025);
+}
+
+.sr-radar-col .sr-section-label {
+    color: rgba(255,255,255,.38);
+}
+
+.sr-radar-col .sr-radar-context-note {
+    color: rgba(255,255,255,.25);
+    border-left-color: rgba(255,255,255,.1);
+}
+
+/* Radar guide (key/val legend) */
+.sr-radar-guide {
+    border-color: rgba(255,255,255,.06);
+    background: rgba(255,255,255,.02);
+}
+
+.sr-radar-guide-title {
+    color: rgba(255,255,255,.28);
+}
+
+.sr-radar-guide-key {
+    color: rgba(255,255,255,.5);
+}
+
+.sr-radar-guide-val {
+    color: rgba(255,255,255,.35);
+}
+
+/* Radar selector */
+.sr-radar-tools {
+    /* no visual change; layout preserved */
+}
+
+.sr-radar-col .sr-radar-select-label {
+    color: rgba(255,255,255,.36);
+}
+
+.sr-radar-col .sr-radar-select {
+    background: rgba(255,255,255,.065);
+    border-color: rgba(255,255,255,.13);
+    color: rgba(255,255,255,.78);
+}
+
+/* Custom legend within radar col */
+.sr-radar-col .sr-rcl-item {
+    color: rgba(255,255,255,.72);
+}
+
+/* Player tags within radar col */
+.sr-radar-col .sr-player-tag {
+    background: rgba(255,255,255,.04);
+    border-color: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.7);
+}
+
+/* Axis cards outside radar col (full-width) */
+.sr-axis-card {
+    background: #f0ece4;
+    border: 1px solid #e0dcd4;
+}
+
+.sr-axis-card strong {
+    color: #1a1825;
+}
+
+.sr-axis-card span {
+    color: #8c88a4;
+}
+
+
+/* ── 8. Metric comparison bars ───────────────────────────────────────────── */
+
+/* Dot rows / comparison dots */
+.sr-dot-group-title {
+    color: #8c88a4;
+    border-bottom: 1px solid #e0dcd4;
+}
+
+.sr-dot-label {
+    color: #5a5670;
+}
+
+.sr-dot-val {
+    color: #16a34a;
+}
+
+.sr-dot-axis {
+    background: #e0dcd4;
+}
+
+/* Bar tracks */
+.sr-bar-track {
+    background: #e8e4dc;
+}
+
+.sr-bar-track.main {
+    background: #ddd8cf;
+}
+
+/* Tooltip stays dark — readable on either bg */
+.sr-bar-fill::after,
+.sr-dot::after {
+    background: rgba(10,14,26,.94);
+    border-color: rgba(255,255,255,.12);
+    color: rgba(255,255,255,.88);
+}
+
+/* Raw bars note */
+.sr-raw-bars-note {
+    color: #8c88a4;
+    background: #f0ece4;
+    border-left-color: #c8c4bc;
+}
+
+/* Legend */
+.sr-legend {
+    color: #5a5670;
+}
+
+
+/* ── 9. Heatmap / spatial block ──────────────────────────────────────────── */
+
+/* Toggle buttons */
+.sr-heatmap-btn {
+    border-color: #d8d4cc;
+    background: #f5f1ea;
+    color: #8c88a4;
+}
+
+.sr-heatmap-btn:hover {
+    background: #ece8e0;
+    color: #3d3a52;
+}
+
+.sr-heatmap-btn.active {
+    border-color: rgba(22,163,74,.35);
+    background: rgba(22,163,74,.07);
+    color: #16a34a;
+}
+
+/* SVG pitch stays dark (embedded background: #080e1c) — no override needed */
+
+.sr-pitch-title {
+    color: #5a5670;
+}
+
+.sr-pitch-note {
+    color: #8c88a4;
+}
+
+/* DEF summary */
+.sr-def-summary {
+    background: rgba(22,163,74,.04);
+    border-color: rgba(22,163,74,.14);
+}
+
+.sr-def-stat {
+    color: #5a5670;
+    background: #f0ece4;
+}
+
+.sr-def-stat strong {
+    color: #0e7490;  /* teal — readable on light */
+}
+
+
+/* ── 10. Similarity cards ────────────────────────────────────────────────── */
+
+.sr-sim-grid .sr-sim-space {
+    background: #faf8f5;
+    border: 1px solid #e0dcd4;
+}
+
+.sr-sim-space-title {
+    color: #c2410c;
+}
+
+.sr-sim-desc {
+    color: #8c88a4;
+}
+
+.sr-sim-match {
+    border-bottom-color: #e8e4dc;
+}
+
+.sr-sim-name {
+    color: #1a1825;
+}
+
+.sr-sim-score {
+    color: #c2410c;
+}
+
+.sr-sim-bar {
+    background: #e8e4dc;
+}
+
+
+/* ── 11. Footnotes / provenance ──────────────────────────────────────────── */
+
+.sr-footnote-chip {
+    background: #f0ece4;
+    border: 1px solid #e0dcd4;
+    color: #8c88a4;
+}
+
+.sr-footnotes {
+    /* layout preserved */
+}
+
+
+/* ── 12. Player tags (outside radar col) ────────────────────────────────── */
+
+.sr-player-tags .sr-player-tag {
+    background: #f0ece4;
+    border-color: #e0dcd4;
+    color: #5a5670;
+}
+
+
+/* ── 13. Toggle switch ───────────────────────────────────────────────────── */
+
+.sr-toggle {
+    color: #8c88a4;
+}
+
+.sr-toggle-switch {
+    border-color: #d0ccc4;
+    background: #e8e4dc;
+}
+
+.sr-toggle-switch::after {
+    background: #5a5670;
+}
+
+.sr-toggle input:checked + .sr-toggle-switch {
+    background: rgba(194,65,12,.14);
+    border-color: rgba(194,65,12,.36);
+}
+
+
+/* ── 14. Style test page annotation banner ───────────────────────────────── */
+
+/* Subtle top strip to visually distinguish test pages from live pages. */
+.sr-page::before {
+    content: "🎨 STYLE TEST — editorial-light theme — not a live page";
+    display: block;
+    text-align: center;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #8c88a4;
+    background: #ece8df;
+    border-bottom: 1px solid #d8d4cc;
+    padding: .45rem 1rem;
+}

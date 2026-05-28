@@ -1,0 +1,26 @@
+# Development/archive folders
+archive/
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SASS source (compiled CSS already in assets/css/)
+assets/sass/
+
+# Editor
+.vscode/
+.idea/
+
+# Playwright (card generation only, not needed in prod)
+playwright-report/
+test-results/

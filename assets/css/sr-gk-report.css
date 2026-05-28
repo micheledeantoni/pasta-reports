@@ -1,0 +1,148 @@
+/* Goalkeeper report styles that remain schema/runtime-specific.
+   Extracted during Sprint 1A report CSS harmonization. */
+
+.sr-inner, .sr-inner * { box-sizing: border-box; }
+
+.sr-card { min-width: 0; width: 100%; padding: 1.5rem; border: 1px solid rgba(255,255,255,.09); border-radius: 1.25rem; background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02)), rgba(14,18,32,.92); box-shadow: 0 1.2rem 2.8rem rgba(0,0,0,.3); }
+
+.sr-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(74,222,128,.07), rgba(255,255,255,.02)); color: rgba(255,255,255,.62); font-size: 2.3rem; font-weight: 800; }
+
+.sr-club-flow { display: flex; align-items: center; gap: .7rem; margin-top: .75rem; flex-wrap: wrap; }
+
+.sr-club-logo.tottenham { background: linear-gradient(135deg, #f8fafc, #1e293b); color: #0f172a; }
+
+.sr-club-logo.inter { background: linear-gradient(135deg, #0057b8, #111); color: #fff; }
+
+.sr-gk-sample { display: grid; gap: .25rem; padding: .78rem .85rem; border-radius: .7rem; border: 1px solid rgba(255,255,255,.08); margin-top: 1rem; font-size: .78rem; }
+
+.sr-gk-sample span { color: rgba(255,255,255,.64); }
+
+.sr-gk-ok { background: rgba(74,222,128,.09); color: #b9f7d8; }
+
+.sr-gk-info { background: rgba(96,165,250,.09); color: #bfdbfe; }
+
+.sr-gk-warn { background: rgba(251,191,36,.11); color: #fde68a; }
+
+.sr-gk-alert { background: rgba(248,113,113,.11); color: #fecaca; }
+
+.sr-gk-muted { background: rgba(255,255,255,.05); color: rgba(255,255,255,.7); }
+
+.sr-gk-room-note { display: grid; gap: .55rem; margin-top: 1rem; }
+
+.sr-gk-room-row { display: grid; grid-template-columns: 1fr auto; gap: .8rem; align-items: center; padding: .65rem .75rem; border-radius: .7rem; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.065); }
+
+.sr-gk-room-row span { color: rgba(255,255,255,.45); font-size: .74rem; }
+
+.sr-gk-status { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; padding: .24rem .46rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.035); color: rgba(255,255,255,.52); white-space: nowrap; }
+
+.sr-gk-room-row .sr-gk-ok, .sr-gk-room-row .sr-gk-info, .sr-gk-room-row .sr-gk-warn, .sr-gk-room-row .sr-gk-alert, .sr-gk-room-row .sr-gk-muted { background: rgba(255,255,255,.035); color: rgba(255,255,255,.52); }
+
+.sr-radar-selector-wrap { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; flex-wrap: wrap; }
+
+.sr-radar-select { background: rgba(255,255,255,.065); border: 1px solid rgba(255,255,255,.13); border-radius: .52rem; color: rgba(255,255,255,.78); font-size: .79rem; padding: .32rem .7rem; cursor: pointer; outline: none; -webkit-appearance: none; appearance: none; min-width: 10rem; max-width: 100%; }
+
+.sr-radar-context-note, .sr-raw-bars-note { font-size: .75rem; color: rgba(255,255,255,.38); padding: .42rem .72rem; background: rgba(255,255,255,.025); border-left: 2px solid rgba(255,255,255,.1); border-radius: 0 .42rem .42rem 0; margin-bottom: 1.1rem; line-height: 1.55; font-style: italic; }
+
+.sr-radar-context-note { margin-top: .55rem; margin-bottom: 0; font-size: .69rem; color: rgba(255,255,255,.28); }
+
+.sr-axis-list { list-style: none; padding: .62rem .85rem .75rem; margin: 0; display: grid; gap: .5rem; }
+
+.sr-dot-group { margin-bottom: 1.25rem; }
+
+.sr-dot-row { display: grid; grid-template-columns: 9.5rem 1fr 4.5rem; gap: .65rem; align-items: center; margin-bottom: .62rem; }
+
+.sr-heatmap-btn:hover, .sr-heatmap-btn.active { border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.1); color: #b9f7d8; }
+
+.sr-pitch-wrap { display: flex; flex-direction: column; gap: .52rem; min-width: 0; }
+
+.sr-gk-goal-frame { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border: 4px solid rgba(255,255,255,.28); border-bottom-width: 7px; background: #080e1c; border-radius: .75rem; overflow: hidden; }
+
+.sr-gk-goal-zone { min-height: 5.5rem; border: 1px solid rgba(255,255,255,.1); padding: .48rem; display: grid; align-content: start; gap: .08rem; }
+
+.sr-gk-goal-zone span, .sr-gk-goal-zone em { color: rgba(255,255,255,.5); font-size: .64rem; font-style: normal; }
+
+.sr-gk-goal-zone b { color: #b9f7d8; }
+
+.sr-gk-field-map, .sr-gk-pitch, .sr-gk-mini-field { width: 100%; aspect-ratio: 1.65; max-height: 210px; border-radius: .75rem; background: #080e1c; border: 1px solid rgba(255,255,255,.07); display: block; margin: 0 auto; }
+
+.sr-gk-field-map text, .sr-gk-pitch text, .sr-gk-mini-field text { font-family: inherit; paint-order: stroke; stroke: rgba(8,14,28,.75); stroke-width: .8px; stroke-linejoin: round; }
+
+.sr-gk-field-map .pitch-line { fill: none; stroke: rgba(255,255,255,.16); stroke-width: .75; }
+
+.sr-gk-field-map .pitch-guide { fill: none; stroke: rgba(255,255,255,.08); stroke-width: .55; stroke-dasharray: 2 2; }
+
+.sr-gk-field-legend { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; margin-top: .4rem; font-size: .62rem; color: rgba(255,255,255,.43); }
+
+.sr-gk-field-legend span { display: inline-flex; align-items: center; gap: .25rem; }
+
+.sr-gk-field-dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; }
+
+.sr-gk-stat-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .55rem; margin-top: .55rem; }
+
+.sr-gk-stat-grid span { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: .65rem; padding: .58rem; color: rgba(255,255,255,.54); font-size: .72rem; }
+
+.sr-gk-stat-grid b { color: rgba(255,255,255,.86); }
+
+.sr-gk-bucket { margin-top: .75rem; padding-top: .65rem; border-top: 1px solid rgba(255,255,255,.07); display: grid; gap: .45rem; }
+
+.sr-gk-bucket-row { display: grid; grid-template-columns: 6rem 2.8rem 4.9rem 1fr; align-items: center; gap: .45rem; font-size: .68rem; color: rgba(255,255,255,.56); }
+
+.sr-gk-bucket-row i { display: block; height: .4rem; border-radius: 999px; background: #4ade80; }
+
+.sr-bar-note { display:block; margin-top:.1rem; font-size:.58rem; color:rgba(251,191,36,.58); font-style:italic; letter-spacing:0; text-transform:none; }
+
+.sr-dist-heatmap, .sr-profile-heatmap { display:grid; gap:.08rem; }
+
+.sr-dist-cell, .sr-profile-cell { min-height:3.2rem; border:1px solid rgba(255,255,255,.08); border-radius:.5rem; padding:.38rem .42rem; display:grid; align-content:center; gap:.08rem; }
+
+.sr-dist-cell strong, .sr-profile-cell strong { color:rgba(255,255,255,.9); font-size:.72rem; line-height:1.12; }
+
+.sr-dist-cell span { color:rgba(255,255,255,.48); font-size:.58rem; }
+
+.sr-profile-cell strong { font-size:.64rem; }
+
+.sr-gk-mini-field { width:100%; max-height:235px; border-radius:.75rem; background:#080e1c; border:1px solid rgba(255,255,255,.07); }
+
+.sr-gk-mini-field text { font-family: inherit; }
+
+.sr-gk-empty { border: 1px dashed rgba(251,191,36,.34); border-radius: .75rem; padding: .85rem; background: rgba(251,191,36,.06); color: rgba(255,255,255,.72); display: grid; gap: .25rem; font-size: .74rem; }
+
+.sr-gk-action-list { display: grid; gap: .45rem; }
+
+.sr-gk-action-row { display: grid; grid-template-columns: 1fr auto; gap: .8rem; align-items: center; border-bottom: 1px solid rgba(255,255,255,.06); padding-bottom: .42rem; font-size: .72rem; color: rgba(255,255,255,.56); }
+
+.sr-gk-action-row strong { color: rgba(255,255,255,.82); }
+
+.sr-footnotes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+
+.sr-dot-row-3 { grid-template-columns: 9.5rem 1fr 6.5rem; }
+
+.sr-dot-val-3 { font-size: .68rem; font-weight: 600; color: #4ade80; text-align: right; }
+
+.sr-action-stack { display: flex; height: 26px; border-radius: .45rem; overflow: hidden; gap: 1px; }
+
+.sr-action-seg { display: flex; align-items: center; justify-content: center; font-size: .59rem; color: rgba(0,0,0,.65); font-weight: 700; transition: flex .2s; opacity: .85; }
+
+.sr-dist-zone { padding: .38rem .45rem; border-radius: .45rem; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.025); }
+
+.sr-dist-bar { height: 4px; border-radius: 999px; background: rgba(255,255,255,.08); }
+
+.sr-dist-bar-fill { height: 100%; border-radius: 999px; }
+
+.sr-gk-coord-note { font-size: .66rem; color: rgba(251,191,36,.72); background: rgba(251,191,36,.07); border: 1px solid rgba(251,191,36,.18); border-radius: .45rem; padding: .32rem .55rem; margin-bottom: .45rem; }
+
+/* Sprint 1B GK responsive layout. */
+@media screen and (max-width: 768px) {
+    .sr-dot-row-3 { grid-template-columns: 7rem 1fr 5.5rem; }
+    .sr-header-top { display: grid; grid-template-columns: 1fr; }
+    .sr-header-left { width: 100%; }
+    .sr-role-pill { justify-self: start; }
+    .sr-gk-room-row { grid-template-columns: 1fr; }
+    .sr-gk-status { justify-self: start; white-space: normal; }
+    .sr-gk-bucket-row { grid-template-columns: 1fr 2.8rem 4.9rem; }
+    .sr-gk-bucket-row i { grid-column: 1 / -1; }
+}
+
+@media screen and (max-width: 480px) {
+    .sr-dot-row-3 { grid-template-columns: 6rem 1fr 4.8rem; }
+}

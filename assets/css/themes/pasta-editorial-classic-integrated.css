@@ -1,0 +1,711 @@
+/*
+ * PASTA Theme — Editorial Classic Integrated
+ * Sprint 6D — single integrated refinement.
+ * Sprint 6E — radar theme palette bridge (CSS variables for Chart.js).
+ *
+ * Addresses three confirmed problems from Sprint 6B/6C review:
+ *   1. Player hero violet block → killed and replaced with warm paper heading
+ *   2. Radar cold navy → deep charcoal-green, visual family with pitch
+ *   3. Homepage hero flat/purple → editorial masthead on warm ivory
+ *
+ * Sprint 6E adds:
+ *   4. Radar polygon/stroke/grid no longer neon — editorial warm tones via
+ *      CSS custom properties read by sr-role-runtime.js getCssVar bridge.
+ *
+ * Design language:
+ *   - warm ivory paper, ink typography
+ *   - wine/terracotta accent used sparingly (section labels, CTA, scores)
+ *   - deep charcoal-green for all visualization panels (radar + pitch same family)
+ *   - subtle border-lines, no glow, no neon
+ *   - compact report density preserved
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CUSTOM PROPERTIES
+   ═════════════════════════════════════════════════════════════════════════ */
+:root {
+    /* Paper */
+    --ei-bg:          #f6f2ec;
+    --ei-surface:     #ffffff;
+    --ei-surface-2:   #f2ede6;
+    --ei-surface-3:   #ece5db;
+
+    /* Ink scale */
+    --ei-ink:         #1c1917;
+    --ei-ink-2:       #44403c;
+    --ei-ink-muted:   #78716c;
+    --ei-ink-faint:   #a8a29e;
+
+    /* Borders */
+    --ei-border:      #ddd6cc;
+    --ei-border-2:    #e7e2db;
+
+    /* Accents */
+    --ei-accent:      #831843;   /* wine red — primary identity accent */
+    --ei-accent-rgb:  131,24,67;
+    --ei-accent-2:    #14532d;   /* deep green — secondary accent */
+    --ei-accent-2-rgb:20,83,45;
+
+    /* Bars */
+    --ei-bar-subject: #9f1239;
+    --ei-bar-comp:    #166534;
+
+    /* Visualization panels — BOTH use the same dark charcoal-green family */
+    --ei-viz-bg:      #14201a;   /* deep charcoal-green — radar */
+    --ei-pitch-bg:    #162918;   /* football pitch (slightly brighter green) */
+
+    /* Shadows */
+    --ei-shadow:      rgba(28, 25, 23, 0.06);
+
+    /* Typographic rules */
+    --ei-rule:        #1c1917;
+
+    /* ── Sprint 6E: Chart.js radar palette bridge ───────────────────────────
+     * Read by getCssVar() in sr-role-runtime.js.
+     * Subject: warm sienna — editorial, replaces neon green (#4ade80).
+     * Comparison: muted sage-olive — replaces bright orange (rgba(251,146,60)).
+     * Grid / angle lines / labels: warm ivory tones on charcoal-green panel.
+     * ─────────────────────────────────────────────────────────────────────── */
+    --sr-radar-subject-border:     rgba(200, 128, 70, 0.92);
+    --sr-radar-subject-fill:       rgba(200, 128, 70, 0.18);
+
+    --sr-radar-comparison-border:  rgba(100, 130, 88, 0.80);
+    --sr-radar-comparison-fill:    rgba(100, 130, 88, 0.09);
+
+    --sr-radar-grid-color:         rgba(238, 232, 218, 0.12);
+    --sr-radar-angle-color:        rgba(238, 232, 218, 0.15);
+    --sr-radar-label-color:        rgba(246, 242, 234, 0.82);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEST BANNER
+   ═════════════════════════════════════════════════════════════════════════ */
+body::after {
+    content: "PASTA Integrated — not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--ei-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .3rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBAL / BODY
+   ═════════════════════════════════════════════════════════════════════════ */
+html, body {
+    background-color: var(--ei-bg) !important;
+    color: var(--ei-ink) !important;
+}
+
+body.sr-page {
+    /* Very subtle warm vignette — preserves document feel without neon glow */
+    background:
+        radial-gradient(ellipse at 0% 0%,   rgba(131,24,67,.03),  transparent 35%),
+        radial-gradient(ellipse at 100% 0%,  rgba(20,83,45,.02),   transparent 30%),
+        var(--ei-bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SITE HEADER
+   ═════════════════════════════════════════════════════════════════════════ */
+#header,
+#header.alt {
+    background: var(--ei-surface) !important;
+    box-shadow: 0 1px 0 var(--ei-border) !important;
+}
+
+#header a,
+#header nav a {
+    color: var(--ei-ink) !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+#header a.logo strong {
+    color: var(--ei-accent) !important;
+    background: none !important;
+    font-size: 1rem !important;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+#header a.logo span {
+    color: var(--ei-ink-faint) !important;
+    font-size: .6rem !important;
+    letter-spacing: .16em;
+}
+
+.header-topbar {
+    background: var(--ei-surface) !important;
+    color: var(--ei-ink-faint) !important;
+    border-bottom-color: var(--ei-border-2) !important;
+    font-size: .55rem !important;
+    letter-spacing: .3em;
+}
+
+.header-mainbar {
+    background: var(--ei-surface) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE HERO — EDITORIAL MASTHEAD
+   ─────────────────────────────────────────────────────────────────────────
+   The inline <style> block in index.html sets a dark navy gradient.
+   Our theme CSS (loaded last, equal specificity) wins with !important.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Strip all dark-mode banner backgrounds */
+#banner,
+section#banner,
+#banner.pasta-hero,
+section.pasta-hero {
+    background: var(--ei-bg) !important;
+    box-shadow: none !important;
+    color: var(--ei-ink) !important;
+}
+
+/* Masthead bottom rule — section separator, not a color block */
+#banner.pasta-hero {
+    padding-bottom: .5rem !important;
+    border-bottom: 2px solid var(--ei-rule) !important;
+    min-height: 0 !important;
+}
+
+/* Hero inner — measured editorial breathing room */
+.pasta-hero-inner {
+    padding-top: 4rem !important;
+    padding-bottom: 3.5rem !important;
+}
+
+/* PASTA wordmark — large and weighty, masthead scale */
+.pasta-wordmark {
+    font-size: clamp(4.5rem, 11vw, 8rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.04em !important;
+    color: var(--ei-ink) !important;
+    line-height: .95 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* Pre-title label — very small caps, no color, just ink spacing */
+.pasta-hero-label {
+    font-size: .67rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .3em !important;
+    text-transform: uppercase !important;
+    color: var(--ei-ink-faint) !important;
+    margin-bottom: 1.3rem !important;
+    padding-top: .8rem !important;
+    border-top: 1px solid var(--ei-border) !important;
+    display: block !important;
+}
+
+/* Descriptor text — sober, journalistic prose */
+.pasta-hero-desc {
+    color: var(--ei-ink-muted) !important;
+    font-size: 1rem !important;
+    line-height: 1.72 !important;
+    max-width: 33rem !important;
+    margin-bottom: 2rem !important;
+    text-shadow: none !important;
+}
+
+/* Buttons — typographic, not marketing */
+#banner .actions .button,
+.pasta-hero-inner .actions .button {
+    border-radius: .25rem !important;
+    font-size: .76rem !important;
+    letter-spacing: .13em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: .72rem 1.55rem !important;
+    box-shadow: none !important;
+    transition: background .12s, border-color .12s !important;
+}
+
+#banner .actions .button.primary,
+.pasta-hero-inner .actions .button.primary {
+    background: var(--ei-ink) !important;
+    color: var(--ei-surface) !important;
+    border: 1.5px solid var(--ei-ink) !important;
+}
+
+#banner .actions .button.primary:hover,
+.pasta-hero-inner .actions .button.primary:hover {
+    background: var(--ei-accent) !important;
+    border-color: var(--ei-accent) !important;
+}
+
+#banner .actions .button:not(.primary),
+.pasta-hero-inner .actions .button:not(.primary) {
+    background: transparent !important;
+    color: var(--ei-ink) !important;
+    border: 1.5px solid var(--ei-border) !important;
+}
+
+#banner .actions .button:not(.primary):hover,
+.pasta-hero-inner .actions .button:not(.primary):hover {
+    border-color: var(--ei-ink-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PLAYER PAGE HERO — EDITORIAL REPORT HEADING
+   ─────────────────────────────────────────────────────────────────────────
+   Problem: main.css `#banner.style2::after` has background-color:#8d82c4
+   (violet/lilac) at opacity 0.85, overlaid on the background image.
+   Fix: hide the ::after pseudo-element, replace banner with paper surface.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* The violet overlay pseudo-element — eliminate it */
+#banner.style2::after,
+#banner.style2:after {
+    display: none !important;
+    opacity: 0 !important;
+    background-color: transparent !important;
+}
+
+/* Player banner — compact report heading on warm paper */
+#banner.style2 {
+    background: var(--ei-bg) !important;
+    background-image: none !important;
+    border-bottom: 2px solid var(--ei-rule) !important;
+    box-shadow: none !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    padding: 6.5rem 0 2.25rem !important;
+}
+
+/* The inner ::before overlay (HTML5UP Forty sometimes adds one) */
+#banner.style2 > .inner::before {
+    display: none !important;
+    background: none !important;
+    opacity: 0 !important;
+}
+
+/* Inner container — tight typographic heading */
+#banner.style2 > .inner {
+    padding: 0 !important;
+}
+
+/* Hide the background image panel */
+#banner.style2 > .inner .image,
+#banner.style2 > .inner .image img {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Player name — bold ink report heading */
+#banner.style2 .inner header.major h1,
+#banner.style2 .inner h1,
+#banner.style2 h1 {
+    color: var(--ei-ink) !important;
+    font-size: clamp(2.2rem, 5.5vw, 4rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.025em !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+    margin-bottom: .55rem !important;
+}
+
+/* Section pre-label above player name */
+#banner.style2 header.major::before {
+    content: "Scouting Report · PASTA";
+    display: block;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--ei-accent);
+    margin-bottom: .7rem;
+}
+
+/* Subtitle / position text */
+#banner.style2 .content p,
+#banner.style2 .inner .content p,
+#banner.style2 p {
+    font-size: .87rem !important;
+    color: var(--ei-ink-muted) !important;
+    text-shadow: none !important;
+    letter-spacing: .04em !important;
+    margin-top: .4rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN CONTAINER
+   ═════════════════════════════════════════════════════════════════════════ */
+#main {
+    background: var(--ei-bg) !important;
+    /* Undo the inline style="background: #080c18" that index.html sets */
+}
+
+#wrapper {
+    background: var(--ei-bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REPORT CARDS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-card {
+    background: var(--ei-surface) !important;
+    border: 1px solid var(--ei-border) !important;
+    border-radius: .75rem !important;
+    box-shadow:
+        0 1px 2px var(--ei-shadow),
+        0 3px 10px var(--ei-shadow) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION LABELS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-section-label {
+    color: var(--ei-accent) !important;
+    letter-spacing: .2em;
+    border-bottom: 1px solid var(--ei-border-2);
+    padding-bottom: .5rem;
+    margin-bottom: 1.1rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PLAYER CARD HEADER (inside .sr-card, not the #banner hero)
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-player-name {
+    color: var(--ei-ink) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.015em !important;
+}
+
+.sr-clubs-line  { color: var(--ei-ink-muted) !important; }
+.sr-club-node   { color: var(--ei-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink) !important;
+}
+
+.sr-club-arrow { color: var(--ei-ink-faint) !important; }
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: rgba(var(--ei-accent-rgb), .07) !important;
+    border: 1px solid rgba(var(--ei-accent-rgb), .26) !important;
+    color: var(--ei-accent) !important;
+    border-radius: .25rem !important;
+}
+
+/* ── Meta chips, badges, tags ────────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+}
+
+.sr-badge-k { color: var(--ei-ink-faint) !important; }
+.sr-badge-v { color: var(--ei-ink) !important; }
+
+.sr-player-tag {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink-2) !important;
+}
+
+/* ── Narrative ──────────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--ei-ink-2) !important;
+    line-height: 1.82 !important;
+    font-size: .95rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RADAR — DEEP CHARCOAL-GREEN PANEL
+   ─────────────────────────────────────────────────────────────────────────
+   Key change: `--ei-viz-bg: #14201a` — deep charcoal-green.
+   Same visual family as pitch green `#162918`. Together they feel like
+   two sides of the same editorial figure: chart and pitch, unified.
+   Chart.js canvas/rendering is not modified — full readability preserved.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--ei-viz-bg) !important;   /* #14201a deep charcoal-green */
+    border-radius: .55rem !important;
+    padding: .6rem !important;
+    border: 1px solid rgba(134,239,172,.08) !important;  /* faint green rim */
+    /* Editorial figure treatment — like a diagram in an article */
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.18),
+        inset 0 0 0 1px rgba(134,239,172,.04) !important;
+}
+
+/* Radar legend — outside the dark panel, on paper surface */
+.sr-radar-select-label { color: var(--ei-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink) !important;
+}
+
+.sr-radar-select option { background: var(--ei-surface); color: var(--ei-ink); }
+
+.sr-rcl-item { color: var(--ei-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--ei-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--ei-ink-faint) !important;
+    border-left: 1px solid var(--ei-border) !important;
+    background: none !important;
+    font-style: italic !important;
+}
+
+/* Axis guide */
+.sr-radar-guide {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--ei-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--ei-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--ei-ink-muted) !important; }
+
+/* Axis accordion */
+.sr-axis-accordion {
+    border: 1px solid var(--ei-border) !important;
+    border-radius: .55rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--ei-surface-2) !important;
+    color: var(--ei-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+}
+
+.sr-axis-card strong { color: var(--ei-ink) !important; }
+.sr-axis-card span   { color: var(--ei-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--ei-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--ei-accent) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   METRICS — BARS AND DOTS
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-legend      { color: var(--ei-ink-muted) !important; }
+.sr-legend-item { color: var(--ei-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--ei-ink-faint) !important;
+    border-bottom-color: var(--ei-border-2) !important;
+}
+
+.sr-dot-label { color: var(--ei-ink-2) !important; }
+.sr-dot-val   { color: var(--ei-accent) !important; }
+.sr-dot-axis  { background: var(--ei-border) !important; }
+.sr-dot.main  { border-color: var(--ei-border) !important; }
+
+.sr-bar-track      { background: var(--ei-border-2) !important; }
+.sr-bar-track.main { background: var(--ei-border) !important; }
+.sr-bar-fill       { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--ei-ink-muted) !important;
+    background: var(--ei-surface-2) !important;
+    border-left: 1px solid var(--ei-border) !important;
+    font-style: italic !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEATMAP / SPATIAL BLOCKS
+   ─────────────────────────────────────────────────────────────────────────
+   Pitch uses `--ei-pitch-bg: #162918` — same green family as the radar.
+   Border uses a matching faint green rim for visual consistency.
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-heatmap-btn {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--ei-surface-3) !important;
+    color: var(--ei-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--ei-accent-rgb), .07) !important;
+    border-color: rgba(var(--ei-accent-rgb), .28) !important;
+    color: var(--ei-accent) !important;
+}
+
+/* Pitch — dark green panel, same visual family as radar */
+.sr-pitch-svg {
+    background: var(--ei-pitch-bg) !important;
+    border: 1px solid rgba(134,239,172,.08) !important;  /* faint green rim — matches radar */
+}
+
+.sr-pitch-title { color: var(--ei-ink-muted) !important; }
+.sr-pitch-note  { color: var(--ei-ink-faint) !important; }
+
+/* DEF summary */
+.sr-def-summary {
+    background: rgba(var(--ei-accent-2-rgb), .05) !important;
+    border-color: rgba(var(--ei-accent-2-rgb), .18) !important;
+}
+
+.sr-def-stat { color: var(--ei-ink-2) !important; }
+.sr-def-stat strong { color: var(--ei-accent-2) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SIMILARITY
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-sim-space {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    border-radius: .5rem !important;
+}
+
+.sr-sim-space-title { color: var(--ei-accent) !important; }
+.sr-sim-desc  { color: var(--ei-ink-muted) !important; }
+.sr-sim-name  { color: var(--ei-ink) !important; }
+.sr-sim-score { color: var(--ei-accent) !important; font-weight: 800 !important; }
+
+.sr-sim-match  { border-bottom-color: var(--ei-border-2) !important; }
+.sr-sim-bar    { background: var(--ei-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--ei-accent), rgba(var(--ei-accent-rgb),.45)) !important;
+    border-radius: 999px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTNOTES
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-footnote-chip {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+    color: var(--ei-ink-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOGGLE
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-toggle { color: var(--ei-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--ei-border) !important;
+    border-color: var(--ei-border) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GK-SPECIFIC
+   ═════════════════════════════════════════════════════════════════════════ */
+.sr-gk-goal-frame {
+    background: var(--ei-viz-bg) !important;   /* same charcoal-green as radar */
+    border-color: rgba(134,239,172,.12) !important;
+}
+
+.sr-gk-room-row {
+    background: var(--ei-surface-2) !important;
+    border: 1px solid var(--ei-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--ei-ink-muted) !important; }
+.sr-gk-sample { border-color: var(--ei-border) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE CARDS
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Override the dark inline-style #main background on index.html */
+/* (index.html has style="background: #080c18" on #main — needs !important) */
+
+.pasta-card {
+    background: var(--ei-surface) !important;
+    border: 1px solid var(--ei-border) !important;
+    box-shadow: 0 1px 3px var(--ei-shadow) !important;
+    border-radius: .55rem !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 4px 16px var(--ei-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label   { color: var(--ei-ink-faint) !important; }
+.pasta-card-name    { color: var(--ei-ink) !important; }
+.pasta-card-clubs   { color: var(--ei-ink-muted) !important; }
+.pasta-card-insight { color: var(--ei-ink-2) !important; }
+.pasta-card-cta     { color: var(--ei-accent) !important; }
+.pasta-card-cta::after { color: var(--ei-accent) !important; }
+
+.pasta-club-name    { color: var(--ei-ink) !important; }
+.pasta-club-count   { color: var(--ei-ink-faint) !important; }
+.pasta-club-dot.active {
+    background: var(--ei-accent) !important;
+    box-shadow: none !important;
+}
+.pasta-club-divider { background: var(--ei-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--ei-border) !important; }
+
+.pasta-bio-heading  { color: var(--ei-ink-faint) !important; }
+.pasta-bio-name     { color: var(--ei-ink) !important; }
+.pasta-bio-sub      { color: var(--ei-ink-muted) !important; }
+.pasta-bio-text     { color: var(--ei-ink-2) !important; }
+
+/* TBA placeholder cards */
+.pasta-card.tba {
+    border-style: dashed !important;
+    opacity: .32 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOOTER
+   ═════════════════════════════════════════════════════════════════════════ */
+#footer {
+    background: var(--ei-ink) !important;
+    border-top: 2px solid var(--ei-rule) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MENU OVERLAY
+   ═════════════════════════════════════════════════════════════════════════ */
+#menu {
+    background: var(--ei-ink) !important;
+}
+
+#menu a {
+    color: rgba(255,255,255,.75) !important;
+    border-color: rgba(255,255,255,.1) !important;
+}
+
+#menu a:hover { color: #fff !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INLINE BACKGROUND OVERRIDES
+   ─────────────────────────────────────────────────────────────────────────
+   index.html has `style="background: #080c18"` on #main and inline
+   background colors elsewhere. These are addressed by the selectors above
+   with !important. No JS/HTML is modified — CSS override only.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Ensure the main content area uses paper even when inline style is set */
+#main[style] {
+    background: var(--ei-bg) !important;
+}

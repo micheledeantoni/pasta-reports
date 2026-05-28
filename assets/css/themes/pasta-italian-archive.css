@@ -1,0 +1,365 @@
+/*
+ * PASTA Theme — Italian Archive
+ * Sprint 6B visual prototype. Override layer only.
+ *
+ * Palette: warm cream · parchment cards · terracotta + olive accents
+ * Mood: archival document; analytic dossier; warm paper.
+ * Dark visualization panels (radar, pitch) preserved as editorial figures.
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    --ia-bg:          #f0e8d8;
+    --ia-surface:     #faf5e9;
+    --ia-surface-2:   #ede3ce;
+    --ia-ink:         #2c1a0e;
+    --ia-ink-2:       #52372a;
+    --ia-ink-muted:   #7c6150;
+    --ia-ink-faint:   #a8937e;
+    --ia-border:      #c8b89a;
+    --ia-border-2:    #d9cdb5;
+    --ia-accent:      #b84c1a;   /* terracotta */
+    --ia-accent-rgb:  184,76,26;
+    --ia-accent-2:    #5c6118;   /* olive */
+    --ia-accent-2-rgb:92,97,24;
+    --ia-gold:        #9c7c28;
+    --ia-bar-subject: #b84c1a;
+    --ia-bar-comp:    #5c6118;
+    --ia-viz-bg:      #181410;   /* warm-tinted dark panel */
+    --ia-pitch-bg:    #1b3818;   /* football pitch */
+    --ia-shadow:      rgba(44, 26, 14, 0.10);
+}
+
+/* ── Test banner ────────────────────────────────────────────────────────── */
+body::after {
+    content: "PASTA theme test — Italian Archive · not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--ia-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .45rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ── Global / body ──────────────────────────────────────────────────────── */
+html, body {
+    background-color: var(--ia-bg) !important;
+    color: var(--ia-ink) !important;
+}
+
+body.sr-page {
+    background:
+        radial-gradient(ellipse at 0% 0%, rgba(184,76,26,.05), transparent 40%),
+        radial-gradient(ellipse at 100% 100%, rgba(92,97,24,.04), transparent 40%),
+        var(--ia-bg) !important;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+#header,
+#header.alt {
+    background: var(--ia-surface) !important;
+    box-shadow: 0 1px 0 var(--ia-border) !important;
+}
+
+#header a,
+#header a.logo strong,
+#header a.logo span,
+#header nav a {
+    color: var(--ia-ink) !important;
+    background: none !important;
+}
+
+#header a.logo strong {
+    color: var(--ia-accent) !important;
+    font-size: 1rem !important;
+    letter-spacing: .15em;
+}
+
+/* header topbar if present */
+.header-topbar {
+    color: var(--ia-ink-faint) !important;
+    border-bottom-color: var(--ia-border-2) !important;
+}
+
+/* ── Report banner / hero ───────────────────────────────────────────────── */
+#banner,
+#banner.style2 {
+    background:
+        linear-gradient(180deg, var(--ia-surface-2) 0%, var(--ia-bg) 100%) !important;
+    border-bottom: 1px solid var(--ia-border) !important;
+}
+
+#banner .inner header h1,
+#banner .inner h1,
+#banner h1 {
+    color: var(--ia-ink) !important;
+    text-shadow: none !important;
+    font-style: italic;
+}
+
+#banner .content p,
+#banner p {
+    color: var(--ia-ink-muted) !important;
+    text-shadow: none !important;
+}
+
+/* ── Main container ─────────────────────────────────────────────────────── */
+#main, #wrapper {
+    background: var(--ia-bg) !important;
+}
+
+/* ── Report cards ───────────────────────────────────────────────────────── */
+.sr-card {
+    background: var(--ia-surface) !important;
+    border: 1px solid var(--ia-border) !important;
+    border-radius: .75rem !important;
+    box-shadow:
+        0 1px 0 var(--ia-border-2),
+        0 2px 12px var(--ia-shadow) !important;
+}
+
+/* ── Section labels ─────────────────────────────────────────────────────── */
+.sr-section-label {
+    color: var(--ia-accent) !important;
+    letter-spacing: .22em;
+    border-bottom: 1px solid var(--ia-border-2);
+    padding-bottom: .5rem;
+    margin-bottom: 1.1rem !important;
+    font-style: normal;
+}
+
+/* ── Player header ──────────────────────────────────────────────────────── */
+.sr-player-name {
+    color: var(--ia-ink) !important;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.sr-clubs-line { color: var(--ia-ink-muted) !important; }
+
+.sr-club-node { color: var(--ia-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink) !important;
+}
+
+.sr-club-arrow { color: var(--ia-ink-faint) !important; }
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: rgba(var(--ia-accent-rgb), .08) !important;
+    border: 1px solid rgba(var(--ia-accent-rgb), .32) !important;
+    color: var(--ia-accent) !important;
+}
+
+/* ── Metadata chips and badges ──────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-badge-k { color: var(--ia-ink-faint) !important; }
+.sr-badge-v { color: var(--ia-ink) !important; }
+
+/* ── Player tags ────────────────────────────────────────────────────────── */
+.sr-player-tag {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink-2) !important;
+}
+
+/* ── Narrative ──────────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--ia-ink-2) !important;
+    line-height: 1.82;
+}
+
+/* ── Radar — dark editorial figure panel ────────────────────────────────── */
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--ia-viz-bg) !important;
+    border-radius: .65rem;
+    padding: .5rem;
+    border: 1px solid var(--ia-border);
+}
+
+.sr-radar-select-label { color: var(--ia-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink) !important;
+}
+
+.sr-radar-select option { background: var(--ia-surface); color: var(--ia-ink); }
+
+.sr-rcl-item { color: var(--ia-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--ia-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--ia-ink-faint) !important;
+    border-left-color: var(--ia-border) !important;
+    background: none !important;
+    font-style: italic;
+}
+
+/* ── Axis guide and accordion ───────────────────────────────────────────── */
+.sr-radar-guide {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--ia-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--ia-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--ia-ink-muted) !important; }
+
+.sr-axis-accordion {
+    border: 1px solid var(--ia-border) !important;
+    border-radius: .65rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--ia-surface-2) !important;
+    color: var(--ia-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-axis-card strong { color: var(--ia-ink) !important; }
+.sr-axis-card span   { color: var(--ia-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--ia-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--ia-accent) !important; }
+
+/* ── Metric dot rows ────────────────────────────────────────────────────── */
+.sr-legend { color: var(--ia-ink-muted) !important; }
+.sr-legend-item { color: var(--ia-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--ia-ink-faint) !important;
+    border-bottom-color: var(--ia-border-2) !important;
+}
+
+.sr-dot-label { color: var(--ia-ink-2) !important; }
+.sr-dot-val   { color: var(--ia-accent) !important; }
+.sr-dot-axis  { background: var(--ia-border) !important; }
+.sr-dot.main  { border-color: var(--ia-border) !important; }
+
+/* ── Comparison bars ────────────────────────────────────────────────────── */
+.sr-bar-track      { background: var(--ia-border-2) !important; }
+.sr-bar-track.main { background: var(--ia-border) !important; }
+.sr-bar-fill { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--ia-ink-muted) !important;
+    background: var(--ia-surface-2) !important;
+    border-left-color: var(--ia-border) !important;
+    font-style: italic;
+}
+
+/* ── Heatmap / spatial ──────────────────────────────────────────────────── */
+.sr-heatmap-btn {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--ia-surface-2) !important;
+    color: var(--ia-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--ia-accent-rgb), .1) !important;
+    border-color: rgba(var(--ia-accent-rgb), .35) !important;
+    color: var(--ia-accent) !important;
+}
+
+.sr-pitch-svg {
+    background: var(--ia-pitch-bg) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-pitch-title { color: var(--ia-ink-muted) !important; }
+.sr-pitch-note  { color: var(--ia-ink-faint) !important; }
+
+.sr-def-summary {
+    background: rgba(var(--ia-accent-2-rgb), .06) !important;
+    border-color: rgba(var(--ia-accent-2-rgb), .22) !important;
+}
+
+.sr-def-stat { color: var(--ia-ink-2) !important; }
+.sr-def-stat strong { color: var(--ia-accent-2) !important; }
+
+/* ── Similarity ─────────────────────────────────────────────────────────── */
+.sr-sim-space {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-sim-space-title { color: var(--ia-gold) !important; }
+.sr-sim-desc  { color: var(--ia-ink-muted) !important; }
+.sr-sim-name  { color: var(--ia-ink) !important; }
+.sr-sim-score { color: var(--ia-accent) !important; }
+
+.sr-sim-match  { border-bottom-color: var(--ia-border-2) !important; }
+.sr-sim-bar    { background: var(--ia-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--ia-accent), rgba(var(--ia-accent-rgb),.5)) !important;
+}
+
+/* ── Footnotes ──────────────────────────────────────────────────────────── */
+.sr-footnote-chip {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+    color: var(--ia-ink-muted) !important;
+}
+
+/* ── GK-specific ────────────────────────────────────────────────────────── */
+.sr-gk-goal-frame {
+    background: var(--ia-viz-bg) !important;
+    border-color: rgba(255,255,255,.2) !important;
+}
+
+.sr-gk-room-row {
+    background: var(--ia-surface-2) !important;
+    border: 1px solid var(--ia-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--ia-ink-muted) !important; }
+
+.sr-gk-sample {
+    border-color: var(--ia-border) !important;
+}
+
+/* ── Toggle ─────────────────────────────────────────────────────────────── */
+.sr-toggle { color: var(--ia-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--ia-border) !important;
+    border-color: var(--ia-border) !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#footer {
+    background: var(--ia-ink) !important;
+}

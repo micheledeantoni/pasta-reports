@@ -1,0 +1,4940 @@
+{
+  "GK_PAGE_V1_PLAYERS": {
+    "schema_version": "gk_page_v1",
+    "metadata": {
+      "visual_geometry_status": "prototype",
+      "source_freshness_status": "mixed",
+      "benchmark_rule_status": "official_not_modified"
+    },
+    "report_context": {
+      "report_type": "gk_target_vs_team_room",
+      "target_player_name": "Guglielmo Vicario",
+      "target_player_id": 147863,
+      "comparison_team_name": "Inter",
+      "comparison_players": [
+        "Yann Sommer",
+        "Josep Martínez"
+      ],
+      "primary_comparison_player": "Yann Sommer",
+      "forced_backup_player": "Josep Martínez"
+    },
+    "players": [
+      {
+        "payload_type": "gk_page_v1_player",
+        "schema_version": "gk_page_v1",
+        "metadata": {
+          "visual_geometry_status": "prototype",
+          "source_freshness_status": "mixed",
+          "benchmark_rule_status": "official_not_modified"
+        },
+        "header": {
+          "player_id": 147863,
+          "player_name": "Guglielmo Vicario",
+          "team_id": 30,
+          "team_name": "Tottenham",
+          "competition_id": 24533,
+          "competition_name": "ENG-Premier League",
+          "season_id": 2526,
+          "minutes": 2250.0,
+          "macro_role": "GK",
+          "team_gk_rank": "starter",
+          "team_gk_rank_number": 1,
+          "official_gk_minutes_threshold": 300,
+          "official_benchmark_eligible": true,
+          "sample_status": "starter_sample",
+          "sample_warning_text": "Starter sample; eligible for normal GK benchmark interpretation."
+        },
+        "radar": {
+          "radar_version": "gk_page_v1_prototype_4_axis",
+          "scoring_note": "Prototype robust z-scores within competition x season x macro_role=GK. Not official rankings. Stable frontend export; not an official ranking.",
+          "axes": [
+            {
+              "axis_id": "shot_stopping",
+              "axis_name": "Shot stopping",
+              "axis_score_0_100": 49.35,
+              "axis_z_score": -0.0431,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "xgot_faced_minus_goals_conceded_per90",
+                  "raw_value": 0.00154,
+                  "z_score": 1.2227,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "save_pct",
+                  "raw_value": 0.797688,
+                  "z_score": -0.5726,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "goals_conceded_per_shot_on_target",
+                  "raw_value": 0.202312,
+                  "z_score": -0.5726,
+                  "inverse_scored": true,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "saves_per90",
+                  "raw_value": 5.52,
+                  "z_score": -0.25,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "box_control",
+              "axis_name": "Box control",
+              "axis_score_0_100": 46.6,
+              "axis_z_score": -0.2269,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "cross_stop_pct",
+                  "raw_value": 0.164502,
+                  "z_score": -0.2867,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "claim_rate_on_crosses",
+                  "raw_value": 0.082251,
+                  "z_score": -0.4023,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "keeper_claim_success_rate",
+                  "raw_value": 0.947368,
+                  "z_score": 0.2398,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "crosses_stopped_per90",
+                  "raw_value": 1.52,
+                  "z_score": -0.4585,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "sweeper_activity",
+              "axis_name": "Sweeper activity",
+              "axis_score_0_100": 55.43,
+              "axis_z_score": 0.3618,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "def_actions_outside_box_per90",
+                  "raw_value": 1.64,
+                  "z_score": 0.6064,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "interventions_outside_box_share",
+                  "raw_value": 0.174468,
+                  "z_score": 0.6217,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "avg_def_action_distance_from_goal",
+                  "raw_value": 12.780016,
+                  "z_score": 0.4294,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "defensive_activity_intensity",
+                  "raw_value": 9.4,
+                  "z_score": -0.2103,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "distribution",
+              "axis_name": "Distribution",
+              "axis_score_0_100": 48.34,
+              "axis_z_score": -0.1105,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "pass_attempts_per90",
+                  "raw_value": 39.8,
+                  "z_score": -0.0253,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "pass_completion_pct",
+                  "raw_value": 0.740704,
+                  "z_score": -0.0928,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "short_pass_share",
+                  "raw_value": 0.170854,
+                  "z_score": 0.0268,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "progressive_passes_per90",
+                  "raw_value": 12.88,
+                  "z_score": -0.3507,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            }
+          ]
+        },
+        "visual_blocks": {
+          "goal_map_save_map": {
+            "visual_status": "available",
+            "coordinate_fields": [
+              "json_goalmouth_y",
+              "json_goalmouth_z"
+            ],
+            "zone_method": "prototype terciles from all on-target goalmouth coordinates",
+            "total_on_target": 173,
+            "zones": {
+              "top_left": {
+                "shots_on_target_faced": 15,
+                "saves": 10,
+                "goals_conceded": 5,
+                "save_pct": 0.666667,
+                "xg_faced": 2.186719,
+                "xgot_faced": 4.819869,
+                "sample_warning": null
+              },
+              "top_center": {
+                "shots_on_target_faced": 7,
+                "saves": 7,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 0.872442,
+                "xgot_faced": 4e-06,
+                "sample_warning": "low_zone_denominator"
+              },
+              "top_right": {
+                "shots_on_target_faced": 9,
+                "saves": 1,
+                "goals_conceded": 8,
+                "save_pct": 0.111111,
+                "xg_faced": 2.437873,
+                "xgot_faced": 7.719915,
+                "sample_warning": "low_zone_denominator"
+              },
+              "middle_left": {
+                "shots_on_target_faced": 18,
+                "saves": 15,
+                "goals_conceded": 3,
+                "save_pct": 0.833333,
+                "xg_faced": 2.903892,
+                "xgot_faced": 2.931824,
+                "sample_warning": null
+              },
+              "middle_center": {
+                "shots_on_target_faced": 35,
+                "saves": 35,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 2.784487,
+                "xgot_faced": 0.076455,
+                "sample_warning": null
+              },
+              "middle_right": {
+                "shots_on_target_faced": 29,
+                "saves": 29,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 2.73288,
+                "xgot_faced": 0.002133,
+                "sample_warning": null
+              },
+              "bottom_left": {
+                "shots_on_target_faced": 25,
+                "saves": 18,
+                "goals_conceded": 7,
+                "save_pct": 0.72,
+                "xg_faced": 2.643268,
+                "xgot_faced": 6.857043,
+                "sample_warning": null
+              },
+              "bottom_center": {
+                "shots_on_target_faced": 15,
+                "saves": 11,
+                "goals_conceded": 4,
+                "save_pct": 0.733333,
+                "xg_faced": 2.774701,
+                "xgot_faced": 3.938391,
+                "sample_warning": null
+              },
+              "bottom_right": {
+                "shots_on_target_faced": 20,
+                "saves": 12,
+                "goals_conceded": 8,
+                "save_pct": 0.6,
+                "xg_faced": 2.73481,
+                "xgot_faced": 8.692855,
+                "sample_warning": null
+              }
+            }
+          },
+          "sweeper_actions_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "coordinate_normalization_note": "Events with raw x > 52.5 mirrored to defensive half (105-x, 68-y). Reliable because GK actions are confined to own half.",
+            "prototype_filter_note": "GK-specific action filter; no generic touches.",
+            "inspected_action_types": [
+              "clearance",
+              "dribble",
+              "freekick",
+              "goalkick",
+              "interception",
+              "keeper_claim",
+              "keeper_pick_up",
+              "keeper_punch",
+              "keeper_save",
+              "offside",
+              "out",
+              "pass",
+              "receival",
+              "tackle"
+            ],
+            "event_count": 288,
+            "event_count_per90": 11.52,
+            "outside_box_count": 53,
+            "outside_box_share": 0.184028,
+            "average_action_distance_from_goal": 12.562881,
+            "centroid": {
+              "x": 10.069,
+              "y": 33.621
+            },
+            "coordinates_sample": [
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 43.656,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.89,
+                "y": 35.292,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 5.145,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.025,
+                "y": 18.972,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 37.06,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.965,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 32.776,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.26,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 4.305,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.755,
+                "y": 40.732,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.555,
+                "y": 30.6,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 0.84,
+                "y": 27.064,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.44,
+                "y": 42.024,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.155,
+                "y": 32.028,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 31.5,
+                "y": 23.732,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.665,
+                "y": 33.456,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 20.265,
+                "y": 31.484,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.415,
+                "y": 38.352,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.44,
+                "y": 18.836,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.49,
+                "y": 32.028,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.29,
+                "y": 17.748,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.725,
+                "y": 26.316,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 19.74,
+                "y": 13.26,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 16.8,
+                "y": 29.988,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.485,
+                "y": 26.18,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 31.71,
+                "y": 45.152,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 37.128,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.415,
+                "y": 38.76,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.725,
+                "y": 20.468,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.885,
+                "y": 34.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 1.785,
+                "y": 37.264,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 36.652,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 13.65,
+                "y": 35.292,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 8.085,
+                "y": 21.352,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 35.292,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.6,
+                "y": 42.092,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.78,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.335,
+                "y": 46.512,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.56,
+                "y": 27.948,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.335,
+                "y": 25.772,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.605,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.5,
+                "y": 41.14,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 7.77,
+                "y": 37.536,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.015,
+                "y": 20.4,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.17,
+                "y": 39.644,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 29.925,
+                "y": 39.644,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.54,
+                "y": 36.38,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 23.625,
+                "y": 39.236,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 21.945,
+                "y": 38.828,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 34.65,
+                "y": 27.404,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.275,
+                "y": 45.356,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.305,
+                "y": 34.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.755,
+                "y": 41.82,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 13.335,
+                "y": 57.46,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.7,
+                "y": 36.992,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.18,
+                "y": 30.396,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 40.005,
+                "y": 41.14,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.7,
+                "y": 27.608,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.015,
+                "y": 18.02,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 26.88,
+                "y": 41.616,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.98,
+                "y": 30.328,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.28,
+                "y": 32.504,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.715,
+                "y": 34.884,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 43.575,
+                "y": 17.544,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.07,
+                "y": 30.464,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.76,
+                "y": 34.408,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.57,
+                "y": 32.98,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.81,
+                "y": 38.964,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 2.73,
+                "y": 32.912,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.395,
+                "y": 45.9,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 5.04,
+                "y": 30.464,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 25.095,
+                "y": 49.776,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 27.93,
+                "y": 49.028,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.465,
+                "y": 30.532,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.94,
+                "y": 34.884,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 5.46,
+                "y": 33.864,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.245,
+                "y": 28.016,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.395,
+                "y": 30.532,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.705,
+                "y": 31.96,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.255,
+                "y": 31.96,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.93,
+                "y": 32.708,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.3,
+                "y": 24.684,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.465,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 24.36,
+                "y": 52.088,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.91,
+                "y": 30.056,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 5.88,
+                "y": 33.864,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 32.776,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.465,
+                "y": 37.74,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 23.415,
+                "y": 31.212,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 23.205,
+                "y": 27.948,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.255,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 19.215,
+                "y": 45.968,
+                "outside_box": true
+              },
+              {
+                "type_name": "clearance",
+                "x": 20.685,
+                "y": 45.288,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.045,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 7.77,
+                "y": 30.94,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 24.072,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 28.98,
+                "y": 22.712,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.605,
+                "y": 33.32,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.15,
+                "y": 27.676,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.305,
+                "y": 24.072,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.76,
+                "y": 27.472,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 26.46,
+                "y": 21.284,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.05,
+                "y": 32.98,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.35,
+                "y": 34.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.29,
+                "y": 42.908,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.84,
+                "y": 24.276,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.465,
+                "y": 34.952,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 34.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.305,
+                "y": 39.712,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.89,
+                "y": 29.852,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.755,
+                "y": 41.412,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.6,
+                "y": 45.696,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.07,
+                "y": 33.592,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.515,
+                "y": 32.572,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.03,
+                "y": 17.612,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.305,
+                "y": 45.968,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 28.665,
+                "y": 36.108,
+                "outside_box": true
+              },
+              {
+                "type_name": "clearance",
+                "x": 6.93,
+                "y": 64.124,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 17.535,
+                "y": 56.168,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 4.935,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.415,
+                "y": 55.216,
+                "outside_box": true
+              },
+              {
+                "type_name": "clearance",
+                "x": 17.43,
+                "y": 55.692,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.465,
+                "y": 31.892,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 23.73,
+                "y": 20.672,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 23.73,
+                "y": 18.564,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 7.56,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.465,
+                "y": 29.376,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 2.1,
+                "y": 33.388,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 0.84,
+                "y": 32.436,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.75,
+                "y": 35.088,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 37.4,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.415,
+                "y": 39.576,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.995,
+                "y": 32.912,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.995,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 1.785,
+                "y": 33.388,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 11.76,
+                "y": 7.412,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 31.008,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 13.02,
+                "y": 39.78,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.765,
+                "y": 32.708,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 3.36,
+                "y": 42.364,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.365,
+                "y": 33.184,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 14.7,
+                "y": 35.7,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.515,
+                "y": 37.672,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.095,
+                "y": 17.612,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.255,
+                "y": 35.564,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.66,
+                "y": 32.164,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.705,
+                "y": 39.78,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.54,
+                "y": 30.736,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.835,
+                "y": 33.796,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 15.75,
+                "y": 31.076,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.23,
+                "y": 25.772,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.255,
+                "y": 29.104,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 29.715,
+                "y": 63.92,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.23,
+                "y": 45.152,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.555,
+                "y": 22.916,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 5.355,
+                "y": 38.556,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.94,
+                "y": 43.248,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.73,
+                "y": 35.156,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.205,
+                "y": 16.388,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.4,
+                "y": 18.768,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.985,
+                "y": 36.448,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 6.09,
+                "y": 9.18,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.73,
+                "y": 33.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.73,
+                "y": 34.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 28.35,
+                "y": 44.676,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.83,
+                "y": 40.12,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.42,
+                "y": 34.68,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 15.96,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 5.565,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.235,
+                "y": 35.224,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.91,
+                "y": 40.324,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.235,
+                "y": 38.692,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.025,
+                "y": 35.904,
+                "outside_box": false
+              },
+              {
+                "type_name": "tackle",
+                "x": 10.08,
+                "y": 30.192,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.72,
+                "y": 40.528,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.63,
+                "y": 32.98,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.245,
+                "y": 48.824,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.195,
+                "y": 34.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.945,
+                "y": 27.472,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 30.056,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.05,
+                "y": 33.796,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 16.275,
+                "y": 20.808,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.92,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.82,
+                "y": 31.484,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 21.84,
+                "y": 44.54,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.045,
+                "y": 32.98,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.575,
+                "y": 33.116,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 34.02,
+                "y": 36.72,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.38,
+                "y": 30.056,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.3,
+                "y": 33.116,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.88,
+                "y": 38.352,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.775,
+                "y": 25.84,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.84,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.725,
+                "y": 35.224,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 26.25,
+                "y": 9.928,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.09,
+                "y": 34.884,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.41,
+                "y": 39.168,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.885,
+                "y": 31.28,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 36.04,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.25,
+                "y": 31.688,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.19,
+                "y": 29.784,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.57,
+                "y": 33.184,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.495,
+                "y": 26.452,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.97,
+                "y": 23.256,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.575,
+                "y": 34.884,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.255,
+                "y": 35.292,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.255,
+                "y": 36.788,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 2.52,
+                "y": 17.68,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 0.84,
+                "y": 34.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.5,
+                "y": 40.392,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 2.625,
+                "y": 31.96,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.015,
+                "y": 32.64,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.35,
+                "y": 16.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 5.67,
+                "y": 37.74,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 1.785,
+                "y": 32.98,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.515,
+                "y": 30.668,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 0.945,
+                "y": 32.436,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.835,
+                "y": 34.136,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 22.155,
+                "y": 58.004,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 32.655,
+                "y": 26.996,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 17.34,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 29.61,
+                "y": 23.392,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 26.88,
+                "y": 25.976,
+                "outside_box": true
+              },
+              {
+                "type_name": "clearance",
+                "x": 29.295,
+                "y": 43.52,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 27.51,
+                "y": 41.888,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 15.645,
+                "y": 52.904,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 1.785,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 3.78,
+                "y": 32.64,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.565,
+                "y": 32.436,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.26,
+                "y": 27.744,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 34.748,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.465,
+                "y": 35.564,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 28.14,
+                "y": 47.6,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 43.928,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.1,
+                "y": 39.168,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.52,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.56,
+                "y": 43.112,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.55,
+                "y": 39.916,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.885,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.925,
+                "y": 37.128,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.99,
+                "y": 36.448,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 6.3,
+                "y": 16.252,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 7.245,
+                "y": 15.572,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.485,
+                "y": 33.252,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 20.475,
+                "y": 37.74,
+                "outside_box": true
+              }
+            ]
+          },
+          "distribution_profile": {
+            "visual_status": "available",
+            "event_count": 1125,
+            "pass_length_bands": {
+              "long": {
+                "attempts": 419,
+                "completions": 127,
+                "completion_pct": 0.303103,
+                "share_of_attempts": 0.372444
+              },
+              "medium": {
+                "attempts": 512,
+                "completions": 493,
+                "completion_pct": 0.962891,
+                "share_of_attempts": 0.455111
+              },
+              "short": {
+                "attempts": 194,
+                "completions": 194,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.172444
+              }
+            },
+            "destination_lanes": {
+              "center": {
+                "attempts": 279,
+                "completions": 201,
+                "completion_pct": 0.72043,
+                "share_of_attempts": 0.248
+              },
+              "left": {
+                "attempts": 364,
+                "completions": 277,
+                "completion_pct": 0.760989,
+                "share_of_attempts": 0.323556
+              },
+              "right": {
+                "attempts": 482,
+                "completions": 336,
+                "completion_pct": 0.697095,
+                "share_of_attempts": 0.428444
+              }
+            },
+            "destination_depth": {
+              "final_third": {
+                "attempts": 138,
+                "completions": 23,
+                "completion_pct": 0.166667,
+                "share_of_attempts": 0.122667
+              },
+              "middle_third": {
+                "attempts": 344,
+                "completions": 166,
+                "completion_pct": 0.482558,
+                "share_of_attempts": 0.305778
+              },
+              "own_third": {
+                "attempts": 643,
+                "completions": 625,
+                "completion_pct": 0.972006,
+                "share_of_attempts": 0.571556
+              }
+            },
+            "destination_grid": {
+              "final_third__center": {
+                "destination_depth": "final_third",
+                "destination_lane": "center",
+                "attempts": 39,
+                "completions": 6,
+                "completion_pct": 0.153846,
+                "share_of_attempts": 0.034667
+              },
+              "final_third__left": {
+                "destination_depth": "final_third",
+                "destination_lane": "left",
+                "attempts": 23,
+                "completions": 2,
+                "completion_pct": 0.086957,
+                "share_of_attempts": 0.020444
+              },
+              "final_third__right": {
+                "destination_depth": "final_third",
+                "destination_lane": "right",
+                "attempts": 76,
+                "completions": 15,
+                "completion_pct": 0.197368,
+                "share_of_attempts": 0.067556
+              },
+              "middle_third__center": {
+                "destination_depth": "middle_third",
+                "destination_lane": "center",
+                "attempts": 83,
+                "completions": 38,
+                "completion_pct": 0.457831,
+                "share_of_attempts": 0.073778
+              },
+              "middle_third__left": {
+                "destination_depth": "middle_third",
+                "destination_lane": "left",
+                "attempts": 115,
+                "completions": 61,
+                "completion_pct": 0.530435,
+                "share_of_attempts": 0.102222
+              },
+              "middle_third__right": {
+                "destination_depth": "middle_third",
+                "destination_lane": "right",
+                "attempts": 146,
+                "completions": 67,
+                "completion_pct": 0.458904,
+                "share_of_attempts": 0.129778
+              },
+              "own_third__center": {
+                "destination_depth": "own_third",
+                "destination_lane": "center",
+                "attempts": 157,
+                "completions": 157,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.139556
+              },
+              "own_third__left": {
+                "destination_depth": "own_third",
+                "destination_lane": "left",
+                "attempts": 226,
+                "completions": 214,
+                "completion_pct": 0.946903,
+                "share_of_attempts": 0.200889
+              },
+              "own_third__right": {
+                "destination_depth": "own_third",
+                "destination_lane": "right",
+                "attempts": 260,
+                "completions": 254,
+                "completion_pct": 0.976923,
+                "share_of_attempts": 0.231111
+              }
+            },
+            "destination_grid_source": "joint_pass_end_depth_x_lane",
+            "coordinate_fields_used": {
+              "start": [
+                "x",
+                "y"
+              ],
+              "delta": [
+                "dx",
+                "dy"
+              ],
+              "derived_end": [
+                "end_x",
+                "end_y"
+              ]
+            },
+            "season_metrics": {
+              "pass_attempts_per90": 39.8,
+              "pass_completion_pct": 0.740704,
+              "avg_pass_distance": 30.072133,
+              "long_pass_share": 0.292462,
+              "short_pass_share": 0.170854,
+              "progressive_passes_per90": 12.88,
+              "progressive_pass_share": 0.323618
+            }
+          },
+          "build_up_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "total_events": 288,
+            "zones": {
+              "in_box": {
+                "label": "Area",
+                "event_count": 235,
+                "share": 0.815972,
+                "event_count_per90": 9.4,
+                "top_action_types": {
+                  "keeper_pick_up": 175,
+                  "keeper_punch": 19,
+                  "keeper_claim": 19
+                }
+              },
+              "left_corridor": {
+                "label": "Sx basso",
+                "event_count": 9,
+                "share": 0.03125,
+                "event_count_per90": 0.36,
+                "top_action_types": {
+                  "interception": 7,
+                  "clearance": 2
+                }
+              },
+              "right_corridor": {
+                "label": "Dx basso",
+                "event_count": 12,
+                "share": 0.041667,
+                "event_count_per90": 0.48,
+                "top_action_types": {
+                  "interception": 10,
+                  "clearance": 2
+                }
+              },
+              "limite": {
+                "label": "Limite",
+                "event_count": 22,
+                "share": 0.076389,
+                "event_count_per90": 0.88,
+                "top_action_types": {
+                  "interception": 15,
+                  "clearance": 7
+                }
+              },
+              "deep_center": {
+                "label": "Centro",
+                "event_count": 6,
+                "share": 0.020833,
+                "event_count_per90": 0.24,
+                "top_action_types": {
+                  "interception": 6
+                }
+              }
+            }
+          }
+        },
+        "action_split": {
+          "saves": {
+            "raw_total": 138.0,
+            "per90": 5.52,
+            "percentage_or_share": null,
+            "source": "shot_event_base_or_gk_events",
+            "sample_warning": null
+          },
+          "goals_conceded": {
+            "raw_total": 35.0,
+            "per90": 1.4,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "shots_on_target_faced": {
+            "raw_total": 173.0,
+            "per90": 6.92,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "claims": {
+            "raw_total": 19.0,
+            "per90": 0.76,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": null
+          },
+          "punches": {
+            "raw_total": 19.0,
+            "per90": 0.76,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": null
+          },
+          "crosses_faced": {
+            "raw_total": 231.0,
+            "per90": 9.24,
+            "percentage_or_share": null,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "crosses_stopped": {
+            "raw_total": 38.0,
+            "per90": 1.52,
+            "percentage_or_share": 0.164502,
+            "source": "derived",
+            "sample_warning": null
+          },
+          "defensive_actions_outside_box": {
+            "raw_total": 41.0,
+            "per90": 1.64,
+            "percentage_or_share": 0.174468,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "passes_attempted": {
+            "raw_total": 995.0,
+            "per90": 39.8,
+            "percentage_or_share": null,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "short_passes": {
+            "raw_total": 170.0,
+            "per90": null,
+            "percentage_or_share": 0.170854,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "long_passes": {
+            "raw_total": 291.0,
+            "per90": null,
+            "percentage_or_share": 0.292462,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "progressive_passes": {
+            "raw_total": 322.0,
+            "per90": 12.88,
+            "percentage_or_share": 0.323618,
+            "source": "player_pass",
+            "sample_warning": null
+          }
+        },
+        "excluded_v1_blocks": [
+          "team_context",
+          "classic_similarity",
+          "generic_positional_heatmap",
+          "pca_breakdown_visible_block",
+          "handling_security_axis"
+        ]
+      },
+      {
+        "payload_type": "gk_page_v1_player",
+        "schema_version": "gk_page_v1",
+        "metadata": {
+          "visual_geometry_status": "prototype",
+          "source_freshness_status": "mixed",
+          "benchmark_rule_status": "official_not_modified"
+        },
+        "header": {
+          "player_id": 35758,
+          "player_name": "Yann Sommer",
+          "team_id": 75,
+          "team_name": "Inter",
+          "competition_id": 24500,
+          "competition_name": "ITA-Serie A",
+          "season_id": 2526,
+          "minutes": 2700.0,
+          "macro_role": "GK",
+          "team_gk_rank": "starter",
+          "team_gk_rank_number": 1,
+          "official_gk_minutes_threshold": 300,
+          "official_benchmark_eligible": true,
+          "sample_status": "starter_sample",
+          "sample_warning_text": "Starter sample; eligible for normal GK benchmark interpretation."
+        },
+        "radar": {
+          "radar_version": "gk_page_v1_prototype_4_axis",
+          "scoring_note": "Prototype robust z-scores within competition x season x macro_role=GK. Not official rankings. Stable frontend export; not an official ranking.",
+          "axes": [
+            {
+              "axis_id": "shot_stopping",
+              "axis_name": "Shot stopping",
+              "axis_score_0_100": 44.94,
+              "axis_z_score": -0.3375,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "xgot_faced_minus_goals_conceded_per90",
+                  "raw_value": 0.015311,
+                  "z_score": 0.852,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "save_pct",
+                  "raw_value": 0.818182,
+                  "z_score": -0.5056,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "goals_conceded_per_shot_on_target",
+                  "raw_value": 0.181818,
+                  "z_score": -0.5056,
+                  "inverse_scored": true,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "saves_per90",
+                  "raw_value": 2.7,
+                  "z_score": -1.191,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "box_control",
+              "axis_name": "Box control",
+              "axis_score_0_100": 31.49,
+              "axis_z_score": -1.234,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "cross_stop_pct",
+                  "raw_value": 0.081081,
+                  "z_score": -0.7864,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "claim_rate_on_crosses",
+                  "raw_value": 0.058559,
+                  "z_score": -0.4024,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "keeper_claim_success_rate",
+                  "raw_value": 0.692308,
+                  "z_score": -1.9301,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "crosses_stopped_per90",
+                  "raw_value": 0.6,
+                  "z_score": -1.8172,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "sweeper_activity",
+              "axis_name": "Sweeper activity",
+              "axis_score_0_100": 53.99,
+              "axis_z_score": 0.2657,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "def_actions_outside_box_per90",
+                  "raw_value": 1.133333,
+                  "z_score": 0.0457,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "interventions_outside_box_share",
+                  "raw_value": 0.170854,
+                  "z_score": 1.4635,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "avg_def_action_distance_from_goal",
+                  "raw_value": 13.295776,
+                  "z_score": 0.7689,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "defensive_activity_intensity",
+                  "raw_value": 6.633333,
+                  "z_score": -1.2153,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "distribution",
+              "axis_name": "Distribution",
+              "axis_score_0_100": 58.07,
+              "axis_z_score": 0.5381,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "pass_attempts_per90",
+                  "raw_value": 29.466667,
+                  "z_score": 0.8324,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "pass_completion_pct",
+                  "raw_value": 0.855204,
+                  "z_score": 1.2832,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "short_pass_share",
+                  "raw_value": 0.193439,
+                  "z_score": 0.9108,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "progressive_passes_per90",
+                  "raw_value": 6.166667,
+                  "z_score": -0.8739,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            }
+          ]
+        },
+        "visual_blocks": {
+          "goal_map_save_map": {
+            "visual_status": "available",
+            "coordinate_fields": [
+              "json_goalmouth_y",
+              "json_goalmouth_z"
+            ],
+            "zone_method": "prototype terciles from all on-target goalmouth coordinates",
+            "total_on_target": 99,
+            "zones": {
+              "top_left": {
+                "shots_on_target_faced": 5,
+                "saves": 4,
+                "goals_conceded": 1,
+                "save_pct": 0.8,
+                "xg_faced": 0.466603,
+                "xgot_faced": 1.923582,
+                "sample_warning": "low_zone_denominator"
+              },
+              "top_center": {
+                "shots_on_target_faced": 4,
+                "saves": 3,
+                "goals_conceded": 1,
+                "save_pct": 0.75,
+                "xg_faced": 0.619879,
+                "xgot_faced": 0.98068,
+                "sample_warning": "low_zone_denominator"
+              },
+              "top_right": {
+                "shots_on_target_faced": 3,
+                "saves": 1,
+                "goals_conceded": 2,
+                "save_pct": 0.333333,
+                "xg_faced": 0.208115,
+                "xgot_faced": 1.957533,
+                "sample_warning": "low_zone_denominator"
+              },
+              "middle_left": {
+                "shots_on_target_faced": 10,
+                "saves": 8,
+                "goals_conceded": 2,
+                "save_pct": 0.8,
+                "xg_faced": 0.428034,
+                "xgot_faced": 1.941621,
+                "sample_warning": null
+              },
+              "middle_center": {
+                "shots_on_target_faced": 32,
+                "saves": 32,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 2.023863,
+                "xgot_faced": 3e-06,
+                "sample_warning": null
+              },
+              "middle_right": {
+                "shots_on_target_faced": 17,
+                "saves": 15,
+                "goals_conceded": 2,
+                "save_pct": 0.882353,
+                "xg_faced": 1.961505,
+                "xgot_faced": 1.848743,
+                "sample_warning": null
+              },
+              "bottom_left": {
+                "shots_on_target_faced": 7,
+                "saves": 3,
+                "goals_conceded": 4,
+                "save_pct": 0.428571,
+                "xg_faced": 1.476671,
+                "xgot_faced": 3.898933,
+                "sample_warning": "low_zone_denominator"
+              },
+              "bottom_center": {
+                "shots_on_target_faced": 8,
+                "saves": 6,
+                "goals_conceded": 2,
+                "save_pct": 0.75,
+                "xg_faced": 1.075351,
+                "xgot_faced": 1.9762,
+                "sample_warning": "low_zone_denominator"
+              },
+              "bottom_right": {
+                "shots_on_target_faced": 13,
+                "saves": 9,
+                "goals_conceded": 4,
+                "save_pct": 0.692308,
+                "xg_faced": 1.252572,
+                "xgot_faced": 3.932023,
+                "sample_warning": null
+              }
+            }
+          },
+          "sweeper_actions_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "coordinate_normalization_note": "Events with raw x > 52.5 mirrored to defensive half (105-x, 68-y). Reliable because GK actions are confined to own half.",
+            "prototype_filter_note": "GK-specific action filter; no generic touches.",
+            "inspected_action_types": [
+              "clearance",
+              "dribble",
+              "freekick",
+              "goalkick",
+              "interception",
+              "keeper_claim",
+              "keeper_pick_up",
+              "keeper_punch",
+              "keeper_save",
+              "offside",
+              "out",
+              "pass",
+              "receival"
+            ],
+            "event_count": 199,
+            "event_count_per90": 6.633333,
+            "outside_box_count": 33,
+            "outside_box_share": 0.165829,
+            "average_action_distance_from_goal": 12.820213,
+            "centroid": {
+              "x": 10.177,
+              "y": 35.498
+            },
+            "coordinates_sample": [
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 28.56,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.365,
+                "y": 35.02,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 2.94,
+                "y": 51.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 34.816,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 2.625,
+                "y": 34.952,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 3.15,
+                "y": 33.864,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.25,
+                "y": 34.136,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.78,
+                "y": 32.64,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 29.4,
+                "y": 11.9,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 26.46,
+                "y": 12.852,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.755,
+                "y": 32.164,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 49.35,
+                "y": 36.04,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 48.93,
+                "y": 49.368,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 33.184,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.29,
+                "y": 42.16,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.415,
+                "y": 37.672,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.645,
+                "y": 40.936,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 20.895,
+                "y": 29.24,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.675,
+                "y": 51.544,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 37.536,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 39.585,
+                "y": 36.244,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.72,
+                "y": 29.784,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 32.64,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.835,
+                "y": 34.34,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.73,
+                "y": 40.46,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.045,
+                "y": 22.848,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.93,
+                "y": 46.512,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.83,
+                "y": 35.224,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.45,
+                "y": 34.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.07,
+                "y": 24.548,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.765,
+                "y": 26.928,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.395,
+                "y": 33.116,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.495,
+                "y": 30.124,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.29,
+                "y": 43.86,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 51.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 16.17,
+                "y": 30.668,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.38,
+                "y": 45.764,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 8.19,
+                "y": 35.564,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 34.136,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 40.005,
+                "y": 20.264,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.305,
+                "y": 34.748,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.76,
+                "y": 37.332,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.885,
+                "y": 30.872,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 33.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.345,
+                "y": 35.156,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.94,
+                "y": 35.428,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 19.74,
+                "y": 34.476,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 27.825,
+                "y": 35.02,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 34.136,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.715,
+                "y": 45.492,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 24.675,
+                "y": 47.736,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.675,
+                "y": 32.776,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.04,
+                "y": 44.54,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.145,
+                "y": 27.336,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 14.7,
+                "y": 31.892,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.99,
+                "y": 36.04,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 27.93,
+                "y": 23.46,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.975,
+                "y": 35.904,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 12.6,
+                "y": 23.732,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 14.07,
+                "y": 57.392,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 15.225,
+                "y": 60.384,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.255,
+                "y": 32.708,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.935,
+                "y": 35.564,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 29.085,
+                "y": 65.28,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 18.9,
+                "y": 54.876,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.41,
+                "y": 34.544,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.45,
+                "y": 36.924,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.275,
+                "y": 32.028,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 15.75,
+                "y": 48.416,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.25,
+                "y": 33.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.515,
+                "y": 40.596,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.77,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 43.365,
+                "y": 34.68,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.305,
+                "y": 40.596,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.39,
+                "y": 35.904,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.225,
+                "y": 33.456,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.78,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.82,
+                "y": 35.972,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.825,
+                "y": 33.864,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.52,
+                "y": 60.044,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.99,
+                "y": 31.62,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 30.056,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 21.63,
+                "y": 23.46,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 21.42,
+                "y": 26.86,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.91,
+                "y": 25.908,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 13.545,
+                "y": 29.58,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 2.73,
+                "y": 28.492,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.77,
+                "y": 29.988,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 26.316,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.865,
+                "y": 51.884,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.825,
+                "y": 46.172,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.995,
+                "y": 28.696,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.26,
+                "y": 34.68,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.465,
+                "y": 36.448,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 7.875,
+                "y": 44.744,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.095,
+                "y": 29.648,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 30.45,
+                "y": 21.012,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 20.685,
+                "y": 19.652,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 27.72,
+                "y": 34.884,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.075,
+                "y": 47.532,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 27.195,
+                "y": 39.44,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.435,
+                "y": 38.148,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.785,
+                "y": 23.256,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.725,
+                "y": 32.912,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 34.952,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.455,
+                "y": 50.592,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.78,
+                "y": 33.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 10.605,
+                "y": 31.688,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.225,
+                "y": 30.464,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.885,
+                "y": 35.02,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.04,
+                "y": 29.24,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 34.272,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.47,
+                "y": 33.66,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.54,
+                "y": 41.82,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.05,
+                "y": 32.708,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.045,
+                "y": 32.3,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.76,
+                "y": 37.332,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.605,
+                "y": 37.4,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.81,
+                "y": 36.924,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.18,
+                "y": 31.28,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.31,
+                "y": 41.208,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.12,
+                "y": 30.056,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 14.07,
+                "y": 16.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 8.295,
+                "y": 33.932,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 34.952,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 49.14,
+                "y": 37.4,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 2.205,
+                "y": 34.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.775,
+                "y": 30.26,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 17.325,
+                "y": 59.908,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.41,
+                "y": 34.544,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 33.456,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.5,
+                "y": 31.076,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 1.89,
+                "y": 35.088,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.52,
+                "y": 34.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.835,
+                "y": 37.74,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.225,
+                "y": 46.784,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.94,
+                "y": 35.02,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.625,
+                "y": 33.048,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 2.94,
+                "y": 42.432,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 1.47,
+                "y": 30.464,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 7.35,
+                "y": 34.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.89,
+                "y": 34.476,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 34.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.755,
+                "y": 30.872,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 1.155,
+                "y": 36.856,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 37.17,
+                "y": 21.828,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 18.165,
+                "y": 43.452,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 4.2,
+                "y": 27.2,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 3.78,
+                "y": 39.576,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 11.55,
+                "y": 45.56,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 22.575,
+                "y": 16.864,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 3.255,
+                "y": 32.436,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 36.584,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 7.245,
+                "y": 65.96,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.075,
+                "y": 37.196,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.415,
+                "y": 34.884,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 5.04,
+                "y": 34.136,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 4.41,
+                "y": 51.068,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 3.36,
+                "y": 29.104,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 7.455,
+                "y": 21.012,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 13.02,
+                "y": 30.396,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.995,
+                "y": 39.848,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.36,
+                "y": 36.312,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 6.825,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 23.625,
+                "y": 49.98,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.57,
+                "y": 19.584,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.995,
+                "y": 34.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 0.525,
+                "y": 28.22,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 36.015,
+                "y": 55.148,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.415,
+                "y": 35.088,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 4.41,
+                "y": 36.516,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 2.415,
+                "y": 26.248,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 34.0,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.66,
+                "y": 28.492,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 11.13,
+                "y": 45.288,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 16.275,
+                "y": 30.736,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.08,
+                "y": 34.204,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.61,
+                "y": 38.692,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 14.175,
+                "y": 37.604,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_punch",
+                "x": 3.255,
+                "y": 33.524,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_claim",
+                "x": 4.62,
+                "y": 36.992,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.855,
+                "y": 45.084,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 36.72,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 28.875,
+                "y": 56.44,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.86,
+                "y": 32.708,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 28.356,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.835,
+                "y": 39.576,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.52,
+                "y": 37.128,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.205,
+                "y": 33.796,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.75,
+                "y": 31.484,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 14.49,
+                "y": 23.12,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.5,
+                "y": 23.528,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 9.135,
+                "y": 27.812,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.15,
+                "y": 38.148,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 7.035,
+                "y": 47.124,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 11.445,
+                "y": 22.304,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 6.405,
+                "y": 31.824,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 4.935,
+                "y": 42.636,
+                "outside_box": false
+              }
+            ]
+          },
+          "distribution_profile": {
+            "visual_status": "available",
+            "event_count": 1010,
+            "pass_length_bands": {
+              "long": {
+                "attempts": 256,
+                "completions": 115,
+                "completion_pct": 0.449219,
+                "share_of_attempts": 0.253465
+              },
+              "medium": {
+                "attempts": 553,
+                "completions": 538,
+                "completion_pct": 0.972875,
+                "share_of_attempts": 0.547525
+              },
+              "short": {
+                "attempts": 201,
+                "completions": 200,
+                "completion_pct": 0.995025,
+                "share_of_attempts": 0.19901
+              }
+            },
+            "destination_lanes": {
+              "center": {
+                "attempts": 298,
+                "completions": 246,
+                "completion_pct": 0.825503,
+                "share_of_attempts": 0.29505
+              },
+              "left": {
+                "attempts": 331,
+                "completions": 280,
+                "completion_pct": 0.845921,
+                "share_of_attempts": 0.327723
+              },
+              "right": {
+                "attempts": 381,
+                "completions": 327,
+                "completion_pct": 0.858268,
+                "share_of_attempts": 0.377228
+              }
+            },
+            "destination_depth": {
+              "final_third": {
+                "attempts": 42,
+                "completions": 11,
+                "completion_pct": 0.261905,
+                "share_of_attempts": 0.041584
+              },
+              "middle_third": {
+                "attempts": 278,
+                "completions": 161,
+                "completion_pct": 0.579137,
+                "share_of_attempts": 0.275248
+              },
+              "own_third": {
+                "attempts": 690,
+                "completions": 681,
+                "completion_pct": 0.986957,
+                "share_of_attempts": 0.683168
+              }
+            },
+            "destination_grid": {
+              "final_third__center": {
+                "destination_depth": "final_third",
+                "destination_lane": "center",
+                "attempts": 15,
+                "completions": 3,
+                "completion_pct": 0.2,
+                "share_of_attempts": 0.014851
+              },
+              "final_third__left": {
+                "destination_depth": "final_third",
+                "destination_lane": "left",
+                "attempts": 18,
+                "completions": 5,
+                "completion_pct": 0.277778,
+                "share_of_attempts": 0.017822
+              },
+              "final_third__right": {
+                "destination_depth": "final_third",
+                "destination_lane": "right",
+                "attempts": 9,
+                "completions": 3,
+                "completion_pct": 0.333333,
+                "share_of_attempts": 0.008911
+              },
+              "middle_third__center": {
+                "destination_depth": "middle_third",
+                "destination_lane": "center",
+                "attempts": 92,
+                "completions": 53,
+                "completion_pct": 0.576087,
+                "share_of_attempts": 0.091089
+              },
+              "middle_third__left": {
+                "destination_depth": "middle_third",
+                "destination_lane": "left",
+                "attempts": 93,
+                "completions": 58,
+                "completion_pct": 0.623656,
+                "share_of_attempts": 0.092079
+              },
+              "middle_third__right": {
+                "destination_depth": "middle_third",
+                "destination_lane": "right",
+                "attempts": 93,
+                "completions": 50,
+                "completion_pct": 0.537634,
+                "share_of_attempts": 0.092079
+              },
+              "own_third__center": {
+                "destination_depth": "own_third",
+                "destination_lane": "center",
+                "attempts": 191,
+                "completions": 190,
+                "completion_pct": 0.994764,
+                "share_of_attempts": 0.189109
+              },
+              "own_third__left": {
+                "destination_depth": "own_third",
+                "destination_lane": "left",
+                "attempts": 220,
+                "completions": 217,
+                "completion_pct": 0.986364,
+                "share_of_attempts": 0.217822
+              },
+              "own_third__right": {
+                "destination_depth": "own_third",
+                "destination_lane": "right",
+                "attempts": 279,
+                "completions": 274,
+                "completion_pct": 0.982079,
+                "share_of_attempts": 0.276238
+              }
+            },
+            "destination_grid_source": "joint_pass_end_depth_x_lane",
+            "coordinate_fields_used": {
+              "start": [
+                "x",
+                "y"
+              ],
+              "delta": [
+                "dx",
+                "dy"
+              ],
+              "derived_end": [
+                "end_x",
+                "end_y"
+              ]
+            },
+            "season_metrics": {
+              "pass_attempts_per90": 29.466667,
+              "pass_completion_pct": 0.855204,
+              "avg_pass_distance": 25.988368,
+              "long_pass_share": 0.16629,
+              "short_pass_share": 0.193439,
+              "progressive_passes_per90": 6.166667,
+              "progressive_pass_share": 0.209276
+            }
+          },
+          "build_up_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "total_events": 199,
+            "zones": {
+              "in_box": {
+                "label": "Area",
+                "event_count": 166,
+                "share": 0.834171,
+                "event_count_per90": 5.533333,
+                "top_action_types": {
+                  "keeper_pick_up": 125,
+                  "interception": 20,
+                  "keeper_claim": 13
+                }
+              },
+              "left_corridor": {
+                "label": "Sx basso",
+                "event_count": 7,
+                "share": 0.035176,
+                "event_count_per90": 0.233333,
+                "top_action_types": {
+                  "interception": 6,
+                  "clearance": 1
+                }
+              },
+              "right_corridor": {
+                "label": "Dx basso",
+                "event_count": 9,
+                "share": 0.045226,
+                "event_count_per90": 0.3,
+                "top_action_types": {
+                  "interception": 9
+                }
+              },
+              "limite": {
+                "label": "Limite",
+                "event_count": 10,
+                "share": 0.050251,
+                "event_count_per90": 0.333333,
+                "top_action_types": {
+                  "interception": 9,
+                  "clearance": 1
+                }
+              },
+              "deep_center": {
+                "label": "Centro",
+                "event_count": 4,
+                "share": 0.020101,
+                "event_count_per90": 0.133333,
+                "top_action_types": {
+                  "interception": 4
+                }
+              }
+            }
+          }
+        },
+        "action_split": {
+          "saves": {
+            "raw_total": 81.0,
+            "per90": 2.7,
+            "percentage_or_share": null,
+            "source": "shot_event_base_or_gk_events",
+            "sample_warning": null
+          },
+          "goals_conceded": {
+            "raw_total": 18.0,
+            "per90": 0.6,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "shots_on_target_faced": {
+            "raw_total": 99.0,
+            "per90": 3.3,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "claims": {
+            "raw_total": 13.0,
+            "per90": 0.433333,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": null
+          },
+          "punches": {
+            "raw_total": 5.0,
+            "per90": 0.166667,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": "low_denominator"
+          },
+          "crosses_faced": {
+            "raw_total": 222.0,
+            "per90": 7.4,
+            "percentage_or_share": null,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "crosses_stopped": {
+            "raw_total": 18.0,
+            "per90": 0.6,
+            "percentage_or_share": 0.081081,
+            "source": "derived",
+            "sample_warning": null
+          },
+          "defensive_actions_outside_box": {
+            "raw_total": 34.0,
+            "per90": 1.133333,
+            "percentage_or_share": 0.170854,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "passes_attempted": {
+            "raw_total": 884.0,
+            "per90": 29.466667,
+            "percentage_or_share": null,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "short_passes": {
+            "raw_total": 171.0,
+            "per90": null,
+            "percentage_or_share": 0.193439,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "long_passes": {
+            "raw_total": 147.0,
+            "per90": null,
+            "percentage_or_share": 0.16629,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "progressive_passes": {
+            "raw_total": 185.0,
+            "per90": 6.166667,
+            "percentage_or_share": 0.209276,
+            "source": "player_pass",
+            "sample_warning": null
+          }
+        },
+        "excluded_v1_blocks": [
+          "team_context",
+          "classic_similarity",
+          "generic_positional_heatmap",
+          "pca_breakdown_visible_block",
+          "handling_security_axis"
+        ]
+      },
+      {
+        "payload_type": "gk_page_v1_player",
+        "schema_version": "gk_page_v1",
+        "metadata": {
+          "visual_geometry_status": "prototype",
+          "source_freshness_status": "mixed",
+          "benchmark_rule_status": "official_not_modified"
+        },
+        "header": {
+          "player_id": 321236,
+          "player_name": "Josep Martínez",
+          "team_id": 75,
+          "team_name": "Inter",
+          "competition_id": 24500,
+          "competition_name": "ITA-Serie A",
+          "season_id": 2526,
+          "minutes": 270.0,
+          "macro_role": "GK",
+          "team_gk_rank": "backup",
+          "team_gk_rank_number": 2,
+          "official_gk_minutes_threshold": 300,
+          "official_benchmark_eligible": false,
+          "sample_status": "forced_low_sample",
+          "sample_warning_text": "Forced into same-team GK comparison with 270 minutes; excluded from official benchmark cohorts."
+        },
+        "radar": {
+          "radar_version": "gk_page_v1_prototype_4_axis",
+          "scoring_note": "Prototype robust z-scores within competition x season x macro_role=GK. Not official rankings. Stable frontend export; not an official ranking.",
+          "axes": [
+            {
+              "axis_id": "shot_stopping",
+              "axis_name": "Shot stopping",
+              "axis_score_0_100": 55.33,
+              "axis_z_score": 0.3557,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "xgot_faced_minus_goals_conceded_per90",
+                  "raw_value": -0.005805,
+                  "z_score": 0.0357,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "save_pct",
+                  "raw_value": 0.9,
+                  "z_score": 1.152,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "goals_conceded_per_shot_on_target",
+                  "raw_value": 0.1,
+                  "z_score": 1.152,
+                  "inverse_scored": true,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "saves_per90",
+                  "raw_value": 3.0,
+                  "z_score": -0.917,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "box_control",
+              "axis_name": "Box control",
+              "axis_score_0_100": 14.09,
+              "axis_z_score": -2.3941,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "cross_stop_pct",
+                  "raw_value": 0.0,
+                  "z_score": -2.2631,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "claim_rate_on_crosses",
+                  "raw_value": 0.0,
+                  "z_score": -1.869,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "crosses_stopped_per90",
+                  "raw_value": 0.0,
+                  "z_score": -3.5312,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "claims_per90",
+                  "raw_value": 0.0,
+                  "z_score": -1.9134,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [
+                "keeper_claim_success_rate"
+              ],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "sweeper_activity",
+              "axis_name": "Sweeper activity",
+              "axis_score_0_100": 100.0,
+              "axis_z_score": 3.8109,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "def_actions_outside_box_per90",
+                  "raw_value": 2.666667,
+                  "z_score": 3.9392,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "interventions_outside_box_share",
+                  "raw_value": 0.421053,
+                  "z_score": 8.4471,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "avg_def_action_distance_from_goal",
+                  "raw_value": 19.507644,
+                  "z_score": 4.2519,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "defensive_activity_intensity",
+                  "raw_value": 6.333333,
+                  "z_score": -1.3946,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": true,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            },
+            {
+              "axis_id": "distribution",
+              "axis_name": "Distribution",
+              "axis_score_0_100": 58.3,
+              "axis_z_score": 0.5533,
+              "component_count": 4,
+              "component_metrics": [
+                {
+                  "metric_name": "pass_attempts_per90",
+                  "raw_value": 24.666667,
+                  "z_score": -0.4167,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "pass_completion_pct",
+                  "raw_value": 0.837838,
+                  "z_score": 1.0725,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "short_pass_share",
+                  "raw_value": 0.27027,
+                  "z_score": 2.5825,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                },
+                {
+                  "metric_name": "progressive_passes_per90",
+                  "raw_value": 5.666667,
+                  "z_score": -1.0252,
+                  "inverse_scored": false,
+                  "style_component": false,
+                  "fallback_component": false,
+                  "scoring_note": "quality/context component"
+                }
+              ],
+              "missing_components": [],
+              "reliability_warning": null
+            }
+          ]
+        },
+        "visual_blocks": {
+          "goal_map_save_map": {
+            "visual_status": "available",
+            "coordinate_fields": [
+              "json_goalmouth_y",
+              "json_goalmouth_z"
+            ],
+            "zone_method": "prototype terciles from all on-target goalmouth coordinates",
+            "total_on_target": 10,
+            "zones": {
+              "top_left": {
+                "shots_on_target_faced": 0,
+                "saves": 0,
+                "goals_conceded": 0,
+                "save_pct": null,
+                "xg_faced": 0.0,
+                "xgot_faced": 0.0,
+                "sample_warning": null
+              },
+              "top_center": {
+                "shots_on_target_faced": 0,
+                "saves": 0,
+                "goals_conceded": 0,
+                "save_pct": null,
+                "xg_faced": 0.0,
+                "xgot_faced": 0.0,
+                "sample_warning": null
+              },
+              "top_right": {
+                "shots_on_target_faced": 1,
+                "saves": 1,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 0.046344,
+                "xgot_faced": 1e-06,
+                "sample_warning": "low_zone_denominator"
+              },
+              "middle_left": {
+                "shots_on_target_faced": 1,
+                "saves": 1,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 0.027682,
+                "xgot_faced": 1e-06,
+                "sample_warning": "low_zone_denominator"
+              },
+              "middle_center": {
+                "shots_on_target_faced": 0,
+                "saves": 0,
+                "goals_conceded": 0,
+                "save_pct": null,
+                "xg_faced": 0.0,
+                "xgot_faced": 0.0,
+                "sample_warning": null
+              },
+              "middle_right": {
+                "shots_on_target_faced": 5,
+                "saves": 5,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 0.240172,
+                "xgot_faced": 0.0,
+                "sample_warning": "low_zone_denominator"
+              },
+              "bottom_left": {
+                "shots_on_target_faced": 2,
+                "saves": 1,
+                "goals_conceded": 1,
+                "save_pct": 0.5,
+                "xg_faced": 0.318118,
+                "xgot_faced": 0.982581,
+                "sample_warning": "low_zone_denominator"
+              },
+              "bottom_center": {
+                "shots_on_target_faced": 1,
+                "saves": 1,
+                "goals_conceded": 0,
+                "save_pct": 1.0,
+                "xg_faced": 0.029292,
+                "xgot_faced": 0.0,
+                "sample_warning": "low_zone_denominator"
+              },
+              "bottom_right": {
+                "shots_on_target_faced": 0,
+                "saves": 0,
+                "goals_conceded": 0,
+                "save_pct": null,
+                "xg_faced": 0.0,
+                "xgot_faced": 0.0,
+                "sample_warning": null
+              }
+            }
+          },
+          "sweeper_actions_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "coordinate_normalization_note": "Events with raw x > 52.5 mirrored to defensive half (105-x, 68-y). Reliable because GK actions are confined to own half.",
+            "prototype_filter_note": "GK-specific action filter; no generic touches.",
+            "inspected_action_types": [
+              "clearance",
+              "dribble",
+              "freekick",
+              "goalkick",
+              "interception",
+              "keeper_pick_up",
+              "keeper_save",
+              "offside",
+              "out",
+              "pass",
+              "receival"
+            ],
+            "event_count": 19,
+            "event_count_per90": 6.333333,
+            "outside_box_count": 8,
+            "outside_box_share": 0.421053,
+            "average_action_distance_from_goal": 19.507644,
+            "centroid": {
+              "x": 14.297,
+              "y": 32.74
+            },
+            "coordinates_sample": [
+              {
+                "type_name": "interception",
+                "x": 27.405,
+                "y": 28.356,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 1.89,
+                "y": 34.34,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 12.285,
+                "y": 17.544,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 10.185,
+                "y": 12.852,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 13.44,
+                "y": 36.176,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 39.9,
+                "y": 26.996,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.1,
+                "y": 33.728,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 12.39,
+                "y": 11.288,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 2.52,
+                "y": 34.748,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 15.75,
+                "y": 20.264,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 15.96,
+                "y": 37.264,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 8.295,
+                "y": 17.748,
+                "outside_box": false
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 3.885,
+                "y": 32.64,
+                "outside_box": false
+              },
+              {
+                "type_name": "clearance",
+                "x": 11.55,
+                "y": 65.144,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 25.515,
+                "y": 28.22,
+                "outside_box": true
+              },
+              {
+                "type_name": "clearance",
+                "x": 31.29,
+                "y": 34.952,
+                "outside_box": true
+              },
+              {
+                "type_name": "interception",
+                "x": 14.175,
+                "y": 43.86,
+                "outside_box": false
+              },
+              {
+                "type_name": "interception",
+                "x": 12.18,
+                "y": 56.372,
+                "outside_box": true
+              },
+              {
+                "type_name": "keeper_pick_up",
+                "x": 10.92,
+                "y": 49.572,
+                "outside_box": false
+              }
+            ]
+          },
+          "distribution_profile": {
+            "visual_status": "available",
+            "event_count": 87,
+            "pass_length_bands": {
+              "long": {
+                "attempts": 25,
+                "completions": 8,
+                "completion_pct": 0.32,
+                "share_of_attempts": 0.287356
+              },
+              "medium": {
+                "attempts": 40,
+                "completions": 40,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.45977
+              },
+              "short": {
+                "attempts": 22,
+                "completions": 22,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.252874
+              }
+            },
+            "destination_lanes": {
+              "center": {
+                "attempts": 35,
+                "completions": 26,
+                "completion_pct": 0.742857,
+                "share_of_attempts": 0.402299
+              },
+              "left": {
+                "attempts": 24,
+                "completions": 19,
+                "completion_pct": 0.791667,
+                "share_of_attempts": 0.275862
+              },
+              "right": {
+                "attempts": 28,
+                "completions": 25,
+                "completion_pct": 0.892857,
+                "share_of_attempts": 0.321839
+              }
+            },
+            "destination_depth": {
+              "final_third": {
+                "attempts": 3,
+                "completions": 0,
+                "completion_pct": 0.0,
+                "share_of_attempts": 0.034483
+              },
+              "middle_third": {
+                "attempts": 34,
+                "completions": 20,
+                "completion_pct": 0.588235,
+                "share_of_attempts": 0.390805
+              },
+              "own_third": {
+                "attempts": 50,
+                "completions": 50,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.574713
+              }
+            },
+            "destination_grid": {
+              "final_third__center": {
+                "destination_depth": "final_third",
+                "destination_lane": "center",
+                "attempts": 2,
+                "completions": 0,
+                "completion_pct": 0.0,
+                "share_of_attempts": 0.022989
+              },
+              "final_third__left": {
+                "destination_depth": "final_third",
+                "destination_lane": "left",
+                "attempts": 1,
+                "completions": 0,
+                "completion_pct": 0.0,
+                "share_of_attempts": 0.011494
+              },
+              "middle_third__center": {
+                "destination_depth": "middle_third",
+                "destination_lane": "center",
+                "attempts": 15,
+                "completions": 8,
+                "completion_pct": 0.533333,
+                "share_of_attempts": 0.172414
+              },
+              "middle_third__left": {
+                "destination_depth": "middle_third",
+                "destination_lane": "left",
+                "attempts": 11,
+                "completions": 7,
+                "completion_pct": 0.636364,
+                "share_of_attempts": 0.126437
+              },
+              "middle_third__right": {
+                "destination_depth": "middle_third",
+                "destination_lane": "right",
+                "attempts": 8,
+                "completions": 5,
+                "completion_pct": 0.625,
+                "share_of_attempts": 0.091954
+              },
+              "own_third__center": {
+                "destination_depth": "own_third",
+                "destination_lane": "center",
+                "attempts": 18,
+                "completions": 18,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.206897
+              },
+              "own_third__left": {
+                "destination_depth": "own_third",
+                "destination_lane": "left",
+                "attempts": 12,
+                "completions": 12,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.137931
+              },
+              "own_third__right": {
+                "destination_depth": "own_third",
+                "destination_lane": "right",
+                "attempts": 20,
+                "completions": 20,
+                "completion_pct": 1.0,
+                "share_of_attempts": 0.229885
+              }
+            },
+            "destination_grid_source": "joint_pass_end_depth_x_lane",
+            "coordinate_fields_used": {
+              "start": [
+                "x",
+                "y"
+              ],
+              "delta": [
+                "dx",
+                "dy"
+              ],
+              "derived_end": [
+                "end_x",
+                "end_y"
+              ]
+            },
+            "season_metrics": {
+              "pass_attempts_per90": 24.666667,
+              "pass_completion_pct": 0.837838,
+              "avg_pass_distance": 25.65513,
+              "long_pass_share": 0.202703,
+              "short_pass_share": 0.27027,
+              "progressive_passes_per90": 5.666667,
+              "progressive_pass_share": 0.22973
+            }
+          },
+          "build_up_map": {
+            "visual_status": "available",
+            "coordinate_normalization_status": "backend_normalized_heuristic",
+            "total_events": 19,
+            "zones": {
+              "in_box": {
+                "label": "Area",
+                "event_count": 11,
+                "share": 0.578947,
+                "event_count_per90": 3.666667,
+                "top_action_types": {
+                  "keeper_pick_up": 9,
+                  "interception": 2
+                }
+              },
+              "left_corridor": {
+                "label": "Sx basso",
+                "event_count": 0,
+                "share": 0.0,
+                "event_count_per90": 0.0,
+                "top_action_types": {}
+              },
+              "right_corridor": {
+                "label": "Dx basso",
+                "event_count": 0,
+                "share": 0.0,
+                "event_count_per90": 0.0,
+                "top_action_types": {}
+              },
+              "limite": {
+                "label": "Limite",
+                "event_count": 2,
+                "share": 0.105263,
+                "event_count_per90": 0.666667,
+                "top_action_types": {
+                  "interception": 2
+                }
+              },
+              "deep_center": {
+                "label": "Centro",
+                "event_count": 2,
+                "share": 0.105263,
+                "event_count_per90": 0.666667,
+                "top_action_types": {
+                  "interception": 1,
+                  "clearance": 1
+                }
+              }
+            }
+          }
+        },
+        "action_split": {
+          "saves": {
+            "raw_total": 9.0,
+            "per90": 3.0,
+            "percentage_or_share": null,
+            "source": "shot_event_base_or_gk_events",
+            "sample_warning": null
+          },
+          "goals_conceded": {
+            "raw_total": 1.0,
+            "per90": 0.333333,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "shots_on_target_faced": {
+            "raw_total": 10.0,
+            "per90": 3.333333,
+            "percentage_or_share": null,
+            "source": "shot_event_base",
+            "sample_warning": null
+          },
+          "claims": {
+            "raw_total": 0.0,
+            "per90": 0.0,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": "low_denominator"
+          },
+          "punches": {
+            "raw_total": 0.0,
+            "per90": 0.0,
+            "percentage_or_share": null,
+            "source": "player_events",
+            "sample_warning": "low_denominator"
+          },
+          "crosses_faced": {
+            "raw_total": 22.0,
+            "per90": 7.333333,
+            "percentage_or_share": null,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "crosses_stopped": {
+            "raw_total": 0.0,
+            "per90": 0.0,
+            "percentage_or_share": 0.0,
+            "source": "derived",
+            "sample_warning": "low_denominator"
+          },
+          "defensive_actions_outside_box": {
+            "raw_total": 8.0,
+            "per90": 2.666667,
+            "percentage_or_share": 0.421053,
+            "source": "player_gk_context",
+            "sample_warning": null
+          },
+          "passes_attempted": {
+            "raw_total": 74.0,
+            "per90": 24.666667,
+            "percentage_or_share": null,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "short_passes": {
+            "raw_total": 20.0,
+            "per90": null,
+            "percentage_or_share": 0.27027,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "long_passes": {
+            "raw_total": 15.0,
+            "per90": null,
+            "percentage_or_share": 0.202703,
+            "source": "player_pass",
+            "sample_warning": null
+          },
+          "progressive_passes": {
+            "raw_total": 17.0,
+            "per90": 5.666667,
+            "percentage_or_share": 0.22973,
+            "source": "player_pass",
+            "sample_warning": null
+          }
+        },
+        "excluded_v1_blocks": [
+          "team_context",
+          "classic_similarity",
+          "generic_positional_heatmap",
+          "pca_breakdown_visible_block",
+          "handling_security_axis"
+        ]
+      }
+    ]
+  },
+  "GK_PAGE_V1_TEAM_COMPARISONS": {
+    "schema_version": "gk_page_v1",
+    "metadata": {
+      "visual_geometry_status": "prototype",
+      "source_freshness_status": "mixed",
+      "benchmark_rule_status": "official_not_modified"
+    },
+    "report_context": {
+      "report_type": "gk_target_vs_team_room",
+      "target_player_name": "Guglielmo Vicario",
+      "target_player_id": 147863,
+      "comparison_team_name": "Inter",
+      "comparison_players": [
+        "Yann Sommer",
+        "Josep Martínez"
+      ],
+      "primary_comparison_player": "Yann Sommer",
+      "forced_backup_player": "Josep Martínez"
+    },
+    "team_comparisons": [
+      {
+        "payload_type": "gk_page_v1_team_comparison",
+        "schema_version": "gk_page_v1",
+        "metadata": {
+          "visual_geometry_status": "prototype",
+          "source_freshness_status": "mixed",
+          "benchmark_rule_status": "official_not_modified"
+        },
+        "team_gk_comparison": {
+          "team_id": 75,
+          "team_name": "Inter",
+          "competition_id": null,
+          "competition_name": "ITA-Serie A",
+          "season_id": 2526,
+          "official_benchmark_note": "Forced backup inclusion is team-internal display logic only and does not alter official cohorts.",
+          "gks": [
+            {
+              "player_id": 35758,
+              "player_name": "Yann Sommer",
+              "minutes": 2700.0,
+              "team_gk_rank": "starter",
+              "sample_status": "starter_sample",
+              "radar_axis_scores": {
+                "shot_stopping": 44.94,
+                "box_control": 31.49,
+                "sweeper_activity": 53.99,
+                "distribution": 58.07
+              },
+              "key_raw_metrics": {
+                "save_pct": 0.818182,
+                "xgot_faced_minus_goals_conceded_per90": 0.015311,
+                "goals_conceded_per90": 0.6,
+                "cross_stop_pct": 0.081081,
+                "claim_rate_on_crosses": 0.058559,
+                "def_actions_outside_box_per90": 1.133333,
+                "pass_attempts_per90": 29.466667,
+                "pass_completion_pct": 0.855204
+              },
+              "missing_metric_warnings": []
+            },
+            {
+              "player_id": 321236,
+              "player_name": "Josep Martínez",
+              "minutes": 270.0,
+              "team_gk_rank": "backup",
+              "sample_status": "forced_low_sample",
+              "radar_axis_scores": {
+                "shot_stopping": 55.33,
+                "box_control": 14.09,
+                "sweeper_activity": 100.0,
+                "distribution": 58.3
+              },
+              "key_raw_metrics": {
+                "save_pct": 0.9,
+                "xgot_faced_minus_goals_conceded_per90": -0.005805,
+                "goals_conceded_per90": 0.333333,
+                "cross_stop_pct": 0.0,
+                "claim_rate_on_crosses": 0.0,
+                "def_actions_outside_box_per90": 2.666667,
+                "pass_attempts_per90": 24.666667,
+                "pass_completion_pct": 0.837838
+              },
+              "missing_metric_warnings": [
+                "keeper_claim_success_rate"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "GK_PAGE_V1_SUMMARY": {
+    "schema_version": "gk_page_v1",
+    "metadata": {
+      "visual_geometry_status": "prototype",
+      "source_freshness_status": "mixed",
+      "benchmark_rule_status": "official_not_modified"
+    },
+    "report_context": {
+      "report_type": "gk_target_vs_team_room",
+      "target_player_name": "Guglielmo Vicario",
+      "target_player_id": 147863,
+      "comparison_team_name": "Inter",
+      "comparison_players": [
+        "Yann Sommer",
+        "Josep Martínez"
+      ],
+      "primary_comparison_player": "Yann Sommer",
+      "forced_backup_player": "Josep Martínez"
+    },
+    "created_at": "2026-05-20T14:15:31.024769+00:00",
+    "players_exported": 3,
+    "team_comparisons_exported": 1,
+    "player_names": [
+      "Guglielmo Vicario",
+      "Yann Sommer",
+      "Josep Martínez"
+    ],
+    "team_comparison_names": [
+      "Inter"
+    ],
+    "warnings": [
+      "Visual geometry is still prototype-level where governed visual schemas are not finalized.",
+      "Source freshness is mixed across governed GK parquet, raw minutes, shot, event, and pass layers.",
+      "Low-minute backups are display-only in same-team comparison and remain outside official benchmark cohorts."
+    ]
+  },
+  "payloadMeta": {
+    "payloadType": "legacy_gk_payload",
+    "sourcePage": "gk_report.html",
+    "source": "soccerdb",
+    "directExport": true,
+    "loadedByProductionRuntime": true,
+    "fallbackInlineAvailable": false,
+    "extractedGlobals": [
+      "GK_PAGE_V1_PLAYERS",
+      "GK_PAGE_V1_TEAM_COMPARISONS",
+      "GK_PAGE_V1_SUMMARY"
+    ],
+    "missingGlobals": [],
+    "comparedAgainstBackup": "archive/frontend_payload_json_backups/2026_05_21_sprint_5g_soccerdb_gk_promotion/gk_report.legacy_gk_payload.json",
+    "candidateSource": "outputs/frontend_refactor/soccerdb_candidate_payloads/gk_report.legacy_gk_payload.candidate.json",
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/gk_report.with_inline_payload_2026_05_21.html",
+    "generatedFrom": [
+      "/Users/michele/Documents/SoccerDB/outputs/frontend_payloads/gk_page_v1/players.json",
+      "/Users/michele/Documents/SoccerDB/outputs/frontend_payloads/gk_page_v1/team_comparisons.json",
+      "/Users/michele/Documents/SoccerDB/outputs/frontend_payloads/gk_page_v1/summary.json"
+    ]
+  }
+}

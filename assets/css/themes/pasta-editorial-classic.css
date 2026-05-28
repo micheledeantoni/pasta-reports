@@ -1,0 +1,398 @@
+/*
+ * PASTA Theme — Editorial Classic
+ * Sprint 6B visual prototype. Override layer only.
+ *
+ * Palette: warm ivory · white cards · wine-red + deep-green accents
+ * Mood: sober data journalism; paper and ink; report-as-article.
+ * Dark visualization panels (radar, pitch) are preserved as editorial figures.
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    --ec-bg:          #f7f3ed;
+    --ec-surface:     #ffffff;
+    --ec-surface-2:   #f4f0ea;
+    --ec-ink:         #1c1917;
+    --ec-ink-2:       #44403c;
+    --ec-ink-muted:   #78716c;
+    --ec-ink-faint:   #a8a29e;
+    --ec-border:      #ddd6cc;
+    --ec-border-2:    #e7e2db;
+    --ec-accent:      #831843;   /* wine red */
+    --ec-accent-rgb:  131,24,67;
+    --ec-accent-2:    #14532d;   /* deep green */
+    --ec-accent-2-rgb:20,83,45;
+    --ec-bar-subject: #9f1239;
+    --ec-bar-comp:    #166534;
+    --ec-viz-bg:      #1a1d2e;   /* radar/canvas dark panel */
+    --ec-pitch-bg:    #1a3a1a;   /* football pitch green */
+    --ec-shadow:      rgba(28, 25, 23, 0.07);
+}
+
+/* ── Test banner ────────────────────────────────────────────────────────── */
+body::after {
+    content: "PASTA theme test — Editorial Classic · not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--ec-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .45rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ── Global / body ──────────────────────────────────────────────────────── */
+html, body {
+    background-color: var(--ec-bg) !important;
+    color: var(--ec-ink) !important;
+}
+
+body.sr-page {
+    background:
+        radial-gradient(ellipse at 0% 0%, rgba(131,24,67,.04), transparent 40%),
+        radial-gradient(ellipse at 100% 100%, rgba(20,83,45,.03), transparent 40%),
+        var(--ec-bg) !important;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+#header,
+#header.alt {
+    background: var(--ec-surface) !important;
+    box-shadow: 0 1px 0 var(--ec-border) !important;
+}
+
+#header a,
+#header a.logo strong,
+#header a.logo span,
+#header nav a {
+    color: var(--ec-ink) !important;
+    background: none !important;
+}
+
+#header a.logo strong {
+    color: var(--ec-accent) !important;
+    font-size: 1rem !important;
+    letter-spacing: .15em;
+}
+
+/* ── Report banner / hero ───────────────────────────────────────────────── */
+#banner,
+#banner.style2 {
+    background:
+        linear-gradient(180deg, var(--ec-surface-2) 0%, var(--ec-bg) 100%) !important;
+    border-bottom: 1px solid var(--ec-border) !important;
+}
+
+#banner .inner header h1,
+#banner .inner h1,
+#banner h1 {
+    color: var(--ec-ink) !important;
+    text-shadow: none !important;
+}
+
+#banner .content p,
+#banner p {
+    color: var(--ec-ink-muted) !important;
+    text-shadow: none !important;
+}
+
+#banner.pasta-hero {
+    background:
+        radial-gradient(ellipse at 0% 50%, rgba(131,24,67,.05) 0%, transparent 50%),
+        linear-gradient(160deg, var(--ec-surface-2) 0%, var(--ec-bg) 100%) !important;
+}
+
+/* ── Main container ─────────────────────────────────────────────────────── */
+#main, #wrapper {
+    background: var(--ec-bg) !important;
+}
+
+/* ── Report cards ───────────────────────────────────────────────────────── */
+.sr-card {
+    background: var(--ec-surface) !important;
+    border: 1px solid var(--ec-border) !important;
+    border-radius: .85rem !important;
+    box-shadow: 0 1px 4px var(--ec-shadow), 0 4px 16px var(--ec-shadow) !important;
+}
+
+/* ── Section labels ─────────────────────────────────────────────────────── */
+.sr-section-label {
+    color: var(--ec-accent) !important;
+    letter-spacing: .2em;
+    border-bottom: 1px solid var(--ec-border-2);
+    padding-bottom: .5rem;
+    margin-bottom: 1.1rem !important;
+}
+
+/* ── Player header ──────────────────────────────────────────────────────── */
+.sr-player-name {
+    color: var(--ec-ink) !important;
+    font-weight: 800;
+}
+
+.sr-clubs-line {
+    color: var(--ec-ink-muted) !important;
+}
+
+.sr-club-node {
+    color: var(--ec-ink-2) !important;
+}
+
+.sr-club-logo {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink) !important;
+}
+
+.sr-club-arrow {
+    color: var(--ec-ink-faint) !important;
+}
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: rgba(var(--ec-accent-rgb), .07) !important;
+    border: 1px solid rgba(var(--ec-accent-rgb), .28) !important;
+    color: var(--ec-accent) !important;
+}
+
+/* ── Metadata chips and badges ──────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+}
+
+.sr-badge-k {
+    color: var(--ec-ink-faint) !important;
+}
+
+.sr-badge-v {
+    color: var(--ec-ink) !important;
+}
+
+/* ── Player tags ────────────────────────────────────────────────────────── */
+.sr-player-tag {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink-2) !important;
+}
+
+/* ── Narrative text ─────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--ec-ink-2) !important;
+    line-height: 1.8;
+}
+
+/* ── Radar — keep dark, just frame it as an editorial figure ────────────── */
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--ec-viz-bg) !important;
+    border-radius: .65rem;
+    padding: .5rem;
+}
+
+.sr-radar-select-label { color: var(--ec-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink) !important;
+}
+
+.sr-radar-select option { background: var(--ec-surface); color: var(--ec-ink); }
+
+.sr-radar-custom-legend { color: var(--ec-ink-muted) !important; }
+.sr-rcl-item { color: var(--ec-ink-muted) !important; }
+
+.sr-rcl-line--subject { background: var(--ec-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--ec-ink-faint) !important;
+    border-left-color: var(--ec-border) !important;
+    background: none !important;
+    font-style: italic;
+}
+
+/* ── Axis guide and accordion ───────────────────────────────────────────── */
+.sr-radar-guide {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--ec-ink-faint) !important; }
+.sr-radar-guide-key { color: var(--ec-ink-2) !important; }
+.sr-radar-guide-val { color: var(--ec-ink-muted) !important; }
+
+.sr-axis-accordion {
+    border: 1px solid var(--ec-border) !important;
+    border-radius: .65rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--ec-surface-2) !important;
+    color: var(--ec-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+}
+
+.sr-axis-card strong { color: var(--ec-ink) !important; }
+.sr-axis-card span   { color: var(--ec-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--ec-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--ec-accent) !important; }
+
+/* ── Metric dot rows (comparison bars) ──────────────────────────────────── */
+.sr-legend { color: var(--ec-ink-muted) !important; }
+.sr-legend-item { color: var(--ec-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--ec-ink-faint) !important;
+    border-bottom-color: var(--ec-border-2) !important;
+}
+
+.sr-dot-label  { color: var(--ec-ink-2) !important; }
+
+.sr-dot-val    { color: var(--ec-accent) !important; }
+
+.sr-dot-axis { background: var(--ec-border) !important; }
+
+.sr-dot.main { border-color: var(--ec-border) !important; }
+
+/* ── Comparison bars ────────────────────────────────────────────────────── */
+.sr-bar-track {
+    background: var(--ec-border-2) !important;
+}
+
+.sr-bar-track.main {
+    background: var(--ec-border) !important;
+}
+
+.sr-bar-fill {
+    box-shadow: none !important;
+}
+
+.sr-raw-bars-note {
+    color: var(--ec-ink-muted) !important;
+    background: var(--ec-surface-2) !important;
+    border-left-color: var(--ec-border) !important;
+    font-style: italic;
+}
+
+/* ── Heatmap / spatial ──────────────────────────────────────────────────── */
+.sr-heatmap-btn {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--ec-surface-2) !important;
+    color: var(--ec-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--ec-accent-rgb), .08) !important;
+    border-color: rgba(var(--ec-accent-rgb), .3) !important;
+    color: var(--ec-accent) !important;
+}
+
+/* Keep pitch dark — it's a visualization panel (editorial figure) */
+.sr-pitch-svg {
+    background: var(--ec-pitch-bg) !important;
+    border: 1px solid var(--ec-border) !important;
+}
+
+.sr-pitch-title { color: var(--ec-ink-muted) !important; }
+.sr-pitch-note  { color: var(--ec-ink-faint) !important; }
+
+/* DEF summary */
+.sr-def-summary {
+    background: rgba(var(--ec-accent-2-rgb), .05) !important;
+    border-color: rgba(var(--ec-accent-2-rgb), .18) !important;
+}
+
+.sr-def-stat { color: var(--ec-ink-2) !important; }
+.sr-def-stat strong { color: var(--ec-accent-2) !important; }
+
+/* ── Similarity ─────────────────────────────────────────────────────────── */
+.sr-sim-space {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+}
+
+.sr-sim-space-title { color: var(--ec-accent) !important; }
+.sr-sim-desc  { color: var(--ec-ink-muted) !important; }
+.sr-sim-name  { color: var(--ec-ink) !important; }
+.sr-sim-score { color: var(--ec-accent) !important; }
+
+.sr-sim-match { border-bottom-color: var(--ec-border-2) !important; }
+
+.sr-sim-bar { background: var(--ec-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--ec-accent), rgba(var(--ec-accent-rgb),.55)) !important;
+}
+
+/* ── Footnotes ──────────────────────────────────────────────────────────── */
+.sr-footnote-chip {
+    background: var(--ec-surface-2) !important;
+    border: 1px solid var(--ec-border) !important;
+    color: var(--ec-ink-muted) !important;
+}
+
+/* ── Homepage cards (if homepage test page is used) ─────────────────────── */
+.pasta-card {
+    background: var(--ec-surface) !important;
+    border: 1px solid var(--ec-border) !important;
+    box-shadow: 0 1px 3px var(--ec-shadow) !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 4px 16px var(--ec-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label { color: var(--ec-ink-faint) !important; }
+.pasta-card-name  { color: var(--ec-ink) !important; }
+.pasta-card-clubs { color: var(--ec-ink-muted) !important; }
+.pasta-card-insight { color: var(--ec-ink-2) !important; }
+.pasta-card-cta   { color: var(--ec-accent) !important; }
+
+.pasta-wordmark   { color: var(--ec-ink) !important; }
+.pasta-hero-label { color: var(--ec-ink-faint) !important; }
+.pasta-hero-desc  { color: var(--ec-ink-muted) !important; }
+
+.pasta-club-name  { color: var(--ec-ink) !important; }
+.pasta-club-count { color: var(--ec-ink-faint) !important; }
+.pasta-club-dot.active { background: var(--ec-accent) !important; box-shadow: none !important; }
+
+.pasta-club-divider { background: var(--ec-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--ec-border) !important; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#footer {
+    background: var(--ec-ink) !important;
+    border-top: 1px solid var(--ec-border) !important;
+}
+
+/* ── Toggle switch ──────────────────────────────────────────────────────── */
+.sr-toggle { color: var(--ec-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--ec-border) !important;
+    border-color: var(--ec-border) !important;
+}

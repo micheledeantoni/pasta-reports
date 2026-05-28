@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Player Report · Curtis Jones | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta property="og:title"       content="Curtis Jones · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Centrocampista · Premier League 2025–26" />
+    <meta property="og:image"       content="images/cards/curtis-jones.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
+    <link rel="stylesheet" href="assets/css/pasta-theme.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        /* ── Banner: taller, photo top-right, editorial chips ───── */
+        #banner.style2 {
+            background-image: url('images/players/curtis-jones.webp') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
+        }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
+
+        /* ── Banner meta chips ──────────────────────────────────── */
+        .sr-banner-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin-top: 1.1rem;
+        }
+        .sr-banner-chip {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+            color: var(--ei2-ink-2);
+            background: rgba(28, 25, 23, .06);
+            border: 1px solid var(--ei2-border);
+            padding: .3rem .75rem;
+            border-radius: .2rem;
+            white-space: nowrap;
+        }
+        .sr-banner-chip.sr-banner-clubs {
+            color: var(--ei2-accent);
+            background: rgba(131, 24, 67, .06);
+            border-color: rgba(131, 24, 67, .24);
+        }
+
+        @media screen and (max-width: 768px) {
+            .sr-heatmap-grid { grid-template-columns: 1fr; }
+            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Documentazione</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="style2">
+        <div class="inner">
+            <header class="major"><h1>Curtis Jones</h1></header>
+            <div class="content">
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs">Liverpool → Inter</span>
+                    <span class="sr-banner-chip">Centrocampista</span>
+                    <span class="sr-banner-chip">ENG · Premier League</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">1 922 min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+    <section class="sr-inner">
+
+        <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────────── -->
+        <div class="sr-card" id="profileReading" data-static="true">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <p class="sr-narrative">
+                Curtis Jones è un centrocampista di possesso ad alto coinvolgimento, con ottima pulizia tecnica nella
+                circolazione e un volume importante di ricezioni. Il profilo combina sicurezza nel primo controllo,
+                capacità di offrire linee di passaggio continue e progressione palla al piede, con una presenza offensiva
+                più orientata alla connessione della manovra che alla finalizzazione diretta.
+            </p>
+        </div>
+
+        <!-- ── 3. PROFILO RADAR ───────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Profilo sintetico · assi MID interpretativi</p>
+            <!-- Toolbar: custom legend (JS-populated) + comparison selector -->
+            <div class="sr-radar-tools">
+                <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="radarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
+                </div>
+            </div>
+            <!-- Full-width radar canvas -->
+            <div class="sr-radar-wrap-full">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <!-- Cross-league context note (quiet, below radar) -->
+            <div class="sr-radar-context-note">
+                Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
+            </div>
+            <!-- Axis guide accordion (collapsed by default) -->
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
+                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+            </details>
+        </div>
+
+        <!-- ── 4. CONFRONTO INDIVIDUALE VS INTER ─────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Confronto individuale vs centrocampisti Inter · 2025–26</p>
+            <p class="sr-raw-bars-note">
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze di profilo, ma non sono corrette per la difficoltà del campionato.
+                Passa il cursore su una barra per nome e valore esatto.
+            </p>
+            <div class="sr-player-tags" id="interLegend"></div>
+            <div id="interComparison"></div>
+        </div>
+
+        <!-- ── 5. SPATIAL 2×2 ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
+
+            <!-- Toggle giocatore -->
+            <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
+
+            <div class="sr-heatmap-grid">
+                <!-- Panel 1 — Positional heatmap -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#86efac;">Impronta posizionale</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
+                    <span class="sr-pitch-note" id="pitchPosNote"></span>
+                </div>
+                <!-- Panel 2 — Carry direction -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#6ee7b7;">Direzione conduzioni</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
+                    <span class="sr-pitch-note" id="pitchCarryNote"></span>
+                </div>
+                <!-- Panel 3 — Pass distribution -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#fbbf24;">Distribuzione passaggi</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
+                    <span class="sr-pitch-note" id="pitchPassNote"></span>
+                </div>
+                <!-- Panel 4 — Progressive passes -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#7dd3fc;">Progressione via passaggio</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
+                    <span class="sr-pitch-note" id="pitchProgNote"></span>
+                </div>
+            </div>
+
+            <!-- Defensive summary -->
+            <div class="sr-def-summary" id="defSummaryBlock"></div>
+
+            <p style="margin-top:.55rem; font-size:.68rem; color:rgba(255,255,255,.28);">
+                Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
+            </p>
+        </div>
+
+        <!-- ── 6. CONTESTO CLUB ATTUALE ───────────────────────────────── -->
+        <div class="sr-card compact">
+            <p class="sr-section-label">Contesto Liverpool · altri centrocampisti</p>
+            <p style="font-size:.74rem; color:rgba(255,255,255,.38); margin-bottom:1rem; line-height:1.5;">
+                Confronto interno con gli altri centrocampisti Liverpool nel dataset 2025–26: Szoboszlai, Gravenberch, Wirtz e Mac Allister.</p>
+            <div class="sr-player-tags" id="sourceTeamLegend"></div>
+            <div id="sourceTeamComparison"></div>
+        </div>
+
+        <!-- ── 7. SIMILARITY ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Similarità target-team vs centrocampisti Inter · tre spazi indipendenti</p>
+            <div class="sr-sim-grid" id="similarityGrid"></div>
+        </div>
+
+        <!-- ── 8. FOOTER ─────────────────────────────────────────────── -->
+        <div>
+            <div class="sr-footnotes" id="footnotes"></div>
+        </div>
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="generic.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+            </ul>
+        </div>
+    </footer>
+
+</div><!-- /wrapper -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Live page now uses external legacy payload only. Inline fallback archived. -->
+<script>
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/curtis_jones.legacy_role_payload.json";
+</script>
+<script src="assets/js/sr-report-loader.js"></script>
+<script src="assets/js/sr-role-runtime.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Player Report · Oumar Solet | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .sr-heatmap-grid { grid-template-columns: 1fr; }
+            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+        }
+        @media screen and (max-width: 480px) {
+            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Documentazione</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="style2">
+        <div class="inner">
+            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
+            <header class="major"><h1>Oumar Solet</h1></header>
+            <div class="content">
+                <p>Difensori · Mercato invernale 2025–26 · Analisi compatibilità Inter</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+    <section class="sr-inner">
+
+        <!-- ── 1. HEADER ──────────────────────────────────────────────── -->
+        <div class="sr-card" id="roleReportHeader" data-static="true">
+            <div class="sr-header-top">
+                <div class="sr-header-left">
+                    <!-- Foto giocatore – sostituire src con immagine reale -->
+                    <div class="sr-player-photo">
+                        <div class="sr-photo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="sr-player-name">Oumar Solet</h2>
+                        <span class="sr-clubs-line">Valutazione per Inter</span>
+                        <div class="sr-club-flow" aria-label="Percorso valutazione club">
+                            <div class="sr-club-node">
+                                <div class="sr-club-logo liverpool">UDI</div>
+                                <span>Udinese</span>
+                            </div>
+                            <span class="sr-club-arrow">→</span>
+                            <div class="sr-club-node">
+                                <div class="sr-club-logo inter">INT</div>
+                                <span>Inter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="sr-role-pill">Difensore</span>
+            </div>
+            <div class="sr-meta-row">
+                <span class="sr-meta-chip">ITA – Serie A</span>
+                <span class="sr-meta-chip">Stagione 2025–26</span>
+                <span class="sr-meta-chip">2 512 minuti</span>
+            </div>
+            <div class="sr-badges">
+                <div class="sr-badge"><span class="sr-badge-k">Azioni difensive pAdj</span><span class="sr-badge-v">22.4</span></div>
+                <div class="sr-badge"><span class="sr-badge-k">Minuti</span><span class="sr-badge-v">2 512</span></div>
+                <div class="sr-badge"><span class="sr-badge-k">Duelli aerei</span><span class="sr-badge-v">2.51 p90</span></div>
+            </div>
+        </div>
+
+        <!-- ── 2. LETTURA DEL PROFILO ─────────────────────────────────── -->
+        <div class="sr-card" id="profileReading" data-static="true">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <p class="sr-narrative">
+                Oumar Solet è letto come difensore centrale con forte presenza difensiva, coinvolgimento nella prima costruzione
+                e capacità di portare o muovere palla fuori dalla linea. La pagina confronta il suo stile con i difensori
+                Inter selezionati e separa radar, barre, heatmap e similarità per evitare letture da ranking assoluto.
+            </p>
+        </div>
+
+        <!-- ── 3. PROFILO RADAR ───────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Profilo sintetico · assi DEF interpretativi</p>
+            <!-- Toolbar: custom legend (JS-populated) + comparison selector -->
+            <div class="sr-radar-tools">
+                <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="radarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
+                </div>
+            </div>
+            <!-- Full-width radar canvas -->
+            <div class="sr-radar-wrap-full">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <!-- Cross-league context note (quiet, below radar) -->
+            <div class="sr-radar-context-note">
+                Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
+            </div>
+            <!-- Axis guide accordion (collapsed by default) -->
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
+                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+            </details>
+        </div>
+
+        <!-- ── 4. CONFRONTO INDIVIDUALE VS INTER ─────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Confronto individuale vs difensori Inter · 2025–26</p>
+            <p class="sr-raw-bars-note">
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze di profilo, ma non sono corrette per la difficoltà del campionato.
+                Passa il cursore su una barra per nome e valore esatto.
+            </p>
+            <div class="sr-player-tags" id="interLegend"></div>
+            <div id="interComparison"></div>
+        </div>
+
+        <!-- ── 5. SPATIAL 2×2 ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Impronta spaziale DEF · grid 12×8 · 4 blocchi</p>
+
+            <!-- Toggle giocatore -->
+            <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
+
+            <div class="sr-heatmap-grid">
+                <!-- Panel 1 — Positional heatmap -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#86efac;">Impronta posizionale</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
+                    <span class="sr-pitch-note" id="pitchPosNote"></span>
+                </div>
+                <!-- Panel 2 — Carry direction -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#6ee7b7;">Direzione conduzioni</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
+                    <span class="sr-pitch-note" id="pitchCarryNote"></span>
+                </div>
+                <!-- Panel 3 — Pass distribution -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#fbbf24;">Passaggi</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
+                    <span class="sr-pitch-note" id="pitchPassNote"></span>
+                </div>
+                <!-- Panel 4 — Progressive passes -->
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#7dd3fc;">Azioni difensive</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
+                    <span class="sr-pitch-note" id="pitchProgNote"></span>
+                </div>
+            </div>
+
+            <!-- Defensive summary -->
+            <div class="sr-def-summary" id="defSummaryBlock"></div>
+
+            <p style="margin-top:.55rem; font-size:.68rem; color:rgba(255,255,255,.28);">
+                Le griglie riflettono dove avvengono le azioni registrate. Conduzioni e passaggi usano direzione media quando la cella ha almeno 3 eventi.
+            </p>
+        </div>
+
+        <!-- ── 6. CONTESTO CLUB ATTUALE ───────────────────────────────── -->
+        <div class="sr-card compact">
+            <p class="sr-section-label">Contesto Udinese · pari ruolo DEF qualificati</p>
+            <p style="font-size:.74rem; color:rgba(255,255,255,.38); margin-bottom:1rem; line-height:1.5;">
+                Confronto interno con i difensori Udinese qualificati nel dataset 2025–26. Il gruppo disponibile è limitato ai pari ruolo con soglia minuti, senza nomi inventati.</p>
+            <div class="sr-player-tags" id="sourceTeamLegend"></div>
+            <div id="sourceTeamComparison"></div>
+        </div>
+
+        <!-- ── 7. SIMILARITY ─────────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Similarità globale DEF · tre spazi indipendenti</p>
+            <div class="sr-sim-grid" id="similarityGrid"></div>
+        </div>
+
+        <!-- ── 8. FOOTER ─────────────────────────────────────────────── -->
+        <div>
+            <div class="sr-footnotes" id="footnotes"></div>
+        </div>
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="generic.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+            </ul>
+        </div>
+    </footer>
+
+</div><!-- /wrapper -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- Live page now uses external legacy payload only. Inline fallback archived. -->
+<script>
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/solet.legacy_role_payload.json";
+</script>
+<script src="assets/js/sr-report-loader.js"></script>
+<script src="assets/js/sr-role-runtime.js"></script>
+</body>
+</html>

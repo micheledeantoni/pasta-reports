@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #f6f2ec;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Card root ──────────────────────────────────────────────── */
+    .card {
+      width: 1200px;
+      height: 630px;
+      background: #f6f2ec;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Left: photo ────────────────────────────────────────────── */
+    .card-photo {
+      width: 440px;
+      height: 630px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Fade only on the right edge — tight, not excessive */
+    .card-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 72%, #f6f2ec 100%);
+      pointer-events: none;
+    }
+
+    /* Rangefinder bracket — top left, over photo */
+    .card-bracket {
+      position: absolute;
+      top: 24px;
+      left: 20px;
+      z-index: 10;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #831843;
+      letter-spacing: 0.55em;
+      opacity: 0.72;
+    }
+
+    /* ── Right: editorial info ──────────────────────────────────── */
+    .card-info {
+      flex: 1;
+      padding: 0 3rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* "SCOUTING FILE · PASTA" — top (decorative; hidden at thumbnail scale) */
+    .card-label { display: none; }
+
+    /* Player name block */
+    .card-firstname {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 3.2rem;
+      font-weight: 400;
+      color: #1c1917;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+
+    .card-lastname {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 7.5rem;
+      font-weight: 900;
+      color: #1c1917;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    /* Wine red rule */
+    .card-rule {
+      width: 100%;
+      height: 2px;
+      background: #831843;
+      margin: 1.4rem 0 1.6rem;
+    }
+
+    /* "TARGET" label (decorative; hidden at thumbnail scale) */
+    .card-target-label { display: none; }
+
+    /* Arrow + club name + badge */
+    .card-target-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .card-arrow {
+      font-size: 3rem;
+      color: #831843;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .card-club-name {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 5.5rem;
+      font-weight: 800;
+      color: #1c1917;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    /* Club badge — circular panel matches the badge's own circular shape */
+    .card-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Role chip */
+    .card-role {
+      align-self: flex-start;
+      margin-top: 1.2rem;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #44403c;
+      border: 1.5px solid #c4b9ad;
+      padding: 0.3rem 0.9rem;
+      border-radius: 3px;
+    }
+
+    /* "INTERNAL USE ONLY" — hidden at thumbnail scale */
+    .card-footer { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- Left: player photo -->
+    <div class="card-photo">
+      <img src="{{PLAYER_PHOTO}}" alt="{{PLAYER_FIRSTNAME}} {{PLAYER_LASTNAME}}" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Bracket over photo -->
+    <div class="card-bracket">[ ]</div>
+
+    <!-- Right: editorial info -->
+    <div class="card-info">
+
+      <div class="card-label">Scouting File · PASTA</div>
+
+      <div class="card-name-block">
+        <div class="card-firstname">{{PLAYER_FIRSTNAME}}</div>
+        <div class="card-lastname">{{PLAYER_LASTNAME}}</div>
+      </div>
+
+      <div class="card-rule"></div>
+
+      <div class="card-target-label">Target</div>
+      <div class="card-target-row">
+        <span class="card-arrow">→</span>
+        <span class="card-club-name">{{CLUB_NAME}}</span>
+        <div class="card-badge">
+          <img src="{{CLUB_BADGE}}" alt="{{CLUB_NAME}}" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <span class="card-role">{{PLAYER_ROLE}}</span>
+
+      <div class="card-footer">Internal Use Only</div>
+
+    </div>
+
+  </div>
+</body>
+</html>

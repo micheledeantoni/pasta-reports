@@ -1,0 +1,582 @@
+/*
+ * PASTA Theme — Editorial Classic Refined
+ * Sprint 6C refinement of pasta-editorial-classic.css
+ *
+ * Changes from base prototype:
+ *   1. Homepage hero → editorial masthead with strong typographic rule
+ *   2. Player page hero → reduced-height report heading, pure typography
+ *   3. Radar → warm sepia-dark panel instead of cold navy; connects with paper page
+ *
+ * Palette: warm ivory · white cards · wine-red + deep-green accents
+ * Dark visualization panels preserved as editorial figures (warmed).
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    --er-bg:          #f7f3ed;
+    --er-surface:     #ffffff;
+    --er-surface-2:   #f4f0ea;
+    --er-ink:         #1c1917;
+    --er-ink-2:       #44403c;
+    --er-ink-muted:   #78716c;
+    --er-ink-faint:   #a8a29e;
+    --er-border:      #ddd6cc;
+    --er-border-2:    #e7e2db;
+    --er-accent:      #831843;
+    --er-accent-rgb:  131,24,67;
+    --er-accent-2:    #14532d;
+    --er-accent-2-rgb:20,83,45;
+    --er-bar-subject: #9f1239;
+    --er-bar-comp:    #166534;
+    --er-viz-bg:      #231d14;   /* warm sepia-dark — less cold, less tech */
+    --er-pitch-bg:    #1a3a1a;
+    --er-shadow:      rgba(28, 25, 23, 0.06);
+    --er-rule:        #1c1917;   /* strong typographic rule */
+}
+
+/* ── Test banner ────────────────────────────────────────────────────────── */
+body::after {
+    content: "PASTA Refined — not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--er-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .35rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ── Global / body ──────────────────────────────────────────────────────── */
+html, body {
+    background-color: var(--er-bg) !important;
+    color: var(--er-ink) !important;
+}
+
+body.sr-page {
+    background: var(--er-bg) !important;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+#header,
+#header.alt {
+    background: var(--er-surface) !important;
+    box-shadow: 0 1px 0 var(--er-border) !important;
+}
+
+#header a,
+#header nav a {
+    color: var(--er-ink) !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+#header a.logo strong {
+    color: var(--er-accent) !important;
+    background: none !important;
+    font-size: 1rem !important;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+#header a.logo span {
+    color: var(--er-ink-faint) !important;
+    font-size: .6rem !important;
+    letter-spacing: .18em;
+}
+
+/* Header topbar (index.html double-header) */
+.header-topbar {
+    background: var(--er-surface) !important;
+    color: var(--er-ink-faint) !important;
+    border-bottom-color: var(--er-border-2) !important;
+    font-size: .55rem !important;
+    letter-spacing: .3em;
+}
+
+.header-mainbar {
+    background: var(--er-surface) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REFINEMENT 1: HOMEPAGE HERO → EDITORIAL MASTHEAD
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Clear the dark/neon base from main.css entirely */
+#banner,
+#banner.pasta-hero,
+section#banner,
+section.pasta-hero {
+    background: var(--er-bg) !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    color: var(--er-ink) !important;
+}
+
+/* The pasta-hero-inner section — add a strong bottom rule to separate from cards below */
+#banner.pasta-hero {
+    padding-bottom: 0 !important;
+    border-bottom: 3px solid var(--er-rule) !important;
+}
+
+/* Hero inner content */
+.pasta-hero-inner {
+    padding-bottom: 3.5rem !important;
+}
+
+/* PASTA wordmark — masthead scale, even more prominent */
+.pasta-wordmark {
+    font-size: clamp(5rem, 12vw, 9rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.04em !important;
+    color: var(--er-ink) !important;
+    line-height: .95 !important;
+    margin-bottom: 1.6rem !important;
+}
+
+/* Pre-title label — reads like "Vol. 1 · 2025–26 · Scouting archive" */
+.pasta-hero-label {
+    font-size: .68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .32em !important;
+    text-transform: uppercase !important;
+    color: var(--er-ink-faint) !important;
+    margin-bottom: 1.4rem !important;
+    /* small rule above label to anchor the masthead */
+    padding-top: .9rem;
+    border-top: 1px solid var(--er-border);
+    display: block;
+}
+
+/* Description text — sober, journalistic */
+.pasta-hero-desc {
+    color: var(--er-ink-muted) !important;
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+    max-width: 34rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Sober typographic buttons: primary = ink block, secondary = outlined */
+#banner .actions .button,
+.pasta-hero-inner .actions .button {
+    border-radius: .2rem !important;
+    font-size: .78rem !important;
+    letter-spacing: .12em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: .75rem 1.6rem !important;
+    transition: background .15s, color .15s !important;
+}
+
+#banner .actions .button.primary,
+.pasta-hero-inner .actions .button.primary {
+    background: var(--er-ink) !important;
+    color: var(--er-surface) !important;
+    border: 1.5px solid var(--er-ink) !important;
+    box-shadow: none !important;
+}
+
+#banner .actions .button.primary:hover,
+.pasta-hero-inner .actions .button.primary:hover {
+    background: var(--er-accent) !important;
+    border-color: var(--er-accent) !important;
+}
+
+#banner .actions .button:not(.primary),
+.pasta-hero-inner .actions .button:not(.primary) {
+    background: transparent !important;
+    color: var(--er-ink) !important;
+    border: 1.5px solid var(--er-border) !important;
+    box-shadow: none !important;
+}
+
+#banner .actions .button:not(.primary):hover,
+.pasta-hero-inner .actions .button:not(.primary):hover {
+    border-color: var(--er-ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REFINEMENT 2: PLAYER PAGE HERO → EDITORIAL REPORT HEADING
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Remove the block-panel look; make it a tight typographic report heading */
+#banner.style2 {
+    background: var(--er-bg) !important;
+    border-bottom: 3px solid var(--er-rule) !important;
+    box-shadow: none !important;
+    /* Collapse the huge billboard height */
+    padding: 7rem 0 2rem !important;
+    min-height: 0 !important;
+}
+
+/* Hide the background image — pure typography */
+#banner.style2 .image,
+#banner.style2 .image img {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Remove the dark overlay that HTML5UP Forty adds over the image */
+#banner.style2::before,
+#banner.style2 .inner::before {
+    display: none !important;
+    background: none !important;
+    opacity: 0 !important;
+}
+
+/* The inner container — tighten it */
+#banner.style2 .inner {
+    background: none !important;
+    padding: 0 !important;
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 1.5rem !important;
+}
+
+/* Player name as editorial report title */
+#banner.style2 header.major h1,
+#banner.style2 .inner h1,
+#banner.style2 h1 {
+    font-size: clamp(2.2rem, 5.5vw, 4rem) !important;
+    font-weight: 900 !important;
+    color: var(--er-ink) !important;
+    letter-spacing: -.025em !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+    margin-bottom: .6rem !important;
+}
+
+/* Small pre-title label above player name */
+#banner.style2 header.major::before {
+    content: "Report · PASTA";
+    display: block;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--er-accent);
+    margin-bottom: .65rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--er-border);
+}
+
+/* Subtitle text */
+#banner.style2 .content p,
+#banner.style2 p {
+    font-size: .88rem !important;
+    color: var(--er-ink-muted) !important;
+    text-shadow: none !important;
+    letter-spacing: .04em !important;
+    margin-top: .5rem !important;
+}
+
+/* ── Main container ─────────────────────────────────────────────────────── */
+#main, #wrapper {
+    background: var(--er-bg) !important;
+}
+
+/* ── Report cards ───────────────────────────────────────────────────────── */
+.sr-card {
+    background: var(--er-surface) !important;
+    border: 1px solid var(--er-border) !important;
+    border-radius: .65rem !important;
+    box-shadow: 0 1px 3px var(--er-shadow), 0 3px 12px var(--er-shadow) !important;
+}
+
+/* ── Section labels ─────────────────────────────────────────────────────── */
+.sr-section-label {
+    color: var(--er-accent) !important;
+    letter-spacing: .22em;
+    border-bottom: 1px solid var(--er-border-2);
+    padding-bottom: .5rem;
+    margin-bottom: 1.1rem !important;
+}
+
+/* ── Player card header ─────────────────────────────────────────────────── */
+.sr-player-name {
+    color: var(--er-ink) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.015em !important;
+}
+
+.sr-clubs-line  { color: var(--er-ink-muted) !important; }
+.sr-club-node   { color: var(--er-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink) !important;
+}
+
+.sr-club-arrow { color: var(--er-ink-faint) !important; }
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: rgba(var(--er-accent-rgb), .07) !important;
+    border: 1px solid rgba(var(--er-accent-rgb), .28) !important;
+    color: var(--er-accent) !important;
+    border-radius: .25rem !important;
+}
+
+/* ── Chips, badges, tags ────────────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-badge-k { color: var(--er-ink-faint) !important; }
+.sr-badge-v { color: var(--er-ink) !important; }
+
+.sr-player-tag {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink-2) !important;
+}
+
+/* ── Narrative ──────────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--er-ink-2) !important;
+    line-height: 1.82 !important;
+    font-size: .95rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REFINEMENT 3A: RADAR → WARM SEPIA-DARK (connected to paper page)
+   Dark is preserved for readability; cold navy replaced with warm brown.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--er-viz-bg) !important;   /* warm sepia-dark #231d14 */
+    border-radius: .5rem !important;
+    padding: .6rem !important;
+    border: 1px solid var(--er-border) !important;  /* connects to card surface */
+    /* subtle warm inner glow — editorial figure framing */
+    box-shadow: inset 0 0 0 1px rgba(255,240,220,.04) !important;
+}
+
+.sr-radar-select-label { color: var(--er-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink) !important;
+}
+
+.sr-radar-select option { background: var(--er-surface); color: var(--er-ink); }
+
+.sr-rcl-item { color: var(--er-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--er-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--er-ink-faint) !important;
+    border-left: 1px solid var(--er-border) !important;
+    background: none !important;
+    font-style: italic !important;
+}
+
+/* Axis guide */
+.sr-radar-guide {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--er-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--er-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--er-ink-muted) !important; }
+
+/* Axis accordion */
+.sr-axis-accordion {
+    border: 1px solid var(--er-border) !important;
+    border-radius: .5rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--er-surface-2) !important;
+    color: var(--er-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-axis-card strong { color: var(--er-ink) !important; }
+.sr-axis-card span   { color: var(--er-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--er-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--er-accent) !important; }
+
+/* ── Metrics, bars, dots ────────────────────────────────────────────────── */
+.sr-legend      { color: var(--er-ink-muted) !important; }
+.sr-legend-item { color: var(--er-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--er-ink-faint) !important;
+    border-bottom-color: var(--er-border-2) !important;
+}
+
+.sr-dot-label { color: var(--er-ink-2) !important; }
+.sr-dot-val   { color: var(--er-accent) !important; }
+.sr-dot-axis  { background: var(--er-border) !important; }
+.sr-dot.main  { border-color: var(--er-border) !important; }
+
+.sr-bar-track      { background: var(--er-border-2) !important; }
+.sr-bar-track.main { background: var(--er-border) !important; }
+.sr-bar-fill       { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--er-ink-muted) !important;
+    background: var(--er-surface-2) !important;
+    border-left: 1px solid var(--er-border) !important;
+    font-style: italic !important;
+}
+
+/* ── Heatmap ────────────────────────────────────────────────────────────── */
+.sr-heatmap-btn {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    color: var(--er-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--er-accent-rgb), .08) !important;
+    border-color: rgba(var(--er-accent-rgb), .3) !important;
+    color: var(--er-accent) !important;
+}
+
+.sr-pitch-svg {
+    background: var(--er-pitch-bg) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-pitch-title { color: var(--er-ink-muted) !important; }
+.sr-pitch-note  { color: var(--er-ink-faint) !important; }
+
+/* DEF summary */
+.sr-def-summary {
+    background: rgba(var(--er-accent-2-rgb), .05) !important;
+    border-color: rgba(var(--er-accent-2-rgb), .18) !important;
+}
+
+.sr-def-stat { color: var(--er-ink-2) !important; }
+.sr-def-stat strong { color: var(--er-accent-2) !important; }
+
+/* ── Similarity ─────────────────────────────────────────────────────────── */
+.sr-sim-space {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-sim-space-title { color: var(--er-accent) !important; }
+.sr-sim-desc  { color: var(--er-ink-muted) !important; }
+.sr-sim-name  { color: var(--er-ink) !important; }
+.sr-sim-score { color: var(--er-accent) !important; }
+
+.sr-sim-match  { border-bottom-color: var(--er-border-2) !important; }
+.sr-sim-bar    { background: var(--er-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--er-accent), rgba(var(--er-accent-rgb),.45)) !important;
+}
+
+/* ── Footnotes ──────────────────────────────────────────────────────────── */
+.sr-footnote-chip {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+    color: var(--er-ink-muted) !important;
+}
+
+/* ── Toggle ─────────────────────────────────────────────────────────────── */
+.sr-toggle { color: var(--er-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--er-border) !important;
+    border-color: var(--er-border) !important;
+}
+
+/* ── GK ─────────────────────────────────────────────────────────────────── */
+.sr-gk-goal-frame {
+    background: var(--er-viz-bg) !important;
+}
+
+.sr-gk-room-row {
+    background: var(--er-surface-2) !important;
+    border: 1px solid var(--er-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--er-ink-muted) !important; }
+.sr-gk-sample { border-color: var(--er-border) !important; }
+
+/* ── Homepage cards ─────────────────────────────────────────────────────── */
+.pasta-card {
+    background: var(--er-surface) !important;
+    border: 1px solid var(--er-border) !important;
+    box-shadow: 0 1px 3px var(--er-shadow) !important;
+    border-radius: .5rem !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 4px 16px var(--er-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label   { color: var(--er-ink-faint) !important; }
+.pasta-card-name    { color: var(--er-ink) !important; }
+.pasta-card-clubs   { color: var(--er-ink-muted) !important; }
+.pasta-card-insight { color: var(--er-ink-2) !important; }
+.pasta-card-cta     { color: var(--er-accent) !important; }
+.pasta-card-cta::after { color: var(--er-accent) !important; }
+
+.pasta-club-name    { color: var(--er-ink) !important; }
+.pasta-club-count   { color: var(--er-ink-faint) !important; }
+.pasta-club-dot.active { background: var(--er-accent) !important; box-shadow: none !important; }
+.pasta-club-divider { background: var(--er-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--er-border) !important; }
+
+.pasta-bio-heading { color: var(--er-ink-faint) !important; }
+.pasta-bio-name    { color: var(--er-ink) !important; }
+.pasta-bio-sub     { color: var(--er-ink-muted) !important; }
+.pasta-bio-text    { color: var(--er-ink-2) !important; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#footer {
+    background: var(--er-ink) !important;
+    border-top: 3px solid var(--er-rule) !important;
+}
+
+/* ── Menu overlay ───────────────────────────────────────────────────────── */
+#menu {
+    background: var(--er-ink) !important;
+}
+
+#menu a {
+    color: rgba(255,255,255,.75) !important;
+    border-color: rgba(255,255,255,.1) !important;
+}
+
+#menu a:hover {
+    color: #fff !important;
+}
+
+/* ── TBA cards on homepage ──────────────────────────────────────────────── */
+.pasta-card.tba {
+    border-style: dashed !important;
+    opacity: .35 !important;
+}

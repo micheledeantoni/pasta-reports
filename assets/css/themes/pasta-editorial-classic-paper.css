@@ -1,0 +1,575 @@
+/*
+ * PASTA Theme — Editorial Classic Paper
+ * Sprint 6C refinement of pasta-editorial-classic.css — Variant 2
+ *
+ * Design approach: maximum paper homogeneity.
+ *   1. Homepage hero → pure typography on paper, no rules, generous space
+ *   2. Player page hero → ink-only label + name, minimal footprint
+ *   3. Radar → parchment-light panel (chart JS polygon shapes still visible;
+ *      white Chart.js gridlines become faint — known trade-off, see docs)
+ *
+ * Palette: warm ivory · parchment cards · wine-red accent
+ * Visualization panels: pitch stays dark; radar becomes parchment figure frame.
+ *
+ * NOT PRODUCTION. Do not link from live pages.
+ */
+
+/* ── Custom properties ──────────────────────────────────────────────────── */
+:root {
+    --ep-bg:          #f5f0e8;   /* warm ivory — slightly more parchment */
+    --ep-surface:     #fffef9;   /* near-white with warm cast */
+    --ep-surface-2:   #ede3ce;   /* parchment — also used for radar panel */
+    --ep-surface-3:   #e4d8c0;   /* deeper parchment for hover / emphasis */
+    --ep-ink:         #1c1917;
+    --ep-ink-2:       #44403c;
+    --ep-ink-muted:   #78716c;
+    --ep-ink-faint:   #a8a29e;
+    --ep-border:      #d4c9b8;   /* slightly warmer/stronger than Refined */
+    --ep-border-2:    #e0d6c4;
+    --ep-accent:      #831843;
+    --ep-accent-rgb:  131,24,67;
+    --ep-accent-2:    #14532d;
+    --ep-accent-2-rgb:20,83,45;
+    --ep-bar-subject: #9f1239;
+    --ep-bar-comp:    #166534;
+    --ep-viz-bg:      #ede3ce;   /* parchment light — radar becomes figure frame */
+    --ep-pitch-bg:    #1a3a1a;   /* pitch stays dark */
+    --ep-shadow:      rgba(28, 25, 23, 0.05);
+}
+
+/* ── Test banner ────────────────────────────────────────────────────────── */
+body::after {
+    content: "PASTA Paper — not production";
+    position: fixed;
+    bottom: .75rem;
+    right: .75rem;
+    z-index: 9999;
+    background: var(--ep-ink);
+    color: var(--ep-surface);
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    border-radius: .35rem;
+    pointer-events: none;
+    opacity: .9;
+}
+
+/* ── Global / body ──────────────────────────────────────────────────────── */
+html, body {
+    background-color: var(--ep-bg) !important;
+    color: var(--ep-ink) !important;
+}
+
+body.sr-page {
+    background: var(--ep-bg) !important;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+#header,
+#header.alt {
+    background: var(--ep-surface) !important;
+    box-shadow: 0 1px 0 var(--ep-border) !important;
+}
+
+#header a,
+#header nav a {
+    color: var(--ep-ink) !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+#header a.logo strong {
+    color: var(--ep-accent) !important;
+    background: none !important;
+    font-size: 1rem !important;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+#header a.logo span {
+    color: var(--ep-ink-faint) !important;
+    font-size: .6rem !important;
+    letter-spacing: .18em;
+}
+
+.header-topbar {
+    background: var(--ep-surface) !important;
+    color: var(--ep-ink-faint) !important;
+    border-bottom-color: var(--ep-border-2) !important;
+    font-size: .55rem !important;
+    letter-spacing: .3em;
+}
+
+.header-mainbar {
+    background: var(--ep-surface) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAPER 1: HOMEPAGE HERO → PURE TYPOGRAPHY ON PAPER (no rule, no block)
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Strip the dark base completely — the page IS the hero */
+#banner,
+#banner.pasta-hero,
+section#banner,
+section.pasta-hero {
+    background: var(--ep-bg) !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    color: var(--ep-ink) !important;
+}
+
+/* No bottom rule — the page continues seamlessly into the card grid */
+#banner.pasta-hero {
+    padding-bottom: 1.5rem !important;
+    border-bottom: 1px solid var(--ep-border-2) !important;
+}
+
+/* Hero inner — generous top breathing room */
+.pasta-hero-inner {
+    padding-top: 4.5rem !important;
+    padding-bottom: 3rem !important;
+}
+
+/* PASTA wordmark — large but calmer than Refined */
+.pasta-wordmark {
+    font-size: clamp(4rem, 10vw, 7.5rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.04em !important;
+    color: var(--ep-ink) !important;
+    line-height: .95 !important;
+    margin-bottom: 1.4rem !important;
+}
+
+/* Label — subtler, no rule, just space */
+.pasta-hero-label {
+    font-size: .66rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .3em !important;
+    text-transform: uppercase !important;
+    color: var(--ep-ink-faint) !important;
+    margin-bottom: 1.2rem !important;
+    display: block;
+}
+
+/* Description */
+.pasta-hero-desc {
+    color: var(--ep-ink-muted) !important;
+    font-size: .97rem !important;
+    line-height: 1.72 !important;
+    max-width: 32rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Paper buttons: both outlined, primary has ink fill on hover */
+#banner .actions .button,
+.pasta-hero-inner .actions .button {
+    border-radius: .25rem !important;
+    font-size: .75rem !important;
+    letter-spacing: .14em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding: .7rem 1.5rem !important;
+    transition: background .15s, color .15s, border-color .15s !important;
+}
+
+#banner .actions .button.primary,
+.pasta-hero-inner .actions .button.primary {
+    background: var(--ep-accent) !important;
+    color: #fff !important;
+    border: 1.5px solid var(--ep-accent) !important;
+    box-shadow: none !important;
+}
+
+#banner .actions .button.primary:hover,
+.pasta-hero-inner .actions .button.primary:hover {
+    background: #6b1236 !important;
+    border-color: #6b1236 !important;
+}
+
+#banner .actions .button:not(.primary),
+.pasta-hero-inner .actions .button:not(.primary) {
+    background: transparent !important;
+    color: var(--ep-ink) !important;
+    border: 1.5px solid var(--ep-border) !important;
+    box-shadow: none !important;
+}
+
+#banner .actions .button:not(.primary):hover,
+.pasta-hero-inner .actions .button:not(.primary):hover {
+    border-color: var(--ep-ink-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAPER 2: PLAYER PAGE HERO → COMPACT INK HEADING, SEAMLESS WITH PAGE
+   ═════════════════════════════════════════════════════════════════════════ */
+
+#banner.style2 {
+    background: var(--ep-bg) !important;
+    border-bottom: 1px solid var(--ep-border) !important;
+    box-shadow: none !important;
+    padding: 6.5rem 0 1.75rem !important;
+    min-height: 0 !important;
+}
+
+#banner.style2 .image,
+#banner.style2 .image img {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+#banner.style2::before,
+#banner.style2 .inner::before {
+    display: none !important;
+    background: none !important;
+    opacity: 0 !important;
+}
+
+#banner.style2 .inner {
+    background: none !important;
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 1.5rem !important;
+}
+
+/* Player name — editorial report title */
+#banner.style2 header.major h1,
+#banner.style2 .inner h1,
+#banner.style2 h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem) !important;
+    font-weight: 900 !important;
+    color: var(--ep-ink) !important;
+    letter-spacing: -.02em !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+    margin-bottom: .5rem !important;
+}
+
+/* Small section label — no accent, just ink spaced caps */
+#banner.style2 header.major::before {
+    content: "Scouting Report";
+    display: block;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--ep-ink-faint);
+    margin-bottom: .6rem;
+}
+
+#banner.style2 .content p,
+#banner.style2 p {
+    font-size: .87rem !important;
+    color: var(--ep-ink-muted) !important;
+    text-shadow: none !important;
+    letter-spacing: .04em !important;
+    margin-top: .4rem !important;
+}
+
+/* ── Main container ─────────────────────────────────────────────────────── */
+#main, #wrapper {
+    background: var(--ep-bg) !important;
+}
+
+/* ── Report cards ───────────────────────────────────────────────────────── */
+.sr-card {
+    background: var(--ep-surface) !important;
+    border: 1px solid var(--ep-border) !important;
+    border-radius: .75rem !important;
+    box-shadow:
+        0 1px 0 var(--ep-border-2),
+        0 2px 10px var(--ep-shadow) !important;
+}
+
+/* ── Section labels ─────────────────────────────────────────────────────── */
+.sr-section-label {
+    color: var(--ep-ink-faint) !important;
+    letter-spacing: .24em;
+    border-bottom: 1px solid var(--ep-border-2);
+    padding-bottom: .45rem;
+    margin-bottom: 1.1rem !important;
+    text-transform: uppercase;
+}
+
+/* ── Player card header ─────────────────────────────────────────────────── */
+.sr-player-name {
+    color: var(--ep-ink) !important;
+    font-weight: 900 !important;
+    letter-spacing: -.015em !important;
+}
+
+.sr-clubs-line  { color: var(--ep-ink-muted) !important; }
+.sr-club-node   { color: var(--ep-ink-2) !important; }
+
+.sr-club-logo {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink) !important;
+}
+
+.sr-club-arrow { color: var(--ep-ink-faint) !important; }
+
+/* ── Role pill ──────────────────────────────────────────────────────────── */
+.sr-role-pill {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink-2) !important;
+    border-radius: .2rem !important;
+}
+
+/* ── Chips, badges, tags ────────────────────────────────────────────────── */
+.sr-meta-chip {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink-2) !important;
+}
+
+.sr-badge {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-badge-k { color: var(--ep-ink-faint) !important; }
+.sr-badge-v { color: var(--ep-ink) !important; }
+
+.sr-player-tag {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink-2) !important;
+}
+
+/* ── Narrative ──────────────────────────────────────────────────────────── */
+.sr-narrative {
+    color: var(--ep-ink-2) !important;
+    line-height: 1.82 !important;
+    font-size: .95rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAPER 3: RADAR → PARCHMENT FIGURE FRAME
+   Light panel means Chart.js white gridlines become faint.
+   Polygon shapes and filled areas remain fully readable.
+   Known trade-off documented in Sprint 6C docs.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.sr-radar-wrap,
+.sr-radar-wrap-full {
+    background: var(--ep-viz-bg) !important;   /* parchment #ede3ce */
+    border-radius: .5rem !important;
+    padding: .6rem !important;
+    border: 2px solid var(--ep-border) !important;
+}
+
+.sr-radar-select-label { color: var(--ep-ink-muted) !important; }
+
+.sr-radar-select {
+    background: var(--ep-surface) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink) !important;
+}
+
+.sr-radar-select option { background: var(--ep-surface); color: var(--ep-ink); }
+
+.sr-rcl-item { color: var(--ep-ink-muted) !important; }
+.sr-rcl-line--subject { background: var(--ep-bar-subject) !important; }
+
+.sr-radar-context-note {
+    color: var(--ep-ink-muted) !important;
+    border-left: 1px solid var(--ep-border) !important;
+    background: none !important;
+    font-style: italic !important;
+}
+
+/* Axis guide */
+.sr-radar-guide {
+    background: var(--ep-surface) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-radar-guide-title { color: var(--ep-ink-faint) !important; }
+.sr-radar-guide-key   { color: var(--ep-ink-2) !important; }
+.sr-radar-guide-val   { color: var(--ep-ink-muted) !important; }
+
+/* Axis accordion */
+.sr-axis-accordion {
+    border: 1px solid var(--ep-border) !important;
+    border-radius: .5rem !important;
+}
+
+.sr-axis-accordion-summary {
+    background: var(--ep-surface-2) !important;
+    color: var(--ep-ink-muted) !important;
+}
+
+.sr-axis-card {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-axis-card strong { color: var(--ep-ink) !important; }
+.sr-axis-card span   { color: var(--ep-ink-muted) !important; }
+.sr-axis-metrics     { color: var(--ep-ink-faint) !important; }
+.sr-axis-caveat      { color: var(--ep-accent) !important; }
+
+/* ── Metrics, bars, dots ────────────────────────────────────────────────── */
+.sr-legend      { color: var(--ep-ink-muted) !important; }
+.sr-legend-item { color: var(--ep-ink-muted) !important; }
+
+.sr-dot-group-title {
+    color: var(--ep-ink-faint) !important;
+    border-bottom-color: var(--ep-border-2) !important;
+}
+
+.sr-dot-label { color: var(--ep-ink-2) !important; }
+.sr-dot-val   { color: var(--ep-accent) !important; }
+.sr-dot-axis  { background: var(--ep-border) !important; }
+.sr-dot.main  { border-color: var(--ep-border) !important; }
+
+.sr-bar-track      { background: var(--ep-border-2) !important; }
+.sr-bar-track.main { background: var(--ep-border) !important; }
+.sr-bar-fill       { box-shadow: none !important; }
+
+.sr-raw-bars-note {
+    color: var(--ep-ink-muted) !important;
+    background: var(--ep-surface-2) !important;
+    border-left: 1px solid var(--ep-border) !important;
+    font-style: italic !important;
+}
+
+/* ── Heatmap ────────────────────────────────────────────────────────────── */
+.sr-heatmap-btn {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink-muted) !important;
+}
+
+.sr-heatmap-btn:hover {
+    background: var(--ep-surface) !important;
+    color: var(--ep-ink) !important;
+}
+
+.sr-heatmap-btn.active {
+    background: rgba(var(--ep-accent-rgb), .07) !important;
+    border-color: rgba(var(--ep-accent-rgb), .28) !important;
+    color: var(--ep-accent) !important;
+}
+
+/* Pitch stays dark */
+.sr-pitch-svg {
+    background: var(--ep-pitch-bg) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-pitch-title { color: var(--ep-ink-muted) !important; }
+.sr-pitch-note  { color: var(--ep-ink-faint) !important; }
+
+.sr-def-summary {
+    background: rgba(var(--ep-accent-2-rgb), .05) !important;
+    border-color: rgba(var(--ep-accent-2-rgb), .16) !important;
+}
+
+.sr-def-stat { color: var(--ep-ink-2) !important; }
+.sr-def-stat strong { color: var(--ep-accent-2) !important; }
+
+/* ── Similarity ─────────────────────────────────────────────────────────── */
+.sr-sim-space {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-sim-space-title { color: var(--ep-accent) !important; }
+.sr-sim-desc  { color: var(--ep-ink-muted) !important; }
+.sr-sim-name  { color: var(--ep-ink) !important; }
+.sr-sim-score { color: var(--ep-accent) !important; }
+
+.sr-sim-match  { border-bottom-color: var(--ep-border-2) !important; }
+.sr-sim-bar    { background: var(--ep-border-2) !important; }
+.sr-sim-bar-fill {
+    background: linear-gradient(90deg, var(--ep-accent), rgba(var(--ep-accent-rgb),.45)) !important;
+}
+
+/* ── Footnotes ──────────────────────────────────────────────────────────── */
+.sr-footnote-chip {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+    color: var(--ep-ink-muted) !important;
+}
+
+/* ── Toggle ─────────────────────────────────────────────────────────────── */
+.sr-toggle { color: var(--ep-ink-muted) !important; }
+.sr-toggle-switch {
+    background: var(--ep-border) !important;
+    border-color: var(--ep-border) !important;
+}
+
+/* ── GK ─────────────────────────────────────────────────────────────────── */
+.sr-gk-goal-frame {
+    background: #2c1f14 !important;   /* goal frame stays dark */
+}
+
+.sr-gk-room-row {
+    background: var(--ep-surface-2) !important;
+    border: 1px solid var(--ep-border) !important;
+}
+
+.sr-gk-room-row span { color: var(--ep-ink-muted) !important; }
+.sr-gk-sample { border-color: var(--ep-border) !important; }
+
+/* ── Homepage cards ─────────────────────────────────────────────────────── */
+.pasta-card {
+    background: var(--ep-surface) !important;
+    border: 1px solid var(--ep-border) !important;
+    box-shadow: 0 1px 0 var(--ep-border-2) !important;
+    border-radius: .6rem !important;
+}
+
+.pasta-card:hover {
+    box-shadow: 0 4px 16px var(--ep-shadow) !important;
+    transform: translateY(-2px);
+}
+
+.pasta-card-label   { color: var(--ep-ink-faint) !important; }
+.pasta-card-name    { color: var(--ep-ink) !important; }
+.pasta-card-clubs   { color: var(--ep-ink-muted) !important; }
+.pasta-card-insight { color: var(--ep-ink-2) !important; }
+.pasta-card-cta     { color: var(--ep-accent) !important; }
+.pasta-card-cta::after { color: var(--ep-accent) !important; }
+
+.pasta-club-name    { color: var(--ep-ink) !important; }
+.pasta-club-count   { color: var(--ep-ink-faint) !important; }
+.pasta-club-dot.active { background: var(--ep-accent) !important; box-shadow: none !important; }
+.pasta-club-divider { background: var(--ep-border) !important; }
+.pasta-club-header  { border-bottom-color: var(--ep-border) !important; }
+
+.pasta-bio-heading { color: var(--ep-ink-faint) !important; }
+.pasta-bio-name    { color: var(--ep-ink) !important; }
+.pasta-bio-sub     { color: var(--ep-ink-muted) !important; }
+.pasta-bio-text    { color: var(--ep-ink-2) !important; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#footer {
+    background: var(--ep-ink) !important;
+    border-top: 1px solid var(--ep-border) !important;
+}
+
+/* ── Menu overlay ───────────────────────────────────────────────────────── */
+#menu {
+    background: var(--ep-ink) !important;
+}
+
+#menu a {
+    color: rgba(255,255,255,.75) !important;
+    border-color: rgba(255,255,255,.1) !important;
+}
+
+#menu a:hover {
+    color: #fff !important;
+}
+
+/* ── TBA cards on homepage ──────────────────────────────────────────────── */
+.pasta-card.tba {
+    border-style: dashed !important;
+    opacity: .35 !important;
+}

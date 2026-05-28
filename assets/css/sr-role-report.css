@@ -1,0 +1,422 @@
+/* Role-player report styles shared by DEF, MID, and ATT pages.
+   Extracted during Sprint 1A report CSS harmonization. */
+
+.sr-card {
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 1.25rem;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02)),
+                rgba(14,18,32,.92);
+            box-shadow: 0 1.2rem 2.8rem rgba(0,0,0,.3);
+        }
+
+.sr-player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(55%) contrast(1.08) brightness(.9);
+        }
+
+.sr-player-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(74,222,128,.14) 0%, rgba(9,12,24,.4) 100%);
+            pointer-events: none;
+        }
+
+.sr-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(74,222,128,.07), rgba(255,255,255,.02));
+        }
+
+.sr-photo-placeholder svg {
+            width: 38px;
+            height: 38px;
+            opacity: .25;
+        }
+
+.sr-club-flow {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            margin-top: .75rem;
+        }
+
+.sr-club-logo.liverpool { background: linear-gradient(135deg, #c8102e, #7a0016); }
+
+.sr-club-logo.inter { background: linear-gradient(135deg, #0057b8, #111); }
+
+.sr-club-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 4px;
+            background: rgba(255,255,255,.92);
+        }
+
+.sr-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+.sr-radar-layout {
+            grid-template-columns: minmax(0, 1.95fr) minmax(17rem, 1fr);
+            gap: 1rem;
+        }
+
+.sr-radar-col {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+        }
+
+.sr-radar-wrap {
+            position: relative;
+            width: 100%;
+            min-height: 390px;
+            height: clamp(360px, 44vw, 420px);
+        }
+
+.sr-radar-wrap canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+.sr-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: .42rem;
+            color: rgba(255,255,255,.5);
+            font-size: .68rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+.sr-toggle input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+.sr-toggle-switch {
+            width: 32px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,.14);
+            background: rgba(255,255,255,.08);
+            position: relative;
+            transition: background .15s, border-color .15s;
+        }
+
+.sr-toggle-switch::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background: rgba(255,255,255,.75);
+            transition: transform .15s;
+        }
+
+.sr-toggle input:checked + .sr-toggle-switch {
+            background: rgba(251,146,60,.22);
+            border-color: rgba(251,146,60,.42);
+        }
+
+.sr-toggle input:checked + .sr-toggle-switch::after { transform: translateX(14px); }
+
+.sr-axis-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: .42rem;
+        }
+
+.sr-radar-guide {
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: .75rem;
+            padding: .65rem .85rem;
+            background: rgba(255,255,255,.02);
+            display: grid;
+            gap: .28rem;
+        }
+
+.sr-radar-guide-title {
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.28);
+            margin-bottom: .22rem;
+        }
+
+.sr-radar-guide-row {
+            display: grid;
+            grid-template-columns: 5.5rem 1fr;
+            gap: .4rem;
+            font-size: .68rem;
+            line-height: 1.35;
+        }
+
+.sr-radar-guide-key {
+            font-weight: 700;
+            color: rgba(255,255,255,.5);
+            white-space: nowrap;
+        }
+
+.sr-radar-guide-val {
+            color: rgba(255,255,255,.35);
+        }
+
+.sr-legend {
+            display: flex;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+            font-size: .77rem;
+            color: rgba(255,255,255,.54);
+            margin-bottom: 1rem;
+        }
+
+.sr-legend-item { display: flex; align-items: center; gap: .4rem; }
+
+.sr-legend-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+.sr-dot-group { margin-bottom: 1.2rem; }
+
+.sr-dot-row {
+            display: grid;
+            grid-template-columns: 9.5rem 1fr 4.5rem;
+            gap: .65rem;
+            align-items: center;
+            margin-bottom: .52rem;
+        }
+
+.sr-dot-track-wrap {
+            position: relative;
+            height: 28px;
+            display: flex;
+            align-items: center;
+        }
+
+.sr-dot-axis {
+            position: absolute;
+            left: 0; right: 0;
+            height: 1px;
+            background: rgba(255,255,255,.07);
+        }
+
+.sr-dot {
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            cursor: default;
+            transition: transform .15s;
+        }
+
+.sr-dot:hover { transform: translate(-50%,-50%) scale(1.6); z-index: 5; }
+
+.sr-dot.main  { width: 12px; height: 12px; border: 2px solid rgba(255,255,255,.25); z-index: 3; }
+
+.sr-dot::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 7px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10,14,26,.96);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: .4rem;
+            padding: .22rem .5rem;
+            font-size: .7rem;
+            white-space: nowrap;
+            color: rgba(255,255,255,.88);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .12s;
+        }
+
+.sr-dot:hover::after { opacity: 1; }
+
+.sr-heatmap-btn:hover {
+            background: rgba(255,255,255,.08);
+            color: rgba(255,255,255,.75);
+        }
+
+.sr-heatmap-btn.active {
+            border-color: rgba(74,222,128,.35);
+            background: rgba(74,222,128,.1);
+            color: #b9f7d8;
+        }
+
+.sr-pitch-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: .52rem;
+        }
+
+.sr-pitch-svg {
+            width: 100%;
+            border-radius: .75rem;
+            overflow: hidden;
+            background: #080e1c;
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+.sr-def-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem;
+            padding: .65rem .85rem;
+            background: rgba(125,211,252,.04);
+            border: 1px solid rgba(125,211,252,.13);
+            border-radius: .6rem;
+            margin-top: .85rem;
+        }
+
+.sr-def-stat {
+            font-size: .74rem;
+            color: rgba(255,255,255,.50);
+            padding: .18rem .48rem;
+            background: rgba(255,255,255,.04);
+            border-radius: .38rem;
+        }
+
+.sr-def-stat strong { color: #7dd3fc; }
+
+.sr-sim-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .62rem;
+        }
+
+.sr-sim-space {
+            padding: .68rem .72rem;
+            border-radius: .62rem;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(255,255,255,.065);
+        }
+
+.sr-sim-space-title {
+            font-size: .61rem;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+            color: rgba(251,146,60,.82);
+            margin-bottom: .42rem;
+        }
+
+.sr-sim-desc {
+            font-size: .62rem;
+            line-height: 1.35;
+            margin: 0 0 .42rem 0;
+            color: rgba(255,255,255,.42);
+        }
+
+.sr-sim-match {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: .32rem;
+            padding: .28rem 0;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+        }
+
+.sr-sim-match:last-child { border-bottom: none; padding-bottom: 0; }
+
+.sr-sim-name  { font-size: .72rem; line-height: 1.22; color: #e2e8f0; }
+
+.sr-sim-score { font-size: .66rem; font-weight: 700; color: rgba(251,146,60,.88); }
+
+.sr-sim-bar { grid-column: 1/-1; height: 3px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; margin-top: 1px; }
+
+.sr-sim-bar-fill { height: 100%; background: linear-gradient(90deg,#c2410c,#fb923c); border-radius: 999px; }
+
+.sr-footnotes { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.sr-radar-selector-wrap {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            flex-shrink: 0;
+        }
+
+.sr-radar-select {
+            background: rgba(255,255,255,.065);
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: .52rem;
+            color: rgba(255,255,255,.78);
+            font-size: .79rem;
+            padding: .32rem .7rem;
+            cursor: pointer;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            min-width: 10rem;
+        }
+
+.sr-radar-context-note {
+            font-size: .69rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,.25);
+            padding: .26rem .6rem;
+            background: none;
+            border-left: 1px solid rgba(255,255,255,.1);
+            border-radius: 0;
+            margin-top: .55rem;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+.sr-axis-accordion .sr-axis-list { padding: .62rem .85rem .75rem; gap: .5rem; }
+
+.sr-axis-metrics {
+            display: block;
+            color: rgba(255,255,255,.28);
+            font-size: .61rem;
+            margin-top: .14rem;
+            font-style: italic;
+            line-height: 1.35;
+        }
+
+.sr-axis-caveat {
+            display: block;
+            color: rgba(251,146,60,.5);
+            font-size: .61rem;
+            margin-top: .2rem;
+            line-height: 1.35;
+        }
+
+.sr-raw-bars-note {
+            font-size: .75rem;
+            color: rgba(255,255,255,.38);
+            padding: .42rem .72rem;
+            background: rgba(255,255,255,.025);
+            border-left: 2px solid rgba(255,255,255,.1);
+            border-radius: 0 .42rem .42rem 0;
+            margin-bottom: 1.1rem;
+            line-height: 1.55;
+            font-style: italic;
+        }
+
+/* Sprint 1B role responsive layout. */
+@media screen and (max-width: 768px) {
+    .sr-two-col, .sr-radar-layout { grid-template-columns: 1fr; }
+    .sr-radar-wrap { min-height: 320px; height: 360px; }
+    .sr-radar-selector-wrap { flex-wrap: wrap; }
+    .sr-radar-select { min-width: 9rem; font-size: .74rem; }
+    .sr-sim-grid { grid-template-columns: 1fr; }
+}

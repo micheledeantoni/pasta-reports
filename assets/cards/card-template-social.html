@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 1200px;
+      height: 628px;
+      overflow: hidden;
+      background: #f6f2ec;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Card root ──────────────────────────────────────────────── */
+    .card {
+      width: 1200px;
+      height: 628px;
+      background: #f6f2ec;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Left: photo ────────────────────────────────────────────── */
+    .card-photo {
+      width: 370px;
+      height: 628px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .card-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 68%, #f6f2ec 100%);
+      pointer-events: none;
+    }
+
+    /* Rangefinder bracket */
+    .card-bracket {
+      position: absolute;
+      top: 22px;
+      left: 18px;
+      z-index: 10;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #831843;
+      letter-spacing: 0.55em;
+      opacity: 0.72;
+    }
+
+    /* ── Center: editorial info ─────────────────────────────────── */
+    .card-info {
+      width: 355px;
+      flex-shrink: 0;
+      padding: 0 2rem 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .card-label {
+      position: absolute;
+      top: 2.2rem;
+      left: 1.5rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #831843;
+    }
+
+    .card-firstname {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: #1c1917;
+      line-height: 1.05;
+    }
+
+    .card-lastname {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 6.2rem;
+      font-weight: 900;
+      color: #1c1917;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    /* Rule stops here — does NOT cross into radar panel */
+    .card-rule {
+      width: 100%;
+      height: 2px;
+      background: #831843;
+      margin: 1.2rem 0 1.4rem;
+    }
+
+    .card-target-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #831843;
+      margin-bottom: 0.55rem;
+    }
+
+    .card-target-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .card-arrow {
+      font-size: 1.2rem;
+      color: #831843;
+      flex-shrink: 0;
+    }
+
+    .card-club-name {
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #1c1917;
+      text-transform: uppercase;
+    }
+
+    .card-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-role {
+      align-self: flex-start;
+      margin-top: 1rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #44403c;
+      border: 1px solid #ddd6cc;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    /* ── Right: radar panel — light editorial figure on warm paper ─ */
+    .card-radar {
+      flex: 1;
+      background: #f0ebe3;
+      border-left: 1.5px solid #ddd6cc;
+      display: flex;
+      flex-direction: column;
+      padding: 1.6rem 1.4rem 1.2rem 1.8rem;
+      position: relative;
+    }
+
+    .card-radar-wrap {
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    #radarChart {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Legend */
+    .card-radar-legend {
+      display: flex;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid #ddd6cc;
+    }
+
+    .rcl-item {
+      display: flex;
+      align-items: center;
+      gap: 0.38rem;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #78716c;
+      white-space: nowrap;
+    }
+
+    .rcl-swatch {
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    .rcl-swatch.subject {
+      height: 3px;
+    }
+
+    /* "INTERNAL USE ONLY" */
+    .card-footer {
+      position: absolute;
+      bottom: 1.2rem;
+      right: 1.4rem;
+      font-size: 0.47rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(28, 25, 23, 0.22);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- Photo -->
+    <div class="card-photo">
+      <img src="{{PLAYER_PHOTO}}" alt="{{PLAYER_FIRSTNAME}} {{PLAYER_LASTNAME}}"
+           onerror="this.style.display='none'">
+    </div>
+
+    <!-- Bracket -->
+    <div class="card-bracket">[ ]</div>
+
+    <!-- Info -->
+    <div class="card-info">
+      <div class="card-label">Scouting File · PASTA</div>
+
+      <div>
+        <div class="card-firstname">{{PLAYER_FIRSTNAME}}</div>
+        <div class="card-lastname">{{PLAYER_LASTNAME}}</div>
+      </div>
+
+      <div class="card-rule"></div>
+
+      <div class="card-target-label">Target</div>
+      <div class="card-target-row">
+        <span class="card-arrow">→</span>
+        <span class="card-club-name">{{CLUB_NAME}}</span>
+        <div class="card-badge">
+          <img src="{{CLUB_BADGE}}" alt="{{CLUB_NAME}}" onerror="this.style.display='none'">
+        </div>
+      </div>
+
+      <span class="card-role">{{PLAYER_ROLE}}</span>
+    </div>
+
+    <!-- Radar panel -->
+    <div class="card-radar">
+      <div class="card-radar-wrap">
+        <canvas id="radarChart"></canvas>
+      </div>
+      <div class="card-radar-legend" id="radarLegend"></div>
+      <div class="card-footer">Internal Use Only</div>
+    </div>
+
+  </div>
+
+  <!-- Radar data injected by generate_cards.py -->
+  <script>
+    window.RADAR_AXES        = {{RADAR_AXES_JSON}};
+    window.RADAR_DATA        = {{RADAR_DATA_JSON}};
+    window.RADAR_AXIS_RANGES = {{RADAR_AXIS_RANGES_JSON}};
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script>
+  (function () {
+    const axes   = window.RADAR_AXES        || [];
+    const data   = window.RADAR_DATA        || {};
+    const ranges = window.RADAR_AXIS_RANGES || null;
+
+    /* ── normalization (mirrors sr-role-runtime.js normAxisVals) ── */
+    function norm(arr) {
+      if (!ranges || !arr || !arr.length) return (arr || []).slice();
+      return arr.map((v, i) => {
+        const r = ranges[i];
+        if (!r || r.max <= r.min || !Number.isFinite(v)) return v;
+        return Math.round(Math.min(1, Math.max(0, (v - r.min) / (r.max - r.min))) * 10000) / 100;
+      });
+    }
+
+    /* ── short axis labels (same mapping as runtime) ─────────────── */
+    const SHORT = {
+      technical_security:     "Sicurezza",
+      progression:            "Progressione",
+      creation:               "Creazione",
+      direct_threat:          "Minaccia",
+      defensive_contribution: "Duelli",
+    };
+    const labels = axes.map(a => SHORT[a.key] || a.label || a.key);
+
+    /* ── normalize subject & find 2 closest comparators ─────────── */
+    const normSubject = norm(data.subject?.values || []);
+
+    function euclid(a, b) {
+      return Math.sqrt(a.reduce((s, v, i) => s + Math.pow(v - (b[i] || 0), 2), 0));
+    }
+    const comps = (data.targetProfiles || [])
+      .map(tp => ({ ...tp, _norm: norm(tp.values || []) }))
+      .map(tp => ({ ...tp, _dist: euclid(normSubject, tp._norm) }))
+      .sort((a, b) => a._dist - b._dist)
+      .slice(0, 2);
+
+    /* ── editorial palette — adapted for light paper background ─── */
+    const SUBJECT_COLOR = "#831843";
+    const COMP_PALETTE  = [
+      { border: "rgba(180,100,20,.85)",  fill: "rgba(180,100,20,.08)"  },
+      { border: "rgba(50,90,170,.70)",   fill: "rgba(50,90,170,.06)"   },
+    ];
+
+    /* ── datasets: comparators behind, subject in front ─────────── */
+    const datasets = [
+      ...comps.map((tp, i) => ({
+        label:           tp.label,
+        data:            tp._norm,
+        borderColor:     COMP_PALETTE[i].border,
+        backgroundColor: COMP_PALETTE[i].fill,
+        borderWidth:     1.5,
+        borderDash:      [5, 4],
+        pointRadius:     2,
+        pointBackgroundColor: COMP_PALETTE[i].border,
+      })),
+      {
+        label:           data.subject?.label || "Subject",
+        data:            normSubject,
+        borderColor:     SUBJECT_COLOR,
+        backgroundColor: "rgba(159,18,57,.15)",
+        borderWidth:     2.5,
+        pointRadius:     3.5,
+        pointBackgroundColor: SUBJECT_COLOR,
+      },
+    ];
+
+    /* ── Chart.js radar ──────────────────────────────────────────── */
+    new Chart(document.getElementById("radarChart").getContext("2d"), {
+      type: "radar",
+      data: { labels, datasets },
+      options: {
+        animation:           { duration: 0 },
+        responsive:          true,
+        maintainAspectRatio: false,
+        layout:              { padding: 10 },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            ticks:      { display: false, stepSize: 25 },
+            grid:       { color: "rgba(28,25,23,.10)", lineWidth: 0.7 },
+            angleLines: { color: "rgba(28,25,23,.08)", lineWidth: 0.7 },
+            pointLabels: {
+              color: "#44403c",
+              font:  { size: 11, weight: "600" },
+              padding: 6,
+            },
+          },
+        },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      },
+    });
+
+    /* ── custom legend ───────────────────────────────────────────── */
+    const legendEl = document.getElementById("radarLegend");
+    if (legendEl) {
+      const items = [
+        { label: data.subject?.label || "Subject", color: SUBJECT_COLOR, subject: true },
+        ...comps.map((tp, i) => ({ label: tp.label, color: COMP_PALETTE[i].border, subject: false })),
+      ];
+      legendEl.innerHTML = items.map(it => `
+        <div class="rcl-item">
+          <span class="rcl-swatch ${it.subject ? 'subject' : ''}"
+                style="background:${it.color}"></span>
+          ${it.label}
+        </div>`).join("");
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Player Report · {{PLAYER_NAME}} | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta property="og:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
+    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
+    <meta property="og:image"       content="images/cards/{{PLAYER_SLUG}}.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
+    <link rel="stylesheet" href="assets/css/pasta-theme.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        /* ── Banner: player photo top-right, editorial chips ────── */
+        #banner.style2 {
+            background-image: url('images/players/{{PLAYER_SLUG}}.webp') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
+        }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
+
+        /* ── Banner meta chips ───────────────────────────────────── */
+        .sr-banner-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin-top: 1.1rem;
+        }
+        .sr-banner-chip {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+            color: var(--ei2-ink-2);
+            background: rgba(28, 25, 23, .06);
+            border: 1px solid var(--ei2-border);
+            padding: .3rem .75rem;
+            border-radius: .2rem;
+            white-space: nowrap;
+        }
+        .sr-banner-chip.sr-banner-clubs {
+            color: var(--ei2-accent);
+            background: rgba(131, 24, 67, .06);
+            border-color: rgba(131, 24, 67, .24);
+        }
+
+        @media screen and (max-width: 768px) {
+            .sr-heatmap-grid { grid-template-columns: 1fr; }
+            .sr-dot-row      { grid-template-columns: 7rem 1fr 4rem; }
+            #banner.style2   { background-position: center top !important; min-height: 0 !important; }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Documentazione</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="style2">
+        <div class="inner">
+            <header class="major"><h1>{{PLAYER_NAME}}</h1></header>
+            <div class="content">
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs">{{SOURCE_CLUB}} → {{TARGET_CLUB}}</span>
+                    <span class="sr-banner-chip">{{ROLE_LABEL}}</span>
+                    <span class="sr-banner-chip">{{COMPETITION_LABEL}}</span>
+                    <span class="sr-banner-chip">Stagione {{SEASON_LABEL}}</span>
+                    <span class="sr-banner-chip">{{MINUTES}} min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+    <section class="sr-inner">
+
+        <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
+        <div class="sr-card" id="profileReading" data-static="true">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <p class="sr-narrative">{{NARRATIVE}}</p>
+        </div>
+
+        <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Profilo sintetico · assi {{MACRO_ROLE}} interpretativi</p>
+            <div class="sr-radar-tools">
+                <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="radarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
+                </div>
+            </div>
+            <div class="sr-radar-wrap-full">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <div class="sr-radar-context-note">
+                Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
+            </div>
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
+                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+            </details>
+        </div>
+
+        <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Confronto individuale vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · {{SEASON_LABEL}}</p>
+            <p class="sr-raw-bars-note">
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
+                di profilo, ma non sono corrette per la difficoltà del campionato.
+                Passa il cursore su una barra per nome e valore esatto.
+            </p>
+            <div class="sr-player-tags" id="interLegend"></div>
+            <div id="interComparison"></div>
+        </div>
+
+        <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
+            <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
+            <div class="sr-heatmap-grid">
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Impronta posizionale</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
+                    <span class="sr-pitch-note" id="pitchPosNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Direzione conduzioni</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
+                    <span class="sr-pitch-note" id="pitchCarryNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Distribuzione passaggi</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
+                    <span class="sr-pitch-note" id="pitchPassNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Progressione via passaggio</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
+                    <span class="sr-pitch-note" id="pitchProgNote"></span>
+                </div>
+            </div>
+            <div class="sr-def-summary" id="defSummaryBlock"></div>
+            <p class="sr-pitch-note" style="margin-top:.55rem;">
+                Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
+            </p>
+        </div>
+
+        <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
+        <div class="sr-card compact">
+            <p class="sr-section-label">Contesto {{SOURCE_CLUB}} · altri {{ROLE_PLURAL}}</p>
+            <p class="sr-raw-bars-note">{{SOURCE_TEAM_NOTE}}</p>
+            <div class="sr-player-tags" id="sourceTeamLegend"></div>
+            <div id="sourceTeamComparison"></div>
+        </div>
+
+        <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Similarità target-team vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · tre spazi indipendenti</p>
+            <div class="sr-sim-grid" id="similarityGrid"></div>
+        </div>
+
+        <!-- ── 7. FOOTNOTES ──────────────────────────────────────── -->
+        <div>
+            <div class="sr-footnotes" id="footnotes"></div>
+        </div>
+
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="generic.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+            </ul>
+        </div>
+    </footer>
+
+</div><!-- /wrapper -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+  window.SR_EXTERNAL_PAYLOAD_URL = "{{PAYLOAD_URL}}";
+</script>
+<script src="assets/js/sr-report-loader.js"></script>
+<script src="assets/js/sr-role-runtime.js"></script>
+</body>
+</html>

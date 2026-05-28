@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Player Report · Guglielmo Vicario | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
+    <link rel="stylesheet" href="assets/css/sr-gk-report.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @media screen and (max-width: 768px) {
+            .sr-heatmap-grid { grid-template-columns: 1fr; }
+            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+        }
+        @media screen and (max-width: 480px) {
+            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="generic.html">Documentazione</a></li>
+        </ul>
+        <ul class="actions stacked"><li><a href="index.html" class="button primary fit">Tutte le analisi</a></li></ul>
+    </nav>
+    <section id="banner" class="style2">
+        <div class="inner">
+            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
+            <header class="major"><h1>Guglielmo Vicario</h1></header>
+            <div class="content"><p>GK report · Tottenham · 2 250 minuti · Valutazione Inter</p></div>
+        </div>
+    </section>
+    <div id="main">
+    <section class="sr-inner">
+        <div class="sr-card" id="gkProfileOverview">
+            <div id="gkHeader"></div>
+            <div id="gkSampleWarning"></div>
+        </div>
+        <div class="sr-card" id="gkProfileReading">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <p class="sr-narrative" id="gkProfileParagraph">Vicario emerge come un portiere da valutare soprattutto nel rapporto tra volume di interventi, gestione dell’area e contributo nella costruzione. Il confronto con Sommer e Martínez serve a leggere quanto il suo profilo si avvicini o si distanzi dall’attuale stanza portieri dell’Inter. Le metriche vanno interpretate come indicatori di profilo e contesto d’uso, non come una stima diretta del valore assoluto del giocatore.</p>
+        </div>
+        <div class="sr-card" id="gkRadarSection">
+            <p class="sr-section-label">Profilo sintetico · assi GK interpretativi</p>
+            <div class="sr-radar-tools">
+                <div id="gkRadarLegend" class="sr-radar-custom-legend"></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="gkRadarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="gkRadarTargetSelect" class="sr-radar-select"></select>
+                </div>
+            </div>
+            <div class="sr-radar-wrap-full"><canvas id="gkRadarChart"></canvas></div>
+            <div class="sr-radar-context-note">Il radar confronta profili statistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore.</div>
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
+                <ul class="sr-axis-list" id="gkRadarAxisGuide"></ul>
+            </details>
+        </div>
+        <div class="sr-card" id="gkBarsSection">
+            <p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>
+            <p class="sr-raw-bars-note">Le barre usano valori normalizzati per90, percentuali, rate o share: sono utili per leggere differenze di profilo e uso senza penalizzare campioni con minutaggi diversi. I conteggi grezzi restano solo come dettaglio nei tooltip.</p>
+            <div class="sr-player-tags" id="gkBarsLegend"></div>
+            <div id="gkBars"></div>
+        </div>
+        <div class="sr-card" id="gkVisualSection">
+            <p class="sr-section-label">Visualizzazioni portiere</p>
+            <div class="sr-radar-tools">
+                <p class="sr-radar-context-note" style="margin:0;">La griglia visuale ispeziona un portiere alla volta e parte da Vicario. Non è una heatmap posizionale generica.</p>
+                <div id="gkVisualPlayerBtns" class="sr-heatmap-toggle"></div>
+            </div>
+            <div class="sr-heatmap-grid sr-gk-visual-grid">
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#86efac;">Goal map / save map</div>
+                    <div id="gkGoalMap"></div>
+                    <span class="sr-pitch-note">Vista frontale a 9 zone quando le coordinate goalmouth sono disponibili.</span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#fbbf24;">Sweeper / defensive range</div>
+                    <div id="gkSweeperMap"></div>
+                    <span class="sr-pitch-note">Dove il portiere esce o copre la profondità.</span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#7dd3fc;">Destinazione distribuzione</div>
+                    <div id="gkDistribution"></div>
+                    <span class="sr-pitch-note">Dove terminano i passaggi del portiere.</span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title" style="color:#c4b5fd;">Coinvolgimento in costruzione</div>
+                    <div id="gkBuildUpMap"></div>
+                    <span class="sr-pitch-note">Dove il portiere partecipa con il pallone, non dove termina il passaggio.</span>
+                </div>
+            </div>
+        </div>
+        <div class="sr-card compact" id="gkMethodologySection">
+            <p class="sr-section-label">Note / warning / provenienza</p>
+            <div id="gkMethodology"></div>
+        </div>
+    </section>
+    </div>
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="generic.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>
+            </ul>
+            <ul class="copyright"><li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li></ul>
+        </div>
+    </footer>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+<!-- Live GK page now uses external legacy GK payload only. Inline fallback archived. -->
+<script>
+  window.SR_GK_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/gk_report.legacy_gk_payload.json";
+</script>
+<script src="assets/js/sr-gk-report-loader.js"></script>
+<script src="assets/js/sr-gk-runtime.js"></script>
+</body>
+</html>

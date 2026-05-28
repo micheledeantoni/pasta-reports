@@ -1,0 +1,453 @@
+/* Shared report shell styles for GK, DEF, MID, and ATT report pages.
+   Extracted during Sprint 1A report CSS harmonization. */
+
+.sr-page {
+            background:
+                radial-gradient(circle at 12% 0%,  rgba(74,222,128,.08),  transparent 26%),
+                radial-gradient(circle at 88% 0%,  rgba(251,146,60,.07),  transparent 24%),
+                linear-gradient(180deg, rgba(14,18,36,.98), rgba(9,12,24,1));
+        }
+
+.sr-inner {
+            max-width: 52rem;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+            display: grid;
+            gap: 1.6rem;
+        }
+
+.sr-card.compact { padding: 1.1rem 1.4rem; }
+
+.sr-section-label {
+            font-size: .71rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.38);
+            margin: 0 0 1rem;
+        }
+
+.sr-header-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .9rem;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: .9rem;
+        }
+
+.sr-header-left {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            flex: 1;
+            min-width: 0;
+        }
+
+.sr-player-photo {
+            width: 115px;
+            height: 115px;
+            border-radius: .9rem;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.03);
+            position: relative;
+        }
+
+.sr-player-name {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            line-height: 1.1;
+        }
+
+.sr-clubs-line {
+            display: block;
+            margin-top: .3rem;
+            font-size: .87rem;
+            color: rgba(255,255,255,.48);
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+.sr-club-node {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            color: rgba(255,255,255,.62);
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+.sr-club-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.16);
+            background: rgba(255,255,255,.05);
+            color: rgba(255,255,255,.9);
+            font-size: .62rem;
+            font-weight: 800;
+            letter-spacing: .04em;
+        }
+
+.sr-club-arrow {
+            color: rgba(255,255,255,.32);
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+.sr-role-pill {
+            padding: .38rem .85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(74,222,128,.3);
+            color: #b9f7d8;
+            font-size: .73rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            background: rgba(74,222,128,.08);
+            white-space: nowrap;
+        }
+
+.sr-meta-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+
+.sr-meta-chip {
+            padding: .33rem .68rem;
+            border-radius: .7rem;
+            background: rgba(255,255,255,.044);
+            border: 1px solid rgba(255,255,255,.08);
+            color: rgba(255,255,255,.7);
+            font-size: .79rem;
+        }
+
+.sr-badges { display: flex; flex-wrap: wrap; gap: .55rem; }
+
+.sr-badge {
+            display: grid;
+            gap: .1rem;
+            padding: .5rem .78rem;
+            border-radius: .65rem;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.075);
+            min-width: 9.5rem;
+        }
+
+.sr-badge-k {
+            color: rgba(255,255,255,.42);
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+.sr-badge-v {
+            color: rgba(255,255,255,.82);
+            font-size: .86rem;
+            font-weight: 700;
+        }
+
+.sr-narrative {
+            color: rgba(255,255,255,.74);
+            font-size: .95rem;
+            line-height: 1.75;
+            margin: 0;
+        }
+
+.sr-radar-tools {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: .55rem;
+            margin-bottom: .65rem;
+        }
+
+.sr-axis-card {
+            padding: .52rem .62rem;
+            border-radius: .58rem;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(255,255,255,.065);
+        }
+
+.sr-axis-card strong {
+            display: block;
+            color: rgba(255,255,255,.86);
+            font-size: .72rem;
+            margin-bottom: .18rem;
+        }
+
+.sr-axis-card span {
+            display: block;
+            color: rgba(255,255,255,.46);
+            font-size: .64rem;
+            line-height: 1.34;
+        }
+
+.sr-player-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem;
+            margin-bottom: 1.2rem;
+        }
+
+.sr-player-tag {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .3rem .65rem;
+            border-radius: .6rem;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.08);
+            font-size: .76rem;
+            color: rgba(255,255,255,.7);
+        }
+
+.sr-ptag-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+.sr-dot-group:last-child { margin-bottom: 0; }
+
+.sr-dot-group-title {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.32);
+            margin-bottom: .65rem;
+            padding-bottom: .4rem;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+.sr-dot-label {
+            font-size: .77rem;
+            color: rgba(255,255,255,.67);
+            line-height: 1.3;
+        }
+
+.sr-dot-val {
+            font-size: .78rem;
+            font-weight: 600;
+            color: #4ade80;
+            text-align: right;
+        }
+
+.sr-bar-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 0;
+        }
+
+.sr-bar-track {
+            position: relative;
+            height: 7px;
+            overflow: visible;
+            border-radius: 999px;
+            background: rgba(255,255,255,.055);
+        }
+
+.sr-bar-track.main {
+            height: 9px;
+            background: rgba(255,255,255,.09);
+        }
+
+.sr-bar-fill {
+            height: 100%;
+            min-width: 3px;
+            border-radius: 999px;
+            box-shadow: 0 0 10px rgba(255,255,255,.08);
+            position: relative;
+        }
+
+.sr-bar-fill::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 7px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10,14,26,.96);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: .4rem;
+            padding: .22rem .5rem;
+            font-size: .7rem;
+            white-space: nowrap;
+            color: rgba(255,255,255,.88);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .12s;
+            z-index: 10;
+        }
+
+.sr-bar-fill:hover::after { opacity: 1; }
+
+.sr-heatmap-toggle {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .42rem;
+            margin-bottom: .95rem;
+        }
+
+.sr-heatmap-btn {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .3rem .7rem;
+            border-radius: .6rem;
+            border: 1px solid rgba(255,255,255,.1);
+            background: rgba(255,255,255,.04);
+            color: rgba(255,255,255,.48);
+            font-size: .73rem;
+            cursor: pointer;
+            transition: background .12s, color .12s, border-color .12s;
+        }
+
+.sr-heatmap-btn-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+.sr-heatmap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.1rem;
+        }
+
+.sr-pitch-title {
+            font-size: .73rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.48);
+        }
+
+.sr-pitch-note {
+            font-size: .7rem;
+            color: rgba(255,255,255,.36);
+            line-height: 1.4;
+            min-height: 1.8em;
+        }
+
+.sr-footnote-chip {
+            padding: .32rem .68rem;
+            border-radius: .6rem;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(255,255,255,.07);
+            font-size: .72rem;
+            color: rgba(255,255,255,.4);
+        }
+
+.sr-radar-wrap-full {
+            position: relative;
+            width: 100%;
+            height: clamp(440px, 52vw, 540px);
+            margin: .4rem 0 0;
+        }
+
+.sr-radar-wrap-full canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+.sr-radar-select-label {
+            font-size: .69rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.36);
+            white-space: nowrap;
+        }
+
+.sr-radar-select:focus { border-color: rgba(74,222,128,.35); }
+
+.sr-radar-select option { background: #0e1220; color: rgba(255,255,255,.82); }
+
+.sr-radar-custom-legend {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            flex-wrap: wrap;
+        }
+
+.sr-rcl-item {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            font-size: .8rem;
+            color: rgba(255,255,255,.72);
+        }
+
+.sr-rcl-line {
+            flex-shrink: 0;
+            width: 22px;
+            height: 2.5px;
+            border-radius: 2px;
+        }
+
+.sr-rcl-line--subject {
+            background: #4ade80;
+            height: 3px;
+        }
+
+.sr-rcl-line--comp {
+            background: linear-gradient(90deg,
+                rgba(251,146,60,.80) 50%, transparent 50%);
+            background-size: 6px 100%;
+            border-radius: 0;
+        }
+
+.sr-axis-accordion {
+            margin-top: .85rem;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: .65rem;
+            overflow: hidden;
+        }
+
+.sr-axis-accordion-summary {
+            list-style: none;
+            padding: .62rem .9rem;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            cursor: pointer;
+            user-select: none;
+            background: rgba(255,255,255,.025);
+            display: flex;
+            align-items: center;
+            gap: .48rem;
+        }
+
+.sr-axis-accordion-summary::before {
+            content: "▶";
+            font-size: .52rem;
+            transition: transform .18s;
+            flex-shrink: 0;
+        }
+
+.sr-axis-accordion[open] .sr-axis-accordion-summary::before { transform: rotate(90deg); }
+
+.sr-axis-accordion-summary::-webkit-details-marker { display: none; }
+
+/* Sprint 1B shared responsive shell. */
+@media screen and (max-width: 768px) {
+    .sr-radar-wrap-full { height: clamp(340px, 84vw, 440px); }
+}
+
+@media screen and (max-width: 480px) {
+    .sr-player-name { font-size: 1.55rem; }
+    .sr-player-photo { width: 60px; height: 60px; }
+    .sr-radar-wrap-full { height: clamp(320px, 90vw, 380px); }
+}

@@ -1,0 +1,733 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Scouting Report Landing</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.scouting-landing {
+				background:
+					radial-gradient(circle at top left, rgba(96, 208, 255, 0.14), transparent 30%),
+					radial-gradient(circle at top right, rgba(126, 255, 190, 0.12), transparent 28%),
+					linear-gradient(180deg, rgba(36, 41, 67, 0.96), rgba(20, 23, 39, 0.98));
+			}
+
+			.landing-intro {
+				display: grid;
+				gap: 2rem;
+				grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.9fr);
+				align-items: end;
+			}
+
+			.landing-intro p {
+				max-width: 42rem;
+				margin-bottom: 0;
+			}
+
+			.landing-intro-panel {
+				padding: 1.4rem 1.5rem;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 1.1rem;
+				background: rgba(255, 255, 255, 0.04);
+				backdrop-filter: blur(14px);
+			}
+
+			.landing-intro-panel strong,
+			.landing-intro-panel span {
+				display: block;
+			}
+
+			.landing-intro-panel strong {
+				font-size: 0.8rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				color: #7effbe;
+				margin-bottom: 0.55rem;
+			}
+
+			.landing-intro-panel span {
+				color: rgba(255, 255, 255, 0.74);
+			}
+
+			.report-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr);
+				gap: 1.75rem;
+				margin-top: 2.5rem;
+				max-width: 56rem;
+			}
+
+			.scouting-card {
+				display: grid;
+				gap: 1.1rem;
+				padding: 1.5rem;
+				border: 1px solid rgba(255, 255, 255, 0.09);
+				border-radius: 1.35rem;
+				background:
+					linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025)),
+					rgba(18, 21, 35, 0.9);
+				box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
+			}
+
+			.card-header-main {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.8rem;
+				align-items: flex-start;
+				justify-content: space-between;
+			}
+
+			.card-player-name {
+				margin: 0;
+				font-size: 1.45rem;
+				line-height: 1.15;
+			}
+
+			.card-team-line {
+				display: block;
+				margin-top: 0.25rem;
+				color: rgba(255, 255, 255, 0.68);
+				font-size: 0.9rem;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+			}
+
+			.card-role-pill {
+				padding: 0.4rem 0.75rem;
+				border-radius: 999px;
+				border: 1px solid rgba(126, 255, 190, 0.26);
+				color: #cffff0;
+				font-size: 0.76rem;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				background: rgba(126, 255, 190, 0.08);
+			}
+
+			.card-meta-list,
+			.card-badge-list,
+			.card-footer-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.65rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.card-meta-list li,
+			.card-badge-list li,
+			.card-footer-list li {
+				border-radius: 0.8rem;
+				padding: 0.42rem 0.72rem;
+				background: rgba(255, 255, 255, 0.045);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				color: rgba(255, 255, 255, 0.78);
+				font-size: 0.82rem;
+				line-height: 1.3;
+			}
+
+			.card-section-title {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-bottom: 0.65rem;
+			}
+
+			.card-section-title h3,
+			.card-section-title h4 {
+				margin: 0;
+				font-size: 0.92rem;
+				font-weight: 600;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+			}
+
+			.card-section-title span {
+				color: rgba(255, 255, 255, 0.5);
+				font-size: 0.76rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+			}
+
+			.card-subtitle {
+				margin: 0;
+				font-size: 1rem;
+				color: rgba(255, 255, 255, 0.88);
+			}
+
+			.preview-surface,
+			.context-preview,
+			.spatial-tile,
+			.metric-card,
+			.similarity-card {
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				border-radius: 1rem;
+				background: rgba(255, 255, 255, 0.035);
+			}
+
+			.preview-surface {
+				min-height: 13rem;
+				padding: 1rem;
+				display: grid;
+				place-items: center;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.preview-surface::before {
+				content: "";
+				position: absolute;
+				inset: 1rem;
+				border-radius: 50%;
+				border: 1px dashed rgba(155, 241, 255, 0.24);
+			}
+
+			.preview-surface::after {
+				content: "Radar / PCA Placeholder";
+				position: relative;
+				padding: 0.45rem 0.75rem;
+				border-radius: 999px;
+				background: rgba(155, 241, 255, 0.12);
+				color: #9bf1ff;
+				font-size: 0.8rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.breakdown-list {
+				display: grid;
+				gap: 0.65rem;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.breakdown-row {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) auto;
+				gap: 0.85rem;
+				align-items: center;
+				padding: 0.8rem 0.9rem;
+				border-radius: 0.9rem;
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(255, 255, 255, 0.06);
+			}
+
+			.breakdown-row strong {
+				display: block;
+				font-size: 0.92rem;
+			}
+
+			.breakdown-row span {
+				color: rgba(255, 255, 255, 0.58);
+				font-size: 0.8rem;
+			}
+
+			.breakdown-value {
+				color: #7effbe;
+				font-size: 0.82rem;
+				font-weight: 600;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.context-preview {
+				padding: 1rem;
+				min-height: 5.75rem;
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			.spatial-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.85rem;
+			}
+
+			.spatial-tile {
+				min-height: 8.5rem;
+				padding: 0.95rem;
+				display: grid;
+				align-content: space-between;
+			}
+
+			.spatial-tile strong,
+			.metric-card strong,
+			.similarity-card strong {
+				font-size: 0.84rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.spatial-tile span,
+			.metric-card span,
+			.similarity-card span {
+				color: rgba(255, 255, 255, 0.58);
+				font-size: 0.82rem;
+			}
+
+			.gain-grid,
+			.similarity-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 0.85rem;
+			}
+
+			.metric-card,
+			.similarity-card {
+				padding: 0.95rem;
+				min-height: 7.2rem;
+				display: grid;
+				align-content: space-between;
+			}
+
+			.card-footer-list li {
+				font-size: 0.76rem;
+			}
+
+			@media screen and (max-width: 980px) {
+
+				.landing-intro {
+					grid-template-columns: 1fr;
+				}
+
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.scouting-card {
+					padding: 1.15rem;
+				}
+
+				.spatial-grid,
+				.gain-grid,
+				.similarity-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.card-meta-list li,
+				.card-badge-list li,
+				.card-footer-list li {
+					width: 100%;
+				}
+
+			}
+		</style>
+	</head>
+	<body class="is-preload scouting-landing">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Data Scouting</strong> <span>football reports</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="landing.html">Scouting Landing</a></li>
+							<li><a href="generic.html">Generic</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Open Reports</a></li>
+							<li><a href="#" class="button fit">Explore Filters</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>Reusable Scouting Report Cards</h1>
+							</header>
+							<div class="content">
+								<p>Placeholder layout for football scouting previews, designed to host cards with PCA, spatial context and comparison blocks.</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<section id="intro">
+								<div class="inner landing-intro">
+									<div>
+										<header class="major">
+											<h2>Landing Grid Ready</h2>
+										</header>
+										<p>Each card uses generic placeholder content, semantic classes and `data-*` hooks so future real data can be injected without changing the structure.</p>
+									</div>
+									<div class="landing-intro-panel">
+										<strong>Design Notes</strong>
+										<span>Responsive card grid, modular sections, light visual hierarchy and reusable blocks for quick duplication.</span>
+									</div>
+								</div>
+							</section>
+
+						<!-- Cards Grid -->
+							<section id="reports">
+								<div class="inner">
+									<div class="report-grid" data-grid="scouting-report-list">
+
+										<article class="scouting-card" data-card-type="scouting-report" data-player-id="placeholder-player-01" data-team-id="placeholder-team-01" data-season-id="placeholder-season-01">
+											<!-- Card header -->
+											<header class="card-header" data-section="header">
+												<div class="card-header-main">
+													<div>
+														<h2 class="card-player-name" data-field="player-name">Player Placeholder</h2>
+														<span class="card-team-line" data-field="team-name">Team Placeholder</span>
+													</div>
+													<span class="card-role-pill" data-field="role">Role Placeholder</span>
+												</div>
+												<ul class="card-meta-list" data-collection="header-meta">
+													<li data-field="league">League Placeholder</li>
+													<li data-field="season">Season Placeholder</li>
+													<li data-field="minutes">Minutes Placeholder</li>
+												</ul>
+											</header>
+
+											<!-- Hero -->
+											<section class="card-hero" data-section="hero">
+												<div class="card-section-title">
+													<h3>Profile Snapshot</h3>
+													<span data-field="hero-label">Hero</span>
+												</div>
+												<p class="card-subtitle" data-field="subtitle">Short placeholder subtitle describing the report angle or scouting lens.</p>
+												<ul class="card-badge-list" data-collection="hero-badges">
+													<li data-badge="template">Badge Placeholder A</li>
+													<li data-badge="sample">Badge Placeholder B</li>
+													<li data-badge="status">Badge Placeholder C</li>
+												</ul>
+											</section>
+
+											<!-- Radar preview -->
+											<section class="card-preview-radar" data-section="pca-radar">
+												<div class="card-section-title">
+													<h3>Radar PCA Preview</h3>
+													<span data-field="radar-state">Preview</span>
+												</div>
+												<div class="preview-surface" data-visual="radar-pca"></div>
+											</section>
+
+											<!-- PCA breakdown -->
+											<section class="card-preview-breakdown" data-section="pca-breakdown">
+												<div class="card-section-title">
+													<h3>PCA Breakdown</h3>
+													<span data-field="breakdown-state">3 rows</span>
+												</div>
+												<ul class="breakdown-list" data-collection="breakdown-rows">
+													<li class="breakdown-row" data-breakdown-row="1">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 01</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+													<li class="breakdown-row" data-breakdown-row="2">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 02</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+													<li class="breakdown-row" data-breakdown-row="3">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 03</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+												</ul>
+											</section>
+
+											<!-- Original context -->
+											<section class="card-context" data-section="original-context">
+												<div class="card-section-title">
+													<h3>Original Context</h3>
+													<span data-field="context-state">Preview</span>
+												</div>
+												<div class="context-preview" data-field="context-placeholder">
+													Generic placeholder text for source context, competition framing or methodology summary linked to the original dataset.
+												</div>
+											</section>
+
+											<!-- Spatial block -->
+											<section class="card-spatial" data-section="spatial-block">
+												<div class="card-section-title">
+													<h3>Spatial Preview</h3>
+													<span data-field="spatial-layout">2x2</span>
+												</div>
+												<div class="spatial-grid" data-collection="spatial-previews">
+													<div class="spatial-tile" data-visual="heatmap">
+														<strong>Heatmap</strong>
+														<span>Pitch activity placeholder with future density layer hook.</span>
+													</div>
+													<div class="spatial-tile" data-visual="touch-profile">
+														<strong>Touch Profile</strong>
+														<span>Secondary spatial preview placeholder for supporting distribution context.</span>
+													</div>
+													<div class="spatial-tile" data-visual="difference-map">
+														<strong>Difference</strong>
+														<span>Relative map placeholder for role or cohort comparison.</span>
+													</div>
+													<div class="spatial-tile" data-visual="centroid-hull">
+														<strong>Centroid Hull</strong>
+														<span>Shape placeholder for centroid, hull and coverage footprint.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Gain and change -->
+											<section class="card-gain-change" data-section="gain-change">
+												<div class="card-section-title">
+													<h3>Gain / Change</h3>
+													<span data-field="gain-state">Preview</span>
+												</div>
+												<div class="gain-grid" data-collection="gain-change-panels">
+													<div class="metric-card" data-metric="gain">
+														<strong>Gain Block</strong>
+														<span>Placeholder summary for upside, carrying value or model gain.</span>
+													</div>
+													<div class="metric-card" data-metric="change">
+														<strong>Change Block</strong>
+														<span>Placeholder summary for deltas, adaptation or trend direction.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Similarity -->
+											<section class="card-similarity" data-section="similarity">
+												<div class="card-section-title">
+													<h3>Similarity</h3>
+													<span data-field="similarity-state">Preview</span>
+												</div>
+												<div class="similarity-grid" data-collection="similarity-panels">
+													<div class="similarity-card" data-similarity-slot="1">
+														<strong>Comparable Placeholder 01</strong>
+														<span>Reserved for future similar player / cohort match output.</span>
+													</div>
+													<div class="similarity-card" data-similarity-slot="2">
+														<strong>Comparable Placeholder 02</strong>
+														<span>Reserved for future similar player / cohort match output.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Footer -->
+											<footer class="card-footer" data-section="footer">
+												<ul class="card-footer-list" data-collection="footer-meta">
+													<li data-field="source">Source Placeholder</li>
+													<li data-field="threshold">Threshold Placeholder</li>
+													<li data-field="warning">Warning Placeholder</li>
+												</ul>
+											</footer>
+										</article>
+
+										<article class="scouting-card" data-card-type="scouting-report" data-player-id="placeholder-player-02" data-team-id="placeholder-team-02" data-season-id="placeholder-season-02">
+											<!-- Card header -->
+											<header class="card-header" data-section="header">
+												<div class="card-header-main">
+													<div>
+														<h2 class="card-player-name" data-field="player-name">Player Placeholder</h2>
+														<span class="card-team-line" data-field="team-name">Team Placeholder</span>
+													</div>
+													<span class="card-role-pill" data-field="role">Role Placeholder</span>
+												</div>
+												<ul class="card-meta-list" data-collection="header-meta">
+													<li data-field="league">League Placeholder</li>
+													<li data-field="season">Season Placeholder</li>
+													<li data-field="minutes">Minutes Placeholder</li>
+												</ul>
+											</header>
+
+											<!-- Hero -->
+											<section class="card-hero" data-section="hero">
+												<div class="card-section-title">
+													<h3>Profile Snapshot</h3>
+													<span data-field="hero-label">Hero</span>
+												</div>
+												<p class="card-subtitle" data-field="subtitle">Short placeholder subtitle describing the report angle or scouting lens.</p>
+												<ul class="card-badge-list" data-collection="hero-badges">
+													<li data-badge="template">Badge Placeholder A</li>
+													<li data-badge="sample">Badge Placeholder B</li>
+													<li data-badge="status">Badge Placeholder C</li>
+												</ul>
+											</section>
+
+											<!-- Radar preview -->
+											<section class="card-preview-radar" data-section="pca-radar">
+												<div class="card-section-title">
+													<h3>Radar PCA Preview</h3>
+													<span data-field="radar-state">Preview</span>
+												</div>
+												<div class="preview-surface" data-visual="radar-pca"></div>
+											</section>
+
+											<!-- PCA breakdown -->
+											<section class="card-preview-breakdown" data-section="pca-breakdown">
+												<div class="card-section-title">
+													<h3>PCA Breakdown</h3>
+													<span data-field="breakdown-state">3 rows</span>
+												</div>
+												<ul class="breakdown-list" data-collection="breakdown-rows">
+													<li class="breakdown-row" data-breakdown-row="1">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 01</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+													<li class="breakdown-row" data-breakdown-row="2">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 02</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+													<li class="breakdown-row" data-breakdown-row="3">
+														<div>
+															<strong data-field="breakdown-label">Component Placeholder 03</strong>
+															<span data-field="breakdown-description">Short contextual note for this placeholder component.</span>
+														</div>
+														<span class="breakdown-value" data-field="breakdown-value">Value</span>
+													</li>
+												</ul>
+											</section>
+
+											<!-- Original context -->
+											<section class="card-context" data-section="original-context">
+												<div class="card-section-title">
+													<h3>Original Context</h3>
+													<span data-field="context-state">Preview</span>
+												</div>
+												<div class="context-preview" data-field="context-placeholder">
+													Generic placeholder text for source context, competition framing or methodology summary linked to the original dataset.
+												</div>
+											</section>
+
+											<!-- Spatial block -->
+											<section class="card-spatial" data-section="spatial-block">
+												<div class="card-section-title">
+													<h3>Spatial Preview</h3>
+													<span data-field="spatial-layout">2x2</span>
+												</div>
+												<div class="spatial-grid" data-collection="spatial-previews">
+													<div class="spatial-tile" data-visual="heatmap">
+														<strong>Heatmap</strong>
+														<span>Pitch activity placeholder with future density layer hook.</span>
+													</div>
+													<div class="spatial-tile" data-visual="touch-profile">
+														<strong>Touch Profile</strong>
+														<span>Secondary spatial preview placeholder for supporting distribution context.</span>
+													</div>
+													<div class="spatial-tile" data-visual="difference-map">
+														<strong>Difference</strong>
+														<span>Relative map placeholder for role or cohort comparison.</span>
+													</div>
+													<div class="spatial-tile" data-visual="centroid-hull">
+														<strong>Centroid Hull</strong>
+														<span>Shape placeholder for centroid, hull and coverage footprint.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Gain and change -->
+											<section class="card-gain-change" data-section="gain-change">
+												<div class="card-section-title">
+													<h3>Gain / Change</h3>
+													<span data-field="gain-state">Preview</span>
+												</div>
+												<div class="gain-grid" data-collection="gain-change-panels">
+													<div class="metric-card" data-metric="gain">
+														<strong>Gain Block</strong>
+														<span>Placeholder summary for upside, carrying value or model gain.</span>
+													</div>
+													<div class="metric-card" data-metric="change">
+														<strong>Change Block</strong>
+														<span>Placeholder summary for deltas, adaptation or trend direction.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Similarity -->
+											<section class="card-similarity" data-section="similarity">
+												<div class="card-section-title">
+													<h3>Similarity</h3>
+													<span data-field="similarity-state">Preview</span>
+												</div>
+												<div class="similarity-grid" data-collection="similarity-panels">
+													<div class="similarity-card" data-similarity-slot="1">
+														<strong>Comparable Placeholder 01</strong>
+														<span>Reserved for future similar player / cohort match output.</span>
+													</div>
+													<div class="similarity-card" data-similarity-slot="2">
+														<strong>Comparable Placeholder 02</strong>
+														<span>Reserved for future similar player / cohort match output.</span>
+													</div>
+												</div>
+											</section>
+
+											<!-- Footer -->
+											<footer class="card-footer" data-section="footer">
+												<ul class="card-footer-list" data-collection="footer-meta">
+													<li data-field="source">Source Placeholder</li>
+													<li data-field="threshold">Threshold Placeholder</li>
+													<li data-field="warning">Warning Placeholder</li>
+												</ul>
+											</footer>
+										</article>
+
+									</div>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Data Scouting</li><li>Base design: <a href="https://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
