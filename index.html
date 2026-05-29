@@ -374,11 +374,35 @@
 				.pasta-cards { grid-template-columns: repeat(2, 1fr); }
 				.pasta-bio { grid-template-columns: 1fr; gap: 1.5rem; }
 				.pasta-club-header, .pasta-cards, .pasta-bio { padding-left: 1.5rem; padding-right: 1.5rem; }
-				.pasta-hero-grid { padding: 0 1.5rem; }
+				.pasta-hero-inner { padding: 0 1.5rem; }
 			}
 			@media screen and (max-width: 600px) {
 				.pasta-cards { grid-template-columns: 1fr; }
-				.pasta-wordmark { font-size: 4rem; }
+				.pasta-wordmark { font-size: 3.4rem; }
+				.pasta-hero-inner { padding: 0 1.2rem; }
+				.pasta-hero-desc { font-size: .95rem; margin-bottom: 1.6rem; }
+				/* Stack the two hero CTA buttons vertically */
+				.pasta-hero-inner .actions {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					gap: .7rem;
+				}
+				.pasta-hero-inner .actions li { margin: 0; }
+				/* Club header: stack name + meta, hide thin divider line */
+				.pasta-club-header {
+					grid-template-columns: auto auto;
+					grid-template-rows: auto;
+					justify-content: space-between;
+					padding-left: 1.2rem !important;
+					padding-right: 1.2rem !important;
+					padding-bottom: 1.2rem;
+				}
+				.pasta-club-divider { display: none; }
+				.pasta-club-section { padding-top: 3rem; }
+				.pasta-cards { padding-left: 1.2rem !important; padding-right: 1.2rem !important; gap: .85rem; }
+				/* Bio: tighten up */
+				.pasta-bio { padding: 2rem 1.2rem; }
 			}
 		</style>
 	</head>
