@@ -93,6 +93,12 @@ def payload_minutes(player: dict):
     return subject.get("mins")
 
 
+def note_block(text: str) -> str:
+    """Wrap editorial note in a paragraph, or return empty string."""
+    t = text.strip()
+    return f'<p class="sr-section-intro">{t}</p>' if t else ""
+
+
 def build_slots(player: dict) -> dict:
     """Return the substitution dict for one player."""
     macro  = player.get("macro_role", "MID")
@@ -126,6 +132,11 @@ def build_slots(player: dict) -> dict:
         "SOURCE_TEAM_NOTE":  note,
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
+        # ── Editorial section notes (optional, populated via generate_editorial_brief.py) ──
+        "NOTE_CONFRONTO":  note_block(player.get("note_confronto", "")),
+        "NOTE_HEATMAP":    note_block(player.get("note_heatmap", "")),
+        "NOTE_CONTEXT":    note_block(player.get("note_context", "")),
+        "NOTE_SIMILARITY": note_block(player.get("note_similarity", "")),
     }
 
 

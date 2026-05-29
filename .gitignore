@@ -1,6 +1,13 @@
 # Development/archive folders
 archive/
 .claude/
+docs/
+scripts/
+outputs/
+config/
+tools/
+data/report_payload_v1_examples/
+data/editorial/
 
 # Python
 __pycache__/

@@ -66,16 +66,60 @@
             border-color: rgba(131, 24, 67, .24);
         }
 
+        /* ── Section intro notes ─────────────────────────────────── */
+        .sr-section-intro {
+            font-size: .88rem;
+            color: var(--ei2-ink-2);
+            line-height: 1.7;
+            margin: .15rem 0 1.1rem;
+            font-style: italic;
+        }
+
+        /* ── Bar chart: scrollable on mobile ─────────────────────── */
+        .sr-bars-scroll {
+            /* on desktop: transparent pass-through */
+        }
+
+        /* ── Mobile ──────────────────────────────────────────────── */
         @media screen and (max-width: 768px) {
             .sr-heatmap-grid { grid-template-columns: 1fr; }
             .sr-dot-row      { grid-template-columns: 7rem 1fr 4rem; }
-            #banner.style2   { background-position: center top !important; min-height: 0 !important; }
+
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
             #banner.style2::after, #banner.style2:after {
                 background: rgba(246, 242, 236, 0.82) !important;
             }
+
+            /* Radar: force minimum height so chart stays usable */
+            .sr-radar-wrap-full { min-height: 320px; }
+
+            /* Radar toolbar: stack legend above selector */
+            .sr-radar-tools {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .5rem;
+            }
+
+            /* Bar charts: horizontal scroll so bars keep their width */
+            .sr-bars-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: .25rem;
+                /* subtle right-fade hint */
+                mask-image: linear-gradient(to right, black 85%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+            }
+            .sr-bars-scroll .sr-player-tags,
+            .sr-bars-scroll > div:not(.sr-player-tags) {
+                min-width: 520px;
+            }
         }
         @media screen and (max-width: 480px) {
-            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+            .sr-dot-row         { grid-template-columns: 6rem 1fr 3.5rem; }
+            .sr-radar-wrap-full { min-height: 280px; }
         }
     </style>
 </head>
@@ -138,27 +182,27 @@
             <div class="sr-radar-context-note">
                 Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
             </div>
-            <details class="sr-axis-accordion">
-                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
-                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
-            </details>
         </div>
 
         <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Confronto individuale vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · {{SEASON_LABEL}}</p>
+            {{NOTE_CONFRONTO}}
             <p class="sr-raw-bars-note">
                 Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
                 di profilo, ma non sono corrette per la difficoltà del campionato.
                 Passa il cursore su una barra per nome e valore esatto.
             </p>
-            <div class="sr-player-tags" id="interLegend"></div>
-            <div id="interComparison"></div>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="interLegend"></div>
+                <div id="interComparison"></div>
+            </div>
         </div>
 
         <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
+            {{NOTE_HEATMAP}}
             <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
             <div class="sr-heatmap-grid">
                 <div class="sr-pitch-wrap">
@@ -191,20 +235,19 @@
         <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
         <div class="sr-card compact">
             <p class="sr-section-label">Contesto {{SOURCE_CLUB}} · altri {{ROLE_PLURAL}}</p>
+            {{NOTE_CONTEXT}}
             <p class="sr-raw-bars-note">{{SOURCE_TEAM_NOTE}}</p>
-            <div class="sr-player-tags" id="sourceTeamLegend"></div>
-            <div id="sourceTeamComparison"></div>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="sourceTeamLegend"></div>
+                <div id="sourceTeamComparison"></div>
+            </div>
         </div>
 
         <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Similarità target-team vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · tre spazi indipendenti</p>
+            <p class="sr-section-label">Similarità · {{ROLE_PLURAL}} {{TARGET_CLUB}}</p>
+            {{NOTE_SIMILARITY}}
             <div class="sr-sim-grid" id="similarityGrid"></div>
-        </div>
-
-        <!-- ── 7. FOOTNOTES ──────────────────────────────────────── -->
-        <div>
-            <div class="sr-footnotes" id="footnotes"></div>
         </div>
 
     </section>
