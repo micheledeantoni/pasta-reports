@@ -17,7 +17,11 @@
     "report_status": "live",
     "visibility": "hidden",
     "payload_file": "data/report_legacy_payloads/curtis_jones.legacy_role_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "note_confronto": "Rispetto ai centrocampisti dell'Inter, Curtis Jones aggiunge soprattutto controllo, continuità di ricezione e pulizia nella circolazione. Non è un profilo che alza in modo diretto il livello creativo o la minaccia offensiva, quindi appare più come un elemento di complemento alla struttura esistente che come un sostituto naturale di Barella o Çalhanoglu.",
+    "note_heatmap": "La sua impronta spaziale racconta un centrocampista che vive nella connessione tra costruzione e rifinitura, con un baricentro avanzato ma non da incursore puro. La quota alta di azioni difensive nella metà avversaria suggerisce un giocatore utile per tenere compatta la squadra dopo la perdita, mentre progressioni e conduzioni indicano una capacità concreta di accompagnare l'azione senza forzarla.",
+    "note_context": "Nel Liverpool, Jones emerge meno come centrocampista da ultimo passaggio e più come riferimento tecnico di possesso. Il confronto con Szoboszlai, Gravenberch, Wirtz e Mac Allister lo descrive come un giocatore che riceve molto, pulisce molto e collega molto, ma che lascia ad altri la parte più aggressiva della produzione offensiva.",
+    "note_similarity": "La somiglianza più forte con Piotr Zielinski nel volume e nel mix di azioni è la chiave più interessante per leggerne l'inserimento all'Inter. Jones potrebbe occupare una zona funzionale simile, offrendo più continuità nel possesso che rottura verticale, con una vicinanza territoriale anche a Çalhanoglu e Barella che lo rende adattabile ma non del tutto specialistico."
   },
   {
     "player_id": "439584",
