@@ -4,12 +4,20 @@
     <title>Player Report · Curtis Jones | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- Open Graph -->
     <meta property="og:title"       content="Curtis Jones · Analisi PASTA" />
     <meta property="og:description" content="Compatibilità Inter — Centrocampista · Premier League 2025–26" />
-    <meta property="og:image"       content="images/cards/curtis-jones.png" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/curtis-jones.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="https://pasta-reports.com/curtis_jones.html" />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Curtis Jones · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Centrocampista · Premier League 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/curtis-jones.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css" />
@@ -88,18 +96,18 @@
             }
 
             /*
-             * Radar: render at a fixed readable size (340×340) and let the
-             * scroll wrapper handle horizontal overflow. This avoids the
-             * squishing/clipping that happens when forcing width: 100%.
+             * Radar: fixed 420×420px, scroll horizontally in the wrapper.
+             * Bigger than the card interior (~279px) → labels stay readable,
+             * user swipes to explore the full chart.
              */
             .sr-radar-scroll-wrap {
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
             }
             .sr-radar-wrap-full {
-                width: 380px !important;
-                min-width: 380px !important;
-                height: 380px !important;
+                width: 420px !important;
+                min-width: 420px !important;
+                height: 420px !important;
                 overflow: visible !important;
             }
 
@@ -111,25 +119,15 @@
             }
 
             /*
-             * Bar charts: no horizontal scroll — tighter columns that fit
-             * within the card width (~279px on 375px phone).
-             * Labels are truncated with ellipsis for long metric names.
+             * Bar charts: horizontal scroll so metric labels are never
+             * truncated. The wrapper scrolls; inner content is min 440px
+             * which keeps bars wide enough to compare.
              */
-            .sr-dot-row {
-                grid-template-columns: 6.5rem 1fr 3.5rem;
+            .sr-bars-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
-            .sr-dot-label {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                font-size: .72rem;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .sr-dot-row {
-                grid-template-columns: 5.5rem 1fr 3rem;
-            }
-            .sr-dot-label { font-size: .68rem; }
+            .sr-bars-scroll > div { min-width: 440px; }
         }
     </style>
 </head>

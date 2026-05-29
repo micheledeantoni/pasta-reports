@@ -132,6 +132,7 @@ def build_slots(player: dict) -> dict:
         "SOURCE_TEAM_NOTE":  note,
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
+        "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",
         # ── Editorial section notes (optional, populated via generate_editorial_brief.py) ──
         "NOTE_CONFRONTO":  note_block(player.get("note_confronto", "")),
         "NOTE_HEATMAP":    note_block(player.get("note_heatmap", "")),
