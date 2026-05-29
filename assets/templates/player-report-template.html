@@ -88,21 +88,19 @@
             }
 
             /*
-             * Radar fix: sr-report-common.css sets a fixed height (340–440px)
-             * at this breakpoint. Chart.js with 1:1 aspect ratio then tries to
-             * make width = height, overflowing the ~279px card interior.
-             * Solution: replace height-based sizing with aspect-ratio so the
-             * chart is always square within the available width.
+             * Radar: render at a fixed readable size (340×340) and let the
+             * scroll wrapper handle horizontal overflow. This avoids the
+             * squishing/clipping that happens when forcing width: 100%.
              */
-            .sr-radar-wrap-full {
-                height: auto !important;
-                aspect-ratio: 1 !important;
-                width: 100% !important;
-                overflow: visible !important;
+            .sr-radar-scroll-wrap {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
-            /* Backstop: prevent canvas from ever exceeding container width */
-            .sr-radar-wrap-full canvas {
-                max-width: 100% !important;
+            .sr-radar-wrap-full {
+                width: 340px !important;
+                min-width: 340px !important;
+                height: 340px !important;
+                overflow: visible !important;
             }
 
             /* Radar toolbar: stack legend above selector */
@@ -132,7 +130,6 @@
                 grid-template-columns: 5.5rem 1fr 3rem;
             }
             .sr-dot-label { font-size: .68rem; }
-            .sr-radar-wrap-full { height: auto !important; }
         }
     </style>
 </head>
@@ -189,8 +186,10 @@
                     <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
                 </div>
             </div>
-            <div class="sr-radar-wrap-full">
-                <canvas id="radarChart"></canvas>
+            <div class="sr-radar-scroll-wrap">
+                <div class="sr-radar-wrap-full">
+                    <canvas id="radarChart"></canvas>
+                </div>
             </div>
             <div class="sr-radar-context-note">
                 Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.

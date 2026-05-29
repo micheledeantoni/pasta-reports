@@ -289,18 +289,13 @@ function initRoleReport() {
         const radarMax  = 100;
         const radarStep = 25;
 
-        // On narrow screens the chart canvas is ~279px wide. With padding:14 the
-        // outermost labels ("Progressione", "Duelli") clip at the canvas edge.
-        // Increase padding and shrink font on mobile so every label fits inside.
-        const isMobile = window.innerWidth <= 600;
-
         const radarChart = new Chart(ctx, {
             type: "radar",
             data: { labels: chartLabels, datasets },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                layout: { padding: isMobile ? 36 : 14 },
+                layout: { padding: 14 },
                 scales: {
                     r: {
                         min: 0,
@@ -319,8 +314,8 @@ function initRoleReport() {
                         },
                         pointLabels: {
                             color: radarPalette.labelColor,
-                            font: { size: isMobile ? 11 : 12, weight: "600" },
-                            padding: isMobile ? 4 : 8,
+                            font: { size: 12, weight: "600" },
+                            padding: 8,
                         },
                     },
                 },
