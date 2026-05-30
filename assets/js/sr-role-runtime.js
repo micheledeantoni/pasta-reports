@@ -263,11 +263,12 @@ function initRoleReport() {
                 borderColor: radarPalette.compBorder,
                 backgroundColor: radarPalette.compFill,
                 pointBackgroundColor: radarPalette.compBorder,
-                pointBorderColor: radarPalette.compBorder,
+                pointBorderColor: "rgba(255,255,255,.55)",  // subtle halo so dots read on dark bg
+                pointBorderWidth: 1.5,
                 borderWidth: 1.5,
                 borderDash: [5, 5],
-                pointRadius: 2.5,
-                pointHoverRadius: 4,
+                pointRadius: 4,
+                pointHoverRadius: 6,
             },
             {
                 // [1] Subject — protagonist (drawn on top)
@@ -276,10 +277,11 @@ function initRoleReport() {
                 borderColor: radarPalette.subjectBorder,
                 backgroundColor: radarPalette.subjectFill,
                 pointBackgroundColor: radarPalette.subjectBorder,
-                pointBorderColor: radarPalette.subjectBorder,
+                pointBorderColor: "rgba(255,255,255,.90)",  // crisp white halo — makes dots pop
+                pointBorderWidth: 2,
                 borderWidth: 3,
-                pointRadius: 5,
-                pointHoverRadius: 7,
+                pointRadius: 6,
+                pointHoverRadius: 8,
             },
         ];
 
@@ -305,12 +307,13 @@ function initRoleReport() {
                             stepSize: radarStep,
                         },
                         grid: {
+                            circular: true,                 // concentric circles, not polygon
                             color: radarPalette.gridColor,
-                            lineWidth: 0.7,
+                            lineWidth: 1,
                         },
                         angleLines: {
                             color: radarPalette.angleColor,
-                            lineWidth: 0.7,
+                            lineWidth: 0.9,
                         },
                         pointLabels: {
                             color: radarPalette.labelColor,

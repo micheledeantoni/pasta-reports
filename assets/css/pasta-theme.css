@@ -64,12 +64,12 @@
     --sr-radar-subject-border:    rgba(196, 116, 52, 0.94);   /* deep copper */
     --sr-radar-subject-fill:      rgba(196, 116, 52, 0.17);
 
-    --sr-radar-comparison-border: rgba(110, 140, 94, 0.82);   /* brighter sage-olive */
-    --sr-radar-comparison-fill:   rgba(110, 140, 94, 0.10);
+    --sr-radar-comparison-border: rgba(148, 196, 230, 0.88);   /* cool steel-blue — high contrast vs copper subject and dark-green bg */
+    --sr-radar-comparison-fill:   rgba(148, 196, 230, 0.10);
 
-    --sr-radar-grid-color:        rgba(225, 215, 196, 0.10);  /* warmer ivory */
-    --sr-radar-angle-color:       rgba(225, 215, 196, 0.14);
-    --sr-radar-label-color:       rgba(242, 236, 222, 0.84);  /* warm off-white */
+    --sr-radar-grid-color:        rgba(225, 215, 196, 0.22);  /* warmer ivory, more visible */
+    --sr-radar-angle-color:       rgba(225, 215, 196, 0.22);
+    --sr-radar-label-color:       rgba(242, 236, 222, 0.90);  /* warm off-white */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
