@@ -76,11 +76,14 @@
 
         /* ── Section intro notes ─────────────────────────────────── */
         .sr-section-intro {
-            font-size: .88rem;
+            font-size: .91rem;
             color: var(--ei2-ink-2);
-            line-height: 1.7;
-            margin: .15rem 0 1.1rem;
-            font-style: italic;
+            line-height: 1.76;
+            margin: .25rem 0 1.25rem;
+            padding: .6rem .95rem;
+            border-left: 3px solid rgba(131, 24, 67, .38);
+            background: rgba(131, 24, 67, .03);
+            border-radius: 0 .3rem .3rem 0;
         }
 
         /* ── Mobile ──────────────────────────────────────────────── */
@@ -192,6 +195,10 @@
             <div class="sr-radar-context-note">
                 Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
             </div>
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Assi del radar · legenda metriche</summary>
+                <ul class="sr-axis-guide" id="radarAxisGuide"></ul>
+            </details>
         </div>
 
         <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->

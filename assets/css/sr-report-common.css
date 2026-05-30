@@ -407,6 +407,15 @@
             border-radius: 0;
         }
 
+.sr-axis-guide {
+            list-style: none;
+            margin: 0;
+            padding: .7rem .9rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        }
+
 .sr-axis-accordion {
             margin-top: .85rem;
             border: 1px solid rgba(255,255,255,.07);
