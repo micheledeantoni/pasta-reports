@@ -591,7 +591,21 @@ section.pasta-hero {
 .sr-radar-select option { background: var(--ei2-surface); color: var(--ei2-ink); }
 
 .sr-rcl-item { color: var(--ei2-ink-muted) !important; }
-.sr-rcl-line--subject { background: var(--ei2-bar-subject) !important; }
+
+/* Legend lines — must match the actual Chart.js radar palette tokens */
+.sr-rcl-line--subject {
+    background: rgba(196, 116, 52, .94) !important;   /* copper = --sr-radar-subject-border */
+    height: 3px !important;
+    border-radius: 2px !important;
+}
+.sr-rcl-line--comp {
+    /* dashed steel-blue = --sr-radar-comparison-border */
+    background: linear-gradient(90deg,
+        rgba(148, 196, 230, .88) 55%, transparent 55%) !important;
+    background-size: 7px 100% !important;
+    height: 2.5px !important;
+    border-radius: 0 !important;
+}
 
 /* ── Editorial figure caption ────────────────────────────────────────────
    The context note below the radar is styled as a traditional figure caption:
