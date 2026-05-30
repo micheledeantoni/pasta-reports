@@ -288,8 +288,13 @@ function initRoleReport() {
         // ── Radar scale ───────────────────────────────────────────────────────
         // After per-axis normalization values are 0-100. Use a fixed scale so
         // the chart is always interpretable regardless of which player is loaded.
-        const radarMax  = 100;
-        const radarStep = 25;
+        // radarMax = 85: the outer ring represents ~P90 of the comparison pool.
+        // With P05–P95 normalization most "good" players score 50–80, filling
+        // 59–94% of the radius instead of 50–80% with radarMax=100.
+        // Truly exceptional players (>85) visually reach or slightly exceed the
+        // outer ring — which is accurate and matches how DATAMB-style radars look.
+        const radarMax  = 85;
+        const radarStep = 20;   // rings at 20 / 40 / 60 / 80 (clean 4-ring grid)
 
         const radarChart = new Chart(ctx, {
             type: "radar",
