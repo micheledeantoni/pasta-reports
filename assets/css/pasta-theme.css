@@ -155,6 +155,15 @@ section.pasta-hero {
     min-height: 0 !important;
 }
 
+/* main.css puts a #banner:after overlay (background #242943, opacity .85)
+   on every banner section. This covers the cream background entirely.
+   Suppress it for pasta-hero so the parchment bg and ink text show through. */
+#banner.pasta-hero::after,
+#banner.pasta-hero:after {
+    display: none !important;
+    content: none !important;
+}
+
 .pasta-hero-inner {
     padding-top: 4rem !important;
     padding-bottom: 3.5rem !important;
@@ -174,7 +183,7 @@ section.pasta-hero {
     font-weight: 700 !important;
     letter-spacing: .3em !important;
     text-transform: uppercase !important;
-    color: var(--ei2-ink-faint) !important;
+    color: var(--ei2-ink-muted) !important;  /* was ink-faint (#a8a29e, 2.5:1) → ink-muted (#78716c, 3.9:1) */
     margin-bottom: 1.3rem !important;
     padding-top: .8rem !important;
     border-top: 1px solid var(--ei2-border) !important;
@@ -182,7 +191,7 @@ section.pasta-hero {
 }
 
 .pasta-hero-desc {
-    color: var(--ei2-ink-muted) !important;
+    color: var(--ei2-ink-2) !important;  /* was ink-muted (#78716c, 3.9:1) → ink-2 (#44403c, 6.5:1) */
     font-size: 1rem !important;
     line-height: 1.72 !important;
     max-width: 33rem !important;
