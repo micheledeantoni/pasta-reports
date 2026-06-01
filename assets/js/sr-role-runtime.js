@@ -195,8 +195,32 @@ function initRoleReport() {
             creation: "Creazione",
             direct_threat: "Minaccia",
             defensive_contribution: "Duelli",
+            defensive_activity: "Attività difensiva",
+            duel_aerial_presence: ["Duelli", "presenza aerea"],
+            build_up_involvement: ["Costruzione", "coinvolgimento"],
+            progression_from_the_back: ["Progressione", "dal basso"],
+            territorial_advanced_involvement: ["Territorio", "avanzato"],
         };
-        const chartLabels = radarAxes.map(a => SHORT_LABELS[a.key] || a.label || a.key);
+        function wrapAxisLabel(label) {
+            if (Array.isArray(label)) return label;
+            const text = String(label || "");
+            const words = text.split(/\s+/).filter(Boolean);
+            if (text.length <= 18 || words.length < 2) return text;
+            const lines = [];
+            let current = "";
+            words.forEach(word => {
+                const next = current ? `${current} ${word}` : word;
+                if (next.length > 16 && current) {
+                    lines.push(current);
+                    current = word;
+                } else {
+                    current = next;
+                }
+            });
+            if (current) lines.push(current);
+            return lines.slice(0, 2);
+        }
+        const chartLabels = radarAxes.map(a => wrapAxisLabel(SHORT_LABELS[a.key] || a.label || a.key));
 
         // ── find most similar individual by radar-axis Euclidean distance ────
         // Uses normalized values so "closest" is measured on the displayed scale.
@@ -302,7 +326,7 @@ function initRoleReport() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                layout: { padding: 14 },
+                layout: { padding: { top: 18, right: 28, bottom: 18, left: 28 } },
                 scales: {
                     r: {
                         min: 0,
@@ -322,8 +346,8 @@ function initRoleReport() {
                         },
                         pointLabels: {
                             color: radarPalette.labelColor,
-                            font: { size: 12, weight: "600" },
-                            padding: 8,
+                            font: { size: 11, weight: "600", lineHeight: 1.16 },
+                            padding: 10,
                         },
                     },
                 },
@@ -594,15 +618,13 @@ function initRoleReport() {
         }
         buildGoalmouth("pitchGoalmouth", null);
         buildDensity("pitchPos", d.ip, n => `rgba(20,${Math.round(120 + n * 135)},80,${(0.12 + n * 0.72).toFixed(2)})`);
-        buildDensity("pitchDef", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
         buildVectorGrid("pitchCarry", d.carry, "carry");
         buildVectorGrid("pitchPass", d.pass, "pass");
-        buildVectorGrid("pitchProg", d.prog, "prog");
+        buildDensity("pitchProg", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
         note("pitchPosNote", d.ipNote || (d.ipCx ? `Centroide: x=${d.ipCx}` : ""));
-        note("pitchDefNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
         note("pitchCarryNote", d.carryN ? `${d.carryN} conduzioni · ${d.carryProgN || 0} progressive` : "");
         note("pitchPassNote", d.passN ? `${d.passN} passaggi` : "");
-        note("pitchProgNote", d.progN ? `${d.progN} passaggi progressivi` : "");
+        note("pitchProgNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
         const defBlock = $("defSummaryBlock");
         if (defBlock) {
             const oppPct = d.defOppPct != null ? (d.defOppPct * 100).toFixed(0) + "%" : "—";

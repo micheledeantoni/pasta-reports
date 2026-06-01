@@ -21,6 +21,7 @@ Output:         {player["report_file"]}  (e.g. curtis_jones.html, at repo root)
 """
 
 import argparse
+import html
 import json
 import re
 import sys
@@ -44,6 +45,7 @@ ROLE_PLURAL = {
     "DEF": "difensori",
     "GK":  "portieri",
 }
+PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -71,6 +73,49 @@ def fmt_minutes(raw) -> str:
         return str(raw)
 
 
+def player_image_url(slug: str) -> str:
+    """Return the first available player image path for the report hero."""
+    for ext in PLAYER_IMAGE_EXTS:
+        path = BASE_DIR / "images" / "players" / f"{slug}{ext}"
+        if path.exists():
+            return f"images/players/{slug}{ext}"
+    return f"images/players/{slug}.webp"
+
+
+def inline_markdown(text: str) -> str:
+    """Render a small editorial Markdown subset after escaping HTML."""
+    value = html.escape(text, quote=False)
+    value = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", value)
+    value = re.sub(r"\*(.+?)\*", r"<em>\1</em>", value)
+    return value
+
+
+def markdown_block(text: str, paragraph_class: str | None = None) -> str:
+    """Render compact Markdown for editorial copy without external deps."""
+    raw = text.strip()
+    if not raw:
+        return ""
+
+    blocks = re.split(r"\n\s*\n", raw)
+    rendered: list[str] = []
+    p_class = f' class="{paragraph_class}"' if paragraph_class else ""
+
+    for block in blocks:
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if not lines:
+            continue
+
+        if all(line.startswith(("- ", "* ")) for line in lines):
+            items = "".join(f"<li>{inline_markdown(line[2:].strip())}</li>" for line in lines)
+            rendered.append(f"<ul>{items}</ul>")
+            continue
+
+        text_line = " ".join(lines)
+        rendered.append(f"<p{p_class}>{inline_markdown(text_line)}</p>")
+
+    return "\n".join(rendered)
+
+
 def payload_minutes(player: dict):
     """Return SUBJECT_ID PLAYER_META minutes from the external payload, if present."""
     payload_file = player.get("payload_file")
@@ -93,10 +138,30 @@ def payload_minutes(player: dict):
     return subject.get("mins")
 
 
+def payload_profile_reading(player: dict) -> str:
+    """Return PROFILE_READING paragraphs from the external payload, if present."""
+    payload_file = player.get("payload_file")
+    if not payload_file:
+        return ""
+    path = BASE_DIR / payload_file
+    if not path.exists():
+        return ""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return ""
+    profile = payload.get("PROFILE_READING", {})
+    if not isinstance(profile, dict):
+        return ""
+    paragraphs = profile.get("paragraphs", [])
+    if not isinstance(paragraphs, list):
+        return ""
+    return "\n\n".join(str(paragraph).strip() for paragraph in paragraphs if str(paragraph).strip())
+
+
 def note_block(text: str) -> str:
     """Wrap editorial note in a paragraph, or return empty string."""
-    t = text.strip()
-    return f'<p class="sr-section-intro">{t}</p>' if t else ""
+    return markdown_block(text, "sr-section-intro")
 
 
 def build_slots(player: dict) -> dict:
@@ -109,8 +174,9 @@ def build_slots(player: dict) -> dict:
     role_l = ROLE_LABELS.get(macro, macro)
     role_p = ROLE_PLURAL.get(macro, macro.lower() + "s")
     mins   = fmt_minutes(payload_minutes(player) or player.get("minutes", "–"))
-    narr   = player.get("narrative", "").strip()
-    note   = player.get("source_team_note", "").strip()
+    narr_source = player.get("narrative", "").strip() or payload_profile_reading(player)
+    narr   = markdown_block(narr_source, "sr-narrative-p")
+    note   = markdown_block(player.get("source_team_note", ""), "sr-source-team-note")
 
     og_desc = (
         f"Compatibilità {target} — {role_l} · "
@@ -120,6 +186,7 @@ def build_slots(player: dict) -> dict:
     return {
         "PLAYER_NAME":       player["player_name"],
         "PLAYER_SLUG":       player["slug"],
+        "PLAYER_IMAGE_URL":  player_image_url(player["slug"]),
         "SOURCE_CLUB":       source,
         "TARGET_CLUB":       target,
         "ROLE_LABEL":        role_l,

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Player Report · {{PLAYER_NAME}} | PASTA</title>
+    <title>Player Report · Oumar Solet | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <!-- Open Graph -->
-    <meta property="og:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
-    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
-    <meta property="og:image"       content="https://pasta-reports.com/images/cards/{{PLAYER_SLUG}}.png" />
+    <meta property="og:title"       content="Oumar Solet · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Difensore · ITA · Serie A 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/oumar-solet.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type"        content="article" />
-    <meta property="og:url"         content="{{REPORT_URL}}" />
+    <meta property="og:url"         content="https://pasta-reports.com/oumar-solet.html" />
     <!-- Twitter / X card -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:site"        content="@macnonesiste" />
-    <meta name="twitter:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
-    <meta name="twitter:description" content="{{OG_DESCRIPTION}}" />
-    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{{PLAYER_SLUG}}.png" />
+    <meta name="twitter:title"       content="Oumar Solet · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Difensore · ITA · Serie A 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/oumar-solet.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css?v=editorial-copy-20260601" />
@@ -26,9 +26,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        /* ── Banner: player photo (template-specific — uses {{PLAYER_SLUG}}) ── */
+        /* ── Banner: player photo (template-specific — uses oumar-solet) ── */
         #banner.style2 {
-            background-image: url('{{PLAYER_IMAGE_URL}}') !important;
+            background-image: url('images/players/oumar-solet.png') !important;
             background-attachment: scroll !important;
             background-position: right 3.5rem !important;
             background-size: auto 90% !important;
@@ -80,14 +80,14 @@
     <!-- Banner -->
     <section id="banner" class="style2">
         <div class="inner">
-            <header class="major"><h1>{{PLAYER_NAME}}</h1></header>
+            <header class="major"><h1>Oumar Solet</h1></header>
             <div class="content">
                 <div class="sr-banner-meta">
-                    <span class="sr-banner-chip sr-banner-clubs">{{SOURCE_CLUB}} → {{TARGET_CLUB}}</span>
-                    <span class="sr-banner-chip">{{ROLE_LABEL}}</span>
-                    <span class="sr-banner-chip">{{COMPETITION_LABEL}}</span>
-                    <span class="sr-banner-chip">Stagione {{SEASON_LABEL}}</span>
-                    <span class="sr-banner-chip">{{MINUTES}} min</span>
+                    <span class="sr-banner-chip sr-banner-clubs">Udinese → Inter</span>
+                    <span class="sr-banner-chip">Difensore</span>
+                    <span class="sr-banner-chip">ITA · Serie A</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">2 962 min</span>
                 </div>
             </div>
         </div>
@@ -99,12 +99,12 @@
         <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
         <div class="sr-card" id="profileReading" data-static="true">
             <p class="sr-section-label">Lettura del profilo</p>
-            <div class="sr-narrative sr-editorial-markdown">{{NARRATIVE}}</div>
+            <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Oumar Solet è un difensore di volume, più interessante per ciò che aggiunge alla struttura della squadra che per una semplice lettura fisica del ruolo. Rispetto al contesto Inter porta aggressività difensiva, partecipazione costante alla costruzione e una buona capacità di avanzare palla al piede, soprattutto se inserito in una linea che gli permetta di rompere la prima pressione. La cautela riguarda il duello aereo e la pulizia estrema del possesso: non è un clone di Bastoni o Akanji, ma un profilo da integrare con compiti chiari e coperture ben definite.</p></div>
         </div>
 
         <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Profilo sintetico · assi {{MACRO_ROLE}} interpretativi</p>
+            <p class="sr-section-label">Profilo sintetico · assi DEF interpretativi</p>
             <div class="sr-radar-tools">
                 <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
                 <div class="sr-radar-selector-wrap">
@@ -128,8 +128,8 @@
 
         <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Confronto individuale vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · {{SEASON_LABEL}}</p>
-            {{NOTE_CONFRONTO}}
+            <p class="sr-section-label">Confronto individuale vs difensori Inter · 2025–26</p>
+            <p class="sr-section-intro">Nel confronto con i centrali dell’Inter, Solet appare più complementare che ridondante: alza il volume difensivo, porta più conduzioni progressive e pesa molto nella circolazione della squadra. Il limite principale resta la presenza aerea, dove il reparto nerazzurro mantiene una soglia più alta, soprattutto con profili come Bisseck e Acerbi.</p>
             <p class="sr-raw-bars-note">
                 Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
                 di profilo, ma non sono corrette per la difficoltà del campionato.
@@ -144,7 +144,7 @@
         <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
-            {{NOTE_HEATMAP}}
+            <p class="sr-section-intro">La sua impronta spaziale racconta un centrale che parte da una zona medio-bassa e tende ad avanzare più con la conduzione che con il passaggio verticale. Non è un difensore che vive stabilmente alto, ma un giocatore capace di accompagnare l’azione e guadagnare campo quando trova spazio davanti a sé.</p>
             <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
             <div class="sr-heatmap-grid">
                 <div class="sr-pitch-wrap">
@@ -163,7 +163,7 @@
                     <span class="sr-pitch-note" id="pitchPassNote"></span>
                 </div>
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title">Progressione via passaggio</div>
+                    <div class="sr-pitch-title">Azioni difensive</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
                     <span class="sr-pitch-note" id="pitchProgNote"></span>
                 </div>
@@ -176,9 +176,9 @@
 
         <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
         <div class="sr-card compact">
-            <p class="sr-section-label">Contesto {{SOURCE_CLUB}} · altri {{ROLE_PLURAL}}</p>
-            {{NOTE_CONTEXT}}
-            <p class="sr-raw-bars-note">{{SOURCE_TEAM_NOTE}}</p>
+            <p class="sr-section-label">Contesto Udinese · altri difensori</p>
+            <p class="sr-section-intro">Dentro l’Udinese, Solet è molto più di un difensore di struttura: diventa un riferimento tecnico nella prima costruzione e un punto forte nel volume di ricezioni e passaggi. Il confronto con Kristensen, Kabasele, Bertola e Kamara lo restituisce come uno dei profili più centrali nella manovra, pur senza essere il più affidabile in termini di successo nei duelli aerei.</p>
+            <p class="sr-raw-bars-note"></p>
             <div class="sr-bars-scroll">
                 <div class="sr-player-tags" id="sourceTeamLegend"></div>
                 <div id="sourceTeamComparison"></div>
@@ -187,8 +187,8 @@
 
         <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Similarità · {{ROLE_PLURAL}} {{TARGET_CLUB}}</p>
-            {{NOTE_SIMILARITY}}
+            <p class="sr-section-label">Similarità · difensori Inter</p>
+            <p class="sr-section-intro">La somiglianza più forte con Akanji nel mix di azioni suggerisce un possibile ruolo da centrale/braccetto di equilibrio, capace di combinare difesa attiva, conduzione e partecipazione al possesso. La vicinanza territoriale con Bastoni è interessante, ma non va letta come equivalenza tecnica: Solet può coprire zone simili, ma con una grammatica più fisica e meno rifinita nella distribuzione.</p>
             <div class="sr-sim-grid" id="similarityGrid"></div>
         </div>
 
@@ -220,7 +220,7 @@
 <script src="assets/js/main.js"></script>
 
 <script>
-  window.SR_EXTERNAL_PAYLOAD_URL = "{{PAYLOAD_URL}}";
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/solet.legacy_role_payload.json";
 </script>
 <script src="assets/js/sr-report-loader.js"></script>
 <script src="assets/js/sr-role-runtime.js?v=radar-labels-20260601"></script>

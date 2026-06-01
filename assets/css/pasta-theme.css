@@ -560,6 +560,14 @@ section.pasta-hero {
     font-size: .95rem !important;
 }
 
+.sr-editorial-markdown p,
+.sr-editorial-markdown ul,
+.sr-editorial-markdown li,
+.sr-narrative-p,
+.sr-source-team-note {
+    color: var(--ei2-ink-2) !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    RADAR — EDITORIAL FIGURE TREATMENT
    ─────────────────────────────────────────────────────────────────────────

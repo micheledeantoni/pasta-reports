@@ -37,7 +37,15 @@
     "report_status": "live",
     "visibility": "hidden",
     "payload_file": "data/report_legacy_payloads/hojlund_att.legacy_role_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "source_club": "",
+    "minutes": "",
+    "narrative": "",
+    "source_team_note": "",
+    "note_confronto": "",
+    "note_heatmap": "",
+    "note_context": "",
+    "note_similarity": ""
   },
   {
     "player_id": "369570",
@@ -53,7 +61,15 @@
     "report_status": "live",
     "visibility": "hidden",
     "payload_file": "data/report_legacy_payloads/kone.legacy_role_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "source_club": "",
+    "minutes": "",
+    "narrative": "",
+    "source_team_note": "",
+    "note_confronto": "",
+    "note_heatmap": "",
+    "note_context": "",
+    "note_similarity": ""
   },
   {
     "player_id": "354072",
@@ -65,11 +81,18 @@
     "season": "2526",
     "macro_role": "DEF",
     "target_team": "Inter",
-    "report_file": "solet.html",
+    "report_file": "oumar-solet.html",
     "report_status": "live",
     "visibility": "hidden",
     "payload_file": "data/report_legacy_payloads/solet.legacy_role_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "source_club": "Udinese",
+    "narrative": "Oumar Solet è un difensore di volume, più interessante per ciò che aggiunge alla struttura della squadra che per una semplice lettura fisica del ruolo. Rispetto al contesto Inter porta aggressività difensiva, partecipazione costante alla costruzione e una buona capacità di avanzare palla al piede, soprattutto se inserito in una linea che gli permetta di rompere la prima pressione. La cautela riguarda il duello aereo e la pulizia estrema del possesso: non è un clone di Bastoni o Akanji, ma un profilo da integrare con compiti chiari e coperture ben definite.",
+    "note_confronto": "Nel confronto con i centrali dell’Inter, Solet appare più complementare che ridondante: alza il volume difensivo, porta più conduzioni progressive e pesa molto nella circolazione della squadra. Il limite principale resta la presenza aerea, dove il reparto nerazzurro mantiene una soglia più alta, soprattutto con profili come Bisseck e Acerbi.",
+    "note_heatmap": "La sua impronta spaziale racconta un centrale che parte da una zona medio-bassa e tende ad avanzare più con la conduzione che con il passaggio verticale. Non è un difensore che vive stabilmente alto, ma un giocatore capace di accompagnare l’azione e guadagnare campo quando trova spazio davanti a sé.",
+    "note_context": "Dentro l’Udinese, Solet è molto più di un difensore di struttura: diventa un riferimento tecnico nella prima costruzione e un punto forte nel volume di ricezioni e passaggi. Il confronto con Kristensen, Kabasele, Bertola e Kamara lo restituisce come uno dei profili più centrali nella manovra, pur senza essere il più affidabile in termini di successo nei duelli aerei.",
+    "note_similarity": "La somiglianza più forte con Akanji nel mix di azioni suggerisce un possibile ruolo da centrale/braccetto di equilibrio, capace di combinare difesa attiva, conduzione e partecipazione al possesso. La vicinanza territoriale con Bastoni è interessante, ma non va letta come equivalenza tecnica: Solet può coprire zone simili, ma con una grammatica più fisica e meno rifinita nella distribuzione."
+
   },
   {
     "player_id": "459075",
@@ -85,7 +108,15 @@
     "report_status": "live",
     "visibility": "public",
     "payload_file": "data/report_legacy_payloads/stankovic.legacy_role_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "source_club": "",
+    "minutes": "",
+    "narrative": "",
+    "source_team_note": "",
+    "note_confronto": "",
+    "note_heatmap": "",
+    "note_context": "",
+    "note_similarity": ""
   },
   {
     "player_id": "147863",
@@ -101,6 +132,14 @@
     "report_status": "live",
     "visibility": "hidden",
     "payload_file": "data/report_legacy_payloads/gk_report.legacy_gk_payload.json",
-    "payload_source": "soccerdb"
+    "payload_source": "soccerdb",
+    "source_club": "Tottenham",
+    "minutes": "",
+    "narrative": "",
+    "source_team_note": "",
+    "note_confronto": "",
+    "note_heatmap": "",
+    "note_context": "",
+    "note_similarity": ""
   }
 ]

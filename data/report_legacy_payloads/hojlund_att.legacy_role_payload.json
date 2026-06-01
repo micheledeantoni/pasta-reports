@@ -28299,8 +28299,6 @@
   "payloadMeta": {
     "payloadType": "legacy_role_payload",
     "sourcePage": "hojlund_att.html",
-    "source": "soccerdb",
-    "directExport": true,
     "loadedByProductionRuntime": true,
     "fallbackInlineAvailable": false,
     "extractedGlobals": [
@@ -28319,54 +28317,11 @@
       "SOURCE_TEAM_COMPARISON_BARS",
       "HEATMAP_DATA",
       "SIMILARITY_DATA",
-      "FOOTNOTES",
+      "FOOTNOTES"
+    ],
+    "missingGlobals": [
       "RADAR_AXIS_RANGES"
     ],
-    "missingGlobals": [],
-    "comparedAgainstBackup": "archive/frontend_payload_json_backups/2026_05_21_sprint_5d_soccerdb_promotion/hojlund_att.legacy_role_payload.json",
-    "candidateSource": "outputs/frontend_refactor/soccerdb_candidate_payloads/hojlund_att.legacy_role_payload.candidate.json",
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/hojlund_att.with_inline_payload_2026_05_21.html",
-    "radarAxisRangesStrategy": "p05_p95",
-    "radarAxisRangesSource": "outputs/frontend_refactor/proofs/radar_axis_ranges_robust_proof.json",
-    "radarAxisRangesPromotedAt": "2026-05-23T08:07:48+00:00",
-    "radarAxisRangesPromotedBy": "scripts/proofs/promote_radar_axis_ranges_p05_p95.py",
-    "sprintVersion": "Sprint5L"
-  },
-  "RADAR_AXIS_RANGES": [
-    {
-      "min": 13.43,
-      "max": 44.64,
-      "count": 607,
-      "scale": "role_axis_minmax",
-      "role": "ATT"
-    },
-    {
-      "min": 17.92,
-      "max": 55.77,
-      "count": 607,
-      "scale": "role_axis_minmax",
-      "role": "ATT"
-    },
-    {
-      "min": 9.89,
-      "max": 34.03,
-      "count": 607,
-      "scale": "role_axis_minmax",
-      "role": "ATT"
-    },
-    {
-      "min": 33.08,
-      "max": 54.64,
-      "count": 607,
-      "scale": "role_axis_minmax",
-      "role": "ATT"
-    },
-    {
-      "min": 12.59,
-      "max": 31.45,
-      "count": 607,
-      "scale": "role_axis_minmax",
-      "role": "ATT"
-    }
-  ]
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/hojlund_att.with_inline_payload_2026_05_21.html"
+  }
 }

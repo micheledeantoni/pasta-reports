@@ -176,7 +176,7 @@
       border-left: 1.5px solid #ddd6cc;
       display: flex;
       flex-direction: column;
-      padding: 1.6rem 1.4rem 1.2rem 1.8rem;
+      padding: 1.6rem 2.1rem 1.2rem 2.2rem;
       position: relative;
     }
 
@@ -308,15 +308,42 @@
       });
     }
 
-    /* ── short axis labels (same mapping as runtime) ─────────────── */
+    /* ── compact axis labels for fixed-size social cards ─────────── */
     const SHORT = {
       technical_security:     "Sicurezza",
       progression:            "Progressione",
       creation:               "Creazione",
       direct_threat:          "Minaccia",
       defensive_contribution: "Duelli",
+      defensive_activity: "Attività difensiva",
+      duel_aerial_presence: ["Duelli", "presenza aerea"],
+      build_up_involvement: ["Costruzione", "coinvolgimento"],
+      progression_from_the_back: ["Progressione", "dal basso"],
+      territorial_advanced_involvement: ["Territorio", "avanzato"],
     };
-    const labels = axes.map(a => SHORT[a.key] || a.label || a.key);
+
+    function wrapAxisLabel(label) {
+      if (Array.isArray(label)) return label;
+      const text = String(label || "");
+      const words = text.split(/\s+/).filter(Boolean);
+      if (text.length <= 18 || words.length < 2) return text;
+
+      const lines = [];
+      let current = "";
+      for (const word of words) {
+        const next = current ? `${current} ${word}` : word;
+        if (next.length > 16 && current) {
+          lines.push(current);
+          current = word;
+        } else {
+          current = next;
+        }
+      }
+      if (current) lines.push(current);
+      return lines.slice(0, 2);
+    }
+
+    const labels = axes.map(a => wrapAxisLabel(SHORT[a.key] || a.label || a.key));
 
     /* ── normalize subject & find 2 closest comparators ─────────── */
     const normSubject = norm(data.subject?.values || []);
@@ -368,7 +395,7 @@
         animation:           { duration: 0 },
         responsive:          true,
         maintainAspectRatio: false,
-        layout:              { padding: 10 },
+        layout:              { padding: { top: 18, right: 30, bottom: 18, left: 30 } },
         scales: {
           r: {
             min: 0, max: 100,
@@ -377,8 +404,8 @@
             angleLines: { color: "rgba(28,25,23,.08)", lineWidth: 0.7 },
             pointLabels: {
               color: "#44403c",
-              font:  { size: 11, weight: "600" },
-              padding: 6,
+              font:  { size: 10, weight: "600", lineHeight: 1.16 },
+              padding: 10,
             },
           },
         },
