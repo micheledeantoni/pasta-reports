@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        /* ── Banner: player photo top-right, editorial chips ────── */
+        /* ── Banner: player photo (template-specific — uses {{PLAYER_SLUG}}) ── */
         #banner.style2 {
             background-image: url('images/players/{{PLAYER_SLUG}}.webp') !important;
             background-attachment: scroll !important;
@@ -48,48 +48,7 @@
                 rgba(246, 242, 236, 0.10) 100%
             ) !important;
         }
-
-        /* ── Banner meta chips ───────────────────────────────────── */
-        .sr-banner-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .45rem;
-            margin-top: 1.1rem;
-        }
-        .sr-banner-chip {
-            font-size: .62rem;
-            font-weight: 700;
-            letter-spacing: .17em;
-            text-transform: uppercase;
-            color: var(--ei2-ink-2);
-            background: rgba(28, 25, 23, .06);
-            border: 1px solid var(--ei2-border);
-            padding: .3rem .75rem;
-            border-radius: .2rem;
-            white-space: nowrap;
-        }
-        .sr-banner-chip.sr-banner-clubs {
-            color: var(--ei2-accent);
-            background: rgba(131, 24, 67, .06);
-            border-color: rgba(131, 24, 67, .24);
-        }
-
-        /* ── Section intro notes ─────────────────────────────────── */
-        .sr-section-intro {
-            font-size: .91rem;
-            color: var(--ei2-ink-2);
-            line-height: 1.76;
-            margin: .25rem 0 1.25rem;
-            padding: .6rem .95rem;
-            border-left: 3px solid rgba(131, 24, 67, .38);
-            background: rgba(131, 24, 67, .03);
-            border-radius: 0 .3rem .3rem 0;
-        }
-
-        /* ── Mobile ──────────────────────────────────────────────── */
         @media screen and (max-width: 768px) {
-            .sr-heatmap-grid { grid-template-columns: 1fr; }
-
             #banner.style2 {
                 background-position: center top !important;
                 min-height: 0 !important;
@@ -97,40 +56,6 @@
             #banner.style2::after, #banner.style2:after {
                 background: rgba(246, 242, 236, 0.82) !important;
             }
-
-            /*
-             * Radar: fixed 420×420px, scroll horizontally in the wrapper.
-             * Bigger than the card interior (~279px) → labels stay readable,
-             * user swipes to explore the full chart.
-             */
-            .sr-radar-scroll-wrap {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            .sr-radar-wrap-full {
-                width: 420px !important;
-                min-width: 420px !important;
-                height: 420px !important;
-                overflow: visible !important;
-            }
-
-            /* Radar toolbar: stack legend above selector */
-            .sr-radar-tools {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: .5rem;
-            }
-
-            /*
-             * Bar charts: horizontal scroll so metric labels are never
-             * truncated. The wrapper scrolls; inner content is min 440px
-             * which keeps bars wide enough to compare.
-             */
-            .sr-bars-scroll {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            .sr-bars-scroll > div { min-width: 440px; }
         }
     </style>
 </head>

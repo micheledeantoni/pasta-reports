@@ -607,6 +607,51 @@ section.pasta-hero {
     border-radius: 0 !important;
 }
 
+/* ── Banner player chips ─────────────────────────────────────────────────
+   Info chips in the report banner (role, competition, season, minutes).
+   Moved here from template inline <style> so all report types can share them.
+   ─────────────────────────────────────────────────────────────────────── */
+.sr-banner-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-top: 1.1rem;
+}
+
+.sr-banner-chip {
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: var(--ei2-ink-2);
+    background: rgba(28, 25, 23, .06);
+    border: 1px solid var(--ei2-border);
+    padding: .3rem .75rem;
+    border-radius: .2rem;
+    white-space: nowrap;
+}
+
+.sr-banner-chip.sr-banner-clubs {
+    color: var(--ei2-accent);
+    background: rgba(131, 24, 67, .06);
+    border-color: rgba(131, 24, 67, .24);
+}
+
+/* ── Section intro editorial notes ──────────────────────────────────────
+   Interpretive paragraph that introduces each data section.
+   Left bordeaux rule signals "editorial voice", not cold data description.
+   ─────────────────────────────────────────────────────────────────────── */
+.sr-section-intro {
+    font-size: .91rem;
+    color: var(--ei2-ink-2);
+    line-height: 1.76;
+    margin: .25rem 0 1.25rem;
+    padding: .6rem .95rem;
+    border-left: 3px solid rgba(131, 24, 67, .38);
+    background: rgba(131, 24, 67, .03);
+    border-radius: 0 .3rem .3rem 0;
+}
+
 /* ── Editorial figure caption ────────────────────────────────────────────
    The context note below the radar is styled as a traditional figure caption:
    left rule (2px warm stone), ink-muted italic, slightly smaller than body.

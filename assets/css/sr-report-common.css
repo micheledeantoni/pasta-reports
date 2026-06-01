@@ -450,13 +450,44 @@
 
 .sr-axis-accordion-summary::-webkit-details-marker { display: none; }
 
-/* Sprint 1B shared responsive shell. */
+/* ── Shared responsive shell ──────────────────────────────────────────── */
 @media screen and (max-width: 768px) {
-    .sr-radar-wrap-full { height: clamp(340px, 84vw, 440px); }
+
+    /* Heatmap: single column */
+    .sr-heatmap-grid { grid-template-columns: 1fr; }
+
+    /* Radar: fixed 420×420px so labels are never squished.
+       The scroll wrapper enables horizontal swipe on narrow phones.
+       Replaces the old clamp(340px, 84vw, 440px) height-only rule —
+       a fixed square is needed because Chart.js fills width × height. */
+    .sr-radar-scroll-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .sr-radar-wrap-full {
+        width: 420px;
+        min-width: 420px;
+        height: 420px;
+        overflow: visible;
+    }
+
+    /* Radar toolbar: stack legend above comparison selector */
+    .sr-radar-tools {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
+    }
+
+    /* Bar charts: scroll horizontally — labels stay fully readable */
+    .sr-bars-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .sr-bars-scroll > div { min-width: 440px; }
 }
 
 @media screen and (max-width: 480px) {
-    .sr-player-name { font-size: 1.55rem; }
+    .sr-player-name  { font-size: 1.55rem; }
     .sr-player-photo { width: 60px; height: 60px; }
-    .sr-radar-wrap-full { height: clamp(320px, 90vw, 380px); }
+    /* Radar stays 420px fixed — no additional override needed */
 }
