@@ -92,7 +92,6 @@
     "note_heatmap": "La sua impronta spaziale racconta un centrale che parte da una zona medio-bassa e tende ad avanzare più con la conduzione che con il passaggio verticale. Non è un difensore che vive stabilmente alto, ma un giocatore capace di accompagnare l’azione e guadagnare campo quando trova spazio davanti a sé.",
     "note_context": "Dentro l’Udinese, Solet è molto più di un difensore di struttura: diventa un riferimento tecnico nella prima costruzione e un punto forte nel volume di ricezioni e passaggi. Il confronto con Kristensen, Kabasele, Bertola e Kamara lo restituisce come uno dei profili più centrali nella manovra, pur senza essere il più affidabile in termini di successo nei duelli aerei.",
     "note_similarity": "La somiglianza più forte con Akanji nel mix di azioni suggerisce un possibile ruolo da centrale/braccetto di equilibrio, capace di combinare difesa attiva, conduzione e partecipazione al possesso. La vicinanza territoriale con Bastoni è interessante, ma non va letta come equivalenza tecnica: Solet può coprire zone simili, ma con una grammatica più fisica e meno rifinita nella distribuzione."
-
   },
   {
     "player_id": "459075",
@@ -141,5 +140,29 @@
     "note_heatmap": "",
     "note_context": "",
     "note_similarity": ""
+  },
+  {
+    "player_id": "481154",
+    "player_name": "Marco Palestra",
+    "slug": "marco-palestra",
+    "team_id": null,
+    "team_name": "Cagliari",
+    "source_club": "Cagliari",
+    "competition": "ITA-Serie A",
+    "season": "2526",
+    "minutes": "",
+    "macro_role": "DEF",
+    "target_team": "Inter",
+    "narrative": "Marco Palestra è un esterno difensivo ancora in fase di definizione, ma già interessante per l’Inter perché combina pulizia tecnica, buona continuità nel possesso e capacità di portare palla in avanti. Rispetto al livello interno nerazzurro non va letto come un sostituto diretto di Dimarco o Dumfries: il suo profilo oggi è meno territoriale, meno alto e meno incisivo nell’ultimo terzo. La cautela principale riguarda quindi il contesto: al Cagliari emerge come giocatore più propositivo e moderno rispetto ai compagni di reparto, ma il salto verso una squadra che vive stabilmente nella metà campo avversaria richiede una proiezione prudente.",
+    "source_team_note": "",
+    "report_file": "marco-palestra.html",
+    "report_status": "live",
+    "visibility": "hidden",
+    "payload_file": "data/report_legacy_payloads/marco-palestra.legacy_role_payload.json",
+    "payload_source": "soccerdb",
+    "note_confronto": "Nel confronto con i difensori dell’Inter, Palestra appare più come un profilo di complemento che come una ridondanza immediata. Ha numeri interessanti per quota di passaggi, conduzioni progressive e pulizia tecnica, ma resta distante dalla baseline nerazzurra per altezza media delle azioni, ricezioni e presenza nell’ultimo terzo. In una rosa come quella dell’Inter può avere senso come laterale da sviluppare, non come interprete già pronto per replicare il volume territoriale di Dimarco o Dumfries.",
+    "note_heatmap": "La sua impronta spaziale racconta un giocatore collocato con chiarezza sulla corsia destra, con un baricentro medio più alto rispetto al contesto Cagliari ma non ancora da esterno dominante in una squadra di possesso. Il dato sulle azioni difensive in metà avversaria suggerisce una partecipazione al pressing non marginale, ma ancora lontana dai riferimenti Inter. Più che un laterale da ultimo terzo, oggi Palestra sembra un difensore di fascia che accompagna, conduce e consolida la manovra.",
+    "note_context": "Il confronto interno al Cagliari aiuta a separare il profilo reale dalla narrazione. Rispetto a Obert, Zappa e Idrissi, Palestra emerge per conduzioni progressive, cross, altezza media delle azioni e qualità del passaggio: segnali chiari di un giocatore più orientato a partecipare alla fase offensiva. Allo stesso tempo, il basso peso nei passaggi progressivi e nelle azioni difensive pAdj suggerisce che non è ancora un motore completo della fascia, ma un profilo con qualità selettive e margini di crescita.",
+    "note_similarity": "Per volume di coinvolgimento, Palestra si avvicina soprattutto a Denzel Dumfries e Luis Henrique, mentre la somiglianza territoriale lo collega di più a Luis Henrique. Il mix di azioni, invece, richiama in parte Dimarco, ma più per composizione stilistica che per impatto reale nel campo avanzato. Per l’Inter questo implica un profilo ibrido: non un doppione puro, ma un laterale giovane che può essere formato tra compiti da quinto, conduzione dal basso e sviluppo progressivo dell’occupazione offensiva."
   }
 ]

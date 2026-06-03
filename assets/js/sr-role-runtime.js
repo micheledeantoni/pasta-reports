@@ -637,10 +637,15 @@ function initRoleReport() {
         const twin = $("twinNote");
         if (twin) twin.textContent = d.twinNote || "";
     }
+    function hasUsableHeatmap(id) {
+        const d = heatmapData[String(id)] || heatmapData[id];
+        if (!d) return false;
+        return Boolean(d.ip || d.carry || d.pass || d.def || d.prog || d.shotField || d.shotGoalmouth);
+    }
     function renderHeatmaps() {
         const toggle = $("heatmapToggle");
         if (!toggle) return;
-        const ids = [subjectId, ...(comparisonGroups[0]?.ids || [])].filter(id => heatmapData[String(id)] || heatmapData[id]);
+        const ids = [subjectId, ...(comparisonGroups[0]?.ids || [])].filter(hasUsableHeatmap);
         toggle.innerHTML = ids.map(id => {
             const p = meta(id);
             return `<button class="sr-heatmap-btn" data-id="${id}"><span class="sr-heatmap-btn-dot" style="background:${p.color || "#fff"}"></span>${esc(p.name || id)}</button>`;

@@ -60,6 +60,19 @@ def split_name(full_name: str) -> tuple[str, str]:
     return ("", parts[0]) if len(parts) == 1 else (" ".join(parts[:-1]), parts[-1])
 
 
+def lastname_font_size(lastname: str) -> str:
+    compact_len = len(lastname.replace(" ", ""))
+    if compact_len <= 6:
+        return "6.2rem"
+    if compact_len <= 8:
+        return "5.55rem"
+    if compact_len <= 10:
+        return "4.85rem"
+    if compact_len <= 12:
+        return "4.25rem"
+    return "3.75rem"
+
+
 def find_image(folder: Path, stem: str) -> Path | None:
     for ext in IMG_EXTS:
         p = folder / f"{stem}{ext}"
@@ -110,6 +123,7 @@ def _base_slots(player: dict, target_override: str | None) -> dict:
     return dict(
         PLAYER_FIRSTNAME=firstname,
         PLAYER_LASTNAME=lastname,
+        PLAYER_LASTNAME_FONT_SIZE=lastname_font_size(lastname),
         PLAYER_PHOTO=photo,
         CLUB_NAME=club,
         CLUB_BADGE=badge,

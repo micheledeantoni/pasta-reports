@@ -45,6 +45,9 @@ ROLE_PLURAL = {
     "DEF": "difensori",
     "GK":  "portieri",
 }
+HEATMAP_FOURTH_TITLES = {
+    "DEF": "Azioni difensive",
+}
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 
 
@@ -197,6 +200,7 @@ def build_slots(player: dict) -> dict:
         "MINUTES":           mins,
         "NARRATIVE":         narr,
         "SOURCE_TEAM_NOTE":  note,
+        "HEATMAP_FOURTH_TITLE": HEATMAP_FOURTH_TITLES.get(macro, "Progressione via passaggio"),
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
         "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",

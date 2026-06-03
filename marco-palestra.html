@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Player Report · {{PLAYER_NAME}} | PASTA</title>
+    <title>Player Report · Marco Palestra | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <!-- Open Graph -->
-    <meta property="og:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
-    <meta property="og:description" content="{{OG_DESCRIPTION}}" />
-    <meta property="og:image"       content="https://pasta-reports.com/images/cards/{{PLAYER_SLUG}}.png" />
+    <meta property="og:title"       content="Marco Palestra · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Difensore · ITA · Serie A 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/marco-palestra.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type"        content="article" />
-    <meta property="og:url"         content="{{REPORT_URL}}" />
+    <meta property="og:url"         content="https://pasta-reports.com/marco-palestra.html" />
     <!-- Twitter / X card -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:site"        content="@macnonesiste" />
-    <meta name="twitter:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
-    <meta name="twitter:description" content="{{OG_DESCRIPTION}}" />
-    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{{PLAYER_SLUG}}.png" />
+    <meta name="twitter:title"       content="Marco Palestra · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Difensore · ITA · Serie A 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/marco-palestra.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css?v=editorial-copy-20260601" />
@@ -26,9 +26,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        /* ── Banner: player photo (template-specific — uses {{PLAYER_SLUG}}) ── */
+        /* ── Banner: player photo (template-specific — uses marco-palestra) ── */
         #banner.style2 {
-            background-image: url('{{PLAYER_IMAGE_URL}}') !important;
+            background-image: url('images/players/marco-palestra.webp') !important;
             background-attachment: scroll !important;
             background-position: right 3.5rem !important;
             background-size: auto 90% !important;
@@ -80,14 +80,14 @@
     <!-- Banner -->
     <section id="banner" class="style2">
         <div class="inner">
-            <header class="major"><h1>{{PLAYER_NAME}}</h1></header>
+            <header class="major"><h1>Marco Palestra</h1></header>
             <div class="content">
                 <div class="sr-banner-meta">
-                    <span class="sr-banner-chip sr-banner-clubs">{{SOURCE_CLUB}} → {{TARGET_CLUB}}</span>
-                    <span class="sr-banner-chip">{{ROLE_LABEL}}</span>
-                    <span class="sr-banner-chip">{{COMPETITION_LABEL}}</span>
-                    <span class="sr-banner-chip">Stagione {{SEASON_LABEL}}</span>
-                    <span class="sr-banner-chip">{{MINUTES}} min</span>
+                    <span class="sr-banner-chip sr-banner-clubs">Cagliari → Inter</span>
+                    <span class="sr-banner-chip">Difensore</span>
+                    <span class="sr-banner-chip">ITA · Serie A</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">3 093 min</span>
                 </div>
             </div>
         </div>
@@ -99,12 +99,12 @@
         <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
         <div class="sr-card" id="profileReading" data-static="true">
             <p class="sr-section-label">Lettura del profilo</p>
-            <div class="sr-narrative sr-editorial-markdown">{{NARRATIVE}}</div>
+            <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Marco Palestra è un esterno difensivo ancora in fase di definizione, ma già interessante per l’Inter perché combina pulizia tecnica, buona continuità nel possesso e capacità di portare palla in avanti. Rispetto al livello interno nerazzurro non va letto come un sostituto diretto di Dimarco o Dumfries: il suo profilo oggi è meno territoriale, meno alto e meno incisivo nell’ultimo terzo. La cautela principale riguarda quindi il contesto: al Cagliari emerge come giocatore più propositivo e moderno rispetto ai compagni di reparto, ma il salto verso una squadra che vive stabilmente nella metà campo avversaria richiede una proiezione prudente.</p></div>
         </div>
 
         <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Profilo sintetico · assi {{MACRO_ROLE}} interpretativi</p>
+            <p class="sr-section-label">Profilo sintetico · assi DEF interpretativi</p>
             <div class="sr-radar-tools">
                 <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
                 <div class="sr-radar-selector-wrap">
@@ -128,8 +128,8 @@
 
         <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Confronto individuale vs {{ROLE_PLURAL}} {{TARGET_CLUB}} · {{SEASON_LABEL}}</p>
-            {{NOTE_CONFRONTO}}
+            <p class="sr-section-label">Confronto individuale vs difensori Inter · 2025–26</p>
+            <p class="sr-section-intro">Nel confronto con i difensori dell’Inter, Palestra appare più come un profilo di complemento che come una ridondanza immediata. Ha numeri interessanti per quota di passaggi, conduzioni progressive e pulizia tecnica, ma resta distante dalla baseline nerazzurra per altezza media delle azioni, ricezioni e presenza nell’ultimo terzo. In una rosa come quella dell’Inter può avere senso come laterale da sviluppare, non come interprete già pronto per replicare il volume territoriale di Dimarco o Dumfries.</p>
             <p class="sr-raw-bars-note">
                 Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
                 di profilo, ma non sono corrette per la difficoltà del campionato.
@@ -144,7 +144,7 @@
         <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
-            {{NOTE_HEATMAP}}
+            <p class="sr-section-intro">La sua impronta spaziale racconta un giocatore collocato con chiarezza sulla corsia destra, con un baricentro medio più alto rispetto al contesto Cagliari ma non ancora da esterno dominante in una squadra di possesso. Il dato sulle azioni difensive in metà avversaria suggerisce una partecipazione al pressing non marginale, ma ancora lontana dai riferimenti Inter. Più che un laterale da ultimo terzo, oggi Palestra sembra un difensore di fascia che accompagna, conduce e consolida la manovra.</p>
             <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
             <div class="sr-heatmap-grid">
                 <div class="sr-pitch-wrap">
@@ -163,7 +163,7 @@
                     <span class="sr-pitch-note" id="pitchPassNote"></span>
                 </div>
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title">{{HEATMAP_FOURTH_TITLE}}</div>
+                    <div class="sr-pitch-title">Azioni difensive</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
                     <span class="sr-pitch-note" id="pitchProgNote"></span>
                 </div>
@@ -176,9 +176,9 @@
 
         <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
         <div class="sr-card compact">
-            <p class="sr-section-label">Contesto {{SOURCE_CLUB}} · altri {{ROLE_PLURAL}}</p>
-            {{NOTE_CONTEXT}}
-            <p class="sr-raw-bars-note">{{SOURCE_TEAM_NOTE}}</p>
+            <p class="sr-section-label">Contesto Cagliari · altri difensori</p>
+            <p class="sr-section-intro">Il confronto interno al Cagliari aiuta a separare il profilo reale dalla narrazione. Rispetto a Obert, Zappa e Idrissi, Palestra emerge per conduzioni progressive, cross, altezza media delle azioni e qualità del passaggio: segnali chiari di un giocatore più orientato a partecipare alla fase offensiva. Allo stesso tempo, il basso peso nei passaggi progressivi e nelle azioni difensive pAdj suggerisce che non è ancora un motore completo della fascia, ma un profilo con qualità selettive e margini di crescita.</p>
+            <p class="sr-raw-bars-note"></p>
             <div class="sr-bars-scroll">
                 <div class="sr-player-tags" id="sourceTeamLegend"></div>
                 <div id="sourceTeamComparison"></div>
@@ -187,8 +187,8 @@
 
         <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Similarità · {{ROLE_PLURAL}} {{TARGET_CLUB}}</p>
-            {{NOTE_SIMILARITY}}
+            <p class="sr-section-label">Similarità · difensori Inter</p>
+            <p class="sr-section-intro">Per volume di coinvolgimento, Palestra si avvicina soprattutto a Denzel Dumfries e Luis Henrique, mentre la somiglianza territoriale lo collega di più a Luis Henrique. Il mix di azioni, invece, richiama in parte Dimarco, ma più per composizione stilistica che per impatto reale nel campo avanzato. Per l’Inter questo implica un profilo ibrido: non un doppione puro, ma un laterale giovane che può essere formato tra compiti da quinto, conduzione dal basso e sviluppo progressivo dell’occupazione offensiva.</p>
             <div class="sr-sim-grid" id="similarityGrid"></div>
         </div>
 
@@ -220,7 +220,7 @@
 <script src="assets/js/main.js"></script>
 
 <script>
-  window.SR_EXTERNAL_PAYLOAD_URL = "{{PAYLOAD_URL}}";
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/marco-palestra.legacy_role_payload.json";
 </script>
 <script src="assets/js/sr-report-loader.js"></script>
 <script src="assets/js/sr-role-runtime.js?v=heatmap-filter-20260603"></script>
