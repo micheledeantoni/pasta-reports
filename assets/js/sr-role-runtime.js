@@ -388,28 +388,47 @@ function initRoleReport() {
         const referenceIds = data.baselineIds || [];
         const legend = $(legendId);
         const showAverage = data.showAverage !== false;
+
+        // Compact abbreviation: initials from each word, max 3 chars
+        function abbrev(name) {
+            return String(name || "").split(/\s+/).filter(Boolean)
+                .map(w => w[0]).join("").toUpperCase().slice(0, 3);
+        }
+
+        // Stagger overlapping markers (within 5 percentile points) vertically
+        function calcYOffsets(scores) {
+            const indexed = scores.map((s, i) => ({ s: s ?? 0, i })).sort((a, b) => a.s - b.s);
+            const offsets = new Array(scores.length).fill(0);
+            for (let k = 1; k < indexed.length; k++) {
+                if (indexed[k].s - indexed[k - 1].s < 5)
+                    offsets[indexed[k].i] = offsets[indexed[k - 1].i] === 0 ? -6 : 0;
+            }
+            return offsets;
+        }
+
         const tagItems = [
-            `<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</div>`,
+            `<div class="sr-player-tag is-subject"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</div>`,
             ...referenceIds.map(id => {
                 const p = meta(id);
                 return `<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:${p.color || "#fff"}"></span>${esc(p.name || id)}</div>`;
             }),
         ];
-        if (showAverage) {
-            tagItems.push(`<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:rgba(255,255,255,.55)"></span>${esc(data.baselineLabel || "Average")}</div>`);
-        }
+        if (showAverage) tagItems.push(`<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:rgba(0,0,0,.2)"></span>${esc(data.baselineLabel || "Average")}</div>`);
         const tags = tagItems.join("");
         if (legend) legend.innerHTML = tags;
         const title = $(sectionId)?.classList.contains("sr-card") ? `<p class="sr-section-label">${esc(data.label || "Metric comparison")}</p>` : "";
+
         el.innerHTML = `
             ${title}
             ${legend ? "" : `<div class="sr-player-tags">${tags}</div>`}
-            ${data.groups.map(group => `
+            ${data.groups.map((group, gIdx) => `
                 <div class="sr-dot-group">
                     <div class="sr-dot-group-title">${esc(group.label)}</div>
-                    ${group.metrics.map(row => {
+                    ${group.metrics.map((row, mIdx) => {
                         const subjectScore = row.subjectScore ?? 0;
                         const baselineScore = row.baselineScore ?? 0;
+
+                        // ── Desktop row (unchanged) ──────────────────────────
                         const refBars = referenceIds.map(id => {
                             const p = meta(id);
                             const value = metricValue(id, row.metric);
@@ -422,42 +441,52 @@ function initRoleReport() {
                             ? `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${baselineScore}%; background:rgba(255,255,255,.42)" data-tip="${esc(data.baselineLabel || "Average")}: ${esc(fmt(row.metric, row.baselineValue))}"></div></div>`
                             : "";
 
-                        // Mobile: benchmark marker (thin line at baseline position on each bar)
-                        const bmMarker = showAverage && baselineScore > 0
-                            ? `<div class="sr-mobile-bm-marker" style="left:${baselineScore}%"></div>`
-                            : "";
-
-                        // Mobile: per-player rows (subject first, then each reference)
-                        const mobileSubjectRow = `
-                            <div class="sr-mobile-player-row is-subject">
-                                <div class="sr-mobile-player-header">
-                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</span>
-                                    <span class="sr-mobile-player-val">${esc(fmt(row.metric, row.subjectValue))}</span>
-                                </div>
-                                <div class="sr-bar-track main">
-                                    <div class="sr-bar-fill" style="width:${subjectScore}%; background:${subject.color || "#4ade80"}"></div>
-                                    ${bmMarker}
-                                </div>
-                                <div class="sr-mobile-player-sub">P${Math.round(subjectScore)}</div>
-                            </div>`;
-                        const mobileRefRows = referenceIds.map(id => {
+                        // ── Mobile: build per-player data once ──────────────
+                        const allPlayers = [
+                            { id: String(data.subjectId || subjectId), isSubject: true },
+                            ...referenceIds.map(id => ({ id: String(id), isSubject: false })),
+                        ];
+                        const pData = allPlayers.map(({ id, isSubject }) => {
                             const p = meta(id);
-                            const value = metricValue(id, row.metric);
-                            const score = metricScore(row.metric, value);
-                            const color = p.color || "#fff";
-                            const displayScore = score ?? 0;
-                            const displayVal = (value !== null && value !== undefined) ? fmt(row.metric, value) : "—";
+                            const value = isSubject ? row.subjectValue : metricValue(id, row.metric);
+                            const score = isSubject ? subjectScore : (metricScore(row.metric, value) ?? null);
+                            return { id, isSubject, name: p.name || id, color: p.color || (isSubject ? "#4ade80" : "#fff"), value, score };
+                        });
+
+                        // ── Mobile compact: markers on shared 0–100 bar ─────
+                        const yOffsets = calcYOffsets(pData.map(p => p.score));
+                        const markers = pData.map((p, i) => {
+                            const pos = Math.max(0, Math.min(100, p.score ?? 0));
+                            const sz  = p.isSubject ? 13 : 10;
+                            return `<div class="sr-mc-marker${p.isSubject ? " is-subject" : ""}" style="left:${pos}%;width:${sz}px;height:${sz}px;background:${p.color};transform:translate(-50%,calc(-50% + ${yOffsets[i]}px))"></div>`;
+                        }).join("");
+
+                        const chips = pData.map(p => {
+                            const val = (p.value !== null && p.value !== undefined) ? fmt(row.metric, p.value) : "—";
+                            return `<span class="sr-mc-chip${p.isSubject ? " is-subject" : ""}"><span class="sr-mc-chip-dot" style="background:${p.color}"></span>${esc(abbrev(p.name))} ${esc(val)}</span>`;
+                        }).join("");
+
+                        const subjectVal = (row.subjectValue !== null && row.subjectValue !== undefined) ? fmt(row.metric, row.subjectValue) : "—";
+                        const detailId  = `srmc-${sectionId}-${gIdx}-${mIdx}`;
+
+                        // ── Mobile detail: Sprint 1 per-player rows ──────────
+                        const bmMarker = showAverage && baselineScore > 0
+                            ? `<div class="sr-mobile-bm-marker" style="left:${baselineScore}%"></div>` : "";
+                        const detailRows = pData.map(p => {
+                            const ds  = p.score ?? 0;
+                            const dv  = (p.value !== null && p.value !== undefined) ? fmt(row.metric, p.value) : "—";
+                            const bg  = p.isSubject ? p.color : `color-mix(in srgb,${p.color} 72%,transparent)`;
                             return `
-                            <div class="sr-mobile-player-row">
+                            <div class="sr-mobile-player-row${p.isSubject ? " is-subject" : ""}">
                                 <div class="sr-mobile-player-header">
-                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${color}"></span>${esc(p.name || id)}</span>
-                                    <span class="sr-mobile-player-val">${esc(displayVal)}</span>
+                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${p.color}"></span>${esc(p.name)}</span>
+                                    <span class="sr-mobile-player-val">${esc(dv)}</span>
                                 </div>
-                                <div class="sr-bar-track">
-                                    <div class="sr-bar-fill" style="width:${displayScore}%; background:color-mix(in srgb, ${color} 72%, transparent)"></div>
+                                <div class="sr-bar-track${p.isSubject ? " main" : ""}">
+                                    <div class="sr-bar-fill" style="width:${ds}%;background:${bg}"></div>
                                     ${bmMarker}
                                 </div>
-                                ${score !== null ? `<div class="sr-mobile-player-sub">P${Math.round(displayScore)}</div>` : ""}
+                                ${p.score !== null ? `<div class="sr-mobile-player-sub">P${Math.round(ds)}</div>` : ""}
                             </div>`;
                         }).join("");
 
@@ -465,22 +494,58 @@ function initRoleReport() {
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
                                 <div class="sr-bar-group">
-                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%; background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}"></div></div>
+                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%;background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}"></div></div>
                                     ${refBars}
                                     ${baselineBar}
                                 </div>
                                 <div class="sr-dot-val">${esc(fmt(row.metric, row.subjectValue))}</div>
                             </div>
                             <div class="sr-mobile-metric">
-                                <div class="sr-mobile-metric-label">${esc(row.label || row.metric)}</div>
-                                ${mobileSubjectRow}
-                                ${mobileRefRows}
+                                <div class="sr-mobile-compact">
+                                    <div class="sr-mc-header">
+                                        <span class="sr-mc-label">${esc(row.label || row.metric)}</span>
+                                        <span class="sr-mc-subject-val">${esc(subjectVal)} · P${Math.round(subjectScore)}</span>
+                                    </div>
+                                    <div class="sr-mc-bar-wrap">
+                                        <div class="sr-mc-bar-track">${markers}</div>
+                                    </div>
+                                    <div class="sr-mc-player-strip">${chips}</div>
+                                    <button class="sr-mc-toggle" aria-expanded="false" aria-controls="${detailId}">Mostra dettaglio</button>
+                                </div>
+                                <div class="sr-mc-detail" id="${detailId}" hidden>
+                                    ${detailRows}
+                                </div>
                             </div>
                         `;
                     }).join("")}
                 </div>
             `).join("")}
         `;
+
+        // Toggle expand/collapse — one open at a time per section
+        el.querySelectorAll(".sr-mc-toggle").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const isOpen = btn.getAttribute("aria-expanded") === "true";
+                const detail = document.getElementById(btn.getAttribute("aria-controls"));
+                // Close all others in this section
+                el.querySelectorAll(".sr-mc-toggle[aria-expanded='true']").forEach(other => {
+                    if (other === btn) return;
+                    other.setAttribute("aria-expanded", "false");
+                    other.textContent = "Mostra dettaglio";
+                    const d = document.getElementById(other.getAttribute("aria-controls"));
+                    if (d) d.hidden = true;
+                });
+                if (isOpen) {
+                    btn.setAttribute("aria-expanded", "false");
+                    btn.textContent = "Mostra dettaglio";
+                    if (detail) detail.hidden = true;
+                } else {
+                    btn.setAttribute("aria-expanded", "true");
+                    btn.textContent = "Nascondi dettaglio";
+                    if (detail) detail.hidden = false;
+                }
+            });
+        });
     }
 
     function drawPitchLines(svg) {

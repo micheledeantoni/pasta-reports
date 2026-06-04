@@ -735,6 +735,16 @@ section.pasta-hero {
 .sr-bar-track.main { background: var(--ei2-border) !important; }
 .sr-bar-fill       { box-shadow: none !important; }
 
+/* Mobile compact metric view — editorial theme overrides */
+.sr-mc-label        { color: var(--ei2-ink-faint) !important; }
+.sr-mc-subject-val  { color: var(--ei2-ink) !important; }
+.sr-mc-bar-track    { background: var(--ei2-border-2) !important; }
+.sr-mc-marker       { border-color: var(--ei2-surface) !important; }
+.sr-mc-chip         { color: var(--ei2-ink-muted) !important; }
+.sr-mc-chip.is-subject { color: var(--ei2-ink) !important; }
+.sr-mc-toggle       { color: var(--ei2-ink-faint) !important; }
+.sr-mc-detail       { border-top-color: var(--ei2-border-2) !important; }
+
 /* Mobile per-player metric bars — editorial theme overrides */
 .sr-mobile-metric-label {
     color: var(--ei2-ink-faint) !important;
