@@ -477,6 +477,81 @@
 
 .sr-axis-accordion-summary::-webkit-details-marker { display: none; }
 
+/* ── Mobile per-player metric layout ──────────────────────────────────────── */
+/* Hidden on desktop; shown inside @media block below */
+.sr-mobile-metric { display: none; }
+
+.sr-mobile-metric-label {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    margin-bottom: .7rem;
+    padding-bottom: .35rem;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sr-mobile-player-row {
+    margin-bottom: .75rem;
+}
+
+.sr-mobile-player-row.is-subject {
+    margin-bottom: .9rem;
+}
+
+.sr-mobile-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .25rem;
+}
+
+.sr-mobile-player-name {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    font-size: .78rem;
+    color: rgba(255,255,255,.82);
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sr-mobile-player-row.is-subject .sr-mobile-player-name {
+    font-weight: 600;
+    color: rgba(255,255,255,.95);
+}
+
+.sr-mobile-player-val {
+    font-size: .78rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.88);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sr-mobile-player-sub {
+    font-size: .63rem;
+    color: rgba(255,255,255,.35);
+    margin-top: .15rem;
+    letter-spacing: .04em;
+}
+
+/* Benchmark marker: thin vertical line on the bar at the baseline position */
+.sr-mobile-bm-marker {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    border-radius: 1px;
+    background: rgba(255,255,255,.45);
+    pointer-events: none;
+}
+
 /* ── Shared responsive shell ──────────────────────────────────────────── */
 @media screen and (max-width: 768px) {
 
@@ -484,9 +559,7 @@
     .sr-heatmap-grid { grid-template-columns: 1fr; }
 
     /* Radar: fixed 420×420px so labels are never squished.
-       The scroll wrapper enables horizontal swipe on narrow phones.
-       Replaces the old clamp(340px, 84vw, 440px) height-only rule —
-       a fixed square is needed because Chart.js fills width × height. */
+       The scroll wrapper enables horizontal swipe on narrow phones. */
     .sr-radar-scroll-wrap {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -505,12 +578,20 @@
         gap: .5rem;
     }
 
-    /* Bar charts: scroll horizontally — labels stay fully readable */
+    /* Bar charts: vertical per-player layout replaces horizontal scroll.
+       Desktop .sr-dot-row rows are hidden; .sr-mobile-metric rows take over. */
     .sr-bars-scroll {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: visible;
     }
-    .sr-bars-scroll > div { min-width: 440px; }
+    .sr-bars-scroll > div { min-width: 0; }
+
+    .sr-dot-group .sr-dot-row { display: none; }
+    .sr-mobile-metric { display: block; }
+
+    /* Mobile bar tracks fill available width */
+    .sr-mobile-metric .sr-bar-track {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {

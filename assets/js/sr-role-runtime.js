@@ -421,6 +421,46 @@ function initRoleReport() {
                         const baselineBar = showAverage
                             ? `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${baselineScore}%; background:rgba(255,255,255,.42)" data-tip="${esc(data.baselineLabel || "Average")}: ${esc(fmt(row.metric, row.baselineValue))}"></div></div>`
                             : "";
+
+                        // Mobile: benchmark marker (thin line at baseline position on each bar)
+                        const bmMarker = showAverage && baselineScore > 0
+                            ? `<div class="sr-mobile-bm-marker" style="left:${baselineScore}%"></div>`
+                            : "";
+
+                        // Mobile: per-player rows (subject first, then each reference)
+                        const mobileSubjectRow = `
+                            <div class="sr-mobile-player-row is-subject">
+                                <div class="sr-mobile-player-header">
+                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</span>
+                                    <span class="sr-mobile-player-val">${esc(fmt(row.metric, row.subjectValue))}</span>
+                                </div>
+                                <div class="sr-bar-track main">
+                                    <div class="sr-bar-fill" style="width:${subjectScore}%; background:${subject.color || "#4ade80"}"></div>
+                                    ${bmMarker}
+                                </div>
+                                <div class="sr-mobile-player-sub">P${Math.round(subjectScore)}</div>
+                            </div>`;
+                        const mobileRefRows = referenceIds.map(id => {
+                            const p = meta(id);
+                            const value = metricValue(id, row.metric);
+                            const score = metricScore(row.metric, value);
+                            const color = p.color || "#fff";
+                            const displayScore = score ?? 0;
+                            const displayVal = (value !== null && value !== undefined) ? fmt(row.metric, value) : "—";
+                            return `
+                            <div class="sr-mobile-player-row">
+                                <div class="sr-mobile-player-header">
+                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${color}"></span>${esc(p.name || id)}</span>
+                                    <span class="sr-mobile-player-val">${esc(displayVal)}</span>
+                                </div>
+                                <div class="sr-bar-track">
+                                    <div class="sr-bar-fill" style="width:${displayScore}%; background:color-mix(in srgb, ${color} 72%, transparent)"></div>
+                                    ${bmMarker}
+                                </div>
+                                ${score !== null ? `<div class="sr-mobile-player-sub">P${Math.round(displayScore)}</div>` : ""}
+                            </div>`;
+                        }).join("");
+
                         return `
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
@@ -430,6 +470,11 @@ function initRoleReport() {
                                     ${baselineBar}
                                 </div>
                                 <div class="sr-dot-val">${esc(fmt(row.metric, row.subjectValue))}</div>
+                            </div>
+                            <div class="sr-mobile-metric">
+                                <div class="sr-mobile-metric-label">${esc(row.label || row.metric)}</div>
+                                ${mobileSubjectRow}
+                                ${mobileRefRows}
                             </div>
                         `;
                     }).join("")}

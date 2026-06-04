@@ -891,3 +891,14 @@ section.pasta-hero {
 }
 
 #menu a:hover { color: #fff !important; }
+
+/* ── Mobile touch targets for footer social icons ─────────────────────────── */
+@media screen and (max-width: 768px) {
+    #footer .icons li a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
