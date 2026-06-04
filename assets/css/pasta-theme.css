@@ -735,6 +735,17 @@ section.pasta-hero {
 .sr-bar-track.main { background: var(--ei2-border) !important; }
 .sr-bar-fill       { box-shadow: none !important; }
 
+/* Mobile per-player metric bars — editorial theme overrides */
+.sr-mobile-metric-label {
+    color: var(--ei2-ink-faint) !important;
+    border-bottom-color: var(--ei2-border-2) !important;
+}
+.sr-mobile-player-name { color: var(--ei2-ink-2) !important; }
+.sr-mobile-player-row.is-subject .sr-mobile-player-name { color: var(--ei2-ink) !important; }
+.sr-mobile-player-val  { color: var(--ei2-ink) !important; }
+.sr-mobile-player-sub  { color: var(--ei2-ink-faint) !important; }
+.sr-mobile-bm-marker   { background: var(--ei2-border) !important; }
+
 .sr-raw-bars-note {
     color: var(--ei2-ink-muted) !important;
     background: var(--ei2-surface-2) !important;
