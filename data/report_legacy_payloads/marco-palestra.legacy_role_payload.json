@@ -157,6 +157,7 @@
         "Passaggi progressivi per 90",
         "Quota passaggi progressivi",
         "Conduzioni progressive per90",
+        "Dribbling tentati per90",
         "Distanza media conduzione progressiva",
         "Passaggi nell'ultimo terzo per 90"
       ]
@@ -181,7 +182,7 @@
         23.35,
         38.68,
         44.05,
-        37.67,
+        47.93,
         63.44
       ]
     },
@@ -197,7 +198,7 @@
         26.27,
         47.09,
         45.73,
-        51.02,
+        55.37,
         89.19
       ]
     },
@@ -212,7 +213,7 @@
         50.91,
         43.27,
         42.41,
-        52.64,
+        55.99,
         50.53
       ]
     },
@@ -226,7 +227,7 @@
           44.3,
           38.53,
           62.27,
-          74.29,
+          70.05,
           98.36
         ]
       },
@@ -237,7 +238,7 @@
           11.1,
           53.79,
           17.01,
-          26.86,
+          35.74,
           82.83
         ]
       },
@@ -248,7 +249,7 @@
           13.69,
           63.36,
           56.0,
-          53.32,
+          57.76,
           87.02
         ]
       },
@@ -259,61 +260,12 @@
           36.01,
           32.68,
           47.64,
-          49.61,
+          57.94,
           88.55
         ]
       }
     ]
   },
-  "METRIC_GROUPS": [
-    {
-      "label": "Attività difensiva",
-      "metrics": [
-        "Azioni difensive pAdj",
-        "Contrasti tentati pAdj",
-        "Intercetti (padj)",
-        "Contrasti per 90",
-        "Intercetti per 90",
-        "Quota azioni difensive squadra"
-      ]
-    },
-    {
-      "label": "Duelli e presenza aerea",
-      "metrics": [
-        "Duelli aerei per90",
-        "Percentuale duelli aerei vinti",
-        "Successo nei contrasti",
-        "Rapporto intercetti / contrasti"
-      ]
-    },
-    {
-      "label": "Coinvolgimento in costruzione",
-      "metrics": [
-        "Completamento passaggi",
-        "Quota passaggi squadra",
-        "Ricezioni per90"
-      ]
-    },
-    {
-      "label": "Progressione dal basso",
-      "metrics": [
-        "Passaggi progressivi per 90",
-        "Quota passaggi progressivi",
-        "Conduzioni progressive per90",
-        "Distanza media conduzione progressiva",
-        "Passaggi nell'ultimo terzo per 90"
-      ]
-    },
-    {
-      "label": "Coinvolgimento territoriale / avanzato",
-      "metrics": [
-        "Cross tentati per 90",
-        "Passaggi in area per 90",
-        "Altezza media azioni",
-        "Altezza media azioni difensive"
-      ]
-    }
-  ],
   "METRIC_FORMATS": {
     "Defensive actions padj": "number",
     "Interceptions padj": "number",
@@ -332,6 +284,9 @@
     "Progressive pass share": "percent",
     "Progressive carries per90": "number",
     "Average progressive carry distance": "meters",
+    "Dribbling tentati per 90": "number",
+    "Dribbling riusciti": "percent_0_100",
+    "Altezza media dei dribbling": "one_decimal",
     "Passes into final third per90": "number",
     "Passes into penalty area per90": "number",
     "Defensive action mean x": "one_decimal",
@@ -441,6 +396,24 @@
       "count": 1348,
       "scale": "role_minmax_raw"
     },
+    "Dribbling tentati per 90": {
+      "min": 0.0,
+      "max": 7.853042,
+      "count": 1348,
+      "scale": "role_minmax_raw"
+    },
+    "Dribbling riusciti": {
+      "min": 0.0,
+      "max": 100.0,
+      "count": 1302,
+      "scale": "role_minmax_raw"
+    },
+    "Altezza media dei dribbling": {
+      "min": 3.15,
+      "max": 102.9,
+      "count": 1302,
+      "scale": "role_minmax_raw"
+    },
     "Passes into final third per90": {
       "min": 1.302326,
       "max": 34.525862,
@@ -470,6 +443,224 @@
       "max": 7.42268,
       "count": 1348,
       "scale": "role_minmax_raw"
+    }
+  },
+  "METRICS": {
+    "481154": {
+      "Defensive actions padj": 1.734556,
+      "Interceptions padj": 1.097122,
+      "Tackle attempts padj": 0.337105,
+      "Tackles per90": 1.600388,
+      "Interceptions per90": 5.208535,
+      "Defensive actions share team": 0.057968,
+      "Aerial win rate": 0.405405,
+      "Aerial attempts per90": 1.076625,
+      "Tackle success rate": 0.781818,
+      "Interception to tackle ratio": 3.254545,
+      "Pass completion": 0.863046,
+      "Pass share team": 0.059293,
+      "Receivals per90": 28.632396,
+      "Progressive passes per90": 3.113482,
+      "Progressive pass share": 0.126328,
+      "Progressive carries per90": 3.753637,
+      "Average progressive carry distance": 22.05407,
+      "Dribbling tentati per 90": 4.56838,
+      "Dribbling riusciti": 44.585987,
+      "Altezza media dei dribbling": 66.220892,
+      "Passes into final third per90": 5.906887,
+      "Passes into penalty area per90": 0.902037,
+      "Defensive action mean x": 33.677544,
+      "Mean x action location": 52.173843,
+      "Cross attempts per90": 3.171678
+    },
+    "255929": {
+      "Defensive actions padj": 3.141425,
+      "Interceptions padj": 2.353881,
+      "Tackle attempts padj": 0.437524,
+      "Tackles per90": 1.66113,
+      "Interceptions per90": 8.936877,
+      "Defensive actions share team": 0.078988,
+      "Aerial win rate": 0.142857,
+      "Aerial attempts per90": 0.465116,
+      "Tackle success rate": 0.78,
+      "Interception to tackle ratio": 5.38,
+      "Pass completion": 0.831821,
+      "Pass share team": 0.070463,
+      "Receivals per90": 49.069767,
+      "Progressive passes per90": 9.86711,
+      "Progressive pass share": 0.207258,
+      "Progressive carries per90": 1.727575,
+      "Average progressive carry distance": 22.439712,
+      "Dribbling tentati per 90": 0.598007,
+      "Dribbling riusciti": 38.888889,
+      "Altezza media dei dribbling": 64.510833,
+      "Passes into final third per90": 19.501661,
+      "Passes into penalty area per90": 3.089701,
+      "Defensive action mean x": 51.612618,
+      "Mean x action location": 59.125551,
+      "Cross attempts per90": 5.714286
+    },
+    "322153": {
+      "Defensive actions padj": 2.13965,
+      "Interceptions padj": 1.437845,
+      "Tackle attempts padj": 0.273875,
+      "Tackles per90": 1.081893,
+      "Interceptions per90": 5.67994,
+      "Defensive actions share team": 0.027503,
+      "Aerial win rate": 0.588235,
+      "Aerial attempts per90": 3.448535,
+      "Tackle success rate": 0.6875,
+      "Interception to tackle ratio": 5.25,
+      "Pass completion": 0.801061,
+      "Pass share team": 0.018538,
+      "Receivals per90": 27.453043,
+      "Progressive passes per90": 3.110443,
+      "Progressive pass share": 0.122016,
+      "Progressive carries per90": 1.352367,
+      "Average progressive carry distance": 15.9915,
+      "Dribbling tentati per 90": 1.62284,
+      "Dribbling riusciti": 25.0,
+      "Altezza media dei dribbling": 64.61,
+      "Passes into final third per90": 9.872276,
+      "Passes into penalty area per90": 2.096168,
+      "Defensive action mean x": 37.2204,
+      "Mean x action location": 62.07561,
+      "Cross attempts per90": 2.299023
+    },
+    "388567": {
+      "Defensive actions padj": 2.120123,
+      "Interceptions padj": 1.536321,
+      "Tackle attempts padj": 0.307264,
+      "Tackles per90": 1.113173,
+      "Interceptions per90": 5.565863,
+      "Defensive actions share team": 0.030363,
+      "Aerial win rate": 0.833333,
+      "Aerial attempts per90": 0.333952,
+      "Tackle success rate": 0.8,
+      "Interception to tackle ratio": 5.0,
+      "Pass completion": 0.871951,
+      "Pass share team": 0.040321,
+      "Receivals per90": 42.634508,
+      "Progressive passes per90": 7.458256,
+      "Progressive pass share": 0.163415,
+      "Progressive carries per90": 2.615955,
+      "Average progressive carry distance": 18.375,
+      "Dribbling tentati per 90": 1.6141,
+      "Dribbling riusciti": 44.827586,
+      "Altezza media dei dribbling": 60.487241,
+      "Passes into final third per90": 17.643785,
+      "Passes into penalty area per90": 1.892393,
+      "Defensive action mean x": 44.691957,
+      "Mean x action location": 57.856537,
+      "Cross attempts per90": 2.282004
+    },
+    "415415": {
+      "Defensive actions padj": 2.747236,
+      "Interceptions padj": 1.794113,
+      "Tackle attempts padj": 0.672792,
+      "Tackles per90": 2.332613,
+      "Interceptions per90": 6.220302,
+      "Defensive actions share team": 0.010781,
+      "Aerial win rate": 0.6,
+      "Aerial attempts per90": 0.0,
+      "Tackle success rate": 0.666667,
+      "Interception to tackle ratio": 2.666667,
+      "Pass completion": 0.867521,
+      "Pass share team": 0.011506,
+      "Receivals per90": 47.041037,
+      "Progressive passes per90": 5.637149,
+      "Progressive pass share": 0.123932,
+      "Progressive carries per90": 5.637149,
+      "Average progressive carry distance": 19.935517,
+      "Dribbling tentati per 90": 5.442765,
+      "Dribbling riusciti": 42.857143,
+      "Altezza media dei dribbling": 76.8075,
+      "Passes into final third per90": 20.215983,
+      "Passes into penalty area per90": 4.665227,
+      "Defensive action mean x": 53.545714,
+      "Mean x action location": 65.231474,
+      "Cross attempts per90": 1.166307
+    },
+    "424534": {
+      "Defensive actions padj": 3.822092,
+      "Interceptions padj": 2.541356,
+      "Tackle attempts padj": 0.455969,
+      "Tackles per90": 2.171753,
+      "Interceptions per90": 12.104329,
+      "Defensive actions share team": 0.116755,
+      "Aerial win rate": 0.476923,
+      "Aerial attempts per90": 2.07594,
+      "Tackle success rate": 0.735294,
+      "Interception to tackle ratio": 5.573529,
+      "Pass completion": 0.820666,
+      "Pass share team": 0.081974,
+      "Receivals per90": 31.394606,
+      "Progressive passes per90": 7.53726,
+      "Progressive pass share": 0.201537,
+      "Progressive carries per90": 0.862314,
+      "Average progressive carry distance": 24.068333,
+      "Dribbling tentati per 90": 0.862314,
+      "Dribbling riusciti": 59.259259,
+      "Altezza media dei dribbling": 56.913889,
+      "Passes into final third per90": 7.058197,
+      "Passes into penalty area per90": 0.734564,
+      "Defensive action mean x": 32.018,
+      "Mean x action location": 42.174313,
+      "Cross attempts per90": 1.405252
+    },
+    "371396": {
+      "Defensive actions padj": 2.980062,
+      "Interceptions padj": 2.049578,
+      "Tackle attempts padj": 0.352075,
+      "Tackles per90": 1.59292,
+      "Interceptions per90": 9.273072,
+      "Defensive actions share team": 0.048546,
+      "Aerial win rate": 0.458333,
+      "Aerial attempts per90": 1.36536,
+      "Tackle success rate": 0.714286,
+      "Interception to tackle ratio": 5.821429,
+      "Pass completion": 0.842353,
+      "Pass share team": 0.059503,
+      "Receivals per90": 45.22756,
+      "Progressive passes per90": 9.841972,
+      "Progressive pass share": 0.203529,
+      "Progressive carries per90": 1.93426,
+      "Average progressive carry distance": 19.545441,
+      "Dribbling tentati per 90": 1.19469,
+      "Dribbling riusciti": 23.809524,
+      "Altezza media dei dribbling": 61.605,
+      "Passes into final third per90": 11.662453,
+      "Passes into penalty area per90": 1.36536,
+      "Defensive action mean x": 33.242468,
+      "Mean x action location": 46.098829,
+      "Cross attempts per90": 2.04804
+    },
+    "532542": {
+      "Defensive actions padj": 4.07762,
+      "Interceptions padj": 2.524241,
+      "Tackle attempts padj": 0.582517,
+      "Tackles per90": 2.56445,
+      "Interceptions per90": 11.112619,
+      "Defensive actions share team": 0.030111,
+      "Aerial win rate": 0.1,
+      "Aerial attempts per90": 0.0,
+      "Tackle success rate": 0.904762,
+      "Interception to tackle ratio": 4.333333,
+      "Pass completion": 0.806338,
+      "Pass share team": 0.019881,
+      "Receivals per90": 31.872456,
+      "Progressive passes per90": 4.640434,
+      "Progressive pass share": 0.133803,
+      "Progressive carries per90": 2.686567,
+      "Average progressive carry distance": 22.546364,
+      "Dribbling tentati per 90": 2.1981,
+      "Dribbling riusciti": 44.444444,
+      "Altezza media dei dribbling": 65.03,
+      "Passes into final third per90": 8.303935,
+      "Passes into penalty area per90": 0.7327,
+      "Defensive action mean x": 32.000714,
+      "Mean x action location": 49.588468,
+      "Cross attempts per90": 2.320217
     }
   },
   "TARGET_COMPARISON_BARS": {
@@ -740,6 +931,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 4.56838,
+            "baselineValue": 2.319428,
+            "subjectScore": 58.17,
+            "baselineScore": 29.54,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 44.585987,
+            "baselineValue": 37.893405,
+            "subjectScore": 44.59,
+            "baselineScore": 37.89,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 66.220892,
+            "baselineValue": 66.603893,
+            "subjectScore": 63.23,
+            "baselineScore": 63.61,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Passes into final third per90",
@@ -1087,6 +1320,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 4.56838,
+            "baselineValue": 1.418368,
+            "subjectScore": 58.17,
+            "baselineScore": 18.06,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 44.585987,
+            "baselineValue": 42.504409,
+            "subjectScore": 44.59,
+            "baselineScore": 42.5,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 66.220892,
+            "baselineValue": 61.182963,
+            "subjectScore": 63.23,
+            "baselineScore": 58.18,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Passes into final third per90",
@@ -18357,198 +18632,89 @@
     "Barre target e source-team: stessa lista metriche e stesso ordine.",
     "Le metriche pAdj correggono il volume difensivo rispetto alle opportunità difensive della squadra. Servono a leggere il profilo e l’aggressività difensiva, non la qualità assoluta."
   ],
-  "METRICS": {
-    "481154": {
-      "Defensive actions padj": 1.734556,
-      "Interceptions padj": 1.097122,
-      "Tackle attempts padj": 0.337105,
-      "Tackles per90": 1.600388,
-      "Interceptions per90": 5.208535,
-      "Defensive actions share team": 0.057968,
-      "Aerial win rate": 0.405405,
-      "Aerial attempts per90": 1.076625,
-      "Tackle success rate": 0.781818,
-      "Interception to tackle ratio": 3.254545,
-      "Pass completion": 0.863046,
-      "Pass share team": 0.059293,
-      "Receivals per90": 28.632396,
-      "Progressive passes per90": 3.113482,
-      "Progressive pass share": 0.126328,
-      "Progressive carries per90": 3.753637,
-      "Average progressive carry distance": 22.05407,
-      "Passes into final third per90": 5.906887,
-      "Passes into penalty area per90": 0.902037,
-      "Defensive action mean x": 33.677544,
-      "Mean x action location": 52.173843,
-      "Cross attempts per90": 3.171678
+  "METRIC_GROUPS": [
+    {
+      "label": "Attività difensiva",
+      "metrics": [
+        "Azioni difensive pAdj",
+        "Contrasti tentati pAdj",
+        "Intercetti (padj)",
+        "Contrasti per 90",
+        "Intercetti per 90",
+        "Quota azioni difensive squadra"
+      ]
     },
-    "255929": {
-      "Defensive actions padj": 3.141425,
-      "Interceptions padj": 2.353881,
-      "Tackle attempts padj": 0.437524,
-      "Tackles per90": 1.66113,
-      "Interceptions per90": 8.936877,
-      "Defensive actions share team": 0.078988,
-      "Aerial win rate": 0.142857,
-      "Aerial attempts per90": 0.465116,
-      "Tackle success rate": 0.78,
-      "Interception to tackle ratio": 5.38,
-      "Pass completion": 0.831821,
-      "Pass share team": 0.070463,
-      "Receivals per90": 49.069767,
-      "Progressive passes per90": 9.86711,
-      "Progressive pass share": 0.207258,
-      "Progressive carries per90": 1.727575,
-      "Average progressive carry distance": 22.439712,
-      "Passes into final third per90": 19.501661,
-      "Passes into penalty area per90": 3.089701,
-      "Defensive action mean x": 51.612618,
-      "Mean x action location": 59.125551,
-      "Cross attempts per90": 5.714286
+    {
+      "label": "Duelli e presenza aerea",
+      "metrics": [
+        "Duelli aerei per90",
+        "Percentuale duelli aerei vinti",
+        "Successo nei contrasti",
+        "Rapporto intercetti / contrasti"
+      ]
     },
-    "322153": {
-      "Defensive actions padj": 2.13965,
-      "Interceptions padj": 1.437845,
-      "Tackle attempts padj": 0.273875,
-      "Tackles per90": 1.081893,
-      "Interceptions per90": 5.67994,
-      "Defensive actions share team": 0.027503,
-      "Aerial win rate": 0.588235,
-      "Aerial attempts per90": 3.448535,
-      "Tackle success rate": 0.6875,
-      "Interception to tackle ratio": 5.25,
-      "Pass completion": 0.801061,
-      "Pass share team": 0.018538,
-      "Receivals per90": 27.453043,
-      "Progressive passes per90": 3.110443,
-      "Progressive pass share": 0.122016,
-      "Progressive carries per90": 1.352367,
-      "Average progressive carry distance": 15.9915,
-      "Passes into final third per90": 9.872276,
-      "Passes into penalty area per90": 2.096168,
-      "Defensive action mean x": 37.2204,
-      "Mean x action location": 62.07561,
-      "Cross attempts per90": 2.299023
+    {
+      "label": "Coinvolgimento in costruzione",
+      "metrics": [
+        "Completamento passaggi",
+        "Quota passaggi squadra",
+        "Ricezioni per90"
+      ]
     },
-    "388567": {
-      "Defensive actions padj": 2.120123,
-      "Interceptions padj": 1.536321,
-      "Tackle attempts padj": 0.307264,
-      "Tackles per90": 1.113173,
-      "Interceptions per90": 5.565863,
-      "Defensive actions share team": 0.030363,
-      "Aerial win rate": 0.833333,
-      "Aerial attempts per90": 0.333952,
-      "Tackle success rate": 0.8,
-      "Interception to tackle ratio": 5.0,
-      "Pass completion": 0.871951,
-      "Pass share team": 0.040321,
-      "Receivals per90": 42.634508,
-      "Progressive passes per90": 7.458256,
-      "Progressive pass share": 0.163415,
-      "Progressive carries per90": 2.615955,
-      "Average progressive carry distance": 18.375,
-      "Passes into final third per90": 17.643785,
-      "Passes into penalty area per90": 1.892393,
-      "Defensive action mean x": 44.691957,
-      "Mean x action location": 57.856537,
-      "Cross attempts per90": 2.282004
+    {
+      "label": "Progressione dal basso",
+      "metrics": [
+        "Passaggi progressivi per 90",
+        "Quota passaggi progressivi",
+        "Conduzioni progressive per90",
+        "Distanza media conduzione progressiva",
+        "Dribbling tentati per90",
+        "Dribbling riusciti",
+        "Altezza media dei dribbling",
+        "Passaggi nell'ultimo terzo per 90"
+      ]
     },
-    "415415": {
-      "Defensive actions padj": 2.747236,
-      "Interceptions padj": 1.794113,
-      "Tackle attempts padj": 0.672792,
-      "Tackles per90": 2.332613,
-      "Interceptions per90": 6.220302,
-      "Defensive actions share team": 0.010781,
-      "Aerial win rate": 0.6,
-      "Aerial attempts per90": 0.0,
-      "Tackle success rate": 0.666667,
-      "Interception to tackle ratio": 2.666667,
-      "Pass completion": 0.867521,
-      "Pass share team": 0.011506,
-      "Receivals per90": 47.041037,
-      "Progressive passes per90": 5.637149,
-      "Progressive pass share": 0.123932,
-      "Progressive carries per90": 5.637149,
-      "Average progressive carry distance": 19.935517,
-      "Passes into final third per90": 20.215983,
-      "Passes into penalty area per90": 4.665227,
-      "Defensive action mean x": 53.545714,
-      "Mean x action location": 65.231474,
-      "Cross attempts per90": 1.166307
-    },
-    "424534": {
-      "Defensive actions padj": 3.822092,
-      "Interceptions padj": 2.541356,
-      "Tackle attempts padj": 0.455969,
-      "Tackles per90": 2.171753,
-      "Interceptions per90": 12.104329,
-      "Defensive actions share team": 0.116755,
-      "Aerial win rate": 0.476923,
-      "Aerial attempts per90": 2.07594,
-      "Tackle success rate": 0.735294,
-      "Interception to tackle ratio": 5.573529,
-      "Pass completion": 0.820666,
-      "Pass share team": 0.081974,
-      "Receivals per90": 31.394606,
-      "Progressive passes per90": 7.53726,
-      "Progressive pass share": 0.201537,
-      "Progressive carries per90": 0.862314,
-      "Average progressive carry distance": 24.068333,
-      "Passes into final third per90": 7.058197,
-      "Passes into penalty area per90": 0.734564,
-      "Defensive action mean x": 32.018,
-      "Mean x action location": 42.174313,
-      "Cross attempts per90": 1.405252
-    },
-    "371396": {
-      "Defensive actions padj": 2.980062,
-      "Interceptions padj": 2.049578,
-      "Tackle attempts padj": 0.352075,
-      "Tackles per90": 1.59292,
-      "Interceptions per90": 9.273072,
-      "Defensive actions share team": 0.048546,
-      "Aerial win rate": 0.458333,
-      "Aerial attempts per90": 1.36536,
-      "Tackle success rate": 0.714286,
-      "Interception to tackle ratio": 5.821429,
-      "Pass completion": 0.842353,
-      "Pass share team": 0.059503,
-      "Receivals per90": 45.22756,
-      "Progressive passes per90": 9.841972,
-      "Progressive pass share": 0.203529,
-      "Progressive carries per90": 1.93426,
-      "Average progressive carry distance": 19.545441,
-      "Passes into final third per90": 11.662453,
-      "Passes into penalty area per90": 1.36536,
-      "Defensive action mean x": 33.242468,
-      "Mean x action location": 46.098829,
-      "Cross attempts per90": 2.04804
-    },
-    "532542": {
-      "Defensive actions padj": 4.07762,
-      "Interceptions padj": 2.524241,
-      "Tackle attempts padj": 0.582517,
-      "Tackles per90": 2.56445,
-      "Interceptions per90": 11.112619,
-      "Defensive actions share team": 0.030111,
-      "Aerial win rate": 0.1,
-      "Aerial attempts per90": 0.0,
-      "Tackle success rate": 0.904762,
-      "Interception to tackle ratio": 4.333333,
-      "Pass completion": 0.806338,
-      "Pass share team": 0.019881,
-      "Receivals per90": 31.872456,
-      "Progressive passes per90": 4.640434,
-      "Progressive pass share": 0.133803,
-      "Progressive carries per90": 2.686567,
-      "Average progressive carry distance": 22.546364,
-      "Passes into final third per90": 8.303935,
-      "Passes into penalty area per90": 0.7327,
-      "Defensive action mean x": 32.000714,
-      "Mean x action location": 49.588468,
-      "Cross attempts per90": 2.320217
+    {
+      "label": "Coinvolgimento territoriale / avanzato",
+      "metrics": [
+        "Cross tentati per 90",
+        "Passaggi in area per 90",
+        "Altezza media azioni",
+        "Altezza media azioni difensive"
+      ]
     }
+  ],
+  "payloadMeta": {
+    "payloadType": "legacy_role_payload",
+    "sourcePage": "marco-palestra.html",
+    "source": "soccerdb",
+    "directExport": true,
+    "loadedByProductionRuntime": true,
+    "fallbackInlineAvailable": false,
+    "generatedBy": "scripts/exports/export_role_report_data.py --dry-run",
+    "backupDir": "archive/frontend_payload_json_backups/2026_06_04_take_on_promotion",
+    "generatedAt": "2026-06-04T08:17:00Z",
+    "takeOnPromotion": true,
+    "extractedGlobals": [
+      "ROLE_META",
+      "PAGE_META",
+      "SUBJECT_ID",
+      "PLAYER_META",
+      "PROFILE_READING",
+      "COMPARISON_GROUPS",
+      "RADAR_AXES",
+      "RADAR_DATA",
+      "METRIC_FORMATS",
+      "METRIC_RANGES",
+      "METRICS",
+      "TARGET_COMPARISON_BARS",
+      "SOURCE_TEAM_COMPARISON_BARS",
+      "HEATMAP_DATA",
+      "SIMILARITY_DATA",
+      "FOOTNOTES"
+    ],
+    "missingGlobals": [
+      "RADAR_AXIS_RANGES"
+    ]
   }
 }

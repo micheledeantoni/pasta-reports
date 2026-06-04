@@ -3,21 +3,59 @@
 <head>
     <title>Player Report · Rasmus Højlund | PASTA</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="data:," />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- Open Graph -->
+    <meta property="og:title"       content="Rasmus Højlund · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Attaccante · ITA · Serie A 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/rasmus-hojlund.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="https://pasta-reports.com/hojlund_att.html" />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Rasmus Højlund · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Attaccante · ITA · Serie A 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/rasmus-hojlund.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
-    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
+    <link rel="stylesheet" href="assets/css/sr-report-common.css?v=editorial-copy-20260601" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css?v=editorial-copy-20260601" />
+    <link rel="stylesheet" href="assets/css/pasta-theme.css?v=editorial-copy-20260601" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        @media screen and (max-width: 768px) {
-            .sr-heatmap-grid { grid-template-columns: 1fr; }
-            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+        /* ── Banner: player photo (template-specific — uses rasmus-hojlund) ── */
+        #banner.style2 {
+            background-image: url('images/players/rasmus-hojlund.webp') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
         }
-        @media screen and (max-width: 480px) {
-            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
+        @media screen and (max-width: 768px) {
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
         }
     </style>
 </head>
@@ -42,10 +80,15 @@
     <!-- Banner -->
     <section id="banner" class="style2">
         <div class="inner">
-            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
             <header class="major"><h1>Rasmus Højlund</h1></header>
             <div class="content">
-                <p>Attaccanti · Stagione 2025–26 · Analisi compatibilità Inter</p>
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs"> → Inter</span>
+                    <span class="sr-banner-chip">Attaccante</span>
+                    <span class="sr-banner-chip">ITA · Serie A</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">2 792 min</span>
+                </div>
             </div>
         </div>
     </section>
@@ -53,63 +96,16 @@
     <div id="main">
     <section class="sr-inner">
 
-        <!-- ── 1. HEADER ──────────────────────────────────────────────── -->
-        <div class="sr-card" id="roleReportHeader" data-static="true">
-            <div class="sr-header-top">
-                <div class="sr-header-left">
-                    <!-- Foto giocatore – sostituire src con immagine reale -->
-                    <div class="sr-player-photo">
-                        <div class="sr-photo-placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="sr-player-name">Rasmus Højlund</h2>
-                        <span class="sr-clubs-line">Valutazione per Inter</span>
-                        <div class="sr-club-flow" aria-label="Percorso valutazione club">
-                            <div class="sr-club-node">
-                                <div class="sr-club-logo liverpool">NAP</div>
-                                <span>Napoli</span>
-                            </div>
-                            <span class="sr-club-arrow">→</span>
-                            <div class="sr-club-node">
-                                <div class="sr-club-logo inter">INT</div>
-                                <span>Inter</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <span class="sr-role-pill">Attaccante</span>
-            </div>
-            <div class="sr-meta-row">
-                <span class="sr-meta-chip">ITA – Serie A</span>
-                <span class="sr-meta-chip">Stagione 2025–26</span>
-                <span class="sr-meta-chip">2 368 minuti</span>
-            </div>
-            <div class="sr-badges">
-                <div class="sr-badge"><span class="sr-badge-k">xG</span><span class="sr-badge-v">0.19 p90</span></div>
-                <div class="sr-badge"><span class="sr-badge-k">Minuti</span><span class="sr-badge-v">2 368</span></div>
-                <div class="sr-badge"><span class="sr-badge-k">Tiri</span><span class="sr-badge-v">1.94 p90</span></div>
-            </div>
-        </div>
-
-        <!-- ── 2. LETTURA DEL PROFILO ─────────────────────────────────── -->
+        <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
         <div class="sr-card" id="profileReading" data-static="true">
             <p class="sr-section-label">Lettura del profilo</p>
-            <p class="sr-narrative">
-                Rasmus Højlund è letto come attaccante attraverso produzione offensiva, qualità del tiro, rifinitura,
-                partecipazione alla manovra e lavoro offensivo. La pagina confronta il suo profilo con gli attaccanti
-                Inter selezionati e mantiene separati radar, barre, impronta spaziale e similarità.
-            </p>
+            <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Rasmus Højlund viene letto come attaccante attraverso assi ATT osservabili: finalizzazione, qualità del tiro, rifinitura, partecipazione/link-up e lavoro offensivo.</p>
+<p class="sr-narrative-p">Contesto: ITA-Serie A 2526, squadra 276, 2,792 minuti. Radar e barre usano metriche governate ATT; le metriche di gol e conversione sono mostrate come contesto, non come driver unico.</p></div>
         </div>
 
-        <!-- ── 3. PROFILO RADAR ───────────────────────────────────── -->
+        <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Profilo sintetico · assi ATT interpretativi</p>
-            <!-- Toolbar: custom legend (JS-populated) + comparison selector -->
             <div class="sr-radar-tools">
                 <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
                 <div class="sr-radar-selector-wrap">
@@ -117,96 +113,86 @@
                     <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
                 </div>
             </div>
-            <!-- Full-width radar canvas -->
-            <div class="sr-radar-wrap-full">
-                <canvas id="radarChart"></canvas>
+            <div class="sr-radar-scroll-wrap">
+                <div class="sr-radar-wrap-full">
+                    <canvas id="radarChart"></canvas>
+                </div>
             </div>
-            <!-- Cross-league context note (quiet, below radar) -->
             <div class="sr-radar-context-note">
                 Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
             </div>
-            <!-- Axis guide accordion (collapsed by default) -->
             <details class="sr-axis-accordion">
-                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
-                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+                <summary class="sr-axis-accordion-summary">Assi del radar · legenda metriche</summary>
+                <ul class="sr-axis-guide" id="radarAxisGuide"></ul>
             </details>
         </div>
 
-        <!-- ── 4. CONFRONTO INDIVIDUALE VS INTER ─────────────────────── -->
+        <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Confronto individuale vs attaccanti Inter · 2025–26</p>
+
             <p class="sr-raw-bars-note">
-                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze di profilo, ma non sono corrette per la difficoltà del campionato.
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
+                di profilo, ma non sono corrette per la difficoltà del campionato.
                 Passa il cursore su una barra per nome e valore esatto.
             </p>
-            <div class="sr-player-tags" id="interLegend"></div>
-            <div id="interComparison"></div>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="interLegend"></div>
+                <div id="interComparison"></div>
+            </div>
         </div>
 
-        <!-- ── 5. SPATIAL 2×2 ─────────────────────────────────────────── -->
+        <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Impronta spaziale ATT · Spatial v2 · grid 12×8</p>
+            <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
 
-            <!-- Toggle giocatore -->
             <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
-
             <div class="sr-heatmap-grid">
-                <!-- Panel 1 — Shot map -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#fca5a5;">Shot map</div>
-                    <div class="sr-shot-map-pair">
-                        <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
-                        <svg class="sr-goalmouth-svg" viewBox="0 0 180 90" id="pitchGoalmouth"></svg>
-                    </div>
+                    <div class="sr-pitch-title">Impronta posizionale</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
                     <span class="sr-pitch-note" id="pitchPosNote"></span>
                 </div>
-                <!-- Panel 2 — General heatmap -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#86efac;">Heatmap generale</div>
+                    <div class="sr-pitch-title">Direzione conduzioni</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
                     <span class="sr-pitch-note" id="pitchCarryNote"></span>
                 </div>
-                <!-- Panel 3 — Pass direction -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#fbbf24;">Pass direction</div>
+                    <div class="sr-pitch-title">Distribuzione passaggi</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
                     <span class="sr-pitch-note" id="pitchPassNote"></span>
                 </div>
-                <!-- Panel 4 — Carry direction -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#7dd3fc;">Carry direction</div>
+                    <div class="sr-pitch-title">Progressione via passaggio</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
                     <span class="sr-pitch-note" id="pitchProgNote"></span>
                 </div>
             </div>
-
-            <!-- Defensive summary -->
             <div class="sr-def-summary" id="defSummaryBlock"></div>
-
-            <p style="margin-top:.55rem; font-size:.68rem; color:rgba(255,255,255,.28);">
-                Le griglie riflettono dove avvengono le azioni registrate. Per ATT v1 l'impronta generale e difensiva è disponibile; passaggi, carry e shot map restano fallback finché il payload direzionale ATT non è promosso.
+            <p class="sr-pitch-note" style="margin-top:.55rem;">
+                Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
             </p>
         </div>
 
-        <!-- ── 6. CONTESTO CLUB ATTUALE ───────────────────────────────── -->
+        <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
         <div class="sr-card compact">
-            <p class="sr-section-label">Contesto Napoli · pari ruolo ATT qualificati</p>
-            <p style="font-size:.74rem; color:rgba(255,255,255,.38); margin-bottom:1rem; line-height:1.5;">
-                Confronto interno con gli attaccanti Napoli qualificati nel dataset 2025–26. Il gruppo disponibile è limitato ai pari ruolo con soglia minuti, senza nomi inventati.</p>
-            <div class="sr-player-tags" id="sourceTeamLegend"></div>
-            <div id="sourceTeamComparison"></div>
+            <p class="sr-section-label">Contesto  · altri attaccanti</p>
+
+            <p class="sr-raw-bars-note"></p>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="sourceTeamLegend"></div>
+                <div id="sourceTeamComparison"></div>
+            </div>
         </div>
 
-        <!-- ── 7. SIMILARITY ─────────────────────────────────────────── -->
+        <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Similarità globale ATT · tre spazi indipendenti</p>
+            <p class="sr-section-label">Similarità · attaccanti Inter</p>
+
             <div class="sr-sim-grid" id="similarityGrid"></div>
         </div>
 
-        <!-- ── 8. FOOTER ─────────────────────────────────────────────── -->
-        <div>
-            <div class="sr-footnotes" id="footnotes"></div>
-        </div>
     </section>
     </div>
 
@@ -234,11 +220,10 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Live page now uses external legacy payload only. Inline fallback archived. -->
 <script>
   window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/hojlund_att.legacy_role_payload.json";
 </script>
 <script src="assets/js/sr-report-loader.js"></script>
-<script src="assets/js/sr-role-runtime.js"></script>
+<script src="assets/js/sr-role-runtime.js?v=heatmap-filter-20260603"></script>
 </body>
 </html>
