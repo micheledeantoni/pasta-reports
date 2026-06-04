@@ -730,11 +730,19 @@ function initRoleReport() {
         buildDensity("pitchPos", d.ip, n => `rgba(20,${Math.round(120 + n * 135)},80,${(0.12 + n * 0.72).toFixed(2)})`);
         buildVectorGrid("pitchCarry", d.carry, "carry");
         buildVectorGrid("pitchPass", d.pass, "pass");
-        buildDensity("pitchProg", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
+        if (roleMeta.role === "DEF") {
+            buildDensity("pitchProg", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
+        } else {
+            buildVectorGrid("pitchProg", d.prog, "prog");
+        }
         note("pitchPosNote", d.ipNote || (d.ipCx ? `Centroide: x=${d.ipCx}` : ""));
         note("pitchCarryNote", d.carryN ? `${d.carryN} conduzioni · ${d.carryProgN || 0} progressive` : "");
         note("pitchPassNote", d.passN ? `${d.passN} passaggi` : "");
-        note("pitchProgNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
+        if (roleMeta.role === "DEF") {
+            note("pitchProgNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
+        } else {
+            note("pitchProgNote", d.progN ? `${d.progN} passaggi progressivi` : "");
+        }
         const defBlock = $("defSummaryBlock");
         if (defBlock) {
             const oppPct = d.defOppPct != null ? (d.defOppPct * 100).toFixed(0) + "%" : "—";
