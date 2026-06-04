@@ -568,6 +568,101 @@
 }
 .sr-mc-toggle[aria-expanded="true"]::before { transform: rotate(180deg); }
 
+/* ── Mobile radar summary (compact default, hidden on desktop) ────────────── */
+.sr-radar-mobile-summary { display: none; }
+
+.sr-rm-axes { display: flex; flex-direction: column; gap: .45rem; margin-bottom: .65rem; }
+
+.sr-rm-axis-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr 2.2rem;
+    gap: .45rem;
+    align-items: center;
+}
+
+.sr-rm-axis-label {
+    font-size: .7rem;
+    color: rgba(255,255,255,.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sr-rm-bar-wrap { min-width: 0; }
+
+.sr-rm-bar-track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+}
+
+.sr-rm-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    min-width: 3px;
+}
+
+.sr-rm-comp-marker {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(251,146,60,.88);
+    border: 1.5px solid rgba(14,18,32,.7);
+    box-sizing: border-box;
+}
+
+.sr-rm-axis-score {
+    font-size: .7rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.82);
+    text-align: right;
+}
+
+.sr-rm-comp-note {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .66rem;
+    color: rgba(255,255,255,.45);
+    margin-bottom: .55rem;
+}
+
+.sr-rm-comp-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sr-rm-comp-hint { color: rgba(255,255,255,.3); }
+
+.sr-rm-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .28rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: .67rem;
+    color: rgba(255,255,255,.38);
+    font-family: inherit;
+    letter-spacing: .04em;
+}
+
+.sr-rm-expand-btn::before {
+    content: "▾";
+    font-size: .58rem;
+    transition: transform .15s;
+    display: inline-block;
+}
+
+.sr-rm-expand-btn[aria-expanded="true"]::before { transform: rotate(180deg); }
+
 /* ── Detail view (expanded Sprint 1 layout) ───────────────────────────────── */
 .sr-mc-detail {
     margin-top: .7rem;
@@ -665,8 +760,13 @@
         overflow: visible;
     }
 
-    /* Radar toolbar: stack legend above comparison selector */
-    .sr-radar-tools {
+    /* Radar summary: show on mobile; hide full canvas + toolbar by default */
+    .sr-radar-mobile-summary { display: block; }
+    .sr-radar-scroll-wrap:not(.sr-mobile-open) { display: none; }
+    .sr-radar-tools:not(.sr-mobile-open) { display: none; }
+
+    /* When expanded, restore toolbar stack layout */
+    .sr-radar-tools.sr-mobile-open {
         flex-direction: column;
         align-items: flex-start;
         gap: .5rem;

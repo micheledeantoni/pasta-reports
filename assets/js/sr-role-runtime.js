@@ -368,6 +368,72 @@ function initRoleReport() {
                 if (nameEl) nameEl.textContent = getCompLabel();
             });
         }
+
+        // ── Mobile radar summary (compact default on narrow viewports) ────────
+        const scrollWrap = canvas.closest(".sr-radar-scroll-wrap");
+        if (scrollWrap) {
+            const radarParent = scrollWrap.parentElement;
+            const radarTools  = radarParent.querySelector(".sr-radar-tools");
+
+            // Remove any previous summary (guards against double-render)
+            radarParent.querySelector(".sr-radar-mobile-summary")?.remove();
+
+            const pct = v => Math.min(100, ((v || 0) / radarMax * 100)).toFixed(1);
+
+            function axisRows(compVals) {
+                return radarAxes.map((axis, i) => {
+                    const sv = Math.round(subjectValues[i] || 0);
+                    const sl = SHORT_LABELS[axis.key];
+                    const label = Array.isArray(sl) ? sl.join(" ") : (sl || axis.label || axis.key);
+                    return `
+                    <div class="sr-rm-axis-row">
+                        <span class="sr-rm-axis-label">${esc(label)}</span>
+                        <div class="sr-rm-bar-wrap">
+                            <div class="sr-rm-bar-track">
+                                <div class="sr-rm-bar-fill" style="width:${pct(subjectValues[i])}%;background:${radarPalette.subjectBorder}"></div>
+                                <div class="sr-rm-comp-marker" style="left:${pct(compVals[i])}%" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <span class="sr-rm-axis-score">${sv}</span>
+                    </div>`;
+                }).join("");
+            }
+
+            const summary = document.createElement("div");
+            summary.className = "sr-radar-mobile-summary";
+            summary.innerHTML = `
+                <div class="sr-rm-axes">${axisRows(getCompValues())}</div>
+                <div class="sr-rm-comp-note">
+                    <span class="sr-rm-comp-dot" style="background:${radarPalette.compBorder}"></span>
+                    <span class="sr-rm-comp-name">${esc(getCompLabel())}</span>
+                    <span class="sr-rm-comp-hint">· marcatore di confronto</span>
+                </div>
+                <button class="sr-rm-expand-btn" aria-expanded="false">
+                    Visualizza radar completo
+                </button>`;
+
+            radarParent.insertBefore(summary, scrollWrap);
+
+            summary.querySelector(".sr-rm-expand-btn").addEventListener("click", function () {
+                const opening = this.getAttribute("aria-expanded") !== "true";
+                this.setAttribute("aria-expanded", String(opening));
+                this.textContent = opening ? "Chiudi radar" : "Visualizza radar completo";
+                scrollWrap.classList.toggle("sr-mobile-open", opening);
+                if (radarTools) radarTools.classList.toggle("sr-mobile-open", opening);
+            });
+
+            // Sync markers when comparison selector changes
+            if (select) {
+                select.addEventListener("change", () => {
+                    const cv = getCompValues();
+                    summary.querySelectorAll(".sr-rm-comp-marker").forEach((m, i) => {
+                        m.style.left = pct(cv[i]) + "%";
+                    });
+                    const nameEl = summary.querySelector(".sr-rm-comp-name");
+                    if (nameEl) nameEl.textContent = getCompLabel();
+                });
+            }
+        }
     }
 
     function metricValue(playerId, metric) {
