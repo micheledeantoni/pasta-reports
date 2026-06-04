@@ -203,7 +203,7 @@ def build_slots(player: dict) -> dict:
             f'  window.SR_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
             '</script>\n'
             '<script src="assets/js/sr-report-loader.js"></script>\n'
-            '<script src="assets/js/sr-role-runtime.js?v=heatmap-filter-20260603"></script>'
+            '<script src="assets/js/sr-role-runtime.js?v=radar-mobile-20260604"></script>'
         )
 
     return {

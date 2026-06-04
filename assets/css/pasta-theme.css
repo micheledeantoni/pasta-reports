@@ -736,12 +736,18 @@ section.pasta-hero {
 .sr-bar-fill       { box-shadow: none !important; }
 
 /* Mobile radar summary — editorial theme overrides */
+.sr-rm-header      { border-bottom-color: var(--ei2-border-2) !important; }
+.sr-rm-subject-name { color: var(--ei2-ink) !important; }
+.sr-rm-vs-label    { color: var(--ei2-ink-faint) !important; }
+.sr-rm-comp-select {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
 .sr-rm-axis-label  { color: var(--ei2-ink-2) !important; }
 .sr-rm-axis-score  { color: var(--ei2-ink) !important; }
 .sr-rm-bar-track   { background: var(--ei2-border-2) !important; }
 .sr-rm-comp-marker { border-color: var(--ei2-surface) !important; }
-.sr-rm-comp-note   { color: var(--ei2-ink-faint) !important; }
-.sr-rm-comp-hint   { color: var(--ei2-ink-faint) !important; opacity: .7; }
 .sr-rm-expand-btn  { color: var(--ei2-ink-faint) !important; }
 
 /* Mobile compact metric view — editorial theme overrides */

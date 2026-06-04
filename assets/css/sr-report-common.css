@@ -571,24 +571,87 @@
 /* ── Mobile radar summary (compact default, hidden on desktop) ────────────── */
 .sr-radar-mobile-summary { display: none; }
 
-.sr-rm-axes { display: flex; flex-direction: column; gap: .45rem; margin-bottom: .65rem; }
+/* Header: subject name + comparison selector */
+.sr-rm-header {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    flex-wrap: wrap;
+    margin-bottom: .65rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sr-rm-subject-name {
+    display: flex;
+    align-items: center;
+    gap: .28rem;
+    font-size: .78rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    flex-shrink: 0;
+}
+
+.sr-rm-select-wrap {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.sr-rm-vs-label {
+    font-size: .7rem;
+    color: rgba(255,255,255,.38);
+    flex-shrink: 0;
+}
+
+.sr-rm-comp-select {
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: .45rem;
+    color: rgba(255,255,255,.78);
+    font-size: .73rem;
+    padding: .3rem .55rem;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    font-family: inherit;
+}
+
+/* Axis rows: label wraps, bar fills available space, score aligned */
+.sr-rm-axes {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: .6rem;
+}
 
 .sr-rm-axis-row {
     display: grid;
-    grid-template-columns: 7rem 1fr 2.2rem;
-    gap: .45rem;
-    align-items: center;
+    grid-template-columns: minmax(0, 6.5rem) 1fr 2.2rem;
+    column-gap: .45rem;
+    row-gap: 0;
+    align-items: start;
 }
 
 .sr-rm-axis-label {
-    font-size: .7rem;
-    color: rgba(255,255,255,.6);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: .75rem;       /* legible at 320px */
+    line-height: 1.28;
+    color: rgba(255,255,255,.65);
+    white-space: normal;     /* allow wrapping */
+    overflow: visible;
+    padding-top: .04rem;     /* optical alignment with bar */
 }
 
-.sr-rm-bar-wrap { min-width: 0; }
+.sr-rm-bar-wrap {
+    min-width: 0;
+    padding-top: .38rem;     /* vertically center bar on first label line */
+}
 
 .sr-rm-bar-track {
     position: relative;
@@ -603,60 +666,44 @@
     min-width: 3px;
 }
 
+/* Marker color set inline via radarPalette.compBorder — no hardcoded color here */
 .sr-rm-comp-marker {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: rgba(251,146,60,.88);
-    border: 1.5px solid rgba(14,18,32,.7);
+    border: 1.5px solid rgba(14,18,32,.75);
     box-sizing: border-box;
 }
 
 .sr-rm-axis-score {
-    font-size: .7rem;
+    font-size: .75rem;
     font-weight: 700;
     color: rgba(255,255,255,.82);
     text-align: right;
+    padding-top: .04rem;
 }
-
-.sr-rm-comp-note {
-    display: flex;
-    align-items: center;
-    gap: .3rem;
-    font-size: .66rem;
-    color: rgba(255,255,255,.45);
-    margin-bottom: .55rem;
-}
-
-.sr-rm-comp-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.sr-rm-comp-hint { color: rgba(255,255,255,.3); }
 
 .sr-rm-expand-btn {
     display: inline-flex;
     align-items: center;
     gap: .3rem;
-    padding: .28rem 0;
+    margin-top: .15rem;
+    padding: .3rem 0;
     background: none;
     border: none;
     cursor: pointer;
-    font-size: .67rem;
-    color: rgba(255,255,255,.38);
+    font-size: .7rem;
+    color: rgba(255,255,255,.42);
     font-family: inherit;
     letter-spacing: .04em;
 }
 
 .sr-rm-expand-btn::before {
     content: "▾";
-    font-size: .58rem;
+    font-size: .6rem;
     transition: transform .15s;
     display: inline-block;
 }

@@ -369,29 +369,29 @@ function initRoleReport() {
             });
         }
 
-        // ── Mobile radar summary (compact default on narrow viewports) ────────
+        // ── Mobile radar summary ─────────────────────────────────────────────
         const scrollWrap = canvas.closest(".sr-radar-scroll-wrap");
-        if (scrollWrap) {
+        if (scrollWrap) { try {
             const radarParent = scrollWrap.parentElement;
             const radarTools  = radarParent.querySelector(".sr-radar-tools");
 
-            // Remove any previous summary (guards against double-render)
             radarParent.querySelector(".sr-radar-mobile-summary")?.remove();
 
             const pct = v => Math.min(100, ((v || 0) / radarMax * 100)).toFixed(1);
 
-            function axisRows(compVals) {
+            function buildAxisRows(compVals) {
                 return radarAxes.map((axis, i) => {
                     const sv = Math.round(subjectValues[i] || 0);
                     const sl = SHORT_LABELS[axis.key];
-                    const label = Array.isArray(sl) ? sl.join(" ") : (sl || axis.label || axis.key);
+                    // Full label — allow wrapping, no truncation
+                    const label = Array.isArray(sl) ? sl.join(" ") : (sl || axis.label || axis.key);
                     return `
                     <div class="sr-rm-axis-row">
                         <span class="sr-rm-axis-label">${esc(label)}</span>
                         <div class="sr-rm-bar-wrap">
                             <div class="sr-rm-bar-track">
                                 <div class="sr-rm-bar-fill" style="width:${pct(subjectValues[i])}%;background:${radarPalette.subjectBorder}"></div>
-                                <div class="sr-rm-comp-marker" style="left:${pct(compVals[i])}%" aria-hidden="true"></div>
+                                <div class="sr-rm-comp-marker" style="left:${pct(compVals[i])}%;background:${radarPalette.compBorder}" aria-hidden="true"></div>
                             </div>
                         </div>
                         <span class="sr-rm-axis-score">${sv}</span>
@@ -399,21 +399,71 @@ function initRoleReport() {
                 }).join("");
             }
 
+            // Comparison selector options — same data source as desktop select
+            // Mirror the exact value format used by the desktop select ("p0","p1",..."avg")
+            const mobileOpts = normTargetProfiles.map((profile, i) =>
+                `<option value="p${i}">${esc(profile.label || `Player ${profile.id}`)}</option>`
+            );
+            if ((normTargetAvg.values || []).length) {
+                mobileOpts.push(`<option value="avg">${esc(normTargetAvg.label || "Media")}</option>`);
+            }
+            const mobileOptions = mobileOpts.join("");
+
+            const subjectMeta = playerMeta[String(subjectId)] || playerMeta[subjectId] || {};
             const summary = document.createElement("div");
             summary.className = "sr-radar-mobile-summary";
             summary.innerHTML = `
-                <div class="sr-rm-axes">${axisRows(getCompValues())}</div>
-                <div class="sr-rm-comp-note">
-                    <span class="sr-rm-comp-dot" style="background:${radarPalette.compBorder}"></span>
-                    <span class="sr-rm-comp-name">${esc(getCompLabel())}</span>
-                    <span class="sr-rm-comp-hint">· marcatore di confronto</span>
+                <div class="sr-rm-header">
+                    <span class="sr-rm-subject-name">
+                        <span class="sr-ptag-dot" style="background:${radarPalette.subjectBorder}"></span>
+                        ${esc(subjectMeta.name || radarData.subject?.label || "Subject")}
+                    </span>
+                    <div class="sr-rm-select-wrap">
+                        <span class="sr-rm-vs-label">vs</span>
+                        <select class="sr-rm-comp-select" aria-label="Seleziona giocatore di confronto">
+                            ${mobileOptions}
+                        </select>
+                    </div>
                 </div>
+                <div class="sr-rm-axes">${buildAxisRows(getCompValues())}</div>
                 <button class="sr-rm-expand-btn" aria-expanded="false">
                     Visualizza radar completo
                 </button>`;
 
             radarParent.insertBefore(summary, scrollWrap);
 
+            const mobileSelect = summary.querySelector(".sr-rm-comp-select");
+            if (select) mobileSelect.value = select.value; // sync initial state
+
+            // Helper: redraw markers using current comparison selection
+            function syncMarkers() {
+                const cv = getCompValues();
+                summary.querySelectorAll(".sr-rm-comp-marker").forEach((m, i) => {
+                    m.style.left  = pct(cv[i]) + "%";
+                    m.style.background = radarPalette.compBorder;
+                });
+            }
+
+            // Mobile select → chart + desktop select + markers (single source of truth)
+            mobileSelect.addEventListener("change", () => {
+                if (select && select.value !== mobileSelect.value) select.value = mobileSelect.value;
+                radarChart.data.datasets[0].data  = getCompValues();
+                radarChart.data.datasets[0].label = getCompLabel();
+                radarChart.update();
+                const nameEl = $("radarLegendCompName");
+                if (nameEl) nameEl.textContent = getCompLabel();
+                syncMarkers();
+            });
+
+            // Desktop select → mobile select + markers
+            if (select) {
+                select.addEventListener("change", () => {
+                    if (mobileSelect.value !== select.value) mobileSelect.value = select.value;
+                    syncMarkers();
+                });
+            }
+
+            // Toggle full radar
             summary.querySelector(".sr-rm-expand-btn").addEventListener("click", function () {
                 const opening = this.getAttribute("aria-expanded") !== "true";
                 this.setAttribute("aria-expanded", String(opening));
@@ -421,19 +471,7 @@ function initRoleReport() {
                 scrollWrap.classList.toggle("sr-mobile-open", opening);
                 if (radarTools) radarTools.classList.toggle("sr-mobile-open", opening);
             });
-
-            // Sync markers when comparison selector changes
-            if (select) {
-                select.addEventListener("change", () => {
-                    const cv = getCompValues();
-                    summary.querySelectorAll(".sr-rm-comp-marker").forEach((m, i) => {
-                        m.style.left = pct(cv[i]) + "%";
-                    });
-                    const nameEl = summary.querySelector(".sr-rm-comp-name");
-                    if (nameEl) nameEl.textContent = getCompLabel();
-                });
-            }
-        }
+        } catch(e) { console.error("[radar-mobile] error:", e); } }
     }
 
     function metricValue(playerId, metric) {
