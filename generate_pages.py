@@ -186,6 +186,26 @@ def build_slots(player: dict) -> dict:
         f"{comp} {season}"
     )
 
+    # ── Role-specific CSS and JS runtime ──────────────────────────────────
+    if macro == "GK":
+        role_css = "sr-gk-report.css"
+        role_scripts = (
+            '<script>\n'
+            f'  window.SR_GK_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
+            '</script>\n'
+            '<script src="assets/js/sr-gk-report-loader.js"></script>\n'
+            '<script src="assets/js/sr-gk-runtime.js"></script>'
+        )
+    else:
+        role_css = "sr-role-report.css"
+        role_scripts = (
+            '<script>\n'
+            f'  window.SR_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
+            '</script>\n'
+            '<script src="assets/js/sr-report-loader.js"></script>\n'
+            '<script src="assets/js/sr-role-runtime.js?v=heatmap-filter-20260603"></script>'
+        )
+
     return {
         "PLAYER_NAME":       player["player_name"],
         "PLAYER_SLUG":       player["slug"],
@@ -204,6 +224,8 @@ def build_slots(player: dict) -> dict:
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
         "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",
+        "ROLE_CSS":          role_css,
+        "ROLE_SCRIPTS":      role_scripts,
         # ── Editorial section notes (optional, populated via generate_editorial_brief.py) ──
         "NOTE_CONFRONTO":  note_block(player.get("note_confronto", "")),
         "NOTE_HEATMAP":    note_block(player.get("note_heatmap", "")),
