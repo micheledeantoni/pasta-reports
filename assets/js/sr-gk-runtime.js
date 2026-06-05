@@ -63,6 +63,7 @@ function initGkReport() {
     let selectedComparisonName = reportContext.primary_comparison_player || 'Yann Sommer';
     let visualPlayerId = null;
     let radarChart = null;
+    let radarEnhanced = false;
 
     function $(id) { return document.getElementById(id); }
     function esc(value) {
@@ -218,6 +219,42 @@ function initGkReport() {
         });
     }
 
+    function enhanceRadarMobile() {
+        if (radarEnhanced) return;
+        const section = $('gkRadarSection');
+        const wrap = section?.querySelector('.sr-radar-wrap-full');
+        if (!section || !wrap) return;
+        let summary = $('gkRadarMobileSummary');
+        if (!summary) {
+            summary = document.createElement('div');
+            summary.id = 'gkRadarMobileSummary';
+            summary.className = 'sr-gk-radar-summary';
+            wrap.parentNode.insertBefore(summary, wrap);
+        }
+        if (!section.querySelector('.sr-gk-radar-details')) {
+            const details = document.createElement('details');
+            details.className = 'sr-gk-radar-details';
+            details.id = 'gkRadarDetails';
+            details.open = !window.matchMedia('(max-width: 768px)').matches;
+            const summaryEl = document.createElement('summary');
+            summaryEl.className = 'sr-axis-accordion-summary';
+            summaryEl.textContent = 'Radar completo';
+            details.appendChild(summaryEl);
+            wrap.parentNode.insertBefore(details, wrap);
+            details.appendChild(wrap);
+            const context = section.querySelector('.sr-radar-context-note');
+            const axis = section.querySelector('.sr-axis-accordion');
+            if (context) details.appendChild(context);
+            if (axis) details.appendChild(axis);
+            details.addEventListener('toggle', () => {
+                if (details.open && radarChart) {
+                    window.requestAnimationFrame(() => radarChart.resize());
+                }
+            });
+        }
+        radarEnhanced = true;
+    }
+
     function renderRadarLegend(target, comparison) {
         const el = $('gkRadarLegend');
         if (!el) return;
@@ -238,11 +275,40 @@ function initGkReport() {
         }).join('');
     }
 
+    function renderRadarSummary(target, comparison) {
+        const el = $('gkRadarMobileSummary');
+        if (!el) return;
+        const targetScores = axisScores(target);
+        const comparisonScores = axisScores(comparison);
+        el.innerHTML = AXES.map(axisId => {
+            const targetValue = Number(targetScores[axisId]) || 0;
+            const comparisonValue = Number(comparisonScores[axisId]) || 0;
+            const delta = targetValue - comparisonValue;
+            const deltaText = delta >= 0 ? `+${fmt(delta, 0)}` : fmt(delta, 0);
+            return `<div class="sr-gk-radar-axis">
+                <div class="sr-gk-radar-axis-head">
+                    <span>${esc(AXIS_LABELS[axisId])}</span>
+                    <strong>${fmt(targetValue, 0)}</strong>
+                </div>
+                <div class="sr-gk-radar-track" aria-hidden="true">
+                    <i class="sr-gk-radar-fill" style="width:${Math.max(0, Math.min(100, targetValue))}%; background:${COLORS.target};"></i>
+                    <b class="sr-gk-radar-marker" style="left:${Math.max(0, Math.min(100, comparisonValue))}%; border-color:${COLORS.comparison};"></b>
+                </div>
+                <div class="sr-gk-radar-axis-foot">
+                    <span>${esc(target.header?.player_name || 'Target')}</span>
+                    <span>${esc(comparison.header?.player_name || 'Confronto')} ${fmt(comparisonValue, 0)} · diff ${deltaText}</span>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
     function renderRadar() {
+        enhanceRadarMobile();
         const target = targetPayload();
         const comparison = selectedComparisonPayload();
         renderRadarLegend(target, comparison);
         renderAxisGuide(target);
+        renderRadarSummary(target, comparison);
         const canvas = $('gkRadarChart');
         if (!canvas || typeof Chart === 'undefined') return;
         if (radarChart) radarChart.destroy();
@@ -408,11 +474,28 @@ function initGkReport() {
                         return `<div class="sr-bar-track${cls}"><div class="sr-bar-fill" style="width:${widths[idx]}%; background:${colors[idx]};" data-tip="${esc(names[idx])} · ${esc(metric.fmt(metric.values[idx]))}${esc(rawTip)}"></div></div>`;
                     }).join('');
                     const valueText = metric.values.map((v, idx) => `${names[idx].split(' ').slice(-1)[0]} ${metric.fmt(v)}`).join(' · ');
-                    return `<div class="sr-dot-row sr-dot-row-3">
+                    const metricId = `gk-${group.label}-${metric.label}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    const mobileRows = trio.map((payload, idx) => {
+                        const raw = metric.rawTips?.[idx];
+                        const rawText = raw !== null && raw !== undefined ? `<span>Raw ${esc(fmt(raw, 0))}</span>` : '';
+                        return `<div class="sr-gk-metric-player">
+                            <span><i style="background:${colors[idx]}"></i>${esc(names[idx])}</span>
+                            <strong>${esc(metric.fmt(metric.values[idx]))}</strong>
+                            ${rawText}
+                        </div>`;
+                    }).join('');
+                    return `<div class="sr-dot-row sr-dot-row-3 sr-gk-bars-desktop">
                         <div class="sr-dot-label">${esc(metric.label)}${metric.note ? `<span class="sr-bar-note">${esc(metric.note)}</span>` : ''}</div>
                         <div class="sr-bar-group">${tracks}</div>
                         <div class="sr-dot-val sr-dot-val-3">${esc(valueText)}</div>
-                    </div>`;
+                    </div>
+                    <details class="sr-gk-metric-detail" id="${esc(metricId)}">
+                        <summary>
+                            <span class="sr-gk-metric-summary-label">${esc(metric.label)}${metric.note ? `<small>${esc(metric.note)}</small>` : ''}</span>
+                            <span class="sr-gk-metric-summary-value">${esc(names[0].split(' ').slice(-1)[0])} ${esc(metric.fmt(metric.values[0]))}</span>
+                        </summary>
+                        <div class="sr-gk-metric-players">${mobileRows}</div>
+                    </details>`;
                 }).join('')}
             </div>`).join('')}`;
     }

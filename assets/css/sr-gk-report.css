@@ -119,6 +119,12 @@
 
 .sr-dot-val-3 { font-size: .68rem; font-weight: 600; color: #4ade80; text-align: right; }
 
+.sr-gk-radar-summary { display: none; }
+
+.sr-gk-radar-details > summary { cursor: pointer; }
+
+.sr-gk-metric-detail { display: none; }
+
 .sr-action-stack { display: flex; height: 26px; border-radius: .45rem; overflow: hidden; gap: 1px; }
 
 .sr-action-seg { display: flex; align-items: center; justify-content: center; font-size: .59rem; color: rgba(0,0,0,.65); font-weight: 700; transition: flex .2s; opacity: .85; }
@@ -133,10 +139,48 @@
 
 /* Sprint 1B GK responsive layout. */
 @media screen and (max-width: 768px) {
-    .sr-dot-row-3 { grid-template-columns: 7rem 1fr 5.5rem; }
+    .sr-card { padding: 1rem; border-radius: .85rem; }
+    .sr-radar-tools { align-items: stretch; gap: .75rem; }
+    .sr-radar-selector-wrap { width: 100%; align-items: flex-start; }
+    .sr-radar-select { width: 100%; min-height: 2.75rem; font-size: .86rem; }
+    .sr-radar-custom-legend { width: 100%; }
+    .sr-gk-radar-summary { display: grid; gap: .7rem; margin-top: .85rem; }
+    .sr-gk-radar-axis { display: grid; gap: .35rem; padding: .72rem; border: 1px solid rgba(255,255,255,.09); border-radius: .75rem; background: rgba(255,255,255,.035); }
+    .sr-gk-radar-axis-head, .sr-gk-radar-axis-foot { display: flex; justify-content: space-between; gap: .8rem; align-items: baseline; min-width: 0; }
+    .sr-gk-radar-axis-head span { color: rgba(255,255,255,.78); font-size: .8rem; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+    .sr-gk-radar-axis-head strong { color: #fff; font-size: 1rem; }
+    .sr-gk-radar-axis-foot { color: rgba(255,255,255,.5); font-size: .65rem; line-height: 1.25; }
+    .sr-gk-radar-axis-foot span:last-child { text-align: right; }
+    .sr-gk-radar-track { position: relative; height: .52rem; border-radius: 999px; background: rgba(255,255,255,.09); overflow: visible; }
+    .sr-gk-radar-fill { display: block; height: 100%; min-width: 3px; border-radius: inherit; }
+    .sr-gk-radar-marker { position: absolute; top: 50%; width: .78rem; height: .78rem; border: 2px solid; border-radius: 999px; background: #101626; transform: translate(-50%, -50%); box-shadow: 0 0 0 2px rgba(16,22,38,.8); }
+    .sr-gk-radar-details { margin-top: .9rem; }
+    .sr-gk-radar-details > summary { min-height: 2.75rem; display: flex; align-items: center; }
+    .sr-gk-radar-details .sr-radar-wrap-full { width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: min(82vw, 25rem); overflow: hidden; }
+    .sr-gk-radar-details .sr-radar-wrap-full canvas { width: 100% !important; max-width: 100% !important; height: 100% !important; }
+    .sr-axis-list { padding-left: 0; padding-right: 0; }
+    .sr-axis-card, .sr-axis-list li { overflow-wrap: anywhere; }
+    .sr-gk-bars-desktop { display: none; }
+    .sr-gk-metric-detail { display: block; border: 1px solid rgba(255,255,255,.08); border-radius: .72rem; background: rgba(255,255,255,.03); margin-bottom: .55rem; overflow: hidden; }
+    .sr-gk-metric-detail > summary { cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .7rem; align-items: center; min-height: 2.9rem; padding: .65rem .72rem; color: rgba(255,255,255,.82); list-style-position: inside; }
+    .sr-gk-metric-summary-label { min-width: 0; font-size: .78rem; line-height: 1.25; overflow-wrap: anywhere; }
+    .sr-gk-metric-summary-label small { display: block; margin-top: .12rem; color: rgba(251,191,36,.68); font-size: .63rem; font-style: italic; }
+    .sr-gk-metric-summary-value { color: #4ade80; font-size: .75rem; font-weight: 800; white-space: nowrap; }
+    .sr-gk-metric-players { display: grid; gap: .42rem; padding: 0 .72rem .72rem; }
+    .sr-gk-metric-player { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .55rem; align-items: baseline; padding-top: .42rem; border-top: 1px solid rgba(255,255,255,.06); }
+    .sr-gk-metric-player span { min-width: 0; color: rgba(255,255,255,.62); font-size: .72rem; overflow-wrap: anywhere; }
+    .sr-gk-metric-player span:first-child { display: inline-flex; align-items: center; gap: .35rem; }
+    .sr-gk-metric-player span:last-child { grid-column: 1 / -1; padding-left: 1rem; font-size: .64rem; color: rgba(255,255,255,.42); }
+    .sr-gk-metric-player i { width: .55rem; height: .55rem; border-radius: 999px; flex: 0 0 auto; }
+    .sr-gk-metric-player strong { color: rgba(255,255,255,.88); font-size: .75rem; text-align: right; }
     .sr-header-top { display: grid; grid-template-columns: 1fr; }
     .sr-header-left { width: 100%; }
     .sr-role-pill { justify-self: start; }
+    .sr-heatmap-grid, .sr-gk-visual-grid { grid-template-columns: 1fr; }
+    .sr-pitch-wrap { min-width: 0; }
+    .sr-gk-field-map, .sr-gk-pitch, .sr-gk-mini-field { max-width: 100%; max-height: none; }
+    .sr-gk-stat-grid { grid-template-columns: 1fr; }
+    .sr-gk-field-legend span { min-width: 0; overflow-wrap: anywhere; }
     .sr-gk-room-row { grid-template-columns: 1fr; }
     .sr-gk-status { justify-self: start; white-space: normal; }
     .sr-gk-bucket-row { grid-template-columns: 1fr 2.8rem 4.9rem; }
@@ -144,5 +188,10 @@
 }
 
 @media screen and (max-width: 480px) {
-    .sr-dot-row-3 { grid-template-columns: 6rem 1fr 4.8rem; }
+    .sr-card { padding: .85rem; }
+    .sr-gk-radar-axis { padding: .62rem; }
+    .sr-gk-radar-axis-head, .sr-gk-radar-axis-foot { display: grid; grid-template-columns: 1fr; gap: .18rem; }
+    .sr-gk-radar-axis-foot span:last-child { text-align: left; }
+    .sr-gk-metric-detail > summary { grid-template-columns: 1fr; gap: .25rem; }
+    .sr-gk-metric-summary-value { white-space: normal; }
 }
