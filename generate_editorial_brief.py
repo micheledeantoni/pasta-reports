@@ -63,6 +63,18 @@ ROLE_PLURAL = {
     "DEF": "difensori",
     "GK":  "portieri",
 }
+HEATMAP_FOURTH_BY_ROLE = {
+    "DEF": {
+        "title": "Azioni difensive",
+        "payload_key": "HEATMAP_DATA[*].def",
+        "editorial_focus": "work-rate difensivo e altezza della difesa attiva",
+    },
+    "DEFAULT": {
+        "title": "Progressione via passaggio",
+        "payload_key": "HEATMAP_DATA[*].prog",
+        "editorial_focus": "progressione tramite passaggio, non azioni difensive",
+    },
+}
 
 FORMAT_FNS = {
     "percent": lambda v: f"{v:.1%}",
@@ -131,6 +143,10 @@ def fmt_gk_val(value, metric_key: str) -> str:
 
 def group_names(player_meta: dict, ids: list) -> list[str]:
     return [player_meta.get(str(pid), {}).get("name", str(pid)) for pid in ids]
+
+
+def heatmap_fourth_for_role(role: str) -> dict:
+    return HEATMAP_FOURTH_BY_ROLE.get(role, HEATMAP_FOURTH_BY_ROLE["DEFAULT"])
 
 
 def bars_diffs(bar_section: dict, metric_formats: dict) -> list[dict]:
@@ -386,6 +402,7 @@ def build_brief(player: dict, payload: dict) -> str:
     s_bars = bars_diffs(payload["SOURCE_TEAM_COMPARISON_BARS"], metric_fmts)
     sim    = payload["SIMILARITY_DATA"]
     subj_hm = payload["HEATMAP_DATA"].get(subject_id, {})
+    fourth_hm = heatmap_fourth_for_role(macro_role)
 
     L = []  # lines
 
@@ -470,6 +487,9 @@ def build_brief(player: dict, payload: dict) -> str:
     L += [
         "---",
         "## § Impronta spaziale",
+        "Mappe mostrate nel report: Impronta posizionale, Direzione conduzioni, Distribuzione passaggi, "
+        f"{fourth_hm['title']}.",
+        f"Quarto riquadro per {macro_role}: {fourth_hm['payload_key']} — focus editoriale: {fourth_hm['editorial_focus']}.",
         f"Tocchi totali nel campione: {ip_n}",
         "",
     ]
@@ -479,7 +499,7 @@ def build_brief(player: dict, payload: dict) -> str:
     if ip_ft is not None:
         L.append(f"- Quota tocchi nel terzo offensivo: {ip_ft:.1%}")
     if def_op is not None:
-        L.append(f"- Azioni difensive in metà avversaria: {def_op:.1%}")
+        L.append(f"- Work-rate difensivo di supporto: {def_op:.1%} delle azioni difensive in metà avversaria")
     if prog_n is not None:
         L.append(f"- Passaggi progressivi: {prog_n} | Conduzioni progressive: {carry_n}")
     L += ["", "**Note analista** *(facoltativo — pattern visibili nelle 4 mappe)*:", "> …", ""]
@@ -549,6 +569,8 @@ def build_brief(player: dict, payload: dict) -> str:
         "",
         f"3. **note_heatmap** — Cosa rivela l'impronta spaziale sullo stile",
         f"   e sul raggio d'azione effettivo del giocatore?",
+        f"   Attenzione: per questo ruolo il quarto riquadro visibile e' **{fourth_hm['title']}**",
+        f"   ({fourth_hm['payload_key']}), quindi non descriverlo come azioni difensive se il ruolo non e' DEF.",
         "",
         f"4. **note_context** — Cosa dice il confronto con i compagni al {source_club}",
         f"   su chi è davvero {subject_name} fuori dal contesto narrativo?",

@@ -145,9 +145,6 @@
         "Passaggi nel terzo finale per90",
         "Passaggi in area per90",
         "Conduzioni progressive per90",
-        "Dribbling tentati per90",
-        "Dribbling riusciti",
-        "Altezza media dei dribbling",
         "Distanza media conduzione progressiva"
       ]
     },
@@ -289,9 +286,6 @@
     "Passes ending box per90": "number",
     "Progressive carry attempts per90": "number",
     "Take-on attempts per90": "number",
-    "Dribbling tentati per 90": "number",
-    "Dribbling riusciti": "percent_0_100",
-    "Altezza media dei dribbling": "one_decimal",
     "Average progressive carry distance": "meters",
     "Shot-creating actions per90": "number",
     "Expected assists per90": "number",
@@ -353,24 +347,6 @@
       "min": 0.0,
       "max": 19.590517,
       "count": 1005,
-      "scale": "role_minmax_raw"
-    },
-    "Dribbling tentati per 90": {
-      "min": 0.0,
-      "max": 12.583587,
-      "count": 1156,
-      "scale": "role_minmax_raw"
-    },
-    "Dribbling riusciti": {
-      "min": 0.0,
-      "max": 100.0,
-      "count": 1154,
-      "scale": "role_minmax_raw"
-    },
-    "Altezza media dei dribbling": {
-      "min": 24.6225,
-      "max": 87.6925,
-      "count": 1154,
       "scale": "role_minmax_raw"
     },
     "Average progressive carry distance": {
@@ -462,9 +438,6 @@
       "Passes ending box per90": 1.752488,
       "Progressive carry attempts per90": 1.986153,
       "Take-on attempts per90": 2.102986,
-      "Dribbling tentati per 90": 2.041312,
-      "Dribbling riusciti": 51.785714,
-      "Altezza media dei dribbling": 62.25375,
       "Average progressive carry distance": 21.162647,
       "Shot-creating actions per90": 0.973605,
       "Expected assists per90": 0.092593,
@@ -488,9 +461,6 @@
       "Passes ending box per90": 4.501975,
       "Progressive carry attempts per90": 2.408951,
       "Take-on attempts per90": 2.053532,
-      "Dribbling tentati per 90": 1.967213,
-      "Dribbling riusciti": 44.642857,
-      "Altezza media dei dribbling": 57.5475,
       "Average progressive carry distance": 22.266885,
       "Shot-creating actions per90": 2.606406,
       "Expected assists per90": 0.156655,
@@ -514,9 +484,6 @@
       "Passes ending box per90": 1.925676,
       "Progressive carry attempts per90": 3.040541,
       "Take-on attempts per90": 1.317568,
-      "Dribbling tentati per 90": 1.316431,
-      "Dribbling riusciti": 60.0,
-      "Altezza media dei dribbling": 56.567,
       "Average progressive carry distance": 18.25075,
       "Shot-creating actions per90": 1.266892,
       "Expected assists per90": 0.048893,
@@ -540,9 +507,6 @@
       "Passes ending box per90": 2.15311,
       "Progressive carry attempts per90": 2.852871,
       "Take-on attempts per90": 0.753589,
-      "Dribbling tentati per 90": 0.753589,
-      "Dribbling riusciti": 35.714286,
-      "Altezza media dei dribbling": 54.315,
       "Average progressive carry distance": 21.978679,
       "Shot-creating actions per90": 1.937799,
       "Expected assists per90": 0.035505,
@@ -566,9 +530,6 @@
       "Passes ending box per90": 3.878158,
       "Progressive carry attempts per90": 3.677563,
       "Take-on attempts per90": 2.340267,
-      "Dribbling tentati per 90": 1.888826,
-      "Dribbling riusciti": 40.540541,
-      "Altezza media dei dribbling": 72.004459,
       "Average progressive carry distance": 20.707909,
       "Shot-creating actions per90": 1.53789,
       "Expected assists per90": 0.125261,
@@ -592,9 +553,6 @@
       "Passes ending box per90": 2.704006,
       "Progressive carry attempts per90": 1.43546,
       "Take-on attempts per90": 0.767804,
-      "Dribbling tentati per 90": 0.750963,
-      "Dribbling riusciti": 50.0,
-      "Altezza media dei dribbling": 63.306923,
       "Average progressive carry distance": 18.929302,
       "Shot-creating actions per90": 0.801187,
       "Expected assists per90": 0.060205,
@@ -618,9 +576,6 @@
       "Passes ending box per90": 3.340206,
       "Progressive carry attempts per90": 4.128866,
       "Take-on attempts per90": 5.195876,
-      "Dribbling tentati per 90": 5.006784,
-      "Dribbling riusciti": 28.455285,
-      "Altezza media dei dribbling": 69.900976,
       "Average progressive carry distance": 20.676742,
       "Shot-creating actions per90": 1.809278,
       "Expected assists per90": 0.102238,
@@ -644,9 +599,6 @@
       "Passes ending box per90": 2.683897,
       "Progressive carry attempts per90": 1.908549,
       "Take-on attempts per90": 1.908549,
-      "Dribbling tentati per 90": 1.908549,
-      "Dribbling riusciti": 15.625,
-      "Altezza media dei dribbling": 62.9475,
       "Average progressive carry distance": 23.33625,
       "Shot-creating actions per90": 1.192843,
       "Expected assists per90": 0.047435,
@@ -670,9 +622,6 @@
       "Passes ending box per90": 1.133263,
       "Progressive carry attempts per90": 2.266527,
       "Take-on attempts per90": 2.266527,
-      "Dribbling tentati per 90": 2.059984,
-      "Dribbling riusciti": 27.586207,
-      "Altezza media dei dribbling": 68.449138,
       "Average progressive carry distance": 17.43,
       "Shot-creating actions per90": 0.755509,
       "Expected assists per90": 0.046283,
@@ -822,46 +771,18 @@
             "label": "Conduzioni progressive per90"
           },
           {
-            "metric": "Dribbling tentati per 90",
-            "subjectValue": 2.041312,
-            "baselineValue": 1.481515,
-            "subjectScore": 16.22,
-            "baselineScore": 11.77,
+            "metric": "Take-on attempts per90",
+            "subjectValue": 2.102986,
+            "baselineValue": 1.616239,
+            "subjectScore": 10.73,
+            "baselineScore": 8.25,
             "range": {
               "min": 0.0,
-              "max": 12.583587,
-              "count": 1156,
+              "max": 19.590517,
+              "count": 1005,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling tentati per90"
-          },
-          {
-            "metric": "Dribbling riusciti",
-            "subjectValue": 51.785714,
-            "baselineValue": 45.224421,
-            "subjectScore": 51.79,
-            "baselineScore": 45.22,
-            "range": {
-              "min": 0.0,
-              "max": 100.0,
-              "count": 1154,
-              "scale": "role_minmax_raw"
-            },
-            "label": "Dribbling riusciti"
-          },
-          {
-            "metric": "Altezza media dei dribbling",
-            "subjectValue": 62.25375,
-            "baselineValue": 60.10849,
-            "subjectScore": 59.67,
-            "baselineScore": 56.26,
-            "range": {
-              "min": 24.6225,
-              "max": 87.6925,
-              "count": 1154,
-              "scale": "role_minmax_raw"
-            },
-            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Average progressive carry distance",
@@ -1184,46 +1105,18 @@
             "label": "Conduzioni progressive per90"
           },
           {
-            "metric": "Dribbling tentati per 90",
-            "subjectValue": 2.041312,
-            "baselineValue": 2.43157,
-            "subjectScore": 16.22,
-            "baselineScore": 19.32,
+            "metric": "Take-on attempts per90",
+            "subjectValue": 2.102986,
+            "baselineValue": 2.534689,
+            "subjectScore": 10.73,
+            "baselineScore": 12.94,
             "range": {
               "min": 0.0,
-              "max": 12.583587,
-              "count": 1156,
+              "max": 19.590517,
+              "count": 1005,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling tentati per90"
-          },
-          {
-            "metric": "Dribbling riusciti",
-            "subjectValue": 51.785714,
-            "baselineValue": 30.416623,
-            "subjectScore": 51.79,
-            "baselineScore": 30.42,
-            "range": {
-              "min": 0.0,
-              "max": 100.0,
-              "count": 1154,
-              "scale": "role_minmax_raw"
-            },
-            "label": "Dribbling riusciti"
-          },
-          {
-            "metric": "Altezza media dei dribbling",
-            "subjectValue": 62.25375,
-            "baselineValue": 66.151134,
-            "subjectScore": 59.67,
-            "baselineScore": 65.85,
-            "range": {
-              "min": 24.6225,
-              "max": 87.6925,
-              "count": 1154,
-              "scale": "role_minmax_raw"
-            },
-            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Average progressive carry distance",
