@@ -868,6 +868,135 @@ section.pasta-hero {
 .sr-gk-room-row span { color: var(--ei2-ink-muted) !important; }
 .sr-gk-sample { border-color: var(--ei2-border) !important; }
 
+/* GK report integration: keep goalkeeper-specific figures dark, but let the
+   surrounding report read like the cream editorial role pages. */
+.sr-gk-sample,
+.sr-gk-status,
+.sr-gk-room-row .sr-gk-ok,
+.sr-gk-room-row .sr-gk-info,
+.sr-gk-room-row .sr-gk-warn,
+.sr-gk-room-row .sr-gk-alert,
+.sr-gk-room-row .sr-gk-muted {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-gk-sample span,
+.sr-gk-action-row,
+.sr-gk-field-legend,
+.sr-gk-bucket-row,
+.sr-dist-cell span {
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-ok {
+    background: rgba(20, 83, 45, .08) !important;
+    color: var(--ei2-accent-2) !important;
+    border-color: rgba(20, 83, 45, .22) !important;
+}
+
+.sr-gk-info {
+    background: rgba(33, 83, 115, .08) !important;
+    color: #215373 !important;
+    border-color: rgba(33, 83, 115, .2) !important;
+}
+
+.sr-gk-warn {
+    background: rgba(154, 88, 22, .08) !important;
+    color: #7c3f10 !important;
+    border-color: rgba(154, 88, 22, .22) !important;
+}
+
+.sr-gk-alert {
+    background: rgba(131, 24, 67, .08) !important;
+    color: var(--ei2-accent) !important;
+    border-color: rgba(131, 24, 67, .22) !important;
+}
+
+.sr-gk-muted {
+    background: var(--ei2-surface-2) !important;
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-goal-frame,
+.sr-gk-field-map,
+.sr-gk-pitch,
+.sr-gk-mini-field {
+    background:
+        radial-gradient(ellipse at 50% 42%,
+            rgba(42, 72, 50, .58) 0%,
+            rgba(26, 42, 28, 0) 48%,
+            rgba(4, 8, 5, .78) 100%),
+        var(--ei2-viz-bg) !important;
+    border-color: rgba(196, 172, 128, .25) !important;
+    border-radius: .5rem !important;
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, .14),
+        inset 0 0 48px rgba(0, 0, 0, .38) !important;
+}
+
+.sr-gk-goal-zone {
+    border-color: rgba(242, 236, 222, .18) !important;
+}
+
+.sr-gk-goal-zone span,
+.sr-gk-goal-zone em,
+.sr-gk-field-map text,
+.sr-gk-pitch text,
+.sr-gk-mini-field text {
+    color: rgba(242, 236, 222, .78) !important;
+    fill: rgba(242, 236, 222, .78) !important;
+}
+
+.sr-gk-goal-zone b {
+    color: rgba(242, 236, 222, .92) !important;
+}
+
+.sr-gk-field-map .pitch-line {
+    stroke: rgba(242, 236, 222, .2) !important;
+}
+
+.sr-gk-field-map .pitch-guide {
+    stroke: rgba(242, 236, 222, .11) !important;
+}
+
+.sr-gk-stat-grid span,
+.sr-dist-cell,
+.sr-profile-cell,
+.sr-dist-zone {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-stat-grid b,
+.sr-gk-action-row strong,
+.sr-dist-cell strong,
+.sr-profile-cell strong {
+    color: var(--ei2-ink) !important;
+}
+
+.sr-gk-bucket,
+.sr-gk-action-row {
+    border-color: var(--ei2-border-2) !important;
+}
+
+.sr-gk-empty,
+.sr-gk-coord-note {
+    background: rgba(154, 88, 22, .06) !important;
+    border-color: rgba(154, 88, 22, .22) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-bar-note {
+    color: #7c3f10 !important;
+}
+
+.sr-dot-val-3 {
+    color: var(--ei2-accent) !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    HOMEPAGE CARDS
    ═════════════════════════════════════════════════════════════════════════ */

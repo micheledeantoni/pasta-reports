@@ -164,5 +164,29 @@
     "note_heatmap": "La sua impronta spaziale racconta un giocatore collocato con chiarezza sulla corsia destra, con un baricentro medio più alto rispetto al contesto Cagliari ma non ancora da esterno dominante in una squadra di possesso. Il dato sulle azioni difensive in metà avversaria suggerisce una partecipazione al pressing non marginale, ma ancora lontana dai riferimenti Inter. Più che un laterale da ultimo terzo, oggi Palestra sembra un difensore di fascia che accompagna, conduce e consolida la manovra.",
     "note_context": "Il confronto interno al Cagliari aiuta a separare il profilo reale dalla narrazione. Rispetto a Obert, Zappa e Idrissi, Palestra emerge per conduzioni progressive, cross, altezza media delle azioni e qualità del passaggio: segnali chiari di un giocatore più orientato a partecipare alla fase offensiva. Allo stesso tempo, il basso peso nei passaggi progressivi e nelle azioni difensive pAdj suggerisce che non è ancora un motore completo della fascia, ma un profilo con qualità selettive e margini di crescita.",
     "note_similarity": "Per volume di coinvolgimento, Palestra si avvicina soprattutto a Denzel Dumfries e Luis Henrique, mentre la somiglianza territoriale lo collega di più a Luis Henrique. Il mix di azioni, invece, richiama in parte Dimarco, ma più per composizione stilistica che per impatto reale nel campo avanzato. Per l’Inter questo implica un profilo ibrido: non un doppione puro, ma un laterale giovane che può essere formato tra compiti da quinto, conduzione dal basso e sviluppo progressivo dell’occupazione offensiva."
+  },
+  {
+    "player_id": "118667",
+    "player_name": "Ivan Provedel",
+    "slug": "ivan-provedel",
+    "team_id": "77",
+    "team_name": "Lazio",
+    "source_club": "Lazio",
+    "competition": "ITA-Serie A",
+    "season": "2526",
+    "minutes": "",
+    "macro_role": "GK",
+    "target_team": "Inter",
+    "report_file": "ivan-provedel.html",
+    "report_status": "live",
+    "visibility": "hidden",
+    "payload_file": "data/report_legacy_payloads/ivan-provedel.legacy_gk_payload.json",
+    "payload_source": "soccerdb",
+    "narrative": "Ivan Provedel è un portiere da leggere più per equilibrio funzionale che per picchi estremi: porta un campione solido, un volume alto di interventi e una gestione con i piedi ordinata, ma non si presenta come rottura radicale rispetto alla stanza Inter. Il confronto con Sommer e Josep Martínez serve soprattutto a separare rendimento, profilo d’uso e proiezione tattica. La cautela principale riguarda il contesto: alcune metriche da portiere sono molto sensibili a qualità dei tiri affrontati, struttura difensiva e altezza della squadra.",
+    "source_team_note": "",
+    "note_confronto": "Rispetto a Sommer, Provedel appare più carico di volume sui tiri e leggermente meno pulito nella distribuzione, con un profilo da titolare abituato a gestire più lavoro diretto. Martínez resta un riferimento interno utile ma con campione più ridotto: i suoi valori vanno letti come indizi di stanza portieri, non come baseline pienamente stabile. Per l’Inter, Provedel sembra più un’alternativa di continuità esperta che un cambio netto di grammatica.",
+    "note_heatmap": "Le visualizzazioni GK raccontano un portiere con attività reale e leggibile: molti tiri nello specchio affrontati, una quota non trascurabile di interventi fuori area e una partecipazione alla costruzione presente ma non dominante. La distribuzione suggerisce un uso pragmatico del pallone, più orientato a sostenere l’uscita che a trasformare il portiere in un regista aggiunto. Il profilo visuale va quindi letto come affidabilità operativa, non come specialismo estremo da sweeper o da primo costruttore.",
+    "note_context": "",
+    "note_similarity": ""
   }
 ]

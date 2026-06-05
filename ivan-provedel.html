@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Player Report · Guglielmo Vicario | PASTA</title>
+    <title>Player Report · Ivan Provedel | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!-- Open Graph -->
+    <meta property="og:title"       content="Ivan Provedel · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Portiere · ITA · Serie A 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/ivan-provedel.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="https://pasta-reports.com/ivan-provedel.html" />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Ivan Provedel · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Portiere · ITA · Serie A 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/ivan-provedel.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css" />
@@ -11,7 +25,36 @@
     <link rel="stylesheet" href="assets/css/pasta-theme.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
+        /* Banner: player photo (template-specific - uses ivan-provedel) */
+        #banner.style2 {
+            background-image: url('images/players/ivan-provedel.png') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
+        }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
         @media screen and (max-width: 768px) {
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
             .sr-heatmap-grid { grid-template-columns: 1fr; }
             .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
         }
@@ -35,16 +78,23 @@
     </nav>
     <section id="banner" class="style2">
         <div class="inner">
-            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
-            <header class="major"><h1>Guglielmo Vicario</h1></header>
-            <div class="content"><p>GK report · Tottenham · 2 250 minuti · Valutazione Inter</p></div>
+            <header class="major"><h1>Ivan Provedel</h1></header>
+            <div class="content">
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs">Lazio → Inter</span>
+                    <span class="sr-banner-chip">Portiere</span>
+                    <span class="sr-banner-chip">ITA · Serie A</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">2 430 min</span>
+                </div>
+            </div>
         </div>
     </section>
     <div id="main">
     <section class="sr-inner">
         <div class="sr-card" id="gkProfileReading">
             <p class="sr-section-label">Lettura del profilo</p>
-            <p class="sr-narrative" id="gkProfileParagraph">Vicario emerge come un portiere da valutare soprattutto nel rapporto tra volume di interventi, gestione dell’area e contributo nella costruzione. Il confronto con Sommer e Martínez serve a leggere quanto il suo profilo si avvicini o si distanzi dall’attuale stanza portieri dell’Inter. Le metriche vanno interpretate come indicatori di profilo e contesto d’uso, non come una stima diretta del valore assoluto del giocatore.</p>
+            <div class="sr-narrative sr-editorial-markdown" id="gkProfileParagraph"><p class="sr-narrative-p">Ivan Provedel è un portiere da leggere più per equilibrio funzionale che per picchi estremi: porta un campione solido, un volume alto di interventi e una gestione con i piedi ordinata, ma non si presenta come rottura radicale rispetto alla stanza Inter. Il confronto con Sommer e Josep Martínez serve soprattutto a separare rendimento, profilo d’uso e proiezione tattica. La cautela principale riguarda il contesto: alcune metriche da portiere sono molto sensibili a qualità dei tiri affrontati, struttura difensiva e altezza della squadra.</p></div>
         </div>
         <div class="sr-card" id="gkRadarSection">
             <p class="sr-section-label">Profilo sintetico · assi GK interpretativi</p>
@@ -64,14 +114,16 @@
         </div>
         <div class="sr-card" id="gkBarsSection">
             <p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>
+            <p class="sr-section-intro">Rispetto a Sommer, Provedel appare più carico di volume sui tiri e leggermente meno pulito nella distribuzione, con un profilo da titolare abituato a gestire più lavoro diretto. Martínez resta un riferimento interno utile ma con campione più ridotto: i suoi valori vanno letti come indizi di stanza portieri, non come baseline pienamente stabile. Per l’Inter, Provedel sembra più un’alternativa di continuità esperta che un cambio netto di grammatica.</p>
             <p class="sr-raw-bars-note">Le barre usano valori normalizzati per90, percentuali, rate o share: sono utili per leggere differenze di profilo e uso senza penalizzare campioni con minutaggi diversi. I conteggi grezzi restano solo come dettaglio nei tooltip.</p>
             <div class="sr-player-tags" id="gkBarsLegend"></div>
             <div id="gkBars"></div>
         </div>
         <div class="sr-card" id="gkVisualSection">
             <p class="sr-section-label">Visualizzazioni portiere</p>
+            <p class="sr-section-intro">Le visualizzazioni GK raccontano un portiere con attività reale e leggibile: molti tiri nello specchio affrontati, una quota non trascurabile di interventi fuori area e una partecipazione alla costruzione presente ma non dominante. La distribuzione suggerisce un uso pragmatico del pallone, più orientato a sostenere l’uscita che a trasformare il portiere in un regista aggiunto. Il profilo visuale va quindi letto come affidabilità operativa, non come specialismo estremo da sweeper o da primo costruttore.</p>
             <div class="sr-radar-tools">
-                <p class="sr-radar-context-note" style="margin:0;">La griglia visuale ispeziona un portiere alla volta e parte da Vicario. Non è una heatmap posizionale generica.</p>
+                <p class="sr-radar-context-note" style="margin:0;">La griglia visuale ispeziona un portiere alla volta e parte da Ivan Provedel. Non è una heatmap posizionale generica.</p>
                 <div id="gkVisualPlayerBtns" class="sr-heatmap-toggle"></div>
             </div>
             <div class="sr-heatmap-grid sr-gk-visual-grid">
@@ -119,7 +171,7 @@
 <script src="assets/js/main.js"></script>
 <!-- Live GK page now uses external legacy GK payload only. Inline fallback archived. -->
 <script>
-  window.SR_GK_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/gk_report.legacy_gk_payload.json";
+  window.SR_GK_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/ivan-provedel.legacy_gk_payload.json";
 </script>
 <script src="assets/js/sr-gk-report-loader.js"></script>
 <script src="assets/js/sr-gk-runtime.js?v=cream-theme-20260604"></script>

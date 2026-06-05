@@ -51,7 +51,15 @@ function initGkReport() {
         ['middle_left', 'middle_center', 'middle_right'],
         ['bottom_left', 'bottom_center', 'bottom_right'],
     ];
-    const COLORS = { target: '#4ade80', comparison: '#fb923c', alternate: '#60a5fa' };
+    function cssVar(name, fallback) {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        return value || fallback;
+    }
+    const COLORS = {
+        target: cssVar('--sr-radar-subject-border', '#c47434'),
+        comparison: cssVar('--sr-radar-comparison-border', '#94c4e6'),
+        alternate: cssVar('--ei2-accent', '#831843'),
+    };
     let selectedComparisonName = reportContext.primary_comparison_player || 'Yann Sommer';
     let visualPlayerId = null;
     let radarChart = null;
