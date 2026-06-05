@@ -164,6 +164,9 @@
       "description": "Proxy on-ball e fisici del lavoro offensivo: conduzioni progressive, 1v1 e duelli aerei offensivi.",
       "metrics": [
         "Conduzioni progressive per90",
+        "Dribbling tentati per90",
+        "Dribbling riusciti",
+        "Altezza media dei dribbling",
         "1v1 tentati per90",
         "Successo 1v1",
         "Duelli aerei offensivi per90"
@@ -282,7 +285,10 @@
     "Final-third receival share": "percent",
     "Pass completion": "percent",
     "Progressive pass share": "percent",
-    "Offensive aerial attempts per90": "number"
+    "Offensive aerial attempts per90": "number",
+    "Dribbling tentati per 90": "number",
+    "Dribbling riusciti": "percent_0_100",
+    "Altezza media dei dribbling": "one_decimal"
   },
   "METRIC_RANGES": {
     "xG per90": {
@@ -404,6 +410,24 @@
       "max": 15.449591,
       "count": 607,
       "scale": "role_minmax_raw"
+    },
+    "Dribbling tentati per 90": {
+      "min": 0.196507,
+      "max": 11.099091,
+      "count": 824,
+      "scale": "role_minmax_raw"
+    },
+    "Dribbling riusciti": {
+      "min": 0.0,
+      "max": 100.0,
+      "count": 824,
+      "scale": "role_minmax_raw"
+    },
+    "Altezza media dei dribbling": {
+      "min": 49.268333,
+      "max": 87.615938,
+      "count": 824,
+      "scale": "role_minmax_raw"
     }
   },
   "METRICS": {
@@ -427,7 +451,10 @@
       "Final-third receival share": 0.517606,
       "Pass completion": 0.737885,
       "Progressive pass share": 0.112335,
-      "Offensive aerial attempts per90": 3.002534
+      "Offensive aerial attempts per90": 3.002534,
+      "Dribbling tentati per 90": 1.192693,
+      "Dribbling riusciti": 32.432432,
+      "Altezza media dei dribbling": 78.347027
     },
     "299344": {
       "xG per90": 0.489418,
@@ -449,7 +476,10 @@
       "Final-third receival share": 0.588997,
       "Pass completion": 0.784499,
       "Progressive pass share": 0.141777,
-      "Offensive aerial attempts per90": 1.628141
+      "Offensive aerial attempts per90": 1.628141,
+      "Dribbling tentati per 90": 2.202084,
+      "Dribbling riusciti": 38.888889,
+      "Altezza media dei dribbling": 69.193056
     },
     "296322": {
       "xG per90": 0.256989,
@@ -471,7 +501,10 @@
       "Final-third receival share": 0.579737,
       "Pass completion": 0.753986,
       "Progressive pass share": 0.084282,
-      "Offensive aerial attempts per90": 3.227299
+      "Offensive aerial attempts per90": 3.227299,
+      "Dribbling tentati per 90": 1.722711,
+      "Dribbling riusciti": 45.945946,
+      "Altezza media dei dribbling": 70.426622
     },
     "497222": {
       "xG per90": 0.291658,
@@ -493,7 +526,10 @@
       "Final-third receival share": 0.55665,
       "Pass completion": 0.734513,
       "Progressive pass share": 0.112094,
-      "Offensive aerial attempts per90": 3.747212
+      "Offensive aerial attempts per90": 3.747212,
+      "Dribbling tentati per 90": 1.230469,
+      "Dribbling riusciti": 19.047619,
+      "Altezza media dei dribbling": 77.255
     },
     "447489": {
       "xG per90": 0.233506,
@@ -515,7 +551,10 @@
       "Final-third receival share": 0.536965,
       "Pass completion": 0.78733,
       "Progressive pass share": 0.117647,
-      "Offensive aerial attempts per90": 2.289017
+      "Offensive aerial attempts per90": 2.289017,
+      "Dribbling tentati per 90": 3.723022,
+      "Dribbling riusciti": 43.478261,
+      "Altezza media dei dribbling": 66.522065
     },
     "326505": {
       "xG per90": 0.096758,
@@ -537,7 +576,10 @@
       "Final-third receival share": 0.571429,
       "Pass completion": 0.815951,
       "Progressive pass share": 0.116564,
-      "Offensive aerial attempts per90": 1.058824
+      "Offensive aerial attempts per90": 1.058824,
+      "Dribbling tentati per 90": 5.871658,
+      "Dribbling riusciti": 31.147541,
+      "Altezza media dei dribbling": 76.419344
     },
     "354283": {
       "xG per90": 0.117717,
@@ -559,7 +601,10 @@
       "Final-third receival share": 0.49635,
       "Pass completion": 0.799228,
       "Progressive pass share": 0.169884,
-      "Offensive aerial attempts per90": 0.697674
+      "Offensive aerial attempts per90": 0.697674,
+      "Dribbling tentati per 90": 3.265602,
+      "Dribbling riusciti": 52.0,
+      "Altezza media dei dribbling": 70.0728
     },
     "424819": {
       "xG per90": 0.420679,
@@ -581,7 +626,10 @@
       "Final-third receival share": 0.542553,
       "Pass completion": 0.791045,
       "Progressive pass share": 0.029851,
-      "Offensive aerial attempts per90": 3.087071
+      "Offensive aerial attempts per90": 3.087071,
+      "Dribbling tentati per 90": 2.137203,
+      "Dribbling riusciti": 66.666667,
+      "Altezza media dei dribbling": 61.436667
     }
   },
   "TARGET_COMPARISON_BARS": {
@@ -843,6 +891,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Conduzioni progressive per90"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 1.192693,
+            "baselineValue": 2.219572,
+            "subjectScore": 9.14,
+            "baselineScore": 18.56,
+            "range": {
+              "min": 0.196507,
+              "max": 11.099091,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 32.432432,
+            "baselineValue": 36.840179,
+            "subjectScore": 32.43,
+            "baselineScore": 36.84,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 78.347027,
+            "baselineValue": 70.849186,
+            "subjectScore": 75.83,
+            "baselineScore": 56.28,
+            "range": {
+              "min": 49.268333,
+              "max": 87.615938,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Take-ons per90",
@@ -1148,6 +1238,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Conduzioni progressive per90"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 1.192693,
+            "baselineValue": 3.758154,
+            "subjectScore": 9.14,
+            "baselineScore": 32.67,
+            "range": {
+              "min": 0.196507,
+              "max": 11.099091,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 32.432432,
+            "baselineValue": 49.938069,
+            "subjectScore": 32.43,
+            "baselineScore": 49.94,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 78.347027,
+            "baselineValue": 69.309604,
+            "subjectScore": 75.83,
+            "baselineScore": 52.26,
+            "range": {
+              "min": 49.268333,
+              "max": 87.615938,
+              "count": 824,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Take-ons per90",

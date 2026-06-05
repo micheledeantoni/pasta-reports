@@ -167,6 +167,9 @@
         "Passaggi progressivi per 90",
         "Quota passaggi progressivi",
         "Conduzioni progressive per90",
+        "Dribbling tentati per90",
+        "Dribbling riusciti",
+        "Altezza media dei dribbling",
         "Distanza media conduzione progressiva",
         "Passaggi nell'ultimo terzo per 90"
       ]
@@ -298,7 +301,10 @@
     "Passes into penalty area per90": "number",
     "Defensive action mean x": "one_decimal",
     "Mean x action location": "one_decimal",
-    "Cross attempts per90": "number"
+    "Cross attempts per90": "number",
+    "Dribbling tentati per 90": "number",
+    "Dribbling riusciti": "percent_0_100",
+    "Altezza media dei dribbling": "one_decimal"
   },
   "METRIC_RANGES": {
     "Defensive actions padj": {
@@ -432,6 +438,24 @@
       "max": 7.42268,
       "count": 1348,
       "scale": "role_minmax_raw"
+    },
+    "Dribbling tentati per 90": {
+      "min": 0.0,
+      "max": 7.853042,
+      "count": 1348,
+      "scale": "role_minmax_raw"
+    },
+    "Dribbling riusciti": {
+      "min": 0.0,
+      "max": 100.0,
+      "count": 1302,
+      "scale": "role_minmax_raw"
+    },
+    "Altezza media dei dribbling": {
+      "min": 3.15,
+      "max": 102.9,
+      "count": 1302,
+      "scale": "role_minmax_raw"
     }
   },
   "METRICS": {
@@ -457,7 +481,10 @@
       "Passes into penalty area per90": 1.883862,
       "Defensive action mean x": 32.448297,
       "Mean x action location": 43.62469,
-      "Cross attempts per90": 0.607698
+      "Cross attempts per90": 0.607698,
+      "Dribbling tentati per 90": 2.096556,
+      "Dribbling riusciti": 59.42029,
+      "Altezza media dei dribbling": 57.98587
     },
     "329665": {
       "Defensive actions padj": 4.743642,
@@ -481,7 +508,10 @@
       "Passes into penalty area per90": 2.221243,
       "Defensive action mean x": 35.541541,
       "Mean x action location": 48.773131,
-      "Cross attempts per90": 3.371529
+      "Cross attempts per90": 3.371529,
+      "Dribbling tentati per 90": 0.515646,
+      "Dribbling riusciti": 46.153846,
+      "Altezza media dei dribbling": 64.995
     },
     "349126": {
       "Defensive actions padj": 4.493965,
@@ -505,7 +535,10 @@
       "Passes into penalty area per90": 1.730769,
       "Defensive action mean x": 32.93093,
       "Mean x action location": 46.394408,
-      "Cross attempts per90": 0.608108
+      "Cross attempts per90": 0.608108,
+      "Dribbling tentati per 90": 0.701663,
+      "Dribbling riusciti": 53.333333,
+      "Altezza media dei dribbling": 60.9
     },
     "297390": {
       "Defensive actions padj": 4.943374,
@@ -529,7 +562,10 @@
       "Passes into penalty area per90": 1.055437,
       "Defensive action mean x": 35.638393,
       "Mean x action location": 45.664561,
-      "Cross attempts per90": 0.095949
+      "Cross attempts per90": 0.095949,
+      "Dribbling tentati per 90": 0.127932,
+      "Dribbling riusciti": 25.0,
+      "Altezza media dei dribbling": 51.8175
     },
     "54968": {
       "Defensive actions padj": 5.841999,
@@ -553,7 +589,10 @@
       "Passes into penalty area per90": 0.587382,
       "Defensive action mean x": 31.664694,
       "Mean x action location": 40.8555,
-      "Cross attempts per90": 0.195794
+      "Cross attempts per90": 0.195794,
+      "Dribbling tentati per 90": 0.130529,
+      "Dribbling riusciti": 50.0,
+      "Altezza media dei dribbling": 67.0425
     },
     "440029": {
       "Defensive actions padj": 4.932172,
@@ -577,7 +616,10 @@
       "Passes into penalty area per90": 0.834005,
       "Defensive action mean x": 27.345875,
       "Mean x action location": 41.118753,
-      "Cross attempts per90": 0.145044
+      "Cross attempts per90": 0.145044,
+      "Dribbling tentati per 90": 0.435133,
+      "Dribbling riusciti": 50.0,
+      "Altezza media dei dribbling": 46.38375
     },
     "68393": {
       "Defensive actions padj": 4.337463,
@@ -601,7 +643,10 @@
       "Passes into penalty area per90": 0.392157,
       "Defensive action mean x": 28.375301,
       "Mean x action location": 35.238443,
-      "Cross attempts per90": 0.0
+      "Cross attempts per90": 0.0,
+      "Dribbling tentati per 90": 0.313725,
+      "Dribbling riusciti": 62.5,
+      "Altezza media dei dribbling": 53.458125
     },
     "416238": {
       "Defensive actions padj": 4.830457,
@@ -625,7 +670,10 @@
       "Passes into penalty area per90": 1.538462,
       "Defensive action mean x": 32.807704,
       "Mean x action location": 43.662991,
-      "Cross attempts per90": 0.410256
+      "Cross attempts per90": 0.410256,
+      "Dribbling tentati per 90": 1.025641,
+      "Dribbling riusciti": 25.0,
+      "Altezza media dei dribbling": 51.53925
     },
     "239881": {
       "Defensive actions padj": 3.105951,
@@ -649,7 +697,10 @@
       "Passes into penalty area per90": 1.242698,
       "Defensive action mean x": 34.408608,
       "Mean x action location": 51.255352,
-      "Cross attempts per90": 3.584705
+      "Cross attempts per90": 3.584705,
+      "Dribbling tentati per 90": 1.959639,
+      "Dribbling riusciti": 41.463415,
+      "Altezza media dei dribbling": 66.923415
     }
   },
   "TARGET_COMPARISON_BARS": {
@@ -920,6 +971,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 2.096556,
+            "baselineValue": 0.368943,
+            "subjectScore": 26.7,
+            "baselineScore": 4.7,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 59.42029,
+            "baselineValue": 43.621795,
+            "subjectScore": 59.42,
+            "baselineScore": 43.62,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 57.98587,
+            "baselineValue": 61.18875,
+            "subjectScore": 54.97,
+            "baselineScore": 58.18,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Passes into final third per90",
@@ -1268,6 +1361,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 2.096556,
+            "baselineValue": 0.933534,
+            "subjectScore": 26.7,
+            "baselineScore": 11.89,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 59.42029,
+            "baselineValue": 44.740854,
+            "subjectScore": 59.42,
+            "baselineScore": 44.74,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 57.98587,
+            "baselineValue": 54.576135,
+            "subjectScore": 54.97,
+            "baselineScore": 51.56,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Passes into final third per90",
