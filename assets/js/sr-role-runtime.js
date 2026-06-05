@@ -59,6 +59,7 @@ function initRoleReport() {
         if (typeof globalFmt === "function") return globalFmt(metric, value);
         const kind = metricFormats[metric] || "number";
         if (kind === "percent") return (value * 100).toFixed(1) + "%";
+        if (kind === "percent_0_100") return value.toFixed(1) + "%";
         if (kind === "meters") return value.toFixed(1) + " m";
         if (kind === "one_decimal") return value.toFixed(1);
         return value.toFixed(2);
@@ -594,7 +595,6 @@ function initRoleReport() {
                             </div>`;
                         }).join("");
 
-                        const desktopScore = Number.isFinite(Number(subjectScore)) ? `${Math.round(subjectScore)}% scala` : "";
                         return `
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
@@ -603,7 +603,7 @@ function initRoleReport() {
                                     ${refBars}
                                     ${baselineBar}
                                 </div>
-                                <div class="sr-dot-val"><span>${esc(fmt(row.metric, row.subjectValue))}</span>${desktopScore ? `<small>${esc(desktopScore)}</small>` : ""}</div>
+                                <div class="sr-dot-val">${esc(fmt(row.metric, row.subjectValue))}</div>
                             </div>
                             <div class="sr-mobile-metric">
                                 <div class="sr-mobile-compact">

@@ -269,20 +269,6 @@
             text-align: right;
         }
 
-.sr-dot-val span,
-.sr-dot-val small {
-            display: block;
-        }
-
-.sr-dot-val small {
-            margin-top: .12rem;
-            color: rgba(255,255,255,.36);
-            font-size: .6rem;
-            font-weight: 600;
-            letter-spacing: .02em;
-            white-space: nowrap;
-        }
-
 .sr-bar-group {
             display: flex;
             flex-direction: column;

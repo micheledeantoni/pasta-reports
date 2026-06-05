@@ -50,10 +50,10 @@ HEATMAP_FOURTH_TITLES = {
     "DEF": "Azioni difensive",
 }
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
-COMMON_ASSET_VERSION = "sprint1-mobile-20260605-role-score"
+COMMON_ASSET_VERSION = "sprint1-mobile-20260605-role-percent"
 THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
 GK_ASSET_VERSION = "gk-mobile-20260605-r4"
-ROLE_RUNTIME_VERSION = "radar-mobile-20260605-score"
+ROLE_RUNTIME_VERSION = "radar-mobile-20260605-percent"
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
