@@ -368,6 +368,110 @@ function initRoleReport() {
                 if (nameEl) nameEl.textContent = getCompLabel();
             });
         }
+
+        // ── Mobile radar summary ─────────────────────────────────────────────
+        const scrollWrap = canvas.closest(".sr-radar-scroll-wrap");
+        if (scrollWrap) { try {
+            const radarParent = scrollWrap.parentElement;
+            const radarTools  = radarParent.querySelector(".sr-radar-tools");
+
+            radarParent.querySelector(".sr-radar-mobile-summary")?.remove();
+
+            const pct = v => Math.min(100, ((v || 0) / radarMax * 100)).toFixed(1);
+
+            function buildAxisRows(compVals) {
+                return radarAxes.map((axis, i) => {
+                    const sv = Math.round(subjectValues[i] || 0);
+                    const sl = SHORT_LABELS[axis.key];
+                    // Full label — allow wrapping, no truncation
+                    const label = Array.isArray(sl) ? sl.join(" ") : (sl || axis.label || axis.key);
+                    return `
+                    <div class="sr-rm-axis-row">
+                        <span class="sr-rm-axis-label">${esc(label)}</span>
+                        <div class="sr-rm-bar-wrap">
+                            <div class="sr-rm-bar-track">
+                                <div class="sr-rm-bar-fill" style="width:${pct(subjectValues[i])}%;background:${radarPalette.subjectBorder}"></div>
+                                <div class="sr-rm-comp-marker" style="left:${pct(compVals[i])}%;background:${radarPalette.compBorder}" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <span class="sr-rm-axis-score">${sv}</span>
+                    </div>`;
+                }).join("");
+            }
+
+            // Comparison selector options — same data source as desktop select
+            // Mirror the exact value format used by the desktop select ("p0","p1",..."avg")
+            const mobileOpts = normTargetProfiles.map((profile, i) =>
+                `<option value="p${i}">${esc(profile.label || `Player ${profile.id}`)}</option>`
+            );
+            if ((normTargetAvg.values || []).length) {
+                mobileOpts.push(`<option value="avg">${esc(normTargetAvg.label || "Media")}</option>`);
+            }
+            const mobileOptions = mobileOpts.join("");
+
+            const subjectMeta = playerMeta[String(subjectId)] || playerMeta[subjectId] || {};
+            const summary = document.createElement("div");
+            summary.className = "sr-radar-mobile-summary";
+            summary.innerHTML = `
+                <div class="sr-rm-header">
+                    <span class="sr-rm-subject-name">
+                        <span class="sr-ptag-dot" style="background:${radarPalette.subjectBorder}"></span>
+                        ${esc(subjectMeta.name || radarData.subject?.label || "Subject")}
+                    </span>
+                    <div class="sr-rm-select-wrap">
+                        <span class="sr-rm-vs-label">vs</span>
+                        <select class="sr-rm-comp-select" aria-label="Seleziona giocatore di confronto">
+                            ${mobileOptions}
+                        </select>
+                    </div>
+                </div>
+                <div class="sr-rm-axes">${buildAxisRows(getCompValues())}</div>
+                <button class="sr-rm-expand-btn" aria-expanded="false">
+                    Visualizza radar completo
+                </button>`;
+
+            radarParent.insertBefore(summary, scrollWrap);
+
+            const mobileSelect = summary.querySelector(".sr-rm-comp-select");
+            if (select) mobileSelect.value = select.value; // sync initial state
+
+            // Helper: redraw markers using current comparison selection
+            function syncMarkers() {
+                const cv = getCompValues();
+                summary.querySelectorAll(".sr-rm-comp-marker").forEach((m, i) => {
+                    m.style.left  = pct(cv[i]) + "%";
+                    m.style.background = radarPalette.compBorder;
+                });
+            }
+
+            // Mobile select → chart + desktop select + markers (single source of truth)
+            mobileSelect.addEventListener("change", () => {
+                if (select && select.value !== mobileSelect.value) select.value = mobileSelect.value;
+                radarChart.data.datasets[0].data  = getCompValues();
+                radarChart.data.datasets[0].label = getCompLabel();
+                radarChart.update();
+                const nameEl = $("radarLegendCompName");
+                if (nameEl) nameEl.textContent = getCompLabel();
+                syncMarkers();
+            });
+
+            // Desktop select → mobile select + markers
+            if (select) {
+                select.addEventListener("change", () => {
+                    if (mobileSelect.value !== select.value) mobileSelect.value = select.value;
+                    syncMarkers();
+                });
+            }
+
+            // Toggle full radar
+            summary.querySelector(".sr-rm-expand-btn").addEventListener("click", function () {
+                const opening = this.getAttribute("aria-expanded") !== "true";
+                this.setAttribute("aria-expanded", String(opening));
+                this.textContent = opening ? "Chiudi radar" : "Visualizza radar completo";
+                scrollWrap.classList.toggle("sr-mobile-open", opening);
+                if (radarTools) radarTools.classList.toggle("sr-mobile-open", opening);
+            });
+        } catch(e) { console.error("[radar-mobile] error:", e); } }
     }
 
     function metricValue(playerId, metric) {
@@ -388,28 +492,47 @@ function initRoleReport() {
         const referenceIds = data.baselineIds || [];
         const legend = $(legendId);
         const showAverage = data.showAverage !== false;
+
+        // Compact abbreviation: initials from each word, max 3 chars
+        function abbrev(name) {
+            return String(name || "").split(/\s+/).filter(Boolean)
+                .map(w => w[0]).join("").toUpperCase().slice(0, 3);
+        }
+
+        // Stagger overlapping markers (within 5 percentile points) vertically
+        function calcYOffsets(scores) {
+            const indexed = scores.map((s, i) => ({ s: s ?? 0, i })).sort((a, b) => a.s - b.s);
+            const offsets = new Array(scores.length).fill(0);
+            for (let k = 1; k < indexed.length; k++) {
+                if (indexed[k].s - indexed[k - 1].s < 5)
+                    offsets[indexed[k].i] = offsets[indexed[k - 1].i] === 0 ? -6 : 0;
+            }
+            return offsets;
+        }
+
         const tagItems = [
-            `<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</div>`,
+            `<div class="sr-player-tag is-subject"><span class="sr-ptag-dot" style="background:${subject.color || "#4ade80"}"></span>${esc(subject.name || "Subject")}</div>`,
             ...referenceIds.map(id => {
                 const p = meta(id);
                 return `<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:${p.color || "#fff"}"></span>${esc(p.name || id)}</div>`;
             }),
         ];
-        if (showAverage) {
-            tagItems.push(`<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:rgba(255,255,255,.55)"></span>${esc(data.baselineLabel || "Average")}</div>`);
-        }
+        if (showAverage) tagItems.push(`<div class="sr-player-tag"><span class="sr-ptag-dot" style="background:rgba(0,0,0,.2)"></span>${esc(data.baselineLabel || "Average")}</div>`);
         const tags = tagItems.join("");
         if (legend) legend.innerHTML = tags;
         const title = $(sectionId)?.classList.contains("sr-card") ? `<p class="sr-section-label">${esc(data.label || "Metric comparison")}</p>` : "";
+
         el.innerHTML = `
             ${title}
             ${legend ? "" : `<div class="sr-player-tags">${tags}</div>`}
-            ${data.groups.map(group => `
+            ${data.groups.map((group, gIdx) => `
                 <div class="sr-dot-group">
                     <div class="sr-dot-group-title">${esc(group.label)}</div>
-                    ${group.metrics.map(row => {
+                    ${group.metrics.map((row, mIdx) => {
                         const subjectScore = row.subjectScore ?? 0;
                         const baselineScore = row.baselineScore ?? 0;
+
+                        // ── Desktop row (unchanged) ──────────────────────────
                         const refBars = referenceIds.map(id => {
                             const p = meta(id);
                             const value = metricValue(id, row.metric);
@@ -421,21 +544,112 @@ function initRoleReport() {
                         const baselineBar = showAverage
                             ? `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${baselineScore}%; background:rgba(255,255,255,.42)" data-tip="${esc(data.baselineLabel || "Average")}: ${esc(fmt(row.metric, row.baselineValue))}"></div></div>`
                             : "";
+
+                        // ── Mobile: build per-player data once ──────────────
+                        const allPlayers = [
+                            { id: String(data.subjectId || subjectId), isSubject: true },
+                            ...referenceIds.map(id => ({ id: String(id), isSubject: false })),
+                        ];
+                        const pData = allPlayers.map(({ id, isSubject }) => {
+                            const p = meta(id);
+                            const value = isSubject ? row.subjectValue : metricValue(id, row.metric);
+                            const score = isSubject ? subjectScore : (metricScore(row.metric, value) ?? null);
+                            return { id, isSubject, name: p.name || id, color: p.color || (isSubject ? "#4ade80" : "#fff"), value, score };
+                        });
+
+                        // ── Mobile compact: markers on shared 0–100 bar ─────
+                        const yOffsets = calcYOffsets(pData.map(p => p.score));
+                        const markers = pData.map((p, i) => {
+                            const pos = Math.max(0, Math.min(100, p.score ?? 0));
+                            const sz  = p.isSubject ? 13 : 10;
+                            return `<div class="sr-mc-marker${p.isSubject ? " is-subject" : ""}" style="left:${pos}%;width:${sz}px;height:${sz}px;background:${p.color};transform:translate(-50%,calc(-50% + ${yOffsets[i]}px))"></div>`;
+                        }).join("");
+
+                        const chips = pData.map(p => {
+                            const val = (p.value !== null && p.value !== undefined) ? fmt(row.metric, p.value) : "—";
+                            return `<span class="sr-mc-chip${p.isSubject ? " is-subject" : ""}"><span class="sr-mc-chip-dot" style="background:${p.color}"></span>${esc(abbrev(p.name))} ${esc(val)}</span>`;
+                        }).join("");
+
+                        const subjectVal = (row.subjectValue !== null && row.subjectValue !== undefined) ? fmt(row.metric, row.subjectValue) : "—";
+                        const detailId  = `srmc-${sectionId}-${gIdx}-${mIdx}`;
+
+                        // ── Mobile detail: Sprint 1 per-player rows ──────────
+                        const bmMarker = showAverage && baselineScore > 0
+                            ? `<div class="sr-mobile-bm-marker" style="left:${baselineScore}%"></div>` : "";
+                        const detailRows = pData.map(p => {
+                            const ds  = p.score ?? 0;
+                            const dv  = (p.value !== null && p.value !== undefined) ? fmt(row.metric, p.value) : "—";
+                            const bg  = p.isSubject ? p.color : `color-mix(in srgb,${p.color} 72%,transparent)`;
+                            return `
+                            <div class="sr-mobile-player-row${p.isSubject ? " is-subject" : ""}">
+                                <div class="sr-mobile-player-header">
+                                    <span class="sr-mobile-player-name"><span class="sr-ptag-dot" style="background:${p.color}"></span>${esc(p.name)}</span>
+                                    <span class="sr-mobile-player-val">${esc(dv)}</span>
+                                </div>
+                                <div class="sr-bar-track${p.isSubject ? " main" : ""}">
+                                    <div class="sr-bar-fill" style="width:${ds}%;background:${bg}"></div>
+                                    ${bmMarker}
+                                </div>
+                                ${p.score !== null ? `<div class="sr-mobile-player-sub">P${Math.round(ds)}</div>` : ""}
+                            </div>`;
+                        }).join("");
+
                         return `
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
                                 <div class="sr-bar-group">
-                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%; background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}"></div></div>
+                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%;background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}"></div></div>
                                     ${refBars}
                                     ${baselineBar}
                                 </div>
                                 <div class="sr-dot-val">${esc(fmt(row.metric, row.subjectValue))}</div>
+                            </div>
+                            <div class="sr-mobile-metric">
+                                <div class="sr-mobile-compact">
+                                    <div class="sr-mc-header">
+                                        <span class="sr-mc-label">${esc(row.label || row.metric)}</span>
+                                        <span class="sr-mc-subject-val">${esc(subjectVal)} · P${Math.round(subjectScore)}</span>
+                                    </div>
+                                    <div class="sr-mc-bar-wrap">
+                                        <div class="sr-mc-bar-track">${markers}</div>
+                                    </div>
+                                    <div class="sr-mc-player-strip">${chips}</div>
+                                    <button class="sr-mc-toggle" aria-expanded="false" aria-controls="${detailId}">Mostra dettaglio</button>
+                                </div>
+                                <div class="sr-mc-detail" id="${detailId}" hidden>
+                                    ${detailRows}
+                                </div>
                             </div>
                         `;
                     }).join("")}
                 </div>
             `).join("")}
         `;
+
+        // Toggle expand/collapse — one open at a time per section
+        el.querySelectorAll(".sr-mc-toggle").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const isOpen = btn.getAttribute("aria-expanded") === "true";
+                const detail = document.getElementById(btn.getAttribute("aria-controls"));
+                // Close all others in this section
+                el.querySelectorAll(".sr-mc-toggle[aria-expanded='true']").forEach(other => {
+                    if (other === btn) return;
+                    other.setAttribute("aria-expanded", "false");
+                    other.textContent = "Mostra dettaglio";
+                    const d = document.getElementById(other.getAttribute("aria-controls"));
+                    if (d) d.hidden = true;
+                });
+                if (isOpen) {
+                    btn.setAttribute("aria-expanded", "false");
+                    btn.textContent = "Mostra dettaglio";
+                    if (detail) detail.hidden = true;
+                } else {
+                    btn.setAttribute("aria-expanded", "true");
+                    btn.textContent = "Nascondi dettaglio";
+                    if (detail) detail.hidden = false;
+                }
+            });
+        });
     }
 
     function drawPitchLines(svg) {
@@ -620,11 +834,19 @@ function initRoleReport() {
         buildDensity("pitchPos", d.ip, n => `rgba(20,${Math.round(120 + n * 135)},80,${(0.12 + n * 0.72).toFixed(2)})`);
         buildVectorGrid("pitchCarry", d.carry, "carry");
         buildVectorGrid("pitchPass", d.pass, "pass");
-        buildDensity("pitchProg", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
+        if (roleMeta.role === "DEF") {
+            buildDensity("pitchProg", d.def, n => `rgba(${Math.round(80 + n * 120)},160,220,${(0.12 + n * 0.72).toFixed(2)})`);
+        } else {
+            buildVectorGrid("pitchProg", d.prog, "prog");
+        }
         note("pitchPosNote", d.ipNote || (d.ipCx ? `Centroide: x=${d.ipCx}` : ""));
         note("pitchCarryNote", d.carryN ? `${d.carryN} conduzioni · ${d.carryProgN || 0} progressive` : "");
         note("pitchPassNote", d.passN ? `${d.passN} passaggi` : "");
-        note("pitchProgNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
+        if (roleMeta.role === "DEF") {
+            note("pitchProgNote", d.defNote || (d.defCx ? `Centroide difensivo: x=${d.defCx}` : ""));
+        } else {
+            note("pitchProgNote", d.progN ? `${d.progN} passaggi progressivi` : "");
+        }
         const defBlock = $("defSummaryBlock");
         if (defBlock) {
             const oppPct = d.defOppPct != null ? (d.defOppPct * 100).toFixed(0) + "%" : "—";

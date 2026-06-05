@@ -50,6 +50,10 @@ HEATMAP_FOURTH_TITLES = {
     "DEF": "Azioni difensive",
 }
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
+COMMON_ASSET_VERSION = "sprint1-mobile-20260604"
+THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
+GK_ASSET_VERSION = "gk-mobile-20260605-r4"
+ROLE_RUNTIME_VERSION = "radar-mobile-20260604"
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -83,6 +87,9 @@ def player_image_url(slug: str) -> str:
         path = BASE_DIR / "images" / "players" / f"{slug}{ext}"
         if path.exists():
             return f"images/players/{slug}{ext}"
+    card_path = BASE_DIR / "images" / "cards" / f"{slug}.png"
+    if card_path.exists():
+        return f"images/cards/{slug}.png"
     return f"images/players/{slug}.webp"
 
 
@@ -210,6 +217,26 @@ def build_slots(player: dict) -> dict:
         f"{comp} {season}"
     )
 
+    # ── Role-specific CSS and JS runtime ──────────────────────────────────
+    if macro == "GK":
+        role_css = "sr-gk-report.css"
+        role_scripts = (
+            '<script>\n'
+            f'  window.SR_GK_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
+            '</script>\n'
+            '<script src="assets/js/sr-gk-report-loader.js"></script>\n'
+            f'<script src="assets/js/sr-gk-runtime.js?v={GK_ASSET_VERSION}"></script>'
+        )
+    else:
+        role_css = "sr-role-report.css"
+        role_scripts = (
+            '<script>\n'
+            f'  window.SR_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
+            '</script>\n'
+            '<script src="assets/js/sr-report-loader.js"></script>\n'
+            f'<script src="assets/js/sr-role-runtime.js?v={ROLE_RUNTIME_VERSION}"></script>'
+        )
+
     return {
         "PLAYER_NAME":       player["player_name"],
         "PLAYER_SLUG":       player["slug"],
@@ -228,6 +255,8 @@ def build_slots(player: dict) -> dict:
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
         "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",
+        "ROLE_CSS":          role_css,
+        "ROLE_SCRIPTS":      role_scripts,
         # ── Editorial section notes (optional, populated via generate_editorial_brief.py) ──
         "NOTE_CONFRONTO":  note_block(player.get("note_confronto", "")),
         "NOTE_HEATMAP":    note_block(player.get("note_heatmap", "")),
@@ -268,10 +297,17 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
 
     out = template_text
     out = re.sub(r"<title>.*?</title>", f"<title>Player Report · {name} | PASTA</title>", out, count=1, flags=re.S)
-    out = out.replace(
-        '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />',
+    out = re.sub(
+        r'(<meta name="viewport" content="[^"]+" />)\s*(?:<!-- Open Graph -->.*?)(?=\s*<link rel="stylesheet" href="assets/css/main\.css" />)',
+        r"\1\n",
+        out,
+        count=1,
+        flags=re.S,
+    )
+    out = re.sub(
+        r'<meta name="viewport" content="[^"]+" />',
         (
-            '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
             '    <!-- Open Graph -->\n'
             f'    <meta property="og:title"       content="{name} · Analisi PASTA" />\n'
             f'    <meta property="og:description" content="{og_description}" />\n'
@@ -287,13 +323,33 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
             f'    <meta name="twitter:description" content="{og_description}" />\n'
             f'    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{slug}.png" />'
         ),
-        1,
+        out,
+        count=1,
     )
-    if "assets/css/pasta-theme.css" not in out:
+    out = re.sub(
+        r'<link rel="stylesheet" href="assets/css/sr-report-common\.css(?:\?v=[^"]+)?" />',
+        f'<link rel="stylesheet" href="assets/css/sr-report-common.css?v={COMMON_ASSET_VERSION}" />',
+        out,
+        count=1,
+    )
+    out = re.sub(
+        r'<link rel="stylesheet" href="assets/css/sr-gk-report\.css(?:\?v=[^"]+)?" />',
+        f'<link rel="stylesheet" href="assets/css/sr-gk-report.css?v={GK_ASSET_VERSION}" />',
+        out,
+        count=1,
+    )
+    if "assets/css/pasta-theme.css" in out:
+        out = re.sub(
+            r'<link rel="stylesheet" href="assets/css/pasta-theme\.css(?:\?v=[^"]+)?" />',
+            f'<link rel="stylesheet" href="assets/css/pasta-theme.css?v={THEME_ASSET_VERSION}" />',
+            out,
+            count=1,
+        )
+    else:
         out = out.replace(
-            '<link rel="stylesheet" href="assets/css/sr-gk-report.css" />',
-            '<link rel="stylesheet" href="assets/css/sr-gk-report.css" />\n'
-            '    <link rel="stylesheet" href="assets/css/pasta-theme.css" />',
+            f'<link rel="stylesheet" href="assets/css/sr-gk-report.css?v={GK_ASSET_VERSION}" />',
+            f'<link rel="stylesheet" href="assets/css/sr-gk-report.css?v={GK_ASSET_VERSION}" />\n'
+            f'    <link rel="stylesheet" href="assets/css/pasta-theme.css?v={THEME_ASSET_VERSION}" />',
             1,
         )
     out = re.sub(
@@ -330,11 +386,6 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
             "            #banner.style2::after, #banner.style2:after {\n"
             "                background: rgba(246, 242, 236, 0.82) !important;\n"
             "            }\n"
-            "            .sr-heatmap-grid { grid-template-columns: 1fr; }\n"
-            "            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }\n"
-            "        }\n"
-            "        @media screen and (max-width: 480px) {\n"
-            "            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }\n"
             "        }\n"
             "    </style>"
         ),
@@ -369,29 +420,68 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         flags=re.S,
     )
     out = re.sub(
+        r'(<p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>)\s*(?:<p class="sr-section-intro">.*?</p>\s*)*',
+        r"\1\n",
+        out,
+        count=1,
+        flags=re.S,
+    )
+    out = re.sub(
+        r'(<p class="sr-section-label">Visualizzazioni portiere</p>)\s*(?:<p class="sr-section-intro">.*?</p>\s*)*',
+        r"\1\n",
+        out,
+        count=1,
+        flags=re.S,
+    )
+    out = re.sub(
         r'(<p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>)',
-        r"\1\n            " + note_confronto,
+        r"\1" + (f"\n            {note_confronto}" if note_confronto else ""),
         out,
         count=1,
     )
     out = re.sub(
         r'(<p class="sr-section-label">Visualizzazioni portiere</p>)',
-        r"\1\n            " + note_heatmap,
+        r"\1" + (f"\n            {note_heatmap}" if note_heatmap else ""),
         out,
         count=1,
     )
-    out = out.replace("parte da Vicario", f"parte da {name}")
+    out = re.sub(
+        r"(La griglia visuale ispeziona un portiere alla volta e parte da )[^.]+(\. Non è una heatmap posizionale generica\.)",
+        rf"\1{name}\2",
+        out,
+        count=1,
+    )
     out = re.sub(
         r'window\.SR_GK_EXTERNAL_PAYLOAD_URL = "[^"]*";',
         f'window.SR_GK_EXTERNAL_PAYLOAD_URL = "{payload_url}";',
         out,
         count=1,
     )
-    out = out.replace(
-        '<script src="assets/js/sr-gk-runtime.js"></script>',
-        '<script src="assets/js/sr-gk-runtime.js?v=cream-theme-20260604"></script>',
-        1,
+    out = re.sub(
+        r'<script src="assets/js/sr-gk-runtime\.js(?:\?v=[^"]+)?"></script>',
+        f'<script src="assets/js/sr-gk-runtime.js?v={GK_ASSET_VERSION}"></script>',
+        out,
+        count=1,
     )
+    out = out.replace(
+        '<li><a href="generic.html">Documentazione</a></li>',
+        '<li><a href="method.html">Metodo</a></li>',
+    )
+    out = re.sub(
+        r'<ul class="icons">\s*<li><a href="#" class="icon brands alt fa-twitter"><span class="label">X</span></a></li>\s*<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>\s*<li><a href="generic\.html" class="icon solid alt fa-book"><span class="label">Documentazione</span></a></li>\s*</ul>',
+        (
+            '<ul class="icons">\n'
+            '                <li><a href="https://x.com/macnonesiste" class="icon brands alt fa-twitter" target="_blank" rel="noopener noreferrer" aria-label="Profilo X (Twitter) di Michele Deantoni"><span class="label">X</span></a></li>\n'
+            '                <li><a href="https://www.linkedin.com/in/mdeantoni/" class="icon brands alt fa-linkedin-in" target="_blank" rel="noopener noreferrer" aria-label="Profilo LinkedIn di Michele Deantoni"><span class="label">LinkedIn</span></a></li>\n'
+            '                <li><a href="method.html" class="icon solid alt fa-book" aria-label="Metodo e trasparenza PASTA"><span class="label">Metodo</span></a></li>\n'
+            '            </ul>'
+        ),
+        out,
+        count=1,
+        flags=re.S,
+    )
+    out = re.sub(r"(?m)^[ \t]+$", "", out)
+    out = re.sub(r"\n{3,}", "\n\n", out)
     return out
 
 

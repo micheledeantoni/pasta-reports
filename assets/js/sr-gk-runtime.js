@@ -63,6 +63,7 @@ function initGkReport() {
     let selectedComparisonName = reportContext.primary_comparison_player || 'Yann Sommer';
     let visualPlayerId = null;
     let radarChart = null;
+    let radarEnhanced = false;
 
     function $(id) { return document.getElementById(id); }
     function esc(value) {
@@ -218,6 +219,42 @@ function initGkReport() {
         });
     }
 
+    function enhanceRadarMobile() {
+        if (radarEnhanced) return;
+        const section = $('gkRadarSection');
+        const wrap = section?.querySelector('.sr-radar-wrap-full');
+        if (!section || !wrap) return;
+        let summary = $('gkRadarMobileSummary');
+        if (!summary) {
+            summary = document.createElement('div');
+            summary.id = 'gkRadarMobileSummary';
+            summary.className = 'sr-gk-radar-summary';
+            wrap.parentNode.insertBefore(summary, wrap);
+        }
+        if (!section.querySelector('.sr-gk-radar-details')) {
+            const details = document.createElement('details');
+            details.className = 'sr-gk-radar-details';
+            details.id = 'gkRadarDetails';
+            details.open = !window.matchMedia('(max-width: 768px)').matches;
+            const summaryEl = document.createElement('summary');
+            summaryEl.className = 'sr-axis-accordion-summary';
+            summaryEl.textContent = 'Radar completo';
+            details.appendChild(summaryEl);
+            wrap.parentNode.insertBefore(details, wrap);
+            details.appendChild(wrap);
+            const context = section.querySelector('.sr-radar-context-note');
+            const axis = section.querySelector('.sr-axis-accordion');
+            if (context) details.appendChild(context);
+            if (axis) details.appendChild(axis);
+            details.addEventListener('toggle', () => {
+                if (details.open && radarChart) {
+                    window.requestAnimationFrame(() => radarChart.resize());
+                }
+            });
+        }
+        radarEnhanced = true;
+    }
+
     function renderRadarLegend(target, comparison) {
         const el = $('gkRadarLegend');
         if (!el) return;
@@ -238,11 +275,40 @@ function initGkReport() {
         }).join('');
     }
 
+    function renderRadarSummary(target, comparison) {
+        const el = $('gkRadarMobileSummary');
+        if (!el) return;
+        const targetScores = axisScores(target);
+        const comparisonScores = axisScores(comparison);
+        el.innerHTML = AXES.map(axisId => {
+            const targetValue = Number(targetScores[axisId]) || 0;
+            const comparisonValue = Number(comparisonScores[axisId]) || 0;
+            const delta = targetValue - comparisonValue;
+            const deltaText = delta >= 0 ? `+${fmt(delta, 0)}` : fmt(delta, 0);
+            return `<div class="sr-gk-radar-axis">
+                <div class="sr-gk-radar-axis-head">
+                    <span>${esc(AXIS_LABELS[axisId])}</span>
+                    <strong>${fmt(targetValue, 0)}</strong>
+                </div>
+                <div class="sr-gk-radar-track" aria-hidden="true">
+                    <i class="sr-gk-radar-fill" style="width:${Math.max(0, Math.min(100, targetValue))}%; background:${COLORS.target};"></i>
+                    <b class="sr-gk-radar-marker" style="left:${Math.max(0, Math.min(100, comparisonValue))}%; border-color:${COLORS.comparison};"></b>
+                </div>
+                <div class="sr-gk-radar-axis-foot">
+                    <span>${esc(target.header?.player_name || 'Target')}</span>
+                    <span>${esc(comparison.header?.player_name || 'Confronto')} ${fmt(comparisonValue, 0)} · diff ${deltaText}</span>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
     function renderRadar() {
+        enhanceRadarMobile();
         const target = targetPayload();
         const comparison = selectedComparisonPayload();
         renderRadarLegend(target, comparison);
         renderAxisGuide(target);
+        renderRadarSummary(target, comparison);
         const canvas = $('gkRadarChart');
         if (!canvas || typeof Chart === 'undefined') return;
         if (radarChart) radarChart.destroy();
@@ -391,14 +457,27 @@ function initGkReport() {
         const names = trio.map(p => p?.header?.player_name || 'GK');
         renderBarsLegend(target, comp1, comp2);
         const groups = buildMetricGroups(target, comp1, comp2);
+        function abbrev(name) {
+            return String(name || '').split(/\s+/).filter(Boolean).map(part => part[0]).join('').toUpperCase().slice(0, 3);
+        }
+        function calcMarkerOffsets(values) {
+            const indexed = values.map((value, index) => ({ value: value ?? 0, index })).sort((a, b) => a.value - b.value);
+            const offsets = new Array(values.length).fill(0);
+            for (let i = 1; i < indexed.length; i += 1) {
+                if (indexed[i].value - indexed[i - 1].value < 5) {
+                    offsets[indexed[i].index] = offsets[indexed[i - 1].index] === 0 ? -6 : 0;
+                }
+            }
+            return offsets;
+        }
         let warning = '<p class="sr-radar-context-note">Valori principali normalizzati per90, percentuali, rate o share. I conteggi grezzi restano solo nei tooltip quando disponibili.</p>';
         if (comp2?.header?.sample_status === 'forced_low_sample') {
             warning += `<div class="sr-gk-sample ${statusClass(comp2.header.sample_status)}"><strong>${esc(sampleLabel(comp2.header.sample_status))}</strong><span>Martínez è incluso solo come confronto interno della stanza portieri Inter; non entra nei benchmark ufficiali.</span></div>`;
         }
-        el.innerHTML = `${warning}${groups.map(group => `
+        el.innerHTML = `${warning}${groups.map((group, groupIdx) => `
             <div class="sr-dot-group">
                 <div class="sr-dot-group-title">${esc(group.label)}</div>
-                ${group.metrics.map(metric => {
+                ${group.metrics.map((metric, metricIdx) => {
                     const widths = metric.values.map(v => v == null ? 0 : Math.max(3, Math.min(100, Math.abs(Number(v)) / metric.max * 100)));
                     const colors = [COLORS.target, COLORS.comparison, COLORS.alternate];
                     const tracks = trio.map((payload, idx) => {
@@ -408,13 +487,70 @@ function initGkReport() {
                         return `<div class="sr-bar-track${cls}"><div class="sr-bar-fill" style="width:${widths[idx]}%; background:${colors[idx]};" data-tip="${esc(names[idx])} · ${esc(metric.fmt(metric.values[idx]))}${esc(rawTip)}"></div></div>`;
                     }).join('');
                     const valueText = metric.values.map((v, idx) => `${names[idx].split(' ').slice(-1)[0]} ${metric.fmt(v)}`).join(' · ');
-                    return `<div class="sr-dot-row sr-dot-row-3">
+                    const metricId = `gk-${groupIdx}-${metricIdx}-${group.label}-${metric.label}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    const markerOffsets = calcMarkerOffsets(widths);
+                    const markers = trio.map((payload, idx) => {
+                        const size = idx === 0 ? 13 : 10;
+                        return `<span class="sr-gk-mc-marker${idx === 0 ? ' is-subject' : ''}" style="left:${widths[idx]}%;width:${size}px;height:${size}px;background:${colors[idx]};transform:translate(-50%,calc(-50% + ${markerOffsets[idx]}px))"></span>`;
+                    }).join('');
+                    const chips = trio.map((payload, idx) => {
+                        const value = metric.values[idx] == null ? '—' : metric.fmt(metric.values[idx]);
+                        return `<span class="sr-gk-mc-chip${idx === 0 ? ' is-subject' : ''}"><span class="sr-gk-mc-chip-dot" style="background:${colors[idx]}"></span>${esc(abbrev(names[idx]))} ${esc(value)}</span>`;
+                    }).join('');
+                    const mobileRows = trio.map((payload, idx) => {
+                        const raw = metric.rawTips?.[idx];
+                        const rawText = raw !== null && raw !== undefined ? `<span>Raw ${esc(fmt(raw, 0))}</span>` : '';
+                        return `<div class="sr-gk-metric-player">
+                            <span><i style="background:${colors[idx]}"></i>${esc(names[idx])}</span>
+                            <strong>${esc(metric.fmt(metric.values[idx]))}</strong>
+                            ${rawText}
+                            <div class="sr-gk-metric-player-track">
+                                <i style="width:${widths[idx]}%;background:${colors[idx]}"></i>
+                            </div>
+                        </div>`;
+                    }).join('');
+                    return `<div class="sr-dot-row sr-dot-row-3 sr-gk-bars-desktop">
                         <div class="sr-dot-label">${esc(metric.label)}${metric.note ? `<span class="sr-bar-note">${esc(metric.note)}</span>` : ''}</div>
                         <div class="sr-bar-group">${tracks}</div>
                         <div class="sr-dot-val sr-dot-val-3">${esc(valueText)}</div>
+                    </div>
+                    <div class="sr-gk-mobile-metric">
+                        <div class="sr-gk-mobile-compact">
+                            <div class="sr-gk-mc-header">
+                                <span class="sr-gk-mc-label">${esc(metric.label)}${metric.note ? `<small>${esc(metric.note)}</small>` : ''}</span>
+                                <span class="sr-gk-mc-subject-val">${esc(names[0].split(' ').slice(-1)[0])} ${esc(metric.fmt(metric.values[0]))}</span>
+                            </div>
+                            <div class="sr-gk-mc-bar-wrap">
+                                <div class="sr-gk-mc-bar-track">${markers}</div>
+                            </div>
+                            <div class="sr-gk-mc-player-strip">${chips}</div>
+                            <button class="sr-gk-mc-toggle" type="button" aria-expanded="false" aria-controls="${esc(metricId)}">Mostra dettaglio</button>
+                        </div>
+                        <div class="sr-gk-metric-players">${mobileRows}</div>
                     </div>`;
                 }).join('')}
             </div>`).join('')}`;
+
+        el.querySelectorAll('.sr-gk-mobile-metric').forEach(metricEl => {
+            const toggle = metricEl.querySelector('.sr-gk-mc-toggle');
+            const detail = metricEl.querySelector('.sr-gk-metric-players');
+            if (!toggle || !detail) return;
+            detail.id = toggle.getAttribute('aria-controls');
+            detail.hidden = true;
+            toggle.addEventListener('click', () => {
+                const open = toggle.getAttribute('aria-expanded') === 'true';
+                el.querySelectorAll('.sr-gk-mc-toggle[aria-expanded="true"]').forEach(other => {
+                    if (other === toggle) return;
+                    other.setAttribute('aria-expanded', 'false');
+                    other.textContent = 'Mostra dettaglio';
+                    const otherDetail = document.getElementById(other.getAttribute('aria-controls'));
+                    if (otherDetail) otherDetail.hidden = true;
+                });
+                toggle.setAttribute('aria-expanded', String(!open));
+                toggle.textContent = open ? 'Mostra dettaglio' : 'Nascondi dettaglio';
+                detail.hidden = open;
+            });
+        });
     }
 
     // ---- VISUAL SELECTOR: buttons ----

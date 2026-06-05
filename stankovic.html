@@ -1,66 +1,61 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Aleksandar Stankovic – Scouting Report | PASTA</title>
+    <title>Player Report · Aleksandar Stankovic | PASTA</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Open Graph -->
+    <meta property="og:title"       content="Aleksandar Stankovic · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Inter — Centrocampista · BEL · Jupiler Pro League 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/aleksandar-stankovic.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="https://pasta-reports.com/stankovic.html" />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Aleksandar Stankovic · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Inter — Centrocampista · BEL · Jupiler Pro League 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/aleksandar-stankovic.png" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="assets/css/sr-report-common.css" />
-    <link rel="stylesheet" href="assets/css/sr-role-report.css" />
-    <link rel="stylesheet" href="assets/css/pasta-theme.css" />
+    <link rel="stylesheet" href="assets/css/sr-report-common.css?v=sprint1-mobile-20260604" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css?v=sprint1-mobile-20260604" />
+    <link rel="stylesheet" href="assets/css/pasta-theme.css?v=sprint1-mobile-20260604" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
-        .sr-pca-list {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                    display: grid;
-                    gap: .6rem;
-                }
-                .sr-pca-row {
-                    padding: .75rem .9rem;
-                    border-radius: .9rem;
-                    background: rgba(255,255,255,.03);
-                    border: 1px solid rgba(255,255,255,.065);
-                    display: grid;
-                    grid-template-columns: 1fr auto;
-                    gap: .5rem;
-                    align-items: start;
-                }
-                .sr-pca-row strong {
-                    display: block;
-                    font-size: .84rem;
-                    line-height: 1.3;
-                    color: #e2e8f0;
-                }
-                .sr-pca-row span {
-                    display: block;
-                    font-size: .73rem;
-                    color: rgba(255,255,255,.48);
-                    margin-top: .18rem;
-                    line-height: 1.4;
-                }
-                .sr-pca-score {
-                    font-size: .74rem;
-                    font-weight: 700;
-                    padding: .22rem .5rem;
-                    border-radius: .45rem;
-                    background: rgba(74,222,128,.12);
-                    color: #4ade80;
-                    letter-spacing: .05em;
-                    white-space: nowrap;
-                }
-                .sr-pca-score.neg { background: rgba(251,146,60,.1);  color: #fb923c; }
-                .sr-pca-score.mid { background: rgba(148,163,184,.1); color: #94a3b8; }
-
-        @media screen and (max-width: 768px) {
-            .sr-heatmap-grid { grid-template-columns: 1fr; }
-            .sr-dot-row { grid-template-columns: 7rem 1fr 4rem; }
+        /* ── Banner: player photo (template-specific — uses aleksandar-stankovic) ── */
+        #banner.style2 {
+            background-image: url('images/players/aleksandar-stankovic.webp') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
         }
-        @media screen and (max-width: 480px) {
-            .sr-dot-row { grid-template-columns: 6rem 1fr 3.5rem; }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
+        @media screen and (max-width: 768px) {
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
         }
     </style>
 </head>
@@ -79,17 +74,21 @@
         </ul>
         <ul class="actions stacked">
             <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
-            <li><a href="method.html" class="button fit">Il metodo</a></li>
         </ul>
     </nav>
 
     <!-- Banner -->
     <section id="banner" class="style2">
         <div class="inner">
-            <span class="image"><img src="images/pic07.jpg" alt="" /></span>
             <header class="major"><h1>Aleksandar Stankovic</h1></header>
             <div class="content">
-                <p>Centrocampisti · Mercato estivo 2025–26 · Analisi compatibilità Inter</p>
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs"> → Inter</span>
+                    <span class="sr-banner-chip">Centrocampista</span>
+                    <span class="sr-banner-chip">BEL · Jupiler Pro League</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">2 303 min</span>
+                </div>
             </div>
         </div>
     </section>
@@ -97,64 +96,16 @@
     <div id="main">
     <section class="sr-inner">
 
-        <!-- ── 1. HEADER ──────────────────────────────────────────────── -->
-        <div class="sr-card">
-            <div class="sr-header-top">
-                <div class="sr-header-left">
-                    <!-- Foto giocatore – sostituire src con immagine reale -->
-                    <div class="sr-player-photo">
-                        <div class="sr-photo-placeholder">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="sr-player-name">Aleksandar Stankovic</h2>
-                        <span class="sr-clubs-line">Valutazione per Inter</span>
-                        <div class="sr-club-flow" aria-label="Percorso valutazione club">
-                            <div class="sr-club-node">
-                                <div class="sr-club-logo liverpool">BRU</div>
-                                <span>Club Brugge</span>
-                            </div>
-                            <span class="sr-club-arrow">→</span>
-                            <div class="sr-club-node">
-                                <div class="sr-club-logo inter">INT</div>
-                                <span>Inter</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <span class="sr-role-pill">Centrocampista</span>
-            </div>
-            <div class="sr-meta-row">
-                <span class="sr-meta-chip">BEL – Jupiler Pro League</span>
-                <span class="sr-meta-chip">Stagione 2025–26</span>
-                <span class="sr-meta-chip">1 563 minuti</span>
-            </div>
-            <div class="sr-badges">
-                <div class="sr-badge"><span class="sr-badge-k">Pass completion</span><span class="sr-badge-v">86.4%</span></div>
-                <div class="sr-badge"><span class="sr-badge-k">Minuti</span><span class="sr-badge-v">1 563</span></div>
-                <div class="sr-badge"><span class="sr-badge-k">Carry progressivi</span><span class="sr-badge-v">0.92 p90</span></div>
-            </div>
-        </div>
-
-        <!-- ── 2. LETTURA DEL PROFILO ─────────────────────────────────── -->
-        <div class="sr-card">
+        <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
+        <div class="sr-card" id="profileReading" data-static="true">
             <p class="sr-section-label">Lettura del profilo</p>
-            <p class="sr-narrative">
-                Aleksandar Stankovic è un centrocampista di possesso ad alto coinvolgimento, con ottima pulizia tecnica nella
-                circolazione e un volume importante di ricezioni. Il profilo combina sicurezza nel primo controllo,
-                capacità di offrire linee di passaggio continue e progressione palla al piede, con una presenza offensiva
-                più orientata alla connessione della manovra che alla finalizzazione diretta.
-            </p>
+            <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Aleksandar Stankovic viene letto attraverso il template MID: il radar principale usa assi interpretativi di possesso, progressione, creazione, minaccia diretta e difesa/duelli, senza PCA.</p>
+<p class="sr-narrative-p">Contesto: BEL-Jupiler Pro League 2526, squadra 124, 2,303 minuti. Le barre di dettaglio sono lo zoom degli assi radar e confrontano il giocatore con riferimenti reali, non con una media visuale.</p></div>
         </div>
 
-        <!-- ── 3. PROFILO PCA ─────────────────────────────────────── -->
+        <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Profilo sintetico · assi MID interpretativi</p>
-            <!-- Toolbar: custom legend (JS-populated) + comparison selector -->
             <div class="sr-radar-tools">
                 <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
                 <div class="sr-radar-selector-wrap">
@@ -162,93 +113,86 @@
                     <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
                 </div>
             </div>
-            <!-- Full-width radar canvas -->
-            <div class="sr-radar-wrap-full">
-                <canvas id="radarChart"></canvas>
+            <div class="sr-radar-scroll-wrap">
+                <div class="sr-radar-wrap-full">
+                    <canvas id="radarChart"></canvas>
+                </div>
             </div>
-            <!-- Cross-league context note (quiet, below radar) -->
             <div class="sr-radar-context-note">
                 Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
             </div>
-            <!-- Axis guide accordion (collapsed by default) -->
             <details class="sr-axis-accordion">
-                <summary class="sr-axis-accordion-summary">Come leggere gli assi del radar</summary>
-                <ul class="sr-axis-list" id="radarAxisGuide"></ul>
+                <summary class="sr-axis-accordion-summary">Assi del radar · legenda metriche</summary>
+                <ul class="sr-axis-guide" id="radarAxisGuide"></ul>
             </details>
         </div>
 
-        <!-- ── 4. CONFRONTO INDIVIDUALE VS INTER ─────────────────────── -->
+        <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Confronto individuale vs centrocampisti Inter · 2025–26</p>
+            
             <p class="sr-raw-bars-note">
-                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze di profilo, ma non sono corrette per la difficoltà del campionato.
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
+                di profilo, ma non sono corrette per la difficoltà del campionato.
                 Passa il cursore su una barra per nome e valore esatto.
             </p>
-            <div class="sr-player-tags" id="interLegend"></div>
-            <div id="interComparison"></div>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="interLegend"></div>
+                <div id="interComparison"></div>
+            </div>
         </div>
 
-        <!-- ── 5. SPATIAL 2×2 ─────────────────────────────────────────── -->
+        <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
         <div class="sr-card">
             <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
-
-            <!-- Toggle giocatore -->
+            
             <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
-
             <div class="sr-heatmap-grid">
-                <!-- Panel 1 — Positional heatmap -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#86efac;">Impronta posizionale</div>
+                    <div class="sr-pitch-title">Impronta posizionale</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
                     <span class="sr-pitch-note" id="pitchPosNote"></span>
                 </div>
-                <!-- Panel 2 — Carry direction -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#6ee7b7;">Direzione conduzioni</div>
+                    <div class="sr-pitch-title">Direzione conduzioni</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
                     <span class="sr-pitch-note" id="pitchCarryNote"></span>
                 </div>
-                <!-- Panel 3 — Pass distribution -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#fbbf24;">Distribuzione passaggi</div>
+                    <div class="sr-pitch-title">Distribuzione passaggi</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
                     <span class="sr-pitch-note" id="pitchPassNote"></span>
                 </div>
-                <!-- Panel 4 — Progressive passes -->
                 <div class="sr-pitch-wrap">
-                    <div class="sr-pitch-title" style="color:#7dd3fc;">Progressione via passaggio</div>
+                    <div class="sr-pitch-title">Progressione via passaggio</div>
                     <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
                     <span class="sr-pitch-note" id="pitchProgNote"></span>
                 </div>
             </div>
-
-            <!-- Defensive summary -->
             <div class="sr-def-summary" id="defSummaryBlock"></div>
-
-            <p style="margin-top:.55rem; font-size:.68rem; color:rgba(255,255,255,.28);">
+            <p class="sr-pitch-note" style="margin-top:.55rem;">
                 Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
             </p>
         </div>
 
-        <!-- ── 6. CONTESTO CLUB ATTUALE ───────────────────────────────── -->
+        <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
         <div class="sr-card compact">
-            <p class="sr-section-label">Contesto Club Brugge · pari ruolo MID qualificati</p>
-            <p style="font-size:.74rem; color:rgba(255,255,255,.38); margin-bottom:1rem; line-height:1.5;">
-                Confronto interno con i centrocampisti Club Brugge qualificati nel dataset 2025–26. Il gruppo disponibile e limitato ai pari ruolo con soglia minuti, senza nomi inventati.</p>
-            <div class="sr-player-tags" id="bruggeLegend"></div>
-            <div id="bruggeComparison"></div>
+            <p class="sr-section-label">Contesto  · altri centrocampisti</p>
+            
+            <p class="sr-raw-bars-note"></p>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="sourceTeamLegend"></div>
+                <div id="sourceTeamComparison"></div>
+            </div>
         </div>
 
-        <!-- ── 7. SIMILARITY ─────────────────────────────────────────── -->
+        <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
         <div class="sr-card">
-            <p class="sr-section-label">Similarità target-team vs centrocampisti Inter · tre spazi indipendenti</p>
+            <p class="sr-section-label">Similarità · centrocampisti Inter</p>
+            
             <div class="sr-sim-grid" id="similarityGrid"></div>
         </div>
 
-        <!-- ── 8. FOOTER ─────────────────────────────────────────────── -->
-        <div>
-            <div class="sr-footnotes" id="footnotes"></div>
-        </div>
     </section>
     </div>
 
@@ -256,10 +200,9 @@
     <footer id="footer">
         <div class="inner">
             <ul class="icons">
-                <li><a href="https://x.com/macnonesiste" class="icon brands alt fa-twitter" target="_blank" rel="noopener noreferrer"><span class="label">X</span></a></li>
-                <li><a href="https://www.linkedin.com/in/mdeantoni/" class="icon brands alt fa-linkedin-in" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
-                <li><a href="mailto:michele.deantoni.MD@gmail.com?subject=PASTA%20-%20contact" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
-                <li><a href="method.html" class="icon solid alt fa-book"><span class="label">Metodo</span></a></li>
+                <li><a href="https://x.com/macnonesiste" class="icon brands alt fa-twitter" target="_blank" rel="noopener noreferrer" aria-label="Profilo X (Twitter) di Michele Deantoni"><span class="label">X</span></a></li>
+                <li><a href="https://www.linkedin.com/in/mdeantoni/" class="icon brands alt fa-linkedin-in" target="_blank" rel="noopener noreferrer" aria-label="Profilo LinkedIn di Michele Deantoni"><span class="label">LinkedIn</span></a></li>
+                <li><a href="method.html" class="icon solid alt fa-book" aria-label="Metodo e trasparenza PASTA"><span class="label">Metodo</span></a></li>
             </ul>
             <ul class="copyright">
                 <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
@@ -277,11 +220,10 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Live page now uses external legacy payload only. Inline fallback archived. -->
 <script>
   window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/stankovic.legacy_role_payload.json";
 </script>
 <script src="assets/js/sr-report-loader.js"></script>
-<script src="assets/js/sr-role-runtime.js"></script>
+<script src="assets/js/sr-role-runtime.js?v=radar-mobile-20260604"></script>
 </body>
 </html>

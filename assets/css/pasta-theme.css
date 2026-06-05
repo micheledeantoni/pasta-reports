@@ -735,6 +735,42 @@ section.pasta-hero {
 .sr-bar-track.main { background: var(--ei2-border) !important; }
 .sr-bar-fill       { box-shadow: none !important; }
 
+/* Mobile radar summary — editorial theme overrides */
+.sr-rm-header      { border-bottom-color: var(--ei2-border-2) !important; }
+.sr-rm-subject-name { color: var(--ei2-ink) !important; }
+.sr-rm-vs-label    { color: var(--ei2-ink-faint) !important; }
+.sr-rm-comp-select {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+.sr-rm-axis-label  { color: var(--ei2-ink-2) !important; }
+.sr-rm-axis-score  { color: var(--ei2-ink) !important; }
+.sr-rm-bar-track   { background: var(--ei2-border-2) !important; }
+.sr-rm-comp-marker { border-color: var(--ei2-surface) !important; }
+.sr-rm-expand-btn  { color: var(--ei2-ink-faint) !important; }
+
+/* Mobile compact metric view — editorial theme overrides */
+.sr-mc-label        { color: var(--ei2-ink-faint) !important; }
+.sr-mc-subject-val  { color: var(--ei2-ink) !important; }
+.sr-mc-bar-track    { background: var(--ei2-border-2) !important; }
+.sr-mc-marker       { border-color: var(--ei2-surface) !important; }
+.sr-mc-chip         { color: var(--ei2-ink-muted) !important; }
+.sr-mc-chip.is-subject { color: var(--ei2-ink) !important; }
+.sr-mc-toggle       { color: var(--ei2-ink-faint) !important; }
+.sr-mc-detail       { border-top-color: var(--ei2-border-2) !important; }
+
+/* Mobile per-player metric bars — editorial theme overrides */
+.sr-mobile-metric-label {
+    color: var(--ei2-ink-faint) !important;
+    border-bottom-color: var(--ei2-border-2) !important;
+}
+.sr-mobile-player-name { color: var(--ei2-ink-2) !important; }
+.sr-mobile-player-row.is-subject .sr-mobile-player-name { color: var(--ei2-ink) !important; }
+.sr-mobile-player-val  { color: var(--ei2-ink) !important; }
+.sr-mobile-player-sub  { color: var(--ei2-ink-faint) !important; }
+.sr-mobile-bm-marker   { background: var(--ei2-border) !important; }
+
 .sr-raw-bars-note {
     color: var(--ei2-ink-muted) !important;
     background: var(--ei2-surface-2) !important;
@@ -961,6 +997,75 @@ section.pasta-hero {
     color: var(--ei2-accent) !important;
 }
 
+/* GK mobile summary/detail components live on the light editorial surface. */
+.sr-gk-radar-axis,
+.sr-gk-metric-detail,
+.sr-gk-mobile-compact {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-gk-radar-axis-head span,
+.sr-gk-metric-summary-label,
+.sr-gk-metric-player span,
+.sr-gk-mc-label {
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-gk-radar-axis-head strong,
+.sr-gk-metric-player strong,
+.sr-gk-mc-subject-val {
+    color: var(--ei2-ink) !important;
+}
+
+.sr-gk-radar-axis-foot,
+.sr-gk-metric-summary-label small,
+.sr-gk-metric-player span:nth-child(3),
+.sr-gk-mc-chip {
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-radar-track,
+.sr-gk-mc-bar-track,
+.sr-gk-metric-player-track {
+    background: var(--ei2-border-2) !important;
+}
+
+.sr-gk-radar-marker {
+    background: var(--ei2-surface) !important;
+    box-shadow: 0 0 0 2px var(--ei2-surface) !important;
+}
+
+.sr-gk-mc-marker {
+    border-color: var(--ei2-surface) !important;
+    box-shadow: 0 0 0 2px rgba(76, 45, 20, .18) !important;
+}
+
+.sr-gk-metric-detail > summary,
+.sr-gk-metric-player {
+    border-color: var(--ei2-border-2) !important;
+}
+
+.sr-gk-metric-summary-value,
+.sr-gk-mc-chip.is-subject {
+    color: var(--ei2-accent-2) !important;
+}
+
+.sr-gk-mc-label small {
+    color: #a86522 !important;
+}
+
+.sr-gk-mc-toggle {
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-radar-details > summary {
+    color: var(--ei2-ink-2) !important;
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    HOMEPAGE CARDS
    ═════════════════════════════════════════════════════════════════════════ */
@@ -1020,3 +1125,14 @@ section.pasta-hero {
 }
 
 #menu a:hover { color: #fff !important; }
+
+/* ── Mobile touch targets for footer social icons ─────────────────────────── */
+@media screen and (max-width: 768px) {
+    #footer .icons li a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+}

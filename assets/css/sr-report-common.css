@@ -477,6 +477,317 @@
 
 .sr-axis-accordion-summary::-webkit-details-marker { display: none; }
 
+/* ── Mobile metric layout ─────────────────────────────────────────────────── */
+/* Hidden on desktop; shown inside @media block below */
+.sr-mobile-metric { display: none; }
+
+/* ── Compact view (default mobile state) ──────────────────────────────────── */
+.sr-mc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+.sr-mc-label {
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.42);
+    flex: 1;
+    min-width: 0;
+}
+.sr-mc-subject-val {
+    font-size: .76rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.sr-mc-bar-wrap {
+    padding: .65rem 0 .3rem;
+}
+.sr-mc-bar-track {
+    position: relative;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+}
+.sr-mc-marker {
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(14,18,32,.85);
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.sr-mc-player-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .18rem .45rem;
+    margin-top: .35rem;
+}
+.sr-mc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .22rem;
+    font-size: .65rem;
+    color: rgba(255,255,255,.58);
+    white-space: nowrap;
+}
+.sr-mc-chip.is-subject {
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+}
+.sr-mc-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.sr-mc-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .28rem;
+    margin-top: .5rem;
+    padding: .18rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: .65rem;
+    color: rgba(255,255,255,.35);
+    font-family: inherit;
+    letter-spacing: .04em;
+}
+.sr-mc-toggle::before {
+    content: "▾";
+    font-size: .58rem;
+    transition: transform .15s;
+    display: inline-block;
+}
+.sr-mc-toggle[aria-expanded="true"]::before { transform: rotate(180deg); }
+
+/* ── Mobile radar summary (compact default, hidden on desktop) ────────────── */
+.sr-radar-mobile-summary { display: none; }
+
+/* Header: subject name + comparison selector */
+.sr-rm-header {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    flex-wrap: wrap;
+    margin-bottom: .65rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sr-rm-subject-name {
+    display: flex;
+    align-items: center;
+    gap: .28rem;
+    font-size: .78rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.9);
+    flex-shrink: 0;
+}
+
+.sr-rm-select-wrap {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.sr-rm-vs-label {
+    font-size: .7rem;
+    color: rgba(255,255,255,.38);
+    flex-shrink: 0;
+}
+
+.sr-rm-comp-select {
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: .45rem;
+    color: rgba(255,255,255,.78);
+    font-size: .73rem;
+    padding: .3rem .55rem;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    font-family: inherit;
+}
+
+/* Axis rows: label wraps, bar fills available space, score aligned */
+.sr-rm-axes {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: .6rem;
+}
+
+.sr-rm-axis-row {
+    display: grid;
+    grid-template-columns: minmax(0, 6.5rem) 1fr 2.2rem;
+    column-gap: .45rem;
+    row-gap: 0;
+    align-items: start;
+}
+
+.sr-rm-axis-label {
+    font-size: .75rem;       /* legible at 320px */
+    line-height: 1.28;
+    color: rgba(255,255,255,.65);
+    white-space: normal;     /* allow wrapping */
+    overflow: visible;
+    padding-top: .04rem;     /* optical alignment with bar */
+}
+
+.sr-rm-bar-wrap {
+    min-width: 0;
+    padding-top: .38rem;     /* vertically center bar on first label line */
+}
+
+.sr-rm-bar-track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+}
+
+.sr-rm-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    min-width: 3px;
+}
+
+/* Marker color set inline via radarPalette.compBorder — no hardcoded color here */
+.sr-rm-comp-marker {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(14,18,32,.75);
+    box-sizing: border-box;
+}
+
+.sr-rm-axis-score {
+    font-size: .75rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.82);
+    text-align: right;
+    padding-top: .04rem;
+}
+
+.sr-rm-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    margin-top: .15rem;
+    padding: .3rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: .7rem;
+    color: rgba(255,255,255,.42);
+    font-family: inherit;
+    letter-spacing: .04em;
+}
+
+.sr-rm-expand-btn::before {
+    content: "▾";
+    font-size: .6rem;
+    transition: transform .15s;
+    display: inline-block;
+}
+
+.sr-rm-expand-btn[aria-expanded="true"]::before { transform: rotate(180deg); }
+
+/* ── Detail view (expanded Sprint 1 layout) ───────────────────────────────── */
+.sr-mc-detail {
+    margin-top: .7rem;
+    padding-top: .65rem;
+    border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.sr-mobile-metric-label {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    margin-bottom: .7rem;
+    padding-bottom: .35rem;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.sr-mobile-player-row {
+    margin-bottom: .75rem;
+}
+
+.sr-mobile-player-row.is-subject {
+    margin-bottom: .9rem;
+}
+
+.sr-mobile-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .25rem;
+}
+
+.sr-mobile-player-name {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    font-size: .78rem;
+    color: rgba(255,255,255,.82);
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sr-mobile-player-row.is-subject .sr-mobile-player-name {
+    font-weight: 600;
+    color: rgba(255,255,255,.95);
+}
+
+.sr-mobile-player-val {
+    font-size: .78rem;
+    font-weight: 700;
+    color: rgba(255,255,255,.88);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sr-mobile-player-sub {
+    font-size: .63rem;
+    color: rgba(255,255,255,.35);
+    margin-top: .15rem;
+    letter-spacing: .04em;
+}
+
+/* Benchmark marker: thin vertical line on the bar at the baseline position */
+.sr-mobile-bm-marker {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    border-radius: 1px;
+    background: rgba(255,255,255,.45);
+    pointer-events: none;
+}
+
 /* ── Shared responsive shell ──────────────────────────────────────────── */
 @media screen and (max-width: 768px) {
 
@@ -484,9 +795,7 @@
     .sr-heatmap-grid { grid-template-columns: 1fr; }
 
     /* Radar: fixed 420×420px so labels are never squished.
-       The scroll wrapper enables horizontal swipe on narrow phones.
-       Replaces the old clamp(340px, 84vw, 440px) height-only rule —
-       a fixed square is needed because Chart.js fills width × height. */
+       The scroll wrapper enables horizontal swipe on narrow phones. */
     .sr-radar-scroll-wrap {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -498,19 +807,32 @@
         overflow: visible;
     }
 
-    /* Radar toolbar: stack legend above comparison selector */
-    .sr-radar-tools {
+    /* Radar summary: show on mobile; hide full canvas + toolbar by default */
+    .sr-radar-mobile-summary { display: block; }
+    .sr-radar-scroll-wrap:not(.sr-mobile-open) { display: none; }
+    .sr-radar-tools:not(.sr-mobile-open) { display: none; }
+
+    /* When expanded, restore toolbar stack layout */
+    .sr-radar-tools.sr-mobile-open {
         flex-direction: column;
         align-items: flex-start;
         gap: .5rem;
     }
 
-    /* Bar charts: scroll horizontally — labels stay fully readable */
+    /* Bar charts: vertical per-player layout replaces horizontal scroll.
+       Desktop .sr-dot-row rows are hidden; .sr-mobile-metric rows take over. */
     .sr-bars-scroll {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: visible;
     }
-    .sr-bars-scroll > div { min-width: 440px; }
+    .sr-bars-scroll > div { min-width: 0; }
+
+    .sr-dot-group .sr-dot-row { display: none; }
+    .sr-mobile-metric { display: block; }
+
+    /* Mobile bar tracks fill available width */
+    .sr-mobile-metric .sr-bar-track {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {

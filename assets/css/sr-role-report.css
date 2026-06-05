@@ -415,6 +415,8 @@
 /* Sprint 1B role responsive layout. */
 @media screen and (max-width: 768px) {
     .sr-two-col, .sr-radar-layout { grid-template-columns: 1fr; }
+    /* Prevent grid children from expanding the cell beyond 1fr */
+    .sr-card { min-width: 0; overflow: hidden; }
     .sr-radar-wrap { min-height: 320px; height: 360px; }
     .sr-radar-selector-wrap { flex-wrap: wrap; }
     .sr-radar-select { min-width: 9rem; font-size: .74rem; }
