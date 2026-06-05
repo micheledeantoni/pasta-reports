@@ -51,6 +51,7 @@ HEATMAP_FOURTH_TITLES = {
 }
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 COMMON_ASSET_VERSION = "sprint1-mobile-20260604"
+THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-colors"
 GK_ASSET_VERSION = "gk-mobile-20260605-r3"
 ROLE_RUNTIME_VERSION = "radar-mobile-20260604"
 
@@ -340,7 +341,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
     if "assets/css/pasta-theme.css" in out:
         out = re.sub(
             r'<link rel="stylesheet" href="assets/css/pasta-theme\.css(?:\?v=[^"]+)?" />',
-            f'<link rel="stylesheet" href="assets/css/pasta-theme.css?v={COMMON_ASSET_VERSION}" />',
+            f'<link rel="stylesheet" href="assets/css/pasta-theme.css?v={THEME_ASSET_VERSION}" />',
             out,
             count=1,
         )
@@ -348,7 +349,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         out = out.replace(
             f'<link rel="stylesheet" href="assets/css/sr-gk-report.css?v={GK_ASSET_VERSION}" />',
             f'<link rel="stylesheet" href="assets/css/sr-gk-report.css?v={GK_ASSET_VERSION}" />\n'
-            f'    <link rel="stylesheet" href="assets/css/pasta-theme.css?v={COMMON_ASSET_VERSION}" />',
+            f'    <link rel="stylesheet" href="assets/css/pasta-theme.css?v={THEME_ASSET_VERSION}" />',
             1,
         )
     out = re.sub(

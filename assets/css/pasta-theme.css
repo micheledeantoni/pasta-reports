@@ -997,6 +997,55 @@ section.pasta-hero {
     color: var(--ei2-accent) !important;
 }
 
+/* GK mobile summary/detail components live on the light editorial surface. */
+.sr-gk-radar-axis,
+.sr-gk-metric-detail {
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-gk-radar-axis-head span,
+.sr-gk-metric-summary-label,
+.sr-gk-metric-player span {
+    color: var(--ei2-ink-2) !important;
+}
+
+.sr-gk-radar-axis-head strong,
+.sr-gk-metric-player strong {
+    color: var(--ei2-ink) !important;
+}
+
+.sr-gk-radar-axis-foot,
+.sr-gk-metric-summary-label small,
+.sr-gk-metric-player span:last-child {
+    color: var(--ei2-ink-muted) !important;
+}
+
+.sr-gk-radar-track {
+    background: var(--ei2-border-2) !important;
+}
+
+.sr-gk-radar-marker {
+    background: var(--ei2-surface) !important;
+    box-shadow: 0 0 0 2px var(--ei2-surface) !important;
+}
+
+.sr-gk-metric-detail > summary,
+.sr-gk-metric-player {
+    border-color: var(--ei2-border-2) !important;
+}
+
+.sr-gk-metric-summary-value {
+    color: var(--ei2-accent-2) !important;
+}
+
+.sr-gk-radar-details > summary {
+    color: var(--ei2-ink-2) !important;
+    background: var(--ei2-surface-2) !important;
+    border-color: var(--ei2-border) !important;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    HOMEPAGE CARDS
    ═════════════════════════════════════════════════════════════════════════ */
