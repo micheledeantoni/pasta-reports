@@ -457,14 +457,27 @@ function initGkReport() {
         const names = trio.map(p => p?.header?.player_name || 'GK');
         renderBarsLegend(target, comp1, comp2);
         const groups = buildMetricGroups(target, comp1, comp2);
+        function abbrev(name) {
+            return String(name || '').split(/\s+/).filter(Boolean).map(part => part[0]).join('').toUpperCase().slice(0, 3);
+        }
+        function calcMarkerOffsets(values) {
+            const indexed = values.map((value, index) => ({ value: value ?? 0, index })).sort((a, b) => a.value - b.value);
+            const offsets = new Array(values.length).fill(0);
+            for (let i = 1; i < indexed.length; i += 1) {
+                if (indexed[i].value - indexed[i - 1].value < 5) {
+                    offsets[indexed[i].index] = offsets[indexed[i - 1].index] === 0 ? -6 : 0;
+                }
+            }
+            return offsets;
+        }
         let warning = '<p class="sr-radar-context-note">Valori principali normalizzati per90, percentuali, rate o share. I conteggi grezzi restano solo nei tooltip quando disponibili.</p>';
         if (comp2?.header?.sample_status === 'forced_low_sample') {
             warning += `<div class="sr-gk-sample ${statusClass(comp2.header.sample_status)}"><strong>${esc(sampleLabel(comp2.header.sample_status))}</strong><span>Martínez è incluso solo come confronto interno della stanza portieri Inter; non entra nei benchmark ufficiali.</span></div>`;
         }
-        el.innerHTML = `${warning}${groups.map(group => `
+        el.innerHTML = `${warning}${groups.map((group, groupIdx) => `
             <div class="sr-dot-group">
                 <div class="sr-dot-group-title">${esc(group.label)}</div>
-                ${group.metrics.map(metric => {
+                ${group.metrics.map((metric, metricIdx) => {
                     const widths = metric.values.map(v => v == null ? 0 : Math.max(3, Math.min(100, Math.abs(Number(v)) / metric.max * 100)));
                     const colors = [COLORS.target, COLORS.comparison, COLORS.alternate];
                     const tracks = trio.map((payload, idx) => {
@@ -474,7 +487,16 @@ function initGkReport() {
                         return `<div class="sr-bar-track${cls}"><div class="sr-bar-fill" style="width:${widths[idx]}%; background:${colors[idx]};" data-tip="${esc(names[idx])} · ${esc(metric.fmt(metric.values[idx]))}${esc(rawTip)}"></div></div>`;
                     }).join('');
                     const valueText = metric.values.map((v, idx) => `${names[idx].split(' ').slice(-1)[0]} ${metric.fmt(v)}`).join(' · ');
-                    const metricId = `gk-${group.label}-${metric.label}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    const metricId = `gk-${groupIdx}-${metricIdx}-${group.label}-${metric.label}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    const markerOffsets = calcMarkerOffsets(widths);
+                    const markers = trio.map((payload, idx) => {
+                        const size = idx === 0 ? 13 : 10;
+                        return `<span class="sr-gk-mc-marker${idx === 0 ? ' is-subject' : ''}" style="left:${widths[idx]}%;width:${size}px;height:${size}px;background:${colors[idx]};transform:translate(-50%,calc(-50% + ${markerOffsets[idx]}px))"></span>`;
+                    }).join('');
+                    const chips = trio.map((payload, idx) => {
+                        const value = metric.values[idx] == null ? '—' : metric.fmt(metric.values[idx]);
+                        return `<span class="sr-gk-mc-chip${idx === 0 ? ' is-subject' : ''}"><span class="sr-gk-mc-chip-dot" style="background:${colors[idx]}"></span>${esc(abbrev(names[idx]))} ${esc(value)}</span>`;
+                    }).join('');
                     const mobileRows = trio.map((payload, idx) => {
                         const raw = metric.rawTips?.[idx];
                         const rawText = raw !== null && raw !== undefined ? `<span>Raw ${esc(fmt(raw, 0))}</span>` : '';
@@ -482,6 +504,9 @@ function initGkReport() {
                             <span><i style="background:${colors[idx]}"></i>${esc(names[idx])}</span>
                             <strong>${esc(metric.fmt(metric.values[idx]))}</strong>
                             ${rawText}
+                            <div class="sr-gk-metric-player-track">
+                                <i style="width:${widths[idx]}%;background:${colors[idx]}"></i>
+                            </div>
                         </div>`;
                     }).join('');
                     return `<div class="sr-dot-row sr-dot-row-3 sr-gk-bars-desktop">
@@ -489,15 +514,43 @@ function initGkReport() {
                         <div class="sr-bar-group">${tracks}</div>
                         <div class="sr-dot-val sr-dot-val-3">${esc(valueText)}</div>
                     </div>
-                    <details class="sr-gk-metric-detail" id="${esc(metricId)}">
-                        <summary>
-                            <span class="sr-gk-metric-summary-label">${esc(metric.label)}${metric.note ? `<small>${esc(metric.note)}</small>` : ''}</span>
-                            <span class="sr-gk-metric-summary-value">${esc(names[0].split(' ').slice(-1)[0])} ${esc(metric.fmt(metric.values[0]))}</span>
-                        </summary>
+                    <div class="sr-gk-mobile-metric">
+                        <div class="sr-gk-mobile-compact">
+                            <div class="sr-gk-mc-header">
+                                <span class="sr-gk-mc-label">${esc(metric.label)}${metric.note ? `<small>${esc(metric.note)}</small>` : ''}</span>
+                                <span class="sr-gk-mc-subject-val">${esc(names[0].split(' ').slice(-1)[0])} ${esc(metric.fmt(metric.values[0]))}</span>
+                            </div>
+                            <div class="sr-gk-mc-bar-wrap">
+                                <div class="sr-gk-mc-bar-track">${markers}</div>
+                            </div>
+                            <div class="sr-gk-mc-player-strip">${chips}</div>
+                            <button class="sr-gk-mc-toggle" type="button" aria-expanded="false" aria-controls="${esc(metricId)}">Mostra dettaglio</button>
+                        </div>
                         <div class="sr-gk-metric-players">${mobileRows}</div>
-                    </details>`;
+                    </div>`;
                 }).join('')}
             </div>`).join('')}`;
+
+        el.querySelectorAll('.sr-gk-mobile-metric').forEach(metricEl => {
+            const toggle = metricEl.querySelector('.sr-gk-mc-toggle');
+            const detail = metricEl.querySelector('.sr-gk-metric-players');
+            if (!toggle || !detail) return;
+            detail.id = toggle.getAttribute('aria-controls');
+            detail.hidden = true;
+            toggle.addEventListener('click', () => {
+                const open = toggle.getAttribute('aria-expanded') === 'true';
+                el.querySelectorAll('.sr-gk-mc-toggle[aria-expanded="true"]').forEach(other => {
+                    if (other === toggle) return;
+                    other.setAttribute('aria-expanded', 'false');
+                    other.textContent = 'Mostra dettaglio';
+                    const otherDetail = document.getElementById(other.getAttribute('aria-controls'));
+                    if (otherDetail) otherDetail.hidden = true;
+                });
+                toggle.setAttribute('aria-expanded', String(!open));
+                toggle.textContent = open ? 'Mostra dettaglio' : 'Nascondi dettaglio';
+                detail.hidden = open;
+            });
+        });
     }
 
     // ---- VISUAL SELECTOR: buttons ----

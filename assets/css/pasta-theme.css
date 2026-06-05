@@ -999,7 +999,8 @@ section.pasta-hero {
 
 /* GK mobile summary/detail components live on the light editorial surface. */
 .sr-gk-radar-axis,
-.sr-gk-metric-detail {
+.sr-gk-metric-detail,
+.sr-gk-mobile-compact {
     background: var(--ei2-surface-2) !important;
     border-color: var(--ei2-border) !important;
     color: var(--ei2-ink-2) !important;
@@ -1007,22 +1008,27 @@ section.pasta-hero {
 
 .sr-gk-radar-axis-head span,
 .sr-gk-metric-summary-label,
-.sr-gk-metric-player span {
+.sr-gk-metric-player span,
+.sr-gk-mc-label {
     color: var(--ei2-ink-2) !important;
 }
 
 .sr-gk-radar-axis-head strong,
-.sr-gk-metric-player strong {
+.sr-gk-metric-player strong,
+.sr-gk-mc-subject-val {
     color: var(--ei2-ink) !important;
 }
 
 .sr-gk-radar-axis-foot,
 .sr-gk-metric-summary-label small,
-.sr-gk-metric-player span:last-child {
+.sr-gk-metric-player span:nth-child(3),
+.sr-gk-mc-chip {
     color: var(--ei2-ink-muted) !important;
 }
 
-.sr-gk-radar-track {
+.sr-gk-radar-track,
+.sr-gk-mc-bar-track,
+.sr-gk-metric-player-track {
     background: var(--ei2-border-2) !important;
 }
 
@@ -1031,13 +1037,27 @@ section.pasta-hero {
     box-shadow: 0 0 0 2px var(--ei2-surface) !important;
 }
 
+.sr-gk-mc-marker {
+    border-color: var(--ei2-surface) !important;
+    box-shadow: 0 0 0 2px rgba(76, 45, 20, .18) !important;
+}
+
 .sr-gk-metric-detail > summary,
 .sr-gk-metric-player {
     border-color: var(--ei2-border-2) !important;
 }
 
-.sr-gk-metric-summary-value {
+.sr-gk-metric-summary-value,
+.sr-gk-mc-chip.is-subject {
     color: var(--ei2-accent-2) !important;
+}
+
+.sr-gk-mc-label small {
+    color: #a86522 !important;
+}
+
+.sr-gk-mc-toggle {
+    color: var(--ei2-ink-muted) !important;
 }
 
 .sr-gk-radar-details > summary {

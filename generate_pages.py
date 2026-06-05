@@ -51,8 +51,8 @@ HEATMAP_FOURTH_TITLES = {
 }
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 COMMON_ASSET_VERSION = "sprint1-mobile-20260604"
-THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-colors"
-GK_ASSET_VERSION = "gk-mobile-20260605-r3"
+THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
+GK_ASSET_VERSION = "gk-mobile-20260605-r4"
 ROLE_RUNTIME_VERSION = "radar-mobile-20260604"
 
 
