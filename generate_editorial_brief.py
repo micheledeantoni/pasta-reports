@@ -78,6 +78,24 @@ RADAR_AXIS_ORDER = [
     "defensive_contribution",
 ]
 
+GK_AXIS_LABELS_IT = {
+    "shot_stopping": "Parate e rendimento sui tiri",
+    "box_control": "Controllo dell'area",
+    "sweeper_activity": "Uscite e copertura profondita",
+    "distribution": "Distribuzione",
+}
+
+GK_METRIC_LABELS_IT = {
+    "save_pct": "Save percentage",
+    "xgot_faced_minus_goals_conceded_per90": "xGOT - gol concessi p90",
+    "goals_conceded_per90": "Gol concessi p90",
+    "cross_stop_pct": "Cross stop %",
+    "claim_rate_on_crosses": "Claim rate sui cross",
+    "def_actions_outside_box_per90": "Azioni fuori area p90",
+    "pass_attempts_per90": "Passaggi tentati p90",
+    "pass_completion_pct": "Completamento passaggi",
+}
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -95,6 +113,20 @@ def fmt_val(value, metric_key: str, metric_formats: dict) -> str:
         return fn(float(value))
     except (TypeError, ValueError):
         return str(value)
+
+
+def fmt_gk_val(value, metric_key: str) -> str:
+    if value is None:
+        return "–"
+    try:
+        v = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    if metric_key.endswith("_pct") or metric_key in {"save_pct", "cross_stop_pct", "claim_rate_on_crosses", "pass_completion_pct"}:
+        return f"{v:.1%}"
+    if "per90" in metric_key:
+        return f"{v:.2f} p90"
+    return f"{v:.2f}"
 
 
 def group_names(player_meta: dict, ids: list) -> list[str]:
@@ -149,9 +181,185 @@ def radar_rows(radar_data: dict, radar_axes: list) -> list[dict]:
     return [row(i) for i in ordered]
 
 
+def build_gk_brief(player: dict, payload: dict) -> str:
+    players_env = payload["GK_PAGE_V1_PLAYERS"]
+    comparisons_env = payload["GK_PAGE_V1_TEAM_COMPARISONS"]
+    summary_env = payload["GK_PAGE_V1_SUMMARY"]
+    context = players_env.get("report_context", {}) or summary_env.get("report_context", {})
+
+    subject_id = int(context.get("target_player_id") or player.get("player_id"))
+    target_team = context.get("comparison_team_name") or player.get("target_team", "Inter")
+    source_club = player.get("source_club") or player.get("team_name") or ""
+    subject = None
+    for item in players_env.get("players", []):
+        if int(item.get("header", {}).get("player_id", -1)) == subject_id:
+            subject = item
+            break
+    if subject is None:
+        raise KeyError(f"GK subject {subject_id} not found in payload")
+
+    header = subject["header"]
+    subject_name = header["player_name"]
+    season = fmt_season(str(header.get("season_id", player.get("season", ""))))
+    comp = header.get("competition_name") or player.get("competition", "")
+    minutes = header.get("minutes")
+    sample_status = header.get("sample_status", "")
+    narrative = player.get("narrative", "").strip()
+
+    inter_comparison = None
+    for item in comparisons_env.get("team_comparisons", []):
+        comp_obj = item.get("team_gk_comparison", {})
+        if comp_obj.get("team_name") == target_team:
+            inter_comparison = comp_obj
+            break
+    inter_gks = inter_comparison.get("gks", []) if inter_comparison else []
+    inter_names = [g.get("player_name", "") for g in inter_gks]
+
+    axes = subject.get("radar", {}).get("axes", [])
+    subject_metrics = subject.get("action_split", {})
+    visuals = subject.get("visual_blocks", {})
+    goal_map = visuals.get("goal_map_save_map", {})
+    sweeper = visuals.get("sweeper_actions_map", {})
+    distribution = visuals.get("distribution_profile", {})
+    buildup = visuals.get("build_up_map", {})
+
+    L = [
+        f"# Brief editoriale GK — {subject_name}",
+        f"**Ruolo**: Portiere · **Destinazione**: {target_team} · **Stagione**: {season} · **Campionato**: {comp}",
+        f"**Club di provenienza**: {source_club} · **Minuti**: {minutes:.0f} · **Sample**: {sample_status}",
+        "",
+    ]
+
+    if narrative:
+        L += ["## Incipit esistente", f"> {narrative}", ""]
+
+    L += [
+        "---",
+        "## § Lettura generale",
+        "Radar GK a 4 assi. Scala 0–100, normalizzata nel contesto competitivo.",
+        "",
+        "| Asse | Score | z-score | Componenti principali |",
+        "|------|------:|--------:|-----------------------|",
+    ]
+    for axis in axes:
+        axis_id = axis.get("axis_id")
+        label = GK_AXIS_LABELS_IT.get(axis_id, axis.get("axis_name", axis_id))
+        comps = ", ".join(GK_METRIC_LABELS_IT.get(m.get("metric_name"), m.get("metric_name", "")) for m in axis.get("component_metrics", [])[:3])
+        L.append(f"| {label} | {axis.get('axis_score_0_100', 0):.1f} | {axis.get('axis_z_score', 0):+.2f} | {comps} |")
+    L += ["", "**Note analista** *(facoltativo)*:", "> …", ""]
+
+    L += [
+        "---",
+        f"## § Barre vs portieri {target_team}",
+        f"Confronto visuale con: {', '.join(inter_names)}.",
+        "",
+        "| Metrica | " + subject_name + " | " + " | ".join(inter_names) + " |",
+        "|---------|" + "---:|" * (1 + len(inter_names)),
+    ]
+    key_metrics = [
+        "save_pct",
+        "goals_conceded_per90",
+        "cross_stop_pct",
+        "claim_rate_on_crosses",
+        "def_actions_outside_box_per90",
+        "pass_attempts_per90",
+        "pass_completion_pct",
+    ]
+    raw_subject = {
+        "save_pct": subject_metrics.get("saves", {}).get("percentage_or_share"),
+        "goals_conceded_per90": subject_metrics.get("goals_conceded", {}).get("per90"),
+        "cross_stop_pct": subject_metrics.get("crosses_stopped", {}).get("percentage_or_share"),
+        "claim_rate_on_crosses": subject_metrics.get("claims", {}).get("percentage_or_share"),
+        "def_actions_outside_box_per90": subject_metrics.get("defensive_actions_outside_box", {}).get("per90"),
+        "pass_attempts_per90": subject_metrics.get("passes_attempted", {}).get("per90"),
+    }
+    for axis in axes:
+        for metric in axis.get("component_metrics", []):
+            metric_name = metric.get("metric_name")
+            if raw_subject.get(metric_name) is None:
+                raw_subject[metric_name] = metric.get("raw_value")
+    raw_subject.update(subject.get("visual_blocks", {}).get("distribution_profile", {}).get("season_metrics", {}) or {})
+    raw_subject.update(subject.get("header", {}).get("key_raw_metrics", {}) or {})
+    # Prefer the team-comparison raw metrics when available.
+    target_row = next((g for g in ([{"player_name": subject_name, "key_raw_metrics": {}}] + inter_gks) if g.get("player_name") == subject_name), None)
+    if target_row and target_row.get("key_raw_metrics"):
+        raw_subject.update(target_row["key_raw_metrics"])
+    for metric in key_metrics:
+        vals = [fmt_gk_val(raw_subject.get(metric), metric)]
+        vals += [fmt_gk_val(g.get("key_raw_metrics", {}).get(metric), metric) for g in inter_gks]
+        L.append(f"| {GK_METRIC_LABELS_IT.get(metric, metric)} | " + " | ".join(vals) + " |")
+    L += [
+        "",
+        "**Lettura attesa**: non cercare un vincitore secco. Separare rendimento sui tiri, gestione area, altezza/uscite e uso coi piedi.",
+        "",
+        "**Note analista** *(facoltativo)*:",
+        "> …",
+        "",
+    ]
+
+    L += [
+        "---",
+        "## § Visualizzazioni / heatmap portiere",
+        "La V1 GK non usa heatmap posizionali generiche: usa mappe specifiche da portiere.",
+        "",
+    ]
+    if goal_map:
+        L.append(f"- Goal/save map: {goal_map.get('visual_status', 'n/d')} · tiri nello specchio: {goal_map.get('total_on_target', '–')}")
+    if sweeper:
+        L.append(
+            "- Sweeper / defensive range: "
+            f"{sweeper.get('event_count', '–')} eventi, "
+            f"{fmt_gk_val(sweeper.get('event_count_per90'), 'event_count_per90')}, "
+            f"quota fuori area {fmt_gk_val(sweeper.get('outside_box_share'), 'outside_box_share_pct')}"
+        )
+    if distribution:
+        L.append(f"- Distribuzione: {distribution.get('event_count', '–')} passaggi/eventi; profilo per lunghezza, corsia e profondita.")
+    if buildup:
+        L.append(f"- Build-up map: {buildup.get('visual_status', 'n/d')} · eventi totali: {buildup.get('total_events', '–')}")
+    L += ["", "**Note analista** *(facoltativo — pattern visibili nelle mappe)*:", "> …", ""]
+
+    L += [
+        "---",
+        "---",
+        "## PROMPT PER L'AI",
+        "",
+        "Sei il redattore di una pubblicazione italiana di scouting calcistico.",
+        f"Usa i dati del brief qui sopra per scrivere una narrative iniziale e 2 note editoriali in italiano per il report GK di **{subject_name}**.",
+        "",
+        "**Regole:**",
+        "- Tono: interpretativo, editoriale. Guida il lettore, non elencare dati.",
+        "- Lunghezza narrative: 1 paragrafo da 3–4 frasi.",
+        "- Lunghezza note: 2–3 frasi compatte per nota.",
+        "- Non inventare un contesto squadra o una similarità: qui il report ha solo lettura generale, confronto con i portieri Inter e visualizzazioni GK.",
+        "- Audience: direttori sportivi e analisti calcistici.",
+        "- Evita frasi come «i dati mostrano» o «il grafico indica».",
+        "",
+        "**Campi da produrre:**",
+        "",
+        f"1. **narrative** — Incipit editoriale: che tipo di portiere è {subject_name}, perché è leggibile per {target_team}, e quale cautela serve?",
+        "",
+        f"2. **note_confronto** — Come si colloca {subject_name} rispetto a {', '.join(inter_names)} nelle barre?",
+        "",
+        "3. **note_heatmap** — Cosa rivelano goal map, sweeper range, distribuzione e build-up map sul suo uso effettivo?",
+        "",
+        "**Formato output** (copia-incolla diretto in player_index.json):",
+        "```json",
+        '"narrative": "...",',
+        '"note_confronto": "...",',
+        '"note_heatmap": "...",',
+        '"note_context": "",',
+        '"note_similarity": ""',
+        "```",
+    ]
+    return "\n".join(L)
+
+
 # ── Core builder ──────────────────────────────────────────────────────────────
 
 def build_brief(player: dict, payload: dict) -> str:
+    if "GK_PAGE_V1_PLAYERS" in payload:
+        return build_gk_brief(player, payload)
+
     subject_id   = str(payload["SUBJECT_ID"])
     player_meta  = payload["PLAYER_META"]
     subject_name = player_meta[subject_id]["name"]
@@ -388,6 +596,7 @@ def main():
         sys.exit(f"Payload not found: {payload_path}")
 
     payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    is_gk_payload = "GK_PAGE_V1_PLAYERS" in payload
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output_file = OUTPUT_DIR / f"{args.slug}.brief.md"
@@ -399,7 +608,10 @@ def main():
     print(f"  1. Apri {output_file}")
     print(f"  2. (Opzionale) aggiungi note analista nei campi '> …'")
     print(f"  3. Incolla il file in Claude o ChatGPT")
-    print(f"  4. Copia narrative + i 4 campi JSON in assets/data/player_index.json")
+    if is_gk_payload:
+        print(f"  4. Copia narrative + note_confronto + note_heatmap in assets/data/player_index.json")
+    else:
+        print(f"  4. Copia narrative + i 4 campi JSON in assets/data/player_index.json")
     print(f"  5. python generate_pages.py --slug {args.slug}")
 
     if args.open:
