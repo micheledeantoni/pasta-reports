@@ -86,6 +86,9 @@ def player_image_url(slug: str) -> str:
         path = BASE_DIR / "images" / "players" / f"{slug}{ext}"
         if path.exists():
             return f"images/players/{slug}{ext}"
+    card_path = BASE_DIR / "images" / "cards" / f"{slug}.png"
+    if card_path.exists():
+        return f"images/cards/{slug}.png"
     return f"images/players/{slug}.webp"
 
 
@@ -477,6 +480,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         flags=re.S,
     )
     out = re.sub(r"(?m)^[ \t]+$", "", out)
+    out = re.sub(r"\n{3,}", "\n\n", out)
     return out
 
 
