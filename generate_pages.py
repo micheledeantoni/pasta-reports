@@ -50,10 +50,10 @@ HEATMAP_FOURTH_TITLES = {
     "DEF": "Azioni difensive",
 }
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
-COMMON_ASSET_VERSION = "sprint1-mobile-20260604"
+COMMON_ASSET_VERSION = "sprint1-mobile-20260605-role-score"
 THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
 GK_ASSET_VERSION = "gk-mobile-20260605-r4"
-ROLE_RUNTIME_VERSION = "radar-mobile-20260604"
+ROLE_RUNTIME_VERSION = "radar-mobile-20260605-score"
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -219,7 +219,7 @@ def build_slots(player: dict) -> dict:
 
     # ── Role-specific CSS and JS runtime ──────────────────────────────────
     if macro == "GK":
-        role_css = "sr-gk-report.css"
+        role_css = f"sr-gk-report.css?v={GK_ASSET_VERSION}"
         role_scripts = (
             '<script>\n'
             f'  window.SR_GK_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
@@ -228,7 +228,7 @@ def build_slots(player: dict) -> dict:
             f'<script src="assets/js/sr-gk-runtime.js?v={GK_ASSET_VERSION}"></script>'
         )
     else:
-        role_css = "sr-role-report.css"
+        role_css = f"sr-role-report.css?v={COMMON_ASSET_VERSION}"
         role_scripts = (
             '<script>\n'
             f'  window.SR_EXTERNAL_PAYLOAD_URL = "{player.get("payload_file", "")}";\n'
@@ -256,6 +256,8 @@ def build_slots(player: dict) -> dict:
         "OG_DESCRIPTION":    og_desc,
         "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",
         "ROLE_CSS":          role_css,
+        "COMMON_ASSET_VERSION": COMMON_ASSET_VERSION,
+        "THEME_ASSET_VERSION": THEME_ASSET_VERSION,
         "ROLE_SCRIPTS":      role_scripts,
         # ── Editorial section notes (optional, populated via generate_editorial_brief.py) ──
         "NOTE_CONFRONTO":  note_block(player.get("note_confronto", "")),

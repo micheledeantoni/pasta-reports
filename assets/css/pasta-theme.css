@@ -728,6 +728,7 @@ section.pasta-hero {
 
 .sr-dot-label { color: var(--ei2-ink-2) !important; }
 .sr-dot-val   { color: var(--ei2-accent) !important; }
+.sr-dot-val small { color: var(--ei2-ink-faint) !important; }
 .sr-dot-axis  { background: var(--ei2-border) !important; }
 .sr-dot.main  { border-color: var(--ei2-border) !important; }
 

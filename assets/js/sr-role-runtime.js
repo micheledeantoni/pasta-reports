@@ -594,6 +594,7 @@ function initRoleReport() {
                             </div>`;
                         }).join("");
 
+                        const desktopScore = Number.isFinite(Number(subjectScore)) ? `${Math.round(subjectScore)}% scala` : "";
                         return `
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
@@ -602,7 +603,7 @@ function initRoleReport() {
                                     ${refBars}
                                     ${baselineBar}
                                 </div>
-                                <div class="sr-dot-val">${esc(fmt(row.metric, row.subjectValue))}</div>
+                                <div class="sr-dot-val"><span>${esc(fmt(row.metric, row.subjectValue))}</span>${desktopScore ? `<small>${esc(desktopScore)}</small>` : ""}</div>
                             </div>
                             <div class="sr-mobile-metric">
                                 <div class="sr-mobile-compact">
