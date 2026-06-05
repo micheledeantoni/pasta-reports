@@ -140,6 +140,7 @@
 /* Sprint 1B GK responsive layout. */
 @media screen and (max-width: 768px) {
     .sr-card { padding: 1rem; border-radius: .85rem; }
+    #gkRadarSection .sr-radar-tools:not(.sr-mobile-open) { display: flex; }
     .sr-radar-tools { align-items: stretch; gap: .75rem; }
     .sr-radar-selector-wrap { width: 100%; align-items: flex-start; }
     .sr-radar-select { width: 100%; min-height: 2.75rem; font-size: .86rem; }
