@@ -906,12 +906,8 @@ function initRoleReport() {
             ];
             const tooltip = tipParts.join(" · ");
             const parts = zone.parts || [zone.cells];
-            let labelBounds = null;
             parts.forEach(part => {
                 const bounds = shotZoneBounds(part, cropX, cropW);
-                if (!labelBounds || bounds.width * bounds.height > labelBounds.width * labelBounds.height) {
-                    labelBounds = bounds;
-                }
                 const rect = svgEl("rect", {
                     x: bounds.x + 1.8,
                     y: bounds.y + 1.8,
@@ -924,39 +920,43 @@ function initRoleReport() {
                 });
                 svgTip(rect, tooltip);
                 svg.appendChild(rect);
+                if (!occupied) return;
+                const cx = bounds.x + bounds.width / 2;
+                const cy = bounds.y + bounds.height / 2;
+                const compact = bounds.width < 76;
+                const countDigits = String(zone.shots).length;
+                const countSize = Math.max(8.2, Math.min(16, Math.min(bounds.width / Math.max(2.15, countDigits * 0.9), bounds.height / 1.65)));
+                const secondSize = Math.max(8.4, Math.min(10.4, Math.min(bounds.width / 10.5, bounds.height / 5.4)));
+                const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
+                const approxCountWidth = countDigits * countSize * 0.58;
+                const approxSecondWidth = xgLabel.length * secondSize * 0.56;
+                const showCount = bounds.width >= Math.max(12, approxCountWidth + 5) && bounds.height >= countSize + 5;
+                const showXgPerShot = zone.shots >= 2 && bounds.height >= 42 && approxSecondWidth <= bounds.width - 8;
+                if (!showCount) return;
+                const text = svgEl("text", {
+                    x: cx,
+                    y: cy + (showXgPerShot ? -3 : countSize / 3),
+                    "text-anchor": "middle",
+                    fill: "rgba(255,255,255,.90)",
+                    "font-size": countSize.toFixed(1),
+                    "font-weight": 750,
+                    "pointer-events": "none",
+                });
+                text.textContent = `${zone.shots}`;
+                svg.appendChild(text);
+                if (!showXgPerShot) return;
+                const xgPerShotText = svgEl("text", {
+                    x: cx,
+                    y: cy + Math.max(10, secondSize + 3),
+                    "text-anchor": "middle",
+                    fill: "rgba(255,255,255,.66)",
+                    "font-size": secondSize.toFixed(1),
+                    "font-weight": 600,
+                    "pointer-events": "none",
+                });
+                xgPerShotText.textContent = xgLabel;
+                svg.appendChild(xgPerShotText);
             });
-            if (!occupied || !labelBounds || labelBounds.width < 38 || labelBounds.height < 24) return;
-            const cx = labelBounds.x + labelBounds.width / 2;
-            const cy = labelBounds.y + labelBounds.height / 2;
-            const compact = labelBounds.width < 76;
-            const countSize = Math.max(11, Math.min(16, Math.min(labelBounds.width / 5.2, labelBounds.height / 3.1)));
-            const secondSize = Math.max(8.4, Math.min(10.4, Math.min(labelBounds.width / 10.5, labelBounds.height / 5.4)));
-            const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
-            const approxSecondWidth = xgLabel.length * secondSize * 0.56;
-            const showXgPerShot = zone.shots >= 2 && labelBounds.height >= 42 && approxSecondWidth <= labelBounds.width - 8;
-            const text = svgEl("text", {
-                x: cx,
-                y: cy + (showXgPerShot ? -3 : countSize / 3),
-                "text-anchor": "middle",
-                fill: "rgba(255,255,255,.90)",
-                "font-size": countSize.toFixed(1),
-                "font-weight": 750,
-                "pointer-events": "none",
-            });
-            text.textContent = `${zone.shots}`;
-            svg.appendChild(text);
-            if (!showXgPerShot) return;
-            const xgPerShotText = svgEl("text", {
-                x: cx,
-                y: cy + Math.max(10, secondSize + 3),
-                "text-anchor": "middle",
-                fill: "rgba(255,255,255,.66)",
-                "font-size": secondSize.toFixed(1),
-                "font-weight": 600,
-                "pointer-events": "none",
-            });
-            xgPerShotText.textContent = xgLabel;
-            svg.appendChild(xgPerShotText);
         });
         svg.__attShotZones = zones;
         svg.__attShotColorByXg = colorByXg;
