@@ -187,5 +187,29 @@
     "note_heatmap": "Le visualizzazioni GK raccontano un portiere con attività reale e leggibile: molti tiri nello specchio affrontati, una quota non trascurabile di interventi fuori area e una partecipazione alla costruzione presente ma non dominante. La distribuzione suggerisce un uso pragmatico del pallone, più orientato a sostenere l’uscita che a trasformare il portiere in un regista aggiunto. Il profilo visuale va quindi letto come affidabilità operativa, non come specialismo estremo da sweeper o da primo costruttore.",
     "note_context": "",
     "note_similarity": ""
+  },
+  {
+    "player_id": "302497",
+    "player_name": "Alexander Sørloth",
+    "slug": "alexander-sorloth",
+    "team_id": "63",
+    "team_name": "Atletico Madrid",
+    "competition": "ESP-La Liga",
+    "season": "2526",
+    "macro_role": "ATT",
+    "target_team": "Juventus",
+    "report_file": "alexander-sorloth.html",
+    "report_status": "live",
+    "visibility": "public",
+    "payload_file": "data/report_legacy_payloads/alexander-sorloth.legacy_role_payload.json",
+    "payload_source": "soccerdb",
+    "source_club": "Atletico Madrid",
+    "minutes": "",
+    "narrative": "Alexander Sørloth è un attaccante di riferimento, più vicino al finalizzatore d’area che al centravanti associativo. Per la Juventus può essere interessante come profilo verticale e terminale, capace di dare peso dentro l’area e di trasformare molte azioni in conclusioni ravvicinate. La cautela è chiara: il suo impatto va letto dentro un contesto che gli costruisca volume e qualità di occasioni, perché fuori dalla zona di rifinitura pesa meno di altri profili come David, Vlahovic o Openda.",
+    "note_confronto": "Rispetto agli attaccanti della Juventus, Sørloth sembra più complementare che ridondante solo se viene usato come riferimento finale. Supera la baseline per quota di tiri in area, conversione e successo negli ingressi in area, ma resta sotto per xG, qualità media del tiro, ricezioni alte e creazione. Non è quindi un attaccante che sostituisce il lavoro di connessione: aggiunge presenza, ma chiede struttura intorno.",
+    "note_heatmap": "La sua impronta spaziale racconta un raggio d’azione piuttosto avanzato e concentrato, con centroide alto e molti tocchi orientati verso zone di conclusione. Il dato sulle conduzioni progressive suggerisce un profilo che può accompagnare l’azione in avanti, ma l’assenza di passaggi progressivi nel campione riduce l’idea di un centravanti capace di far salire la squadra con distribuzione lunga o rifinitura. Nel quarto riquadro, la progressione via passaggio va quindi letta come un limite più che come una zona di forza.",
+    "note_context": "Nel contesto Atletico Madrid, il confronto con Julián Alvarez e Antoine Griezmann chiarisce bene la natura del profilo. Sørloth emerge per presenza in area, volume di tiro e altezza delle iniziative, ma non per partecipazione, creazione o pulizia associativa. Fuori dalla narrativa del grande attaccante fisico, appare soprattutto come uno specialista di occupazione e finalizzazione, non come un regista offensivo avanzato.",
+    "note_similarity": "La similarità lo avvicina soprattutto a Dusan Vlahovic per volume, produzione e impronta spaziale, mentre il mix di azioni lo porta più vicino a Jonathan David. Questo crea una lettura interessante per la rosa: Sørloth non apre una direzione tecnica nuova se l’obiettivo è aggiungere connessione, ma può rafforzare la presenza centrale e la minaccia d’area. La scelta avrebbe senso se la Juventus cercasse una soluzione più diretta e terminale, meno se volesse aumentare fluidità e rifinitura tra le linee."
+
   }
 ]

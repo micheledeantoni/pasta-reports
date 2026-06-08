@@ -193,7 +193,6 @@ function initRoleReport() {
         const SHORT_LABELS = {
             technical_security: "Sicurezza",
             progression: "Progressione",
-            creation: "Creazione",
             direct_threat: "Minaccia",
             defensive_contribution: "Duelli",
             defensive_activity: "Attività difensiva",

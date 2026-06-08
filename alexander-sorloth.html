@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Player Report · Alexander Sørloth | PASTA</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Open Graph -->
+    <meta property="og:title"       content="Alexander Sørloth · Analisi PASTA" />
+    <meta property="og:description" content="Compatibilità Juventus — Attaccante · ESP · La Liga 2025–26" />
+    <meta property="og:image"       content="https://pasta-reports.com/images/cards/alexander-sorloth.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="https://pasta-reports.com/alexander-sorloth.html" />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Alexander Sørloth · Analisi PASTA" />
+    <meta name="twitter:description" content="Compatibilità Juventus — Attaccante · ESP · La Liga 2025–26" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/alexander-sorloth.png" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="assets/css/sr-report-common.css?v=sprint1-mobile-20260605-role-percent" />
+    <link rel="stylesheet" href="assets/css/sr-role-report.css?v=sprint1-mobile-20260605-role-percent" />
+    <link rel="stylesheet" href="assets/css/pasta-theme.css?v=sprint1-mobile-20260605-gk-bars" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        /* ── Banner: player photo (template-specific — uses alexander-sorloth) ── */
+        #banner.style2 {
+            background-image: url('images/players/alexander-sorloth.webp') !important;
+            background-attachment: scroll !important;
+            background-position: right 3.5rem !important;
+            background-size: auto 90% !important;
+            background-repeat: no-repeat !important;
+            min-height: 400px !important;
+            padding-top: 8rem !important;
+            padding-bottom: 4rem !important;
+        }
+        #banner.style2::after,
+        #banner.style2:after {
+            display: block !important;
+            opacity: 1 !important;
+            background: linear-gradient(
+                to right,
+                #f6f2ec 42%,
+                rgba(246, 242, 236, 0.80) 62%,
+                rgba(246, 242, 236, 0.10) 100%
+            ) !important;
+        }
+        @media screen and (max-width: 768px) {
+            #banner.style2 {
+                background-position: center top !important;
+                min-height: 0 !important;
+            }
+            #banner.style2::after, #banner.style2:after {
+                background: rgba(246, 242, 236, 0.82) !important;
+            }
+        }
+    </style>
+</head>
+<body class="is-preload sr-page">
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt style2">
+        <a href="index.html" class="logo"><strong>PASTA</strong> <span>Transfer Assessment</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+    </header>
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="method.html">Metodo</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="index.html" class="button primary fit">Tutte le analisi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="style2">
+        <div class="inner">
+            <header class="major"><h1>Alexander Sørloth</h1></header>
+            <div class="content">
+                <div class="sr-banner-meta">
+                    <span class="sr-banner-chip sr-banner-clubs">Atletico Madrid → Juventus</span>
+                    <span class="sr-banner-chip">Attaccante</span>
+                    <span class="sr-banner-chip">ESP · La Liga</span>
+                    <span class="sr-banner-chip">Stagione 2025–26</span>
+                    <span class="sr-banner-chip">1 968 min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+    <section class="sr-inner">
+
+        <!-- ── 1. LETTURA DEL PROFILO ─────────────────────────────── -->
+        <div class="sr-card" id="profileReading" data-static="true">
+            <p class="sr-section-label">Lettura del profilo</p>
+            <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Alexander Sørloth è un attaccante di riferimento, più vicino al finalizzatore d’area che al centravanti associativo. Per la Juventus può essere interessante come profilo verticale e terminale, capace di dare peso dentro l’area e di trasformare molte azioni in conclusioni ravvicinate. La cautela è chiara: il suo impatto va letto dentro un contesto che gli costruisca volume e qualità di occasioni, perché fuori dalla zona di rifinitura pesa meno di altri profili come David, Vlahovic o Openda.</p></div>
+        </div>
+
+        <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Profilo sintetico · assi ATT interpretativi</p>
+            <div class="sr-radar-tools">
+                <div id="radarCustomLegend" class="sr-radar-custom-legend"><!-- populated by runtime --></div>
+                <div class="sr-radar-selector-wrap">
+                    <label for="radarTargetSelect" class="sr-radar-select-label">Confronta con</label>
+                    <select id="radarTargetSelect" class="sr-radar-select"><!-- populated by runtime --></select>
+                </div>
+            </div>
+            <div class="sr-radar-scroll-wrap">
+                <div class="sr-radar-wrap-full">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+            <div class="sr-radar-context-note">
+                Il radar confronta profili stilistici normalizzati nel proprio contesto competitivo. Non è una stima diretta del livello del giocatore in Serie A.
+            </div>
+            <details class="sr-axis-accordion">
+                <summary class="sr-axis-accordion-summary">Assi del radar · legenda metriche</summary>
+                <ul class="sr-axis-guide" id="radarAxisGuide"></ul>
+            </details>
+        </div>
+
+        <!-- ── 3. CONFRONTO INDIVIDUALE VS TARGET CLUB ───────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Confronto individuale vs attaccanti Juventus · 2025–26</p>
+            <p class="sr-section-intro">Rispetto agli attaccanti della Juventus, Sørloth sembra più complementare che ridondante solo se viene usato come riferimento finale. Supera la baseline per quota di tiri in area, conversione e successo negli ingressi in area, ma resta sotto per xG, qualità media del tiro, ricezioni alte e creazione. Non è quindi un attaccante che sostituisce il lavoro di connessione: aggiunge presenza, ma chiede struttura intorno.</p>
+            <p class="sr-raw-bars-note">
+                Le barre mostrano valori grezzi osservati nei rispettivi campionati: sono utili per leggere le differenze
+                di profilo, ma non sono corrette per la difficoltà del campionato.
+                Passa il cursore su una barra per nome e valore esatto.
+            </p>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="interLegend"></div>
+                <div id="interComparison"></div>
+            </div>
+        </div>
+
+        <!-- ── 4. IMPRONTA SPAZIALE ───────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Impronta spaziale · grid 12×8 · 4 panel</p>
+            <p class="sr-section-intro">La sua impronta spaziale racconta un raggio d’azione piuttosto avanzato e concentrato, con centroide alto e molti tocchi orientati verso zone di conclusione. Il dato sulle conduzioni progressive suggerisce un profilo che può accompagnare l’azione in avanti, ma l’assenza di passaggi progressivi nel campione riduce l’idea di un centravanti capace di far salire la squadra con distribuzione lunga o rifinitura. Nel quarto riquadro, la progressione via passaggio va quindi letta come un limite più che come una zona di forza.</p>
+            <div class="sr-heatmap-toggle" id="heatmapToggle"></div>
+            <div class="sr-heatmap-grid">
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Zone di tiro</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPos"></svg>
+                    <span class="sr-pitch-note" id="pitchPosNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Impronta offensiva</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchCarry"></svg>
+                    <span class="sr-pitch-note" id="pitchCarryNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Distribuzione passaggi</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchPass"></svg>
+                    <span class="sr-pitch-note" id="pitchPassNote"></span>
+                </div>
+                <div class="sr-pitch-wrap">
+                    <div class="sr-pitch-title">Direzione conduzioni</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 360 240" id="pitchProg"></svg>
+                    <span class="sr-pitch-note" id="pitchProgNote"></span>
+                </div>
+                <div class="sr-pitch-wrap sr-att-goalmouth-panel" id="pitchGoalmouthPanel" hidden>
+                    <div class="sr-pitch-title">Zone placement tiri</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 180 90" id="pitchGoalmouth"></svg>
+                    <span class="sr-pitch-note" id="pitchGoalmouthNote"></span>
+                </div>
+
+            </div>
+            <div class="sr-def-summary" id="defSummaryBlock"></div>
+            <p class="sr-pitch-note" style="margin-top:.55rem;">
+                Le griglie riflettono dove avvengono le azioni registrate. Frecce: direzione media ≥ 3 eventi per cella.
+            </p>
+        </div>
+
+        <!-- ── 5. CONTESTO CLUB ATTUALE ───────────────────────────── -->
+        <div class="sr-card compact">
+            <p class="sr-section-label">Contesto Atletico Madrid · altri attaccanti</p>
+            <p class="sr-section-intro">Nel contesto Atletico Madrid, il confronto con Julián Alvarez e Antoine Griezmann chiarisce bene la natura del profilo. Sørloth emerge per presenza in area, volume di tiro e altezza delle iniziative, ma non per partecipazione, creazione o pulizia associativa. Fuori dalla narrativa del grande attaccante fisico, appare soprattutto come uno specialista di occupazione e finalizzazione, non come un regista offensivo avanzato.</p>
+            <p class="sr-raw-bars-note"></p>
+            <div class="sr-bars-scroll">
+                <div class="sr-player-tags" id="sourceTeamLegend"></div>
+                <div id="sourceTeamComparison"></div>
+            </div>
+        </div>
+
+        <!-- ── 6. SIMILARITY ─────────────────────────────────────── -->
+        <div class="sr-card">
+            <p class="sr-section-label">Similarità · attaccanti Juventus</p>
+            <p class="sr-section-intro">La similarità lo avvicina soprattutto a Dusan Vlahovic per volume, produzione e impronta spaziale, mentre il mix di azioni lo porta più vicino a Jonathan David. Questo crea una lettura interessante per la rosa: Sørloth non apre una direzione tecnica nuova se l’obiettivo è aggiungere connessione, ma può rafforzare la presenza centrale e la minaccia d’area. La scelta avrebbe senso se la Juventus cercasse una soluzione più diretta e terminale, meno se volesse aumentare fluidità e rifinitura tra le linee.</p>
+            <div class="sr-sim-grid" id="similarityGrid"></div>
+        </div>
+
+    </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="https://x.com/macnonesiste" class="icon brands alt fa-twitter" target="_blank" rel="noopener noreferrer" aria-label="Profilo X (Twitter) di Michele Deantoni"><span class="label">X</span></a></li>
+                <li><a href="https://www.linkedin.com/in/mdeantoni/" class="icon brands alt fa-linkedin-in" target="_blank" rel="noopener noreferrer" aria-label="Profilo LinkedIn di Michele Deantoni"><span class="label">LinkedIn</span></a></li>
+                <li><a href="method.html" class="icon solid alt fa-book" aria-label="Metodo e trasparenza PASTA"><span class="label">Metodo</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; PASTA · Player Analysis System for Transfer Assessment</li><li>Michele Deantoni</li>
+            </ul>
+        </div>
+    </footer>
+
+</div><!-- /wrapper -->
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+  window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/alexander-sorloth.legacy_role_payload.json";
+</script>
+<script src="assets/js/sr-report-loader.js"></script>
+<script src="assets/js/sr-role-runtime.js?v=radar-mobile-20260605-percent"></script>
+</body>
+</html>

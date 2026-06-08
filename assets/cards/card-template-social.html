@@ -146,15 +146,19 @@
     .card-badge {
       width: 56px;
       height: 56px;
-      border-radius: 50%;
-      overflow: hidden;
+      border-radius: 4px;
+      overflow: visible;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card-badge img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      display: block;
     }
 
     .card-role {
@@ -313,7 +317,6 @@
     const SHORT = {
       technical_security:     "Sicurezza",
       progression:            "Progressione",
-      creation:               "Creazione",
       direct_threat:          "Minaccia",
       defensive_contribution: "Duelli",
       defensive_activity: "Attività difensiva",
