@@ -47,8 +47,22 @@ ROLE_PLURAL = {
     "GK":  "portieri",
 }
 HEATMAP_FOURTH_TITLES = {
+    "ATT": "Direzione conduzioni",
     "DEF": "Azioni difensive",
 }
+HEATMAP_TITLES = {
+    "ATT": {
+        "pos": "Zone di tiro",
+        "carry": "Impronta offensiva",
+        "pass": "Distribuzione passaggi",
+    },
+}
+ATT_GOALMOUTH_PANEL = """                <div class="sr-pitch-wrap sr-att-goalmouth-panel" id="pitchGoalmouthPanel" hidden>
+                    <div class="sr-pitch-title">Zone placement tiri</div>
+                    <svg class="sr-pitch-svg" viewBox="0 0 180 90" id="pitchGoalmouth"></svg>
+                    <span class="sr-pitch-note" id="pitchGoalmouthNote"></span>
+                </div>
+"""
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 COMMON_ASSET_VERSION = "sprint1-mobile-20260605-role-percent"
 THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
@@ -211,6 +225,7 @@ def build_slots(player: dict) -> dict:
     narr_source = player.get("narrative", "").strip() or payload_profile_reading(player)
     narr   = markdown_block(narr_source, "sr-narrative-p")
     note   = markdown_block(player.get("source_team_note", ""), "sr-source-team-note")
+    heatmap_titles = HEATMAP_TITLES.get(macro, {})
 
     og_desc = (
         f"Compatibilità {target} — {role_l} · "
@@ -251,7 +266,11 @@ def build_slots(player: dict) -> dict:
         "MINUTES":           mins,
         "NARRATIVE":         narr,
         "SOURCE_TEAM_NOTE":  note,
+        "HEATMAP_POS_TITLE": heatmap_titles.get("pos", "Impronta posizionale"),
+        "HEATMAP_CARRY_TITLE": heatmap_titles.get("carry", "Direzione conduzioni"),
+        "HEATMAP_PASS_TITLE": heatmap_titles.get("pass", "Distribuzione passaggi"),
         "HEATMAP_FOURTH_TITLE": HEATMAP_FOURTH_TITLES.get(macro, "Progressione via passaggio"),
+        "ATT_GOALMOUTH_PANEL": ATT_GOALMOUTH_PANEL if macro == "ATT" else "",
         "PAYLOAD_URL":       player.get("payload_file", ""),
         "OG_DESCRIPTION":    og_desc,
         "REPORT_URL":        f"https://pasta-reports.com/{player['report_file']}",

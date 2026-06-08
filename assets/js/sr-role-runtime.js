@@ -701,12 +701,23 @@ function initRoleReport() {
         const svg = $(svgId);
         if (!svg) return;
         svg.innerHTML = "";
+        svg.__attShotZones = [];
+        svg.__attShotColorByXg = false;
         drawAttShotPitchLines(svg);
         if (!grid) return;
+        if (buildShotMacroZones(svg, grid)) return;
+        buildShotFieldGrid(svg, grid);
+    }
+    function buildShotFieldGrid(svg, grid) {
         const cropX = 52.5;
         const cropW = PITCH_L - cropX;
-        const counts = grid.flat().map(cell => Number(cell?.[0]) || 0);
-        const maxN = Math.max(...counts, 0);
+        const cells = grid.flat();
+        const xgValues = cells.map(cell => Number(cell?.[2]) || 0);
+        const countValues = cells.map(cell => Number(cell?.[0]) || 0);
+        const maxXg = Math.max(...xgValues, 0);
+        const maxShots = Math.max(...countValues, 0);
+        const colorByXg = maxXg > 0;
+        const maxValue = colorByXg ? maxXg : maxShots;
         grid.forEach((col, ix) => col.forEach((cell, iy) => {
             const shots = Number(cell?.[0]) || 0;
             if (!shots) return;
@@ -718,41 +729,273 @@ function initRoleReport() {
             const goals = Number(cell?.[1]) || 0;
             const xg = Number(cell?.[2]) || 0;
             const xgAvg = cell?.[3] == null ? null : Number(cell[3]);
-            const intensity = maxN > 0 ? shots / maxN : 0;
-            const fill = `rgba(${Math.round(190 + intensity * 55)},${Math.round(90 + intensity * 95)},80,${(0.18 + intensity * 0.62).toFixed(2)})`;
+            const sot = Number(cell?.[5]) || 0;
+            const value = colorByXg ? xg : shots;
+            const intensity = maxValue > 0 ? value / maxValue : 0;
+            const fill = `rgba(${Math.round(64 + intensity * 170)},${Math.round(155 + intensity * 70)},${Math.round(145 - intensity * 45)},${(0.12 + intensity * 0.46).toFixed(2)})`;
             const x = ((visualLeftM - cropX) / cropW) * SVG_W;
             const width = ((visualRightM - visualLeftM) / cropW) * SVG_W;
             const displayY = pitchGridY(iy);
-            const rect = svgEl("rect", { x, y: displayY * SVG_CH, width, height: SVG_CH, fill, rx: 2 });
-            svgTip(rect, `${shots} tiri · ${goals} gol · xG ${xg.toFixed(2)}${xgAvg == null ? "" : ` · xG/tiro ${xgAvg.toFixed(2)}`}`);
+            const rect = svgEl("rect", {
+                x: x + 1.5,
+                y: displayY * SVG_CH + 1.5,
+                width: Math.max(0, width - 3),
+                height: SVG_CH - 3,
+                fill,
+                stroke: "rgba(255,255,255,.16)",
+                "stroke-width": 0.8,
+                rx: 3,
+            });
+            const tipParts = [
+                `${shots} tiri`,
+                `${goals} gol`,
+                `xG totale ${xg.toFixed(2)}`,
+                `xG/tiro ${xgAvg == null || !Number.isFinite(xgAvg) ? (shots ? (xg / shots).toFixed(2) : "0.00") : xgAvg.toFixed(2)}`,
+            ];
+            if (sot) tipParts.push(`${sot} tiri in porta`);
+            tipParts.push(colorByXg ? "colore per xG" : "colore per volume tiri");
+            svgTip(rect, tipParts.join(" · "));
             svg.appendChild(rect);
             if (goals > 0) {
                 svg.appendChild(svgTip(svgEl("circle", {
                     cx: x + width / 2,
                     cy: (displayY + 0.5) * SVG_CH,
-                    r: Math.min(9, 3 + goals * 1.7),
-                    fill: "rgba(255,255,255,.88)",
-                    stroke: "rgba(15,23,42,.62)",
-                    "stroke-width": 1,
+                    r: Math.min(5.2, 2.3 + goals * 0.8),
+                    fill: "rgba(15,23,42,.86)",
+                    stroke: "rgba(255,255,255,.82)",
+                    "stroke-width": 1.2,
                 }), `${goals} gol`));
             }
         }));
     }
+    const ATT_SHOT_ZONES = [
+        { label: "Area piccola", cells: [[11, 3], [11, 4]], parts: [[[11, 3], [11, 4]]] },
+        { label: "Centro area", cells: [[10, 3], [10, 4]], short: "Centro area" },
+        {
+            label: "Lati area",
+            cells: [[10, 1], [10, 2], [10, 5], [10, 6], [11, 1], [11, 2], [11, 5], [11, 6]],
+            parts: [
+                [[10, 1], [10, 2], [11, 1], [11, 2]],
+                [[10, 5], [10, 6], [11, 5], [11, 6]],
+            ],
+        },
+        { label: "Limite area", cells: [[8, 2], [8, 3], [8, 4], [8, 5], [9, 2], [9, 3], [9, 4], [9, 5]] },
+        { label: "Fuori area centrale", cells: [[6, 2], [6, 3], [6, 4], [6, 5], [7, 2], [7, 3], [7, 4], [7, 5]] },
+        {
+            label: "Corridoi larghi",
+            cells: [[6, 0], [6, 1], [6, 6], [6, 7], [7, 0], [7, 1], [7, 6], [7, 7], [8, 0], [8, 1], [8, 6], [8, 7], [9, 0], [9, 1], [9, 6], [9, 7], [10, 0], [10, 7], [11, 0], [11, 7]],
+            parts: [
+                [[6, 0], [6, 1], [7, 0], [7, 1], [8, 0], [8, 1], [9, 0], [9, 1], [10, 0], [11, 0]],
+                [[6, 6], [6, 7], [7, 6], [7, 7], [8, 6], [8, 7], [9, 6], [9, 7], [10, 7], [11, 7]],
+            ],
+            visible: false,
+        },
+    ];
+    function readShotCell(grid, ix, iy) {
+        const cell = grid?.[ix]?.[iy];
+        if (!Array.isArray(cell)) return null;
+        const shots = Number(cell[0]) || 0;
+        if (!shots) return null;
+        return {
+            shots,
+            goals: Number(cell[1]) || 0,
+            xg: Number(cell[2]) || 0,
+            sot: Number(cell[5]) || 0,
+        };
+    }
+    function aggregateShotZone(grid, zone) {
+        return zone.cells.reduce((acc, [ix, iy]) => {
+            const cell = readShotCell(grid, ix, iy);
+            if (!cell) return acc;
+            acc.shots += cell.shots;
+            acc.goals += cell.goals;
+            acc.xg += cell.xg;
+            acc.sot += cell.sot;
+            return acc;
+        }, { ...zone, shots: 0, goals: 0, xg: 0, sot: 0 });
+    }
+    function shotZoneBounds(cells, cropX, cropW) {
+        const minX = Math.min(...cells.map(([ix]) => ix));
+        const maxX = Math.max(...cells.map(([ix]) => ix));
+        const minY = Math.min(...cells.map(([, iy]) => iy));
+        const maxY = Math.max(...cells.map(([, iy]) => iy));
+        const leftM = Math.max(minX * CELL_W_M, cropX);
+        const rightM = Math.min((maxX + 1) * CELL_W_M, PITCH_L);
+        const topDisplayY = pitchGridY(maxY);
+        const bottomDisplayY = pitchGridY(minY);
+        return {
+            x: ((leftM - cropX) / cropW) * SVG_W,
+            y: topDisplayY * SVG_CH,
+            width: ((rightM - leftM) / cropW) * SVG_W,
+            height: (bottomDisplayY - topDisplayY + 1) * SVG_CH,
+        };
+    }
+    function buildShotMacroZones(svg, grid) {
+        try {
+            if (!Array.isArray(grid)) return false;
+            const cropX = 52.5;
+            const cropW = PITCH_L - cropX;
+            const zones = ATT_SHOT_ZONES.map(zone => aggregateShotZone(grid, zone));
+            const maxXg = Math.max(...zones.map(zone => zone.xg), 0);
+            const maxShots = Math.max(...zones.map(zone => zone.shots), 0);
+            const colorByXg = maxXg > 0;
+            const maxValue = colorByXg ? maxXg : maxShots;
+            if (!maxValue) return false;
+            zones.forEach(zone => {
+                if (zone.visible === false) return;
+                const value = colorByXg ? zone.xg : zone.shots;
+                const intensity = maxValue > 0 ? value / maxValue : 0;
+                const occupied = zone.shots > 0;
+                const fill = occupied
+                    ? `rgba(${Math.round(54 + intensity * 170)},${Math.round(150 + intensity * 72)},${Math.round(142 - intensity * 44)},${(0.16 + intensity * 0.46).toFixed(2)})`
+                    : "rgba(255,255,255,.018)";
+                const xgPerShot = zone.shots ? zone.xg / zone.shots : 0;
+                const tipParts = [
+                    zone.label,
+                    `${zone.shots} tiri`,
+                    `${zone.goals} gol`,
+                    `xG ${zone.xg.toFixed(2)}`,
+                    `xG/tiro ${xgPerShot.toFixed(2)}`,
+                ];
+                if (zone.sot) tipParts.push(`${zone.sot} tiri in porta`);
+                const tooltip = tipParts.join(" · ");
+                const parts = zone.parts || [zone.cells];
+                let labelBounds = null;
+                parts.forEach(part => {
+                    const bounds = shotZoneBounds(part, cropX, cropW);
+                    if (!labelBounds || bounds.width * bounds.height > labelBounds.width * labelBounds.height) {
+                        labelBounds = bounds;
+                    }
+                    const rect = svgEl("rect", {
+                        x: bounds.x + 1.8,
+                        y: bounds.y + 1.8,
+                        width: Math.max(0, bounds.width - 3.6),
+                        height: Math.max(0, bounds.height - 3.6),
+                        fill,
+                        stroke: occupied ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.055)",
+                        "stroke-width": occupied ? 0.9 : 0.6,
+                        rx: 4,
+                    });
+                    svgTip(rect, tooltip);
+                    svg.appendChild(rect);
+                });
+                if (!occupied || !labelBounds || labelBounds.width < 38 || labelBounds.height < 26) return;
+                const cx = labelBounds.x + labelBounds.width / 2;
+                const cy = labelBounds.y + labelBounds.height / 2;
+                const compact = labelBounds.width < 76;
+                const countSize = Math.max(12, Math.min(16, Math.min(labelBounds.width / 5.2, labelBounds.height / 3.1)));
+                const secondSize = Math.max(8.4, Math.min(10.4, Math.min(labelBounds.width / 10.5, labelBounds.height / 5.4)));
+                const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
+                const approxSecondWidth = xgLabel.length * secondSize * 0.56;
+                const showXgPerShot = zone.shots >= 2 && labelBounds.height >= 42 && approxSecondWidth <= labelBounds.width - 8;
+                const text = svgEl("text", {
+                    x: cx,
+                    y: cy + (showXgPerShot ? -3 : countSize / 3),
+                    "text-anchor": "middle",
+                    fill: "rgba(255,255,255,.90)",
+                    "font-size": countSize.toFixed(1),
+                    "font-weight": 750,
+                    "pointer-events": "none",
+                });
+                text.textContent = `${zone.shots}`;
+                svg.appendChild(text);
+                if (!showXgPerShot) return;
+                const xgPerShotText = svgEl("text", {
+                    x: cx,
+                    y: cy + Math.max(10, secondSize + 3),
+                    "text-anchor": "middle",
+                    fill: "rgba(255,255,255,.66)",
+                    "font-size": secondSize.toFixed(1),
+                    "font-weight": 600,
+                    "pointer-events": "none",
+                });
+                xgPerShotText.textContent = xgLabel;
+                svg.appendChild(xgPerShotText);
+            });
+            svg.__attShotZones = zones;
+            svg.__attShotColorByXg = colorByXg;
+            return true;
+        } catch (_err) {
+            return false;
+        }
+    }
+    function renderShotZoneSummary(noteEl, zones) {
+        if (!noteEl) return;
+        const panel = noteEl.closest(".sr-pitch-wrap");
+        if (!panel) return;
+        let summary = panel.querySelector(".sr-shot-zone-summary");
+        if (!summary) {
+            summary = document.createElement("div");
+            summary.className = "sr-pitch-note sr-shot-zone-summary";
+            summary.style.marginTop = ".35rem";
+            summary.style.lineHeight = "1.35";
+            noteEl.insertAdjacentElement("afterend", summary);
+        }
+        const topZones = (zones || [])
+            .filter(zone => zone.shots > 0)
+            .sort((a, b) => (b.xg - a.xg) || (b.shots - a.shots))
+            .slice(0, 3);
+        if (!topZones.length) {
+            summary.textContent = "";
+            return;
+        }
+        summary.textContent = "Zone principali: " + topZones
+            .map(zone => `${zone.label} ${zone.shots} tiri · ${zone.xg.toFixed(2)} xG · ${zone.goals} gol`)
+            .join(" | ");
+    }
+    function validateGoalmouthGrid(grid) {
+        const empty = { total: 0, maxCell: 0, maxCellShare: 0, centerColumnShare: 0, suspicious: false };
+        if (!Array.isArray(grid)) return empty;
+        let total = 0;
+        let maxCell = 0;
+        let centerColumn = 0;
+        grid.forEach((col, ix) => {
+            if (!Array.isArray(col)) return;
+            col.forEach(cell => {
+                const shots = Number(cell?.[0]) || 0;
+                total += shots;
+                maxCell = Math.max(maxCell, shots);
+                if (ix === 1) centerColumn += shots;
+            });
+        });
+        const maxCellShare = total > 0 ? maxCell / total : 0;
+        const centerColumnShare = total > 0 ? centerColumn / total : 0;
+        return {
+            total,
+            maxCell,
+            maxCellShare,
+            centerColumnShare,
+            suspicious: total > 0 && (maxCellShare > 0.65 || centerColumnShare > 0.85),
+        };
+    }
     function buildGoalmouth(svgId, grid) {
         const svg = $(svgId);
-        if (!svg) return;
+        if (!svg) return false;
+        const panel = svg.closest(".sr-pitch-wrap");
+        if (panel) panel.hidden = false;
         svg.innerHTML = "";
         if (!grid) {
             svg.style.display = "none";
-            return;
+            if (panel) panel.hidden = true;
+            return false;
+        }
+        const validation = validateGoalmouthGrid(grid);
+        // ATT goalmouth is hidden when validation detects central collapse in the aggregated payload.
+        // Re-enable rendering after export confirms true goalmouth coordinates and outcome filters.
+        if (validation.suspicious) {
+            svg.style.display = "none";
+            if (panel) panel.hidden = true;
+            return false;
         }
         const counts = grid.flat().map(cell => Number(cell?.[0]) || 0);
         const maxN = Math.max(...counts, 0);
         if (!maxN) {
             svg.style.display = "none";
-            return;
+            if (panel) panel.hidden = true;
+            return false;
         }
         svg.style.display = "";
+        if (panel) panel.hidden = false;
         const w = 180, h = 90, cw = w / 3, ch = h / 3;
         svg.appendChild(svgEl("rect", { x: 1, y: 1, width: w - 2, height: h - 2, fill: "rgba(255,255,255,.025)", stroke: "rgba(255,255,255,.20)", "stroke-width": 1.2 }));
         for (let x = 1; x < 3; x += 1) svg.appendChild(svgEl("line", { x1: x * cw, y1: 0, x2: x * cw, y2: h, stroke: "rgba(255,255,255,.14)", "stroke-width": 1 }));
@@ -773,6 +1016,7 @@ function initRoleReport() {
             svgTip(rect, `${shots} tiri verso porta · ${goals} gol`);
             svg.appendChild(rect);
         }));
+        return true;
     }
     function buildVectorGrid(svgId, grid, mode) {
         const svg = $(svgId);
@@ -810,11 +1054,17 @@ function initRoleReport() {
         const isAttSpatialV2 = roleMeta.role === "ATT" && d.spatialVersion === "att_heatmap_view_v2";
         if (isAttSpatialV2) {
             buildShotField("pitchPos", d.hasShotFieldMap ? d.shotField : null);
-            buildGoalmouth("pitchGoalmouth", d.hasShotGoalmouthMap ? d.shotGoalmouth : null);
+            const hasGoalmouth = buildGoalmouth("pitchGoalmouth", d.hasShotGoalmouthMap ? d.shotGoalmouth : null);
             buildDensity("pitchCarry", d.ip, n => `rgba(20,${Math.round(120 + n * 135)},80,${(0.12 + n * 0.72).toFixed(2)})`);
             buildVectorGrid("pitchPass", d.hasPassDirection ? d.pass : null, "pass");
             buildVectorGrid("pitchProg", d.hasCarryDirection ? d.carry : null, "carry");
-            note("pitchPosNote", `${d.shotNote || "Shot map unavailable"} · ${d.goalmouthNote || "Goal-mouth placement unavailable"}`);
+            const shotXg = d.shotXg == null ? null : Number(d.shotXg);
+            const shotNote = d.shotN
+                ? `${d.shotN} tiri · ${d.shotGoals || 0} gol${Number.isFinite(shotXg) ? ` · xG ${shotXg.toFixed(2)} · colore = xG totale` : " · colore = volume"}`
+                : (d.shotNote || "Zone tiro non disponibili");
+            note("pitchPosNote", shotNote);
+            renderShotZoneSummary($("pitchPosNote"), $("pitchPos")?.__attShotZones || []);
+            note("pitchGoalmouthNote", hasGoalmouth ? (d.goalmouthNote || "") : "");
             note("pitchCarryNote", d.ipNote || (d.ipCx ? `Centroide: x=${d.ipCx}` : ""));
             note("pitchPassNote", d.passNote || "Pass direction unavailable");
             note("pitchProgNote", d.carryNote || "Carry direction unavailable");
