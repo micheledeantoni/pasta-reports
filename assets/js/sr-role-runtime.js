@@ -836,8 +836,8 @@ function initRoleReport() {
             sot: Number(cell[5]) || 0,
         };
     }
-    function aggregateShotZone(grid, zone) {
-        return zone.cells.reduce((acc, [ix, iy]) => {
+    function aggregateShotCells(grid, cells) {
+        return cells.reduce((acc, [ix, iy]) => {
             const cell = readShotCell(grid, ix, iy);
             if (!cell) return acc;
             acc.shots += cell.shots;
@@ -845,7 +845,18 @@ function initRoleReport() {
             acc.xg += cell.xg;
             acc.sot += cell.sot;
             return acc;
-        }, { ...zone, shots: 0, goals: 0, xg: 0, sot: 0 });
+        }, { shots: 0, goals: 0, xg: 0, sot: 0 });
+    }
+    function aggregateShotZone(grid, zone) {
+        return { ...zone, ...aggregateShotCells(grid, zone.cells) };
+    }
+    function shotPartLabel(zone, cells) {
+        if (!zone.parts || zone.parts.length <= 1) return zone.label;
+        const minY = Math.min(...cells.map(([, iy]) => iy));
+        const maxY = Math.max(...cells.map(([, iy]) => iy));
+        if (maxY <= 3) return `${zone.label} · metà bassa`;
+        if (minY >= 4) return `${zone.label} · metà alta`;
+        return zone.label;
     }
     function shotZoneBounds(cells, cropX, cropW) {
         const minX = Math.min(...cells.map(([ix]) => ix));
@@ -889,24 +900,25 @@ function initRoleReport() {
         if (drawAxis) drawShotCenterAxis(svg);
         zones.forEach(zone => {
             if (zone.visible === false) return;
-            const value = colorByXg ? zone.xg : zone.shots;
-            const intensity = maxValue > 0 ? value / maxValue : 0;
-            const occupied = zone.shots > 0;
-            const fill = occupied
-                ? `rgba(${Math.round(54 + intensity * 170)},${Math.round(150 + intensity * 72)},${Math.round(142 - intensity * 44)},${(0.16 + intensity * 0.46).toFixed(2)})`
-                : "rgba(255,255,255,.018)";
-            const xgPerShot = zone.shots ? zone.xg / zone.shots : 0;
-            const tipParts = [
-                zone.label,
-                `${zone.shots} tiri`,
-                `${zone.goals} gol`,
-                `xG ${zone.xg.toFixed(2)}`,
-                `xG/tiro ${xgPerShot.toFixed(2)}`,
-                `${zone.sot || 0} tiri in porta`,
-            ];
-            const tooltip = tipParts.join(" · ");
             const parts = zone.parts || [zone.cells];
             parts.forEach(part => {
+                const partStats = zone.parts ? aggregateShotCells(grid, part) : zone;
+                const partValue = colorByXg ? partStats.xg : partStats.shots;
+                const partIntensity = maxValue > 0 ? partValue / maxValue : 0;
+                const partOccupied = partStats.shots > 0;
+                const fill = partOccupied
+                    ? `rgba(${Math.round(54 + partIntensity * 170)},${Math.round(150 + partIntensity * 72)},${Math.round(142 - partIntensity * 44)},${(0.16 + partIntensity * 0.46).toFixed(2)})`
+                    : "rgba(255,255,255,.018)";
+                const xgPerShot = partStats.shots ? partStats.xg / partStats.shots : 0;
+                const tipParts = [
+                    shotPartLabel(zone, part),
+                    `${partStats.shots} tiri`,
+                    `${partStats.goals} gol`,
+                    `xG ${partStats.xg.toFixed(2)}`,
+                    `xG/tiro ${xgPerShot.toFixed(2)}`,
+                    `${partStats.sot || 0} tiri in porta`,
+                ];
+                const tooltip = tipParts.join(" · ");
                 const bounds = shotZoneBounds(part, cropX, cropW);
                 const rect = svgEl("rect", {
                     x: bounds.x + 1.8,
@@ -914,24 +926,24 @@ function initRoleReport() {
                     width: Math.max(0, bounds.width - 3.6),
                     height: Math.max(0, bounds.height - 3.6),
                     fill,
-                    stroke: occupied ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.055)",
-                    "stroke-width": occupied ? 0.9 : 0.6,
+                    stroke: partOccupied ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.055)",
+                    "stroke-width": partOccupied ? 0.9 : 0.6,
                     rx: 4,
                 });
                 svgTip(rect, tooltip);
                 svg.appendChild(rect);
-                if (!occupied) return;
+                if (!partOccupied) return;
                 const cx = bounds.x + bounds.width / 2;
                 const cy = bounds.y + bounds.height / 2;
                 const compact = bounds.width < 76;
-                const countDigits = String(zone.shots).length;
+                const countDigits = String(partStats.shots).length;
                 const countSize = Math.max(8.2, Math.min(16, Math.min(bounds.width / Math.max(2.15, countDigits * 0.9), bounds.height / 1.65)));
                 const secondSize = Math.max(8.4, Math.min(10.4, Math.min(bounds.width / 10.5, bounds.height / 5.4)));
                 const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
                 const approxCountWidth = countDigits * countSize * 0.58;
                 const approxSecondWidth = xgLabel.length * secondSize * 0.56;
                 const showCount = bounds.width >= Math.max(12, approxCountWidth + 5) && bounds.height >= countSize + 5;
-                const showXgPerShot = zone.shots >= 2 && bounds.height >= 42 && approxSecondWidth <= bounds.width - 8;
+                const showXgPerShot = partStats.shots >= 2 && bounds.height >= 42 && approxSecondWidth <= bounds.width - 8;
                 if (!showCount) return;
                 const text = svgEl("text", {
                     x: cx,
@@ -942,7 +954,7 @@ function initRoleReport() {
                     "font-weight": 750,
                     "pointer-events": "none",
                 });
-                text.textContent = `${zone.shots}`;
+                text.textContent = `${partStats.shots}`;
                 svg.appendChild(text);
                 if (!showXgPerShot) return;
                 const xgPerShotText = svgEl("text", {
