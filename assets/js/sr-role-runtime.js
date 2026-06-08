@@ -767,7 +767,7 @@ function initRoleReport() {
             }
         }));
     }
-    const ATT_SHOT_ZONES = [
+    const ATT_SHOT_ZONES_LEGACY = [
         { label: "Area piccola", cells: [[11, 3], [11, 4]], parts: [[[11, 3], [11, 4]]] },
         { label: "Centro area", cells: [[10, 3], [10, 4]], short: "Centro area" },
         {
@@ -779,6 +779,40 @@ function initRoleReport() {
             ],
         },
         { label: "Limite area", cells: [[8, 2], [8, 3], [8, 4], [8, 5], [9, 2], [9, 3], [9, 4], [9, 5]] },
+        { label: "Fuori area centrale", cells: [[6, 2], [6, 3], [6, 4], [6, 5], [7, 2], [7, 3], [7, 4], [7, 5]] },
+        {
+            label: "Corridoi larghi",
+            cells: [[6, 0], [6, 1], [6, 6], [6, 7], [7, 0], [7, 1], [7, 6], [7, 7], [8, 0], [8, 1], [8, 6], [8, 7], [9, 0], [9, 1], [9, 6], [9, 7], [10, 0], [10, 7], [11, 0], [11, 7]],
+            parts: [
+                [[6, 0], [6, 1], [7, 0], [7, 1], [8, 0], [8, 1], [9, 0], [9, 1], [10, 0], [11, 0]],
+                [[6, 6], [6, 7], [7, 6], [7, 7], [8, 6], [8, 7], [9, 6], [9, 7], [10, 7], [11, 7]],
+            ],
+            visible: false,
+        },
+    ];
+    const ATT_SHOT_ZONES = [
+        { label: "Area piccola · metà bassa", cells: [[11, 3]], parts: [[[11, 3]]] },
+        { label: "Area piccola · metà alta", cells: [[11, 4]], parts: [[[11, 4]]] },
+        { label: "Centro area · metà bassa", cells: [[10, 3]], parts: [[[10, 3]]] },
+        { label: "Centro area · metà alta", cells: [[10, 4]], parts: [[[10, 4]]] },
+        {
+            label: "Lati area",
+            cells: [[10, 1], [10, 2], [10, 5], [10, 6], [11, 1], [11, 2], [11, 5], [11, 6]],
+            parts: [
+                [[10, 1], [10, 2], [11, 1], [11, 2]],
+                [[10, 5], [10, 6], [11, 5], [11, 6]],
+            ],
+        },
+        {
+            label: "Limite area · metà bassa",
+            cells: [[8, 2], [8, 3], [9, 2], [9, 3]],
+            parts: [[[8, 2], [8, 3], [9, 2], [9, 3]]],
+        },
+        {
+            label: "Limite area · metà alta",
+            cells: [[8, 4], [8, 5], [9, 4], [9, 5]],
+            parts: [[[8, 4], [8, 5], [9, 4], [9, 5]]],
+        },
         { label: "Fuori area centrale", cells: [[6, 2], [6, 3], [6, 4], [6, 5], [7, 2], [7, 3], [7, 4], [7, 5]] },
         {
             label: "Corridoi larghi",
@@ -829,93 +863,114 @@ function initRoleReport() {
             height: (bottomDisplayY - topDisplayY + 1) * SVG_CH,
         };
     }
+    function drawShotCenterAxis(svg) {
+        const y = SVG_H / 2;
+        svg.appendChild(svgEl("line", {
+            x1: 0,
+            y1: y,
+            x2: SVG_W,
+            y2: y,
+            stroke: "rgba(255,255,255,.22)",
+            "stroke-width": 0.8,
+            "stroke-dasharray": "4 5",
+            "pointer-events": "none",
+        }));
+    }
+    function renderShotMacroZoneSet(svg, grid, zoneDefs, drawAxis) {
+        if (!Array.isArray(grid)) return false;
+        const cropX = 52.5;
+        const cropW = PITCH_L - cropX;
+        const zones = zoneDefs.map(zone => aggregateShotZone(grid, zone));
+        const maxXg = Math.max(...zones.map(zone => zone.xg), 0);
+        const maxShots = Math.max(...zones.map(zone => zone.shots), 0);
+        const colorByXg = maxXg > 0;
+        const maxValue = colorByXg ? maxXg : maxShots;
+        if (!maxValue) return false;
+        if (drawAxis) drawShotCenterAxis(svg);
+        zones.forEach(zone => {
+            if (zone.visible === false) return;
+            const value = colorByXg ? zone.xg : zone.shots;
+            const intensity = maxValue > 0 ? value / maxValue : 0;
+            const occupied = zone.shots > 0;
+            const fill = occupied
+                ? `rgba(${Math.round(54 + intensity * 170)},${Math.round(150 + intensity * 72)},${Math.round(142 - intensity * 44)},${(0.16 + intensity * 0.46).toFixed(2)})`
+                : "rgba(255,255,255,.018)";
+            const xgPerShot = zone.shots ? zone.xg / zone.shots : 0;
+            const tipParts = [
+                zone.label,
+                `${zone.shots} tiri`,
+                `${zone.goals} gol`,
+                `xG ${zone.xg.toFixed(2)}`,
+                `xG/tiro ${xgPerShot.toFixed(2)}`,
+                `${zone.sot || 0} tiri in porta`,
+            ];
+            const tooltip = tipParts.join(" · ");
+            const parts = zone.parts || [zone.cells];
+            let labelBounds = null;
+            parts.forEach(part => {
+                const bounds = shotZoneBounds(part, cropX, cropW);
+                if (!labelBounds || bounds.width * bounds.height > labelBounds.width * labelBounds.height) {
+                    labelBounds = bounds;
+                }
+                const rect = svgEl("rect", {
+                    x: bounds.x + 1.8,
+                    y: bounds.y + 1.8,
+                    width: Math.max(0, bounds.width - 3.6),
+                    height: Math.max(0, bounds.height - 3.6),
+                    fill,
+                    stroke: occupied ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.055)",
+                    "stroke-width": occupied ? 0.9 : 0.6,
+                    rx: 4,
+                });
+                svgTip(rect, tooltip);
+                svg.appendChild(rect);
+            });
+            if (!occupied || !labelBounds || labelBounds.width < 38 || labelBounds.height < 24) return;
+            const cx = labelBounds.x + labelBounds.width / 2;
+            const cy = labelBounds.y + labelBounds.height / 2;
+            const compact = labelBounds.width < 76;
+            const countSize = Math.max(11, Math.min(16, Math.min(labelBounds.width / 5.2, labelBounds.height / 3.1)));
+            const secondSize = Math.max(8.4, Math.min(10.4, Math.min(labelBounds.width / 10.5, labelBounds.height / 5.4)));
+            const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
+            const approxSecondWidth = xgLabel.length * secondSize * 0.56;
+            const showXgPerShot = zone.shots >= 2 && labelBounds.height >= 42 && approxSecondWidth <= labelBounds.width - 8;
+            const text = svgEl("text", {
+                x: cx,
+                y: cy + (showXgPerShot ? -3 : countSize / 3),
+                "text-anchor": "middle",
+                fill: "rgba(255,255,255,.90)",
+                "font-size": countSize.toFixed(1),
+                "font-weight": 750,
+                "pointer-events": "none",
+            });
+            text.textContent = `${zone.shots}`;
+            svg.appendChild(text);
+            if (!showXgPerShot) return;
+            const xgPerShotText = svgEl("text", {
+                x: cx,
+                y: cy + Math.max(10, secondSize + 3),
+                "text-anchor": "middle",
+                fill: "rgba(255,255,255,.66)",
+                "font-size": secondSize.toFixed(1),
+                "font-weight": 600,
+                "pointer-events": "none",
+            });
+            xgPerShotText.textContent = xgLabel;
+            svg.appendChild(xgPerShotText);
+        });
+        svg.__attShotZones = zones;
+        svg.__attShotColorByXg = colorByXg;
+        return true;
+    }
     function buildShotMacroZones(svg, grid) {
         try {
-            if (!Array.isArray(grid)) return false;
-            const cropX = 52.5;
-            const cropW = PITCH_L - cropX;
-            const zones = ATT_SHOT_ZONES.map(zone => aggregateShotZone(grid, zone));
-            const maxXg = Math.max(...zones.map(zone => zone.xg), 0);
-            const maxShots = Math.max(...zones.map(zone => zone.shots), 0);
-            const colorByXg = maxXg > 0;
-            const maxValue = colorByXg ? maxXg : maxShots;
-            if (!maxValue) return false;
-            zones.forEach(zone => {
-                if (zone.visible === false) return;
-                const value = colorByXg ? zone.xg : zone.shots;
-                const intensity = maxValue > 0 ? value / maxValue : 0;
-                const occupied = zone.shots > 0;
-                const fill = occupied
-                    ? `rgba(${Math.round(54 + intensity * 170)},${Math.round(150 + intensity * 72)},${Math.round(142 - intensity * 44)},${(0.16 + intensity * 0.46).toFixed(2)})`
-                    : "rgba(255,255,255,.018)";
-                const xgPerShot = zone.shots ? zone.xg / zone.shots : 0;
-                const tipParts = [
-                    zone.label,
-                    `${zone.shots} tiri`,
-                    `${zone.goals} gol`,
-                    `xG ${zone.xg.toFixed(2)}`,
-                    `xG/tiro ${xgPerShot.toFixed(2)}`,
-                ];
-                if (zone.sot) tipParts.push(`${zone.sot} tiri in porta`);
-                const tooltip = tipParts.join(" · ");
-                const parts = zone.parts || [zone.cells];
-                let labelBounds = null;
-                parts.forEach(part => {
-                    const bounds = shotZoneBounds(part, cropX, cropW);
-                    if (!labelBounds || bounds.width * bounds.height > labelBounds.width * labelBounds.height) {
-                        labelBounds = bounds;
-                    }
-                    const rect = svgEl("rect", {
-                        x: bounds.x + 1.8,
-                        y: bounds.y + 1.8,
-                        width: Math.max(0, bounds.width - 3.6),
-                        height: Math.max(0, bounds.height - 3.6),
-                        fill,
-                        stroke: occupied ? "rgba(255,255,255,.20)" : "rgba(255,255,255,.055)",
-                        "stroke-width": occupied ? 0.9 : 0.6,
-                        rx: 4,
-                    });
-                    svgTip(rect, tooltip);
-                    svg.appendChild(rect);
-                });
-                if (!occupied || !labelBounds || labelBounds.width < 38 || labelBounds.height < 26) return;
-                const cx = labelBounds.x + labelBounds.width / 2;
-                const cy = labelBounds.y + labelBounds.height / 2;
-                const compact = labelBounds.width < 76;
-                const countSize = Math.max(12, Math.min(16, Math.min(labelBounds.width / 5.2, labelBounds.height / 3.1)));
-                const secondSize = Math.max(8.4, Math.min(10.4, Math.min(labelBounds.width / 10.5, labelBounds.height / 5.4)));
-                const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
-                const approxSecondWidth = xgLabel.length * secondSize * 0.56;
-                const showXgPerShot = zone.shots >= 2 && labelBounds.height >= 42 && approxSecondWidth <= labelBounds.width - 8;
-                const text = svgEl("text", {
-                    x: cx,
-                    y: cy + (showXgPerShot ? -3 : countSize / 3),
-                    "text-anchor": "middle",
-                    fill: "rgba(255,255,255,.90)",
-                    "font-size": countSize.toFixed(1),
-                    "font-weight": 750,
-                    "pointer-events": "none",
-                });
-                text.textContent = `${zone.shots}`;
-                svg.appendChild(text);
-                if (!showXgPerShot) return;
-                const xgPerShotText = svgEl("text", {
-                    x: cx,
-                    y: cy + Math.max(10, secondSize + 3),
-                    "text-anchor": "middle",
-                    fill: "rgba(255,255,255,.66)",
-                    "font-size": secondSize.toFixed(1),
-                    "font-weight": 600,
-                    "pointer-events": "none",
-                });
-                xgPerShotText.textContent = xgLabel;
-                svg.appendChild(xgPerShotText);
-            });
-            svg.__attShotZones = zones;
-            svg.__attShotColorByXg = colorByXg;
-            return true;
+            return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES, true);
         } catch (_err) {
-            return false;
+            try {
+                return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES_LEGACY, false);
+            } catch (_fallbackErr) {
+                return false;
+            }
         }
     }
     function renderShotZoneSummary(noteEl, zones) {
