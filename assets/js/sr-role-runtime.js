@@ -660,18 +660,85 @@ function initRoleReport() {
         svg.appendChild(svgEl("rect", { x: 0, y: 60, width: 65, height: 120, ...line }));
         svg.appendChild(svgEl("rect", { x: SVG_W - 65, y: 60, width: 65, height: 120, ...line }));
     }
-    function drawAttShotPitchLines(svg) {
-        const line = { stroke: "rgba(255,255,255,.12)", "stroke-width": 1, fill: "none" };
-        const x0 = 52.5;
-        const cropW = PITCH_L - x0;
-        const sx = x => ((x - x0) / cropW) * SVG_W;
-        const sy = y => (y / PITCH_W) * SVG_H;
-        svg.appendChild(svgEl("rect", { x: 0, y: 0, width: SVG_W, height: SVG_H, ...line }));
-        svg.appendChild(svgEl("line", { x1: SVG_W - 1, y1: 0, x2: SVG_W - 1, y2: SVG_H, ...line }));
-        svg.appendChild(svgEl("rect", { x: sx(88.5), y: sy(13.84), width: sx(105) - sx(88.5), height: sy(54.16) - sy(13.84), ...line }));
-        svg.appendChild(svgEl("rect", { x: sx(99.5), y: sy(24.84), width: sx(105) - sx(99.5), height: sy(43.16) - sy(24.84), ...line }));
-        svg.appendChild(svgEl("circle", { cx: sx(94), cy: sy(34), r: 2.4, fill: "rgba(255,255,255,.28)" }));
-        svg.appendChild(svgEl("line", { x1: sx(105), y1: sy(30.34), x2: sx(105), y2: sy(37.66), stroke: "rgba(255,255,255,.55)", "stroke-width": 3, "stroke-linecap": "round" }));
+    function getAttShotLayout() {
+        let variant = "b";
+        try {
+            const params = new URLSearchParams(window.location.search || "");
+            const requested = (params.get("attShotVariant") || "").toLowerCase();
+            if (requested === "a" || requested === "horizontal") variant = "a";
+        } catch (_err) {}
+        if (variant === "b") {
+            return {
+                variant,
+                orientation: "vertical",
+                width: SVG_W,
+                height: SVG_H,
+                plotX: 20,
+                plotY: 0,
+                plotW: 320,
+                plotH: SVG_H,
+                cropX: 70,
+                cropW: PITCH_L - 70,
+                line: { stroke: "rgba(255,255,255,.30)", "stroke-width": 1.15, fill: "none" },
+                strongLine: "rgba(255,255,255,.58)",
+                axisStroke: "rgba(255,255,255,.26)",
+            };
+        }
+        return {
+            variant,
+            orientation: "horizontal",
+            width: SVG_W,
+            height: SVG_H,
+            plotX: 0,
+            plotY: 0,
+            plotW: SVG_W,
+            plotH: SVG_H,
+            cropX: 61.25,
+            cropW: PITCH_L - 61.25,
+            line: { stroke: "rgba(255,255,255,.28)", "stroke-width": 1.15, fill: "none" },
+            strongLine: "rgba(255,255,255,.56)",
+            axisStroke: "rgba(255,255,255,.24)",
+        };
+    }
+    function configureAttShotSvg(svg, layout) {
+        svg.setAttribute("viewBox", `0 0 ${layout.width} ${layout.height}`);
+        svg.style.aspectRatio = `${layout.width} / ${layout.height}`;
+    }
+    function attShotPoint(layout, x, y) {
+        if (layout.orientation === "vertical") {
+            return {
+                x: layout.plotX + (y / PITCH_W) * layout.plotW,
+                y: layout.plotY + ((PITCH_L - x) / layout.cropW) * layout.plotH,
+            };
+        }
+        return {
+            x: layout.plotX + ((x - layout.cropX) / layout.cropW) * layout.plotW,
+            y: layout.plotY + (y / PITCH_W) * layout.plotH,
+        };
+    }
+    function drawAttShotRect(svg, layout, x1, y1, x2, y2, attrs) {
+        const a = attShotPoint(layout, x1, y1);
+        const b = attShotPoint(layout, x2, y2);
+        const x = Math.min(a.x, b.x);
+        const y = Math.min(a.y, b.y);
+        const width = Math.abs(b.x - a.x);
+        const height = Math.abs(b.y - a.y);
+        svg.appendChild(svgEl("rect", { x, y, width, height, ...attrs }));
+    }
+    function drawAttShotLine(svg, layout, x1, y1, x2, y2, attrs) {
+        const a = attShotPoint(layout, x1, y1);
+        const b = attShotPoint(layout, x2, y2);
+        svg.appendChild(svgEl("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, ...attrs }));
+    }
+    function drawAttShotPitchLines(svg, layout) {
+        const line = layout.line;
+        svg.appendChild(svgEl("rect", { x: layout.plotX, y: layout.plotY, width: layout.plotW, height: layout.plotH, ...line }));
+        drawAttShotLine(svg, layout, PITCH_L, 0, PITCH_L, PITCH_W, { ...line, stroke: layout.strongLine, "stroke-width": 1.35 });
+        drawAttShotRect(svg, layout, 88.5, 13.84, 105, 54.16, line);
+        drawAttShotRect(svg, layout, 99.5, 24.84, 105, 43.16, line);
+        const spot = attShotPoint(layout, 94, 34);
+        svg.appendChild(svgEl("circle", { cx: spot.x, cy: spot.y, r: 2.4, fill: "rgba(255,255,255,.40)" }));
+        drawAttShotLine(svg, layout, 105, 30.34, 105, 37.66, { stroke: layout.strongLine, "stroke-width": 3.2, "stroke-linecap": "round" });
     }
     function drawCellArrow(svg, cx, cy, dx, dy, color) {
         const len = Math.sqrt(dx * dx + dy * dy);
@@ -702,9 +769,11 @@ function initRoleReport() {
         svg.innerHTML = "";
         svg.__attShotZones = [];
         svg.__attShotColorByXg = false;
-        drawAttShotPitchLines(svg);
+        const layout = getAttShotLayout();
+        configureAttShotSvg(svg, layout);
+        drawAttShotPitchLines(svg, layout);
         if (!grid) return;
-        if (buildShotMacroZones(svg, grid)) return;
+        if (buildShotMacroZones(svg, grid, layout)) return;
         buildShotFieldGrid(svg, grid);
     }
     function buildShotFieldGrid(svg, grid) {
@@ -858,46 +927,57 @@ function initRoleReport() {
         if (minY >= 4) return `${zone.label} · metà alta`;
         return zone.label;
     }
-    function shotZoneBounds(cells, cropX, cropW) {
+    function shotZoneBounds(cells, layout) {
         const minX = Math.min(...cells.map(([ix]) => ix));
         const maxX = Math.max(...cells.map(([ix]) => ix));
         const minY = Math.min(...cells.map(([, iy]) => iy));
         const maxY = Math.max(...cells.map(([, iy]) => iy));
-        const leftM = Math.max(minX * CELL_W_M, cropX);
+        const leftM = Math.max(minX * CELL_W_M, layout.cropX);
         const rightM = Math.min((maxX + 1) * CELL_W_M, PITCH_L);
+        if (rightM <= leftM) return null;
+        if (layout.orientation === "vertical") {
+            const top = attShotPoint(layout, rightM, minY * CELL_H_M);
+            const bottom = attShotPoint(layout, leftM, (maxY + 1) * CELL_H_M);
+            return {
+                x: top.x,
+                y: top.y,
+                width: bottom.x - top.x,
+                height: bottom.y - top.y,
+            };
+        }
         const topDisplayY = pitchGridY(maxY);
         const bottomDisplayY = pitchGridY(minY);
         return {
-            x: ((leftM - cropX) / cropW) * SVG_W,
-            y: topDisplayY * SVG_CH,
-            width: ((rightM - leftM) / cropW) * SVG_W,
-            height: (bottomDisplayY - topDisplayY + 1) * SVG_CH,
+            x: ((leftM - layout.cropX) / layout.cropW) * layout.width,
+            y: (topDisplayY / GRID_Y) * layout.height,
+            width: ((rightM - leftM) / layout.cropW) * layout.width,
+            height: ((bottomDisplayY - topDisplayY + 1) / GRID_Y) * layout.height,
         };
     }
-    function drawShotCenterAxis(svg) {
-        const y = SVG_H / 2;
-        svg.appendChild(svgEl("line", {
-            x1: 0,
-            y1: y,
-            x2: SVG_W,
-            y2: y,
-            stroke: "rgba(255,255,255,.22)",
-            "stroke-width": 0.8,
+    function drawShotCenterAxis(svg, layout) {
+        const attrs = {
+            stroke: layout.axisStroke,
+            "stroke-width": 0.85,
             "stroke-dasharray": "4 5",
             "pointer-events": "none",
-        }));
+        };
+        if (layout.orientation === "vertical") {
+            const x = layout.plotX + layout.plotW / 2;
+            svg.appendChild(svgEl("line", { x1: x, y1: layout.plotY, x2: x, y2: layout.plotY + layout.plotH, ...attrs }));
+            return;
+        }
+        const y = layout.height / 2;
+        svg.appendChild(svgEl("line", { x1: 0, y1: y, x2: layout.width, y2: y, ...attrs }));
     }
-    function renderShotMacroZoneSet(svg, grid, zoneDefs, drawAxis) {
+    function renderShotMacroZoneSet(svg, grid, zoneDefs, drawAxis, layout) {
         if (!Array.isArray(grid)) return false;
-        const cropX = 52.5;
-        const cropW = PITCH_L - cropX;
         const zones = zoneDefs.map(zone => aggregateShotZone(grid, zone));
         const maxXg = Math.max(...zones.map(zone => zone.xg), 0);
         const maxShots = Math.max(...zones.map(zone => zone.shots), 0);
         const colorByXg = maxXg > 0;
         const maxValue = colorByXg ? maxXg : maxShots;
         if (!maxValue) return false;
-        if (drawAxis) drawShotCenterAxis(svg);
+        if (drawAxis) drawShotCenterAxis(svg, layout);
         zones.forEach(zone => {
             if (zone.visible === false) return;
             const parts = zone.parts || [zone.cells];
@@ -919,7 +999,8 @@ function initRoleReport() {
                     `${partStats.sot || 0} tiri in porta`,
                 ];
                 const tooltip = tipParts.join(" · ");
-                const bounds = shotZoneBounds(part, cropX, cropW);
+                const bounds = shotZoneBounds(part, layout);
+                if (!bounds) return;
                 const rect = svgEl("rect", {
                     x: bounds.x + 1.8,
                     y: bounds.y + 1.8,
@@ -938,12 +1019,12 @@ function initRoleReport() {
                 const compact = bounds.width < 76;
                 const countDigits = String(partStats.shots).length;
                 const countSize = Math.max(8.2, Math.min(16, Math.min(bounds.width / Math.max(2.15, countDigits * 0.9), bounds.height / 1.65)));
-                const secondSize = Math.max(8.4, Math.min(10.4, Math.min(bounds.width / 10.5, bounds.height / 5.4)));
-                const xgLabel = compact ? xgPerShot.toFixed(2) : `${xgPerShot.toFixed(2)} xG/tiro`;
+                const secondSize = Math.max(layout.orientation === "vertical" ? 6.8 : 8.4, Math.min(layout.orientation === "vertical" ? 8.8 : 10.4, Math.min(bounds.width / 7.2, bounds.height / 5.4)));
+                const xgLabel = layout.orientation === "vertical" && compact ? `${xgPerShot.toFixed(2)} xG/t` : `${xgPerShot.toFixed(2)} xG/tiro`;
                 const approxCountWidth = countDigits * countSize * 0.58;
                 const approxSecondWidth = xgLabel.length * secondSize * 0.56;
                 const showCount = bounds.width >= Math.max(12, approxCountWidth + 5) && bounds.height >= countSize + 5;
-                const showXgPerShot = partStats.shots >= 2 && bounds.height >= 42 && approxSecondWidth <= bounds.width - 8;
+                const showXgPerShot = layout.orientation !== "vertical" && partStats.shots >= 2 && bounds.height >= 42 && approxSecondWidth <= bounds.width - 8;
                 if (!showCount) return;
                 const text = svgEl("text", {
                     x: cx,
@@ -974,12 +1055,12 @@ function initRoleReport() {
         svg.__attShotColorByXg = colorByXg;
         return true;
     }
-    function buildShotMacroZones(svg, grid) {
+    function buildShotMacroZones(svg, grid, layout) {
         try {
-            return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES, true);
+            return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES, true, layout);
         } catch (_err) {
             try {
-                return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES_LEGACY, false);
+                return renderShotMacroZoneSet(svg, grid, ATT_SHOT_ZONES_LEGACY, false, layout);
             } catch (_fallbackErr) {
                 return false;
             }
@@ -1005,8 +1086,15 @@ function initRoleReport() {
             summary.textContent = "";
             return;
         }
+        const shotLayout = getAttShotLayout();
         summary.textContent = "Zone principali: " + topZones
-            .map(zone => `${zone.label} ${zone.shots} tiri · ${zone.xg.toFixed(2)} xG · ${zone.goals} gol`)
+            .map(zone => {
+                const xgPerShot = zone.shots ? zone.xg / zone.shots : 0;
+                const xgPart = shotLayout.orientation === "vertical"
+                    ? `${xgPerShot.toFixed(2)} xG/t · ${zone.xg.toFixed(2)} xG`
+                    : `${zone.xg.toFixed(2)} xG`;
+                return `${zone.label} ${zone.shots} tiri · ${xgPart} · ${zone.goals} gol`;
+            })
             .join(" | ");
     }
     function validateGoalmouthGrid(grid) {
@@ -1128,7 +1216,8 @@ function initRoleReport() {
             const shotNote = d.shotN
                 ? `${d.shotN} tiri · ${d.shotGoals || 0} gol${Number.isFinite(shotXg) ? ` · xG ${shotXg.toFixed(2)} · colore = xG totale` : " · colore = volume"}`
                 : (d.shotNote || "Zone tiro non disponibili");
-            note("pitchPosNote", shotNote);
+            const shotLayout = getAttShotLayout();
+            note("pitchPosNote", shotLayout.orientation === "vertical" && d.shotN ? `${shotNote} · xG/tiro nel dettaglio` : shotNote);
             renderShotZoneSummary($("pitchPosNote"), $("pitchPos")?.__attShotZones || []);
             note("pitchGoalmouthNote", hasGoalmouth ? (d.goalmouthNote || "") : "");
             note("pitchCarryNote", d.ipNote || (d.ipCx ? `Centroide: x=${d.ipCx}` : ""));
