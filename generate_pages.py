@@ -417,7 +417,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
     out = re.sub(r'\s*<span class="image"><img src="[^"]+" alt="" /></span>\n', "\n", out, count=1)
     out = re.sub(r'<header class="major"><h1>.*?</h1></header>', f'<header class="major"><h1>{name}</h1></header>', out, count=1)
     out = re.sub(
-        r'<div class="content"><p>.*?</p></div>',
+        r'<div class="content">\s*(?:<p>.*?</p>|<div class="sr-banner-meta">.*?</div>)\s*</div>',
         (
             '<div class="content">\n'
             '                <div class="sr-banner-meta">\n'
@@ -434,7 +434,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         flags=re.S,
     )
     out = re.sub(
-        r'<p class="sr-narrative" id="gkProfileParagraph">.*?</p>',
+        r'(?:<div class="sr-narrative(?: sr-editorial-markdown)?" id="gkProfileParagraph">.*?</div>|<p class="sr-narrative" id="gkProfileParagraph">.*?</p>)',
         f'<div class="sr-narrative sr-editorial-markdown" id="gkProfileParagraph">{narrative}</div>',
         out,
         count=1,
