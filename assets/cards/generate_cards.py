@@ -104,6 +104,39 @@ def load_radar(player: dict) -> dict | None:
     if not path.exists():
         return None
     payload = json.loads(path.read_text(encoding="utf-8"))
+    if "GK_PAGE_V1_PLAYERS" in payload:
+        players = payload.get("GK_PAGE_V1_PLAYERS", {}).get("players", [])
+        if not players:
+            return None
+        target_name = payload.get("GK_PAGE_V1_PLAYERS", {}).get("report_context", {}).get("target_player_name") or player.get("player_name")
+        subject = next((item for item in players if item.get("header", {}).get("player_name") == target_name), players[0])
+        comparators = [item for item in players if item is not subject]
+        axes = [
+            {"key": axis.get("axis_id"), "label": axis.get("axis_name")}
+            for axis in subject.get("radar", {}).get("axes", [])
+        ]
+
+        def values(item: dict) -> list[float]:
+            axis_scores = {axis.get("axis_id"): axis.get("axis_score_0_100") for axis in item.get("radar", {}).get("axes", [])}
+            return [axis_scores.get(axis["key"], 0) for axis in axes]
+
+        return {
+            "axes": axes,
+            "data": {
+                "subject": {
+                    "label": subject.get("header", {}).get("player_name", player.get("player_name", "Subject")),
+                    "values": values(subject),
+                },
+                "targetProfiles": [
+                    {
+                        "label": item.get("header", {}).get("player_name", "Comparison"),
+                        "values": values(item),
+                    }
+                    for item in comparators
+                ],
+            },
+            "ranges": None,
+        }
     return {
         "axes":   payload.get("RADAR_AXES", []),
         "data":   payload.get("RADAR_DATA", {}),
