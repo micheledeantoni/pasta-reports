@@ -57,12 +57,24 @@ function initRoleReport() {
         if (value === null || value === undefined || Number.isNaN(value)) return "—";
         const globalFmt = readGlobal("fmt", null);
         if (typeof globalFmt === "function") return globalFmt(metric, value);
+        if (metric === "Median time to engage" || metric === "Tempo mediano di ingaggio") {
+            const numeric = Number(value);
+            if (!Number.isFinite(numeric)) return "—";
+            if (numeric === 0 || numeric.toFixed(2) === "0.00") return "<0.5s";
+            return numeric.toFixed(1) + "s";
+        }
         const kind = metricFormats[metric] || "number";
         if (kind === "percent") return (value * 100).toFixed(1) + "%";
         if (kind === "percent_0_100") return value.toFixed(1) + "%";
         if (kind === "meters") return value.toFixed(1) + " m";
         if (kind === "one_decimal") return value.toFixed(1);
         return value.toFixed(2);
+    }
+    function metricCaveat(metric) {
+        if (metric === "Median time to engage" || metric === "Tempo mediano di ingaggio") {
+            return " · Very low values can reflect same-timestamp events in the event feed.";
+        }
+        return "";
     }
     function svgEl(tag, attrs) {
         const el = document.createElementNS(NS, tag);
@@ -539,10 +551,10 @@ function initRoleReport() {
                             const score = metricScore(row.metric, value);
                             if (score === null) return "";
                             const color = p.color || "#fff";
-                            return `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${score}%; background:color-mix(in srgb, ${color} 72%, transparent)" data-tip="${esc(p.name || id)}: ${esc(fmt(row.metric, value))}"></div></div>`;
+                            return `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${score}%; background:color-mix(in srgb, ${color} 72%, transparent)" data-tip="${esc(p.name || id)}: ${esc(fmt(row.metric, value))}${esc(metricCaveat(row.metric))}"></div></div>`;
                         }).join("");
                         const baselineBar = showAverage
-                            ? `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${baselineScore}%; background:rgba(255,255,255,.42)" data-tip="${esc(data.baselineLabel || "Average")}: ${esc(fmt(row.metric, row.baselineValue))}"></div></div>`
+                            ? `<div class="sr-bar-track"><div class="sr-bar-fill" style="width:${baselineScore}%; background:rgba(255,255,255,.42)" data-tip="${esc(data.baselineLabel || "Average")}: ${esc(fmt(row.metric, row.baselineValue))}${esc(metricCaveat(row.metric))}"></div></div>`
                             : "";
 
                         // ── Mobile: build per-player data once ──────────────
@@ -598,7 +610,7 @@ function initRoleReport() {
                             <div class="sr-dot-row">
                                 <span class="sr-dot-label">${esc(row.label || row.metric)}</span>
                                 <div class="sr-bar-group">
-                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%;background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}"></div></div>
+                                    <div class="sr-bar-track main"><div class="sr-bar-fill" style="width:${subjectScore}%;background:${subject.color || "#4ade80"}" data-tip="${esc(subject.name || "Subject")}: ${esc(fmt(row.metric, row.subjectValue))}${esc(metricCaveat(row.metric))}"></div></div>
                                     ${refBars}
                                     ${baselineBar}
                                 </div>
