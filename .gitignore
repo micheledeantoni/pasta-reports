@@ -1,13 +1,19 @@
 # Development/archive folders
 archive/
 .claude/
-docs/
-scripts/
+docs/*
+!docs/
+!docs/role_report_generation_runbook_2026_06_03.md
+scripts/*
+!scripts/
+!scripts/resolve_role_report_players.py
+!scripts/orchestrate_role_report.py
 outputs/
 config/
 tools/
 data/report_payload_v1_examples/
 data/editorial/
+!Makefile
 
 # Python
 __pycache__/
