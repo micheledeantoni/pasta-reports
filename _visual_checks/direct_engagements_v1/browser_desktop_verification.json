@@ -1,0 +1,522 @@
+[
+  {
+    "page": "oumar-solet.html",
+    "role": "DEF",
+    "data": {
+      "barFillCount": 30,
+      "canvasSize": {
+        "height": 517,
+        "width": 711
+      },
+      "groupText": [
+        "Ingaggio difensivo diretto",
+        "Ingaggio difensivo diretto"
+      ],
+      "groupVisible": true,
+      "labelsPresent": {
+        "Ingaggi diretti /90": true,
+        "Ingaggi entro 2s": true,
+        "Tempo mediano di ingaggio": true
+      },
+      "lowerBetterChecks": [],
+      "lowerBetterOk": false,
+      "metricValues": [
+        {
+          "fillWidths": [
+            "45.92%",
+            "37.8474%",
+            "25.689%",
+            "27.878%",
+            "24.7417%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "5.26"
+        },
+        {
+          "fillWidths": [
+            "75%",
+            "50%",
+            "25%",
+            "50%",
+            "50%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.50"
+        },
+        {
+          "fillWidths": [
+            "78.32%",
+            "62.7193%",
+            "69.178%",
+            "62.3895%",
+            "46.0785%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "91.3%"
+        },
+        {
+          "fillWidths": [
+            "45.92%",
+            "23.6295%",
+            "17.0423%",
+            "36.6222%",
+            "28.0804%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "5.26"
+        },
+        {
+          "fillWidths": [
+            "75%",
+            "37.5%",
+            "50%",
+            "0%",
+            "25%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.50"
+        },
+        {
+          "fillWidths": [
+            "78.32%",
+            "71.91%",
+            "58.9553%",
+            "79.6513%",
+            "76.9738%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "91.3%"
+        }
+      ],
+      "overflowX": 0,
+      "payloadFetchOk": false,
+      "payloadStatus": null,
+      "payloadUrl": "",
+      "radarAxisCount": 0,
+      "radarHasDirect": false,
+      "usesPca": false,
+      "valuesFormatted": false,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "errors": []
+  },
+  {
+    "page": "marco-palestra.html",
+    "role": "DEF",
+    "data": {
+      "barFillCount": 27,
+      "canvasSize": {
+        "height": 517,
+        "width": 711
+      },
+      "groupText": [
+        "Ingaggio difensivo diretto",
+        "Ingaggio difensivo diretto"
+      ],
+      "groupVisible": true,
+      "labelsPresent": {
+        "Ingaggi diretti /90": true,
+        "Ingaggi entro 2s": true,
+        "Tempo mediano di ingaggio": true
+      },
+      "lowerBetterChecks": [],
+      "lowerBetterOk": false,
+      "metricValues": [
+        {
+          "fillWidths": [
+            "23.66%",
+            "34.8895%",
+            "19.3763%",
+            "19.3612%",
+            "41.5573%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "3.23"
+        },
+        {
+          "fillWidths": [
+            "100%",
+            "25%",
+            "12.5%",
+            "0%",
+            "0%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.00"
+        },
+        {
+          "fillWidths": [
+            "54.95%",
+            "78.5155%",
+            "64.2857%",
+            "70.5883%",
+            "60%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "82.0%"
+        },
+        {
+          "fillWidths": [
+            "23.66%",
+            "54.1285%",
+            "37.5453%",
+            "61.9499%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "3.23"
+        },
+        {
+          "fillWidths": [
+            "100%",
+            "12.5%",
+            "0%",
+            "0%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.00"
+        },
+        {
+          "fillWidths": [
+            "54.95%",
+            "65.4255%",
+            "65.1898%",
+            "86.3638%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "82.0%"
+        }
+      ],
+      "overflowX": 0,
+      "payloadFetchOk": false,
+      "payloadStatus": null,
+      "payloadUrl": "",
+      "radarAxisCount": 0,
+      "radarHasDirect": false,
+      "usesPca": false,
+      "valuesFormatted": false,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "errors": []
+  },
+  {
+    "page": "curtis_jones.html",
+    "role": "MID",
+    "data": {
+      "barFillCount": 33,
+      "canvasSize": {
+        "height": 517,
+        "width": 711
+      },
+      "groupText": [
+        "Ingaggio difensivo diretto",
+        "Ingaggio difensivo diretto"
+      ],
+      "groupVisible": true,
+      "labelsPresent": {
+        "Ingaggi diretti /90": true,
+        "Ingaggi entro 2s": true,
+        "Tempo mediano di ingaggio": true
+      },
+      "lowerBetterChecks": [],
+      "lowerBetterOk": false,
+      "metricValues": [
+        {
+          "fillWidths": [
+            "35.73%",
+            "33.8412%",
+            "29.5437%",
+            "46.3405%",
+            "45.1891%",
+            "47.0346%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "4.12"
+        },
+        {
+          "fillWidths": [
+            "75%",
+            "0%",
+            "50%",
+            "50%",
+            "25%",
+            "25%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.50"
+        },
+        {
+          "fillWidths": [
+            "87.82%",
+            "71.3009%",
+            "81.25%",
+            "59.8215%",
+            "65.368%",
+            "83.3333%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "94.3%"
+        },
+        {
+          "fillWidths": [
+            "35.73%",
+            "44.4236%",
+            "41.8795%",
+            "36.4265%",
+            "48.3037%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "4.12"
+        },
+        {
+          "fillWidths": [
+            "75%",
+            "25%",
+            "50%",
+            "25%",
+            "0%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "0.50"
+        },
+        {
+          "fillWidths": [
+            "87.82%",
+            "54.5091%",
+            "70.1627%",
+            "73.6842%",
+            "81.25%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "94.3%"
+        }
+      ],
+      "overflowX": 0,
+      "payloadFetchOk": false,
+      "payloadStatus": null,
+      "payloadUrl": "",
+      "radarAxisCount": 0,
+      "radarHasDirect": false,
+      "usesPca": false,
+      "valuesFormatted": false,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "errors": []
+  },
+  {
+    "page": "kone.html",
+    "role": "MID",
+    "data": {
+      "barFillCount": 30,
+      "canvasSize": {
+        "height": 517,
+        "width": 711
+      },
+      "groupText": [
+        "Ingaggio difensivo diretto",
+        "Ingaggio difensivo diretto"
+      ],
+      "groupVisible": true,
+      "labelsPresent": {
+        "Ingaggi diretti /90": true,
+        "Ingaggi entro 2s": true,
+        "Tempo mediano di ingaggio": true
+      },
+      "lowerBetterChecks": [],
+      "lowerBetterOk": false,
+      "metricValues": [
+        {
+          "fillWidths": [
+            "41.26%",
+            "33.8412%",
+            "29.5437%",
+            "46.3405%",
+            "45.1891%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "4.67"
+        },
+        {
+          "fillWidths": [
+            "50%",
+            "0%",
+            "50%",
+            "50%",
+            "25%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "1.00"
+        },
+        {
+          "fillWidths": [
+            "71.54%",
+            "71.3009%",
+            "81.25%",
+            "59.8215%",
+            "65.368%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "86.7%"
+        },
+        {
+          "fillWidths": [
+            "41.26%",
+            "47.5382%",
+            "20.3665%",
+            "22.9784%",
+            "45.0829%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "4.67"
+        },
+        {
+          "fillWidths": [
+            "50%",
+            "50%",
+            "0%",
+            "25%",
+            "50%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "1.00"
+        },
+        {
+          "fillWidths": [
+            "71.54%",
+            "64.8713%",
+            "73.2143%",
+            "82.1429%",
+            "69.819%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "86.7%"
+        }
+      ],
+      "overflowX": 0,
+      "payloadFetchOk": false,
+      "payloadStatus": null,
+      "payloadUrl": "",
+      "radarAxisCount": 0,
+      "radarHasDirect": false,
+      "usesPca": false,
+      "valuesFormatted": false,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "errors": []
+  },
+  {
+    "page": "stankovic.html",
+    "role": "MID",
+    "data": {
+      "barFillCount": 30,
+      "canvasSize": {
+        "height": 517,
+        "width": 711
+      },
+      "groupText": [
+        "Ingaggio difensivo diretto",
+        "Ingaggio difensivo diretto"
+      ],
+      "groupVisible": true,
+      "labelsPresent": {
+        "Ingaggi diretti /90": true,
+        "Ingaggi entro 2s": true,
+        "Tempo mediano di ingaggio": true
+      },
+      "lowerBetterChecks": [],
+      "lowerBetterOk": false,
+      "metricValues": [
+        {
+          "fillWidths": [
+            "44.66%",
+            "33.8412%",
+            "29.5437%",
+            "46.3405%",
+            "45.1891%",
+            "47.0346%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "5.00"
+        },
+        {
+          "fillWidths": [
+            "50%",
+            "0%",
+            "50%",
+            "50%",
+            "25%",
+            "25%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "1.00"
+        },
+        {
+          "fillWidths": [
+            "68.19%",
+            "71.3009%",
+            "81.25%",
+            "59.8215%",
+            "65.368%",
+            "83.3333%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "85.2%"
+        },
+        {
+          "fillWidths": [
+            "44.66%",
+            "33.7325%",
+            "43.3601%",
+            "26.5897%"
+          ],
+          "label": "Ingaggi diretti /90",
+          "value": "5.00"
+        },
+        {
+          "fillWidths": [
+            "50%",
+            "12.5%",
+            "50%",
+            "50%"
+          ],
+          "label": "Tempo mediano di ingaggio",
+          "value": "1.00"
+        },
+        {
+          "fillWidths": [
+            "68.19%",
+            "77.0408%",
+            "69.7206%",
+            "46.4286%"
+          ],
+          "label": "Ingaggi entro 2s",
+          "value": "85.2%"
+        }
+      ],
+      "overflowX": 0,
+      "payloadFetchOk": false,
+      "payloadStatus": null,
+      "payloadUrl": "",
+      "radarAxisCount": 0,
+      "radarHasDirect": false,
+      "usesPca": false,
+      "valuesFormatted": false,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "errors": []
+  }
+]

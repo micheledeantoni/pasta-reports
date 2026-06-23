@@ -1,0 +1,48 @@
+{
+  "mobileMidData": {
+    "labels": [
+      [
+        "Ingaggi diretti /90",
+        true
+      ],
+      [
+        "Tempo mediano di ingaggio",
+        true
+      ],
+      [
+        "Ingaggi entro 2s",
+        true
+      ]
+    ],
+    "overflowX": 0,
+    "textHasGroup": true,
+    "url": "http://127.0.0.1:8765/stankovic.html",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  "mobileDefData": {
+    "labels": [
+      [
+        "Ingaggi diretti /90",
+        true
+      ],
+      [
+        "Tempo mediano di ingaggio",
+        true
+      ],
+      [
+        "Ingaggi entro 2s",
+        true
+      ]
+    ],
+    "overflowX": 0,
+    "textHasGroup": true,
+    "url": "http://127.0.0.1:8765/oumar-solet.html",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  }
+}

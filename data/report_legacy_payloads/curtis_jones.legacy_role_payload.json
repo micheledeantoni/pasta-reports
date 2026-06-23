@@ -155,6 +155,7 @@
         "Passaggi nel terzo finale per90",
         "Passaggi in area per90",
         "Conduzioni progressive per90",
+        "Dribbling tentati per90",
         "Distanza media conduzione progressiva"
       ]
     },
@@ -199,11 +200,11 @@
       "id": 355354,
       "label": "Curtis Jones",
       "values": [
-        58.02,
-        46.87,
-        30.65,
-        33.62,
-        40.65
+        60.52,
+        38.11,
+        25.69,
+        29.85,
+        42.5
       ]
     },
     "target": {
@@ -216,11 +217,11 @@
         28421
       ],
       "values": [
-        53.94,
-        47.54,
-        39.91,
-        38.84,
-        38.27
+        56.34,
+        38.32,
+        28.17,
+        27.81,
+        40.63
       ]
     },
     "sourceTeam": {
@@ -232,11 +233,11 @@
         345319
       ],
       "values": [
-        49.84,
-        42.96,
-        41.41,
-        36.74,
-        39.43
+        53.2,
+        35.27,
+        35.57,
+        26.61,
+        41.22
       ]
     },
     "scale": "0-100 fixed role-minmax from detailed metrics",
@@ -246,55 +247,55 @@
         "id": 148684,
         "label": "Nicolò Barella",
         "values": [
-          55.52,
-          53.84,
-          61.33,
-          36.7,
-          35.83
+          58.35,
+          43.36,
+          41.22,
+          25.7,
+          38.22
         ]
       },
       {
         "id": 118169,
         "label": "Piotr Zielinski",
         "values": [
-          56.07,
-          40.89,
-          26.44,
-          29.33,
-          30.24
+          58.15,
+          33.17,
+          17.93,
+          21.3,
+          33.68
         ]
       },
       {
         "id": 110373,
         "label": "Hakan Çalhanoglu",
         "values": [
-          60.85,
-          44.52,
-          33.69,
-          46.89,
-          35.85
+          62.4,
+          35.04,
+          24.99,
+          30.12,
+          39.22
         ]
       },
       {
         "id": 439534,
         "label": "Petar Sucic",
         "values": [
-          52.3,
-          48.79,
-          40.15,
-          37.67,
-          38.93
+          54.58,
+          39.84,
+          30.16,
+          25.85,
+          41.88
         ]
       },
       {
         "id": 28421,
         "label": "Henrikh Mkhitaryan",
         "values": [
-          44.95,
-          49.67,
-          37.93,
-          43.63,
-          50.53
+          48.25,
+          40.19,
+          26.57,
+          36.11,
+          50.19
         ]
       }
     ]
@@ -307,7 +308,9 @@
     "Passes ending final third per90": "number",
     "Passes ending box per90": "number",
     "Progressive carry attempts per90": "number",
-    "Take-on attempts per90": "number",
+    "Dribbling tentati per 90": "number",
+    "Dribbling riusciti": "percent_0_100",
+    "Altezza media dei dribbling": "one_decimal",
     "Average progressive carry distance": "meters",
     "Shot-creating actions per90": "number",
     "Expected assists per90": "number",
@@ -320,366 +323,167 @@
     "Interceptions padj": "number",
     "Aerial attempts per90": "number",
     "Tackle success rate": "percent",
-    "Receival attempts per90": "number"
+    "Receival attempts per90": "number",
+    "Direct engagements /90": "number",
+    "Median time to engage": "number",
+    "Engagements under 2s": "percent"
   },
   "METRIC_RANGES": {
     "Pass completion": {
-      "min": 0.639831,
+      "min": 0.526316,
       "max": 1.0,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Pass share team": {
       "min": 0.000915,
       "max": 0.155817,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Average pass distance": {
-      "min": 12.576245,
-      "max": 21.017611,
-      "count": 655,
+      "min": 11.527603,
+      "max": 21.632849,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Progressive pass share": {
-      "min": 0.064401,
+      "min": 0.041958,
       "max": 0.364341,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Passes ending final third per90": {
       "min": 0.089109,
-      "max": 33.690685,
-      "count": 655,
+      "max": 38.571429,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Passes ending box per90": {
       "min": 0.0,
-      "max": 7.115813,
-      "count": 655,
+      "max": 8.206687,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Progressive carry attempts per90": {
       "min": 0.0,
       "max": 10.773942,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
-    "Take-on attempts per90": {
+    "Dribbling tentati per 90": {
       "min": 0.0,
-      "max": 10.016287,
-      "count": 655,
+      "max": 12.583587,
+      "count": 1156,
+      "scale": "role_minmax_raw"
+    },
+    "Dribbling riusciti": {
+      "min": 0.0,
+      "max": 100.0,
+      "count": 1154,
+      "scale": "role_minmax_raw"
+    },
+    "Altezza media dei dribbling": {
+      "min": 24.6225,
+      "max": 87.6925,
+      "count": 1154,
       "scale": "role_minmax_raw"
     },
     "Average progressive carry distance": {
       "min": 0.0,
-      "max": 36.777391,
-      "count": 655,
+      "max": 44.31,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Shot-creating actions per90": {
-      "min": 0.119363,
-      "max": 3.333333,
-      "count": 652,
+      "min": 0.095796,
+      "max": 4.263158,
+      "count": 1144,
       "scale": "role_minmax_raw"
     },
     "Expected assists per90": {
-      "min": 0.001706,
-      "max": 0.229601,
-      "count": 652,
+      "min": 0.004623,
+      "max": 0.463187,
+      "count": 1144,
       "scale": "role_minmax_raw"
     },
     "Final third receival share": {
       "min": 0.049784,
-      "max": 0.601613,
-      "count": 655,
+      "max": 0.705882,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Shot attempts per90": {
       "min": 0.0,
-      "max": 4.164179,
-      "count": 655,
+      "max": 4.973684,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "xG per90": {
-      "min": 0.001418,
-      "max": 0.519124,
-      "count": 653,
+      "min": 0.001871,
+      "max": 0.764914,
+      "count": 1150,
       "scale": "role_minmax_raw"
     },
     "Avg shot distance": {
-      "min": 10.179596,
-      "max": 35.174906,
-      "count": 653,
+      "min": 8.077015,
+      "max": 30.951678,
+      "count": 1150,
       "scale": "role_minmax_raw"
     },
     "Shot quality": {
-      "min": 0.002972,
-      "max": 0.209077,
-      "count": 653,
+      "min": 0.019458,
+      "max": 0.773598,
+      "count": 1150,
       "scale": "role_minmax_raw"
     },
     "Tackles padj": {
-      "min": 0.199393,
-      "max": 3.226798,
-      "count": 655,
+      "min": 0.177541,
+      "max": 3.398829,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Interceptions padj": {
-      "min": 1.295851,
+      "min": 1.065247,
       "max": 13.803389,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Aerial attempts per90": {
-      "min": 0.103846,
-      "max": 7.815242,
-      "count": 655,
+      "min": 0.0,
+      "max": 10.394022,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Tackle success rate": {
-      "min": 0.375,
+      "min": 0.142857,
       "max": 1.0,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
     },
     "Receival attempts per90": {
       "min": 1.782178,
       "max": 103.911404,
-      "count": 655,
+      "count": 1156,
       "scale": "role_minmax_raw"
-    }
-  },
-  "METRICS": {
-    "355354": {
-      "Pass completion": 0.919484,
-      "Pass share team": 0.082413,
-      "Average pass distance": 15.509394,
-      "Progressive pass share": 0.185003,
-      "Passes ending final third per90": 25.520291,
-      "Passes ending box per90": 2.996878,
-      "Progressive carry attempts per90": 2.154006,
-      "Take-on attempts per90": 1.873049,
-      "Average progressive carry distance": 20.730652,
-      "Shot-creating actions per90": 0.842872,
-      "Expected assists per90": 0.071528,
-      "Final third receival share": 0.263824,
-      "Shot attempts per90": 1.077003,
-      "xG per90": 0.054989,
-      "Avg shot distance": 17.374494,
-      "Shot quality": 0.058716,
-      "Tackles padj": 1.551093,
-      "Interceptions padj": 6.82481,
-      "Aerial attempts per90": 1.779396,
-      "Tackle success rate": 0.7,
-      "Receival attempts per90": 70.28616
     },
-    "148684": {
-      "Pass completion": 0.860904,
-      "Pass share team": 0.085903,
-      "Average pass distance": 16.838281,
-      "Progressive pass share": 0.20893,
-      "Passes ending final third per90": 25.117096,
-      "Passes ending box per90": 4.637002,
-      "Progressive carry attempts per90": 2.318501,
-      "Take-on attempts per90": 1.967213,
-      "Average progressive carry distance": 22.005455,
-      "Shot-creating actions per90": 2.318501,
-      "Expected assists per90": 0.139351,
-      "Final third receival share": 0.354217,
-      "Shot attempts per90": 1.159251,
-      "xG per90": 0.08118,
-      "Avg shot distance": 18.275637,
-      "Shot quality": 0.07703,
-      "Tackles padj": 1.510855,
-      "Interceptions padj": 5.511821,
-      "Aerial attempts per90": 1.159251,
-      "Tackle success rate": 0.703704,
-      "Receival attempts per90": 58.313817
+    "Direct engagements /90": {
+      "min": 0.596026,
+      "max": 10.460922,
+      "count": 1156,
+      "scale": "role_minmax_raw"
     },
-    "118169": {
-      "Pass completion": 0.923861,
-      "Pass share team": 0.072331,
-      "Average pass distance": 16.240622,
-      "Progressive pass share": 0.17743,
-      "Passes ending final third per90": 21.721112,
-      "Passes ending box per90": 1.930765,
-      "Progressive carry attempts per90": 2.764505,
-      "Take-on attempts per90": 1.316431,
-      "Average progressive carry distance": 18.236667,
-      "Shot-creating actions per90": 1.097026,
-      "Expected assists per90": 0.042338,
-      "Final third receival share": 0.221311,
-      "Shot attempts per90": 1.228669,
-      "xG per90": 0.060504,
-      "Avg shot distance": 22.146787,
-      "Shot quality": 0.053032,
-      "Tackles padj": 1.127527,
-      "Interceptions padj": 5.928612,
-      "Aerial attempts per90": 0.877621,
-      "Tackle success rate": 0.645161,
-      "Receival attempts per90": 58.888347
+    "Median time to engage": {
+      "min": 0.0,
+      "max": 2.0,
+      "count": 1156,
+      "scale": "role_minmax_raw"
     },
-    "110373": {
-      "Pass completion": 0.906994,
-      "Pass share team": 0.066086,
-      "Average pass distance": 17.889706,
-      "Progressive pass share": 0.184524,
-      "Passes ending final third per90": 22.284689,
-      "Passes ending box per90": 2.15311,
-      "Progressive carry attempts per90": 2.852871,
-      "Take-on attempts per90": 0.753589,
-      "Average progressive carry distance": 21.978679,
-      "Shot-creating actions per90": 1.937799,
-      "Expected assists per90": 0.035505,
-      "Final third receival share": 0.213429,
-      "Shot attempts per90": 2.206938,
-      "xG per90": 0.236744,
-      "Avg shot distance": 24.138479,
-      "Shot quality": 0.095612,
-      "Tackles padj": 1.414459,
-      "Interceptions padj": 7.779523,
-      "Aerial attempts per90": 1.076555,
-      "Tackle success rate": 0.617647,
-      "Receival attempts per90": 67.338517
-    },
-    "439534": {
-      "Pass completion": 0.893523,
-      "Pass share team": 0.055416,
-      "Average pass distance": 16.847283,
-      "Progressive pass share": 0.190772,
-      "Passes ending final third per90": 22.104368,
-      "Passes ending box per90": 3.471356,
-      "Progressive carry attempts per90": 3.624504,
-      "Take-on attempts per90": 1.888826,
-      "Average progressive carry distance": 19.819859,
-      "Shot-creating actions per90": 1.174135,
-      "Expected assists per90": 0.095634,
-      "Final third receival share": 0.305936,
-      "Shot attempts per90": 1.123086,
-      "xG per90": 0.076839,
-      "Avg shot distance": 17.670707,
-      "Shot quality": 0.083621,
-      "Tackles padj": 2.078376,
-      "Interceptions padj": 6.325493,
-      "Aerial attempts per90": 1.072036,
-      "Tackle success rate": 0.630435,
-      "Receival attempts per90": 55.899036
-    },
-    "28421": {
-      "Pass completion": 0.879276,
-      "Pass share team": 0.048876,
-      "Average pass distance": 15.240573,
-      "Progressive pass share": 0.182093,
-      "Passes ending final third per90": 25.074337,
-      "Passes ending box per90": 3.781513,
-      "Progressive carry attempts per90": 3.199741,
-      "Take-on attempts per90": 1.745314,
-      "Average progressive carry distance": 19.092818,
-      "Shot-creating actions per90": 1.163542,
-      "Expected assists per90": 0.056147,
-      "Final third receival share": 0.366594,
-      "Shot attempts per90": 2.443439,
-      "xG per90": 0.133818,
-      "Avg shot distance": 20.455157,
-      "Shot quality": 0.067652,
-      "Tackles padj": 1.613173,
-      "Interceptions padj": 7.62591,
-      "Aerial attempts per90": 1.221719,
-      "Tackle success rate": 0.939394,
-      "Receival attempts per90": 53.639302
-    },
-    "369875": {
-      "Pass completion": 0.878774,
-      "Pass share team": 0.107385,
-      "Average pass distance": 17.002176,
-      "Progressive pass share": 0.193396,
-      "Passes ending final third per90": 21.276267,
-      "Passes ending box per90": 2.475278,
-      "Progressive carry attempts per90": 2.642151,
-      "Take-on attempts per90": 1.58529,
-      "Average progressive carry distance": 20.578895,
-      "Shot-creating actions per90": 1.529666,
-      "Expected assists per90": 0.06239,
-      "Final third receival share": 0.319018,
-      "Shot attempts per90": 1.557478,
-      "xG per90": 0.082172,
-      "Avg shot distance": 23.872151,
-      "Shot quality": 0.060297,
-      "Tackles padj": 1.270559,
-      "Interceptions padj": 8.304012,
-      "Aerial attempts per90": 1.195921,
-      "Tackle success rate": 0.75,
-      "Receival attempts per90": 54.400494
-    },
-    "363884": {
-      "Pass completion": 0.889009,
-      "Pass share team": 0.093557,
-      "Average pass distance": 15.516805,
-      "Progressive pass share": 0.149973,
-      "Passes ending final third per90": 17.174202,
-      "Passes ending box per90": 1.645612,
-      "Progressive carry attempts per90": 2.244016,
-      "Take-on attempts per90": 2.094415,
-      "Average progressive carry distance": 21.2646,
-      "Shot-creating actions per90": 0.777926,
-      "Expected assists per90": 0.058095,
-      "Final third receival share": 0.222357,
-      "Shot attempts per90": 1.136968,
-      "xG per90": 0.041916,
-      "Avg shot distance": 23.108075,
-      "Shot quality": 0.043779,
-      "Tackles padj": 1.439183,
-      "Interceptions padj": 8.317989,
-      "Aerial attempts per90": 1.43617,
-      "Tackle success rate": 0.694915,
-      "Receival attempts per90": 49.24867
-    },
-    "394786": {
-      "Pass completion": 0.849364,
-      "Pass share team": 0.071624,
-      "Average pass distance": 13.583747,
-      "Progressive pass share": 0.169731,
-      "Passes ending final third per90": 26.570029,
-      "Passes ending box per90": 5.512454,
-      "Progressive carry attempts per90": 1.874234,
-      "Take-on attempts per90": 3.013475,
-      "Average progressive carry distance": 19.394118,
-      "Shot-creating actions per90": 2.131482,
-      "Expected assists per90": 0.153154,
-      "Final third receival share": 0.503687,
-      "Shot attempts per90": 1.837485,
-      "xG per90": 0.16985,
-      "Avg shot distance": 16.454765,
-      "Shot quality": 0.107484,
-      "Tackles padj": 1.040102,
-      "Interceptions padj": 4.802826,
-      "Aerial attempts per90": 1.727236,
-      "Tackle success rate": 0.823529,
-      "Receival attempts per90": 49.832585
-    },
-    "345319": {
-      "Pass completion": 0.862773,
-      "Pass share team": 0.071979,
-      "Average pass distance": 15.717758,
-      "Progressive pass share": 0.187192,
-      "Passes ending final third per90": 15.413254,
-      "Passes ending box per90": 1.976917,
-      "Progressive carry attempts per90": 1.440804,
-      "Take-on attempts per90": 1.038719,
-      "Average progressive carry distance": 24.799535,
-      "Shot-creating actions per90": 0.938198,
-      "Expected assists per90": 0.056884,
-      "Final third receival share": 0.271239,
-      "Shot attempts per90": 1.742368,
-      "xG per90": 0.091411,
-      "Avg shot distance": 17.894136,
-      "Shot quality": 0.060625,
-      "Tackles padj": 1.417997,
-      "Interceptions padj": 6.528138,
-      "Aerial attempts per90": 1.206255,
-      "Tackle success rate": 0.716981,
-      "Receival attempts per90": 42.989576
+    "Engagements under 2s": {
+      "min": 0.533333,
+      "max": 1.0,
+      "count": 1156,
+      "scale": "role_minmax_raw"
     }
   },
   "TARGET_COMPARISON_BARS": {
@@ -703,12 +507,12 @@
             "metric": "Pass completion",
             "subjectValue": 0.919484,
             "baselineValue": 0.892912,
-            "subjectScore": 77.64,
-            "baselineScore": 70.27,
+            "subjectScore": 83.0,
+            "baselineScore": 77.39,
             "range": {
-              "min": 0.639831,
+              "min": 0.526316,
               "max": 1.0,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Completamento passaggi"
@@ -722,7 +526,7 @@
             "range": {
               "min": 0.000915,
               "max": 0.155817,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota passaggi squadra"
@@ -736,7 +540,7 @@
             "range": {
               "min": 1.782178,
               "max": 103.911404,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Ricezioni tentate per90"
@@ -745,12 +549,12 @@
             "metric": "Average pass distance",
             "subjectValue": 15.509394,
             "baselineValue": 16.611293,
-            "subjectScore": 34.75,
-            "baselineScore": 47.8,
+            "subjectScore": 39.4,
+            "baselineScore": 50.31,
             "range": {
-              "min": 12.576245,
-              "max": 21.017611,
-              "count": 655,
+              "min": 11.527603,
+              "max": 21.632849,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media passaggio"
@@ -764,12 +568,12 @@
             "metric": "Progressive pass share",
             "subjectValue": 0.185003,
             "baselineValue": 0.18875,
-            "subjectScore": 40.21,
-            "baselineScore": 41.46,
+            "subjectScore": 44.37,
+            "baselineScore": 45.53,
             "range": {
-              "min": 0.064401,
+              "min": 0.041958,
               "max": 0.364341,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota passaggi progressivi"
@@ -778,12 +582,12 @@
             "metric": "Passes ending final third per90",
             "subjectValue": 25.520291,
             "baselineValue": 23.26032,
-            "subjectScore": 75.68,
-            "baselineScore": 68.96,
+            "subjectScore": 66.09,
+            "baselineScore": 60.21,
             "range": {
               "min": 0.089109,
-              "max": 33.690685,
-              "count": 655,
+              "max": 38.571429,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Passaggi nel terzo finale per90"
@@ -792,12 +596,12 @@
             "metric": "Passes ending box per90",
             "subjectValue": 2.996878,
             "baselineValue": 3.194749,
-            "subjectScore": 42.12,
-            "baselineScore": 44.9,
+            "subjectScore": 36.52,
+            "baselineScore": 38.93,
             "range": {
               "min": 0.0,
-              "max": 7.115813,
-              "count": 655,
+              "max": 8.206687,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Passaggi in area per90"
@@ -811,35 +615,63 @@
             "range": {
               "min": 0.0,
               "max": 10.773942,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Conduzioni progressive per90"
           },
           {
-            "metric": "Take-on attempts per90",
+            "metric": "Dribbling tentati per 90",
             "subjectValue": 1.873049,
             "baselineValue": 1.534275,
-            "subjectScore": 18.7,
-            "baselineScore": 15.32,
+            "subjectScore": 14.88,
+            "baselineScore": 12.19,
             "range": {
               "min": 0.0,
-              "max": 10.016287,
-              "count": 655,
+              "max": 12.583587,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling tentati per90"
           },
           {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 55.0,
+            "baselineValue": 44.179537,
+            "subjectScore": 55.0,
+            "baselineScore": 44.18,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1154,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 51.016875,
+            "baselineValue": 62.302392,
+            "subjectScore": 41.85,
+            "baselineScore": 59.74,
+            "range": {
+              "min": 24.6225,
+              "max": 87.6925,
+              "count": 1154,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
+          },
+          {
             "metric": "Average progressive carry distance",
             "subjectValue": 20.730652,
             "baselineValue": 20.226696,
-            "subjectScore": 56.37,
-            "baselineScore": 55.0,
+            "subjectScore": 46.79,
+            "baselineScore": 45.65,
             "range": {
               "min": 0.0,
-              "max": 36.777391,
-              "count": 655,
+              "max": 44.31,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
@@ -851,28 +683,28 @@
         "metrics": [
           {
             "metric": "Shot-creating actions per90",
-            "subjectValue": 0.842872,
-            "baselineValue": 1.538201,
-            "subjectScore": 22.51,
-            "baselineScore": 44.15,
+            "subjectValue": 1.030177,
+            "baselineValue": 1.301115,
+            "subjectScore": 22.42,
+            "baselineScore": 28.92,
             "range": {
-              "min": 0.119363,
-              "max": 3.333333,
-              "count": 652,
+              "min": 0.095796,
+              "max": 4.263158,
+              "count": 1144,
               "scale": "role_minmax_raw"
             },
             "label": "Azioni che generano tiro per90"
           },
           {
             "metric": "Expected assists per90",
-            "subjectValue": 0.071528,
-            "baselineValue": 0.073795,
-            "subjectScore": 30.64,
-            "baselineScore": 31.63,
+            "subjectValue": 0.105625,
+            "baselineValue": 0.090062,
+            "subjectScore": 22.03,
+            "baselineScore": 18.63,
             "range": {
-              "min": 0.001706,
-              "max": 0.229601,
-              "count": 652,
+              "min": 0.004623,
+              "max": 0.463187,
+              "count": 1144,
               "scale": "role_minmax_raw"
             },
             "label": "xA per90"
@@ -881,12 +713,12 @@
             "metric": "Final third receival share",
             "subjectValue": 0.263824,
             "baselineValue": 0.292297,
-            "subjectScore": 38.79,
-            "baselineScore": 43.95,
+            "subjectScore": 32.62,
+            "baselineScore": 36.96,
             "range": {
               "min": 0.049784,
-              "max": 0.601613,
-              "count": 655,
+              "max": 0.705882,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota ricezioni terzo finale"
@@ -900,54 +732,54 @@
             "metric": "Shot attempts per90",
             "subjectValue": 1.077003,
             "baselineValue": 1.632277,
-            "subjectScore": 25.86,
-            "baselineScore": 39.2,
+            "subjectScore": 21.65,
+            "baselineScore": 32.82,
             "range": {
               "min": 0.0,
-              "max": 4.164179,
-              "count": 655,
+              "max": 4.973684,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Tiri per90"
           },
           {
             "metric": "xG per90",
-            "subjectValue": 0.054989,
-            "baselineValue": 0.117817,
-            "subjectScore": 10.35,
-            "baselineScore": 22.48,
+            "subjectValue": 0.150417,
+            "baselineValue": 0.146268,
+            "subjectScore": 19.47,
+            "baselineScore": 18.92,
             "range": {
-              "min": 0.001418,
-              "max": 0.519124,
-              "count": 653,
+              "min": 0.001871,
+              "max": 0.764914,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "xG per90"
           },
           {
             "metric": "Shot quality",
-            "subjectValue": 0.058716,
-            "baselineValue": 0.075389,
-            "subjectScore": 27.05,
-            "baselineScore": 35.14,
+            "subjectValue": 0.139663,
+            "baselineValue": 0.108936,
+            "subjectScore": 15.94,
+            "baselineScore": 11.86,
             "range": {
-              "min": 0.002972,
-              "max": 0.209077,
-              "count": 653,
+              "min": 0.019458,
+              "max": 0.773598,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "Qualità del tiro"
           },
           {
             "metric": "Avg shot distance",
-            "subjectValue": 17.374494,
-            "baselineValue": 20.537353,
-            "subjectScore": 28.78,
-            "baselineScore": 41.44,
+            "subjectValue": 16.690231,
+            "baselineValue": 20.051913,
+            "subjectScore": 37.65,
+            "baselineScore": 52.35,
             "range": {
-              "min": 10.179596,
-              "max": 35.174906,
-              "count": 653,
+              "min": 8.077015,
+              "max": 30.951678,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media tiro (↓ meglio)"
@@ -961,12 +793,12 @@
             "metric": "Tackles padj",
             "subjectValue": 1.551093,
             "baselineValue": 1.548878,
-            "subjectScore": 44.65,
-            "baselineScore": 44.58,
+            "subjectScore": 42.64,
+            "baselineScore": 42.57,
             "range": {
-              "min": 0.199393,
-              "max": 3.226798,
-              "count": 655,
+              "min": 0.177541,
+              "max": 3.398829,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Contrasti (padj)"
@@ -975,12 +807,12 @@
             "metric": "Interceptions padj",
             "subjectValue": 6.82481,
             "baselineValue": 6.634272,
-            "subjectScore": 44.21,
-            "baselineScore": 42.68,
+            "subjectScore": 45.22,
+            "baselineScore": 43.72,
             "range": {
-              "min": 1.295851,
+              "min": 1.065247,
               "max": 13.803389,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Intercetti (padj)"
@@ -989,12 +821,12 @@
             "metric": "Aerial attempts per90",
             "subjectValue": 1.779396,
             "baselineValue": 1.081436,
-            "subjectScore": 21.73,
-            "baselineScore": 12.68,
+            "subjectScore": 17.12,
+            "baselineScore": 10.4,
             "range": {
-              "min": 0.103846,
-              "max": 7.815242,
-              "count": 655,
+              "min": 0.0,
+              "max": 10.394022,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Duelli aerei per90"
@@ -1003,15 +835,62 @@
             "metric": "Tackle success rate",
             "subjectValue": 0.7,
             "baselineValue": 0.707268,
-            "subjectScore": 52.0,
-            "baselineScore": 53.16,
+            "subjectScore": 65.0,
+            "baselineScore": 65.85,
             "range": {
-              "min": 0.375,
+              "min": 0.142857,
               "max": 1.0,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Successo nei contrasti"
+          }
+        ]
+      },
+      {
+        "label": "Ingaggio difensivo diretto",
+        "metrics": [
+          {
+            "metric": "Direct engagements /90",
+            "subjectValue": 4.120708,
+            "baselineValue": 4.58044,
+            "subjectScore": 35.73,
+            "baselineScore": 40.39,
+            "range": {
+              "min": 0.596026,
+              "max": 10.460922,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi diretti /90"
+          },
+          {
+            "metric": "Median time to engage",
+            "subjectValue": 0.5,
+            "baselineValue": 0.6,
+            "subjectScore": 75.0,
+            "baselineScore": 70.0,
+            "range": {
+              "min": 0.0,
+              "max": 2.0,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Tempo mediano di ingaggio"
+          },
+          {
+            "metric": "Engagements under 2s",
+            "subjectValue": 0.943182,
+            "baselineValue": 0.870335,
+            "subjectScore": 87.82,
+            "baselineScore": 72.21,
+            "range": {
+              "min": 0.533333,
+              "max": 1.0,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi entro 2s"
           }
         ]
       }
@@ -1037,12 +916,12 @@
             "metric": "Pass completion",
             "subjectValue": 0.919484,
             "baselineValue": 0.86998,
-            "subjectScore": 77.64,
-            "baselineScore": 63.9,
+            "subjectScore": 83.0,
+            "baselineScore": 72.55,
             "range": {
-              "min": 0.639831,
+              "min": 0.526316,
               "max": 1.0,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Completamento passaggi"
@@ -1056,7 +935,7 @@
             "range": {
               "min": 0.000915,
               "max": 0.155817,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota passaggi squadra"
@@ -1070,7 +949,7 @@
             "range": {
               "min": 1.782178,
               "max": 103.911404,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Ricezioni tentate per90"
@@ -1079,12 +958,12 @@
             "metric": "Average pass distance",
             "subjectValue": 15.509394,
             "baselineValue": 15.455122,
-            "subjectScore": 34.75,
-            "baselineScore": 34.1,
+            "subjectScore": 39.4,
+            "baselineScore": 38.87,
             "range": {
-              "min": 12.576245,
-              "max": 21.017611,
-              "count": 655,
+              "min": 11.527603,
+              "max": 21.632849,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media passaggio"
@@ -1098,12 +977,12 @@
             "metric": "Progressive pass share",
             "subjectValue": 0.185003,
             "baselineValue": 0.175073,
-            "subjectScore": 40.21,
-            "baselineScore": 36.9,
+            "subjectScore": 44.37,
+            "baselineScore": 41.29,
             "range": {
-              "min": 0.064401,
+              "min": 0.041958,
               "max": 0.364341,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota passaggi progressivi"
@@ -1112,12 +991,12 @@
             "metric": "Passes ending final third per90",
             "subjectValue": 25.520291,
             "baselineValue": 20.108438,
-            "subjectScore": 75.68,
-            "baselineScore": 59.58,
+            "subjectScore": 66.09,
+            "baselineScore": 52.02,
             "range": {
               "min": 0.089109,
-              "max": 33.690685,
-              "count": 655,
+              "max": 38.571429,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Passaggi nel terzo finale per90"
@@ -1126,12 +1005,12 @@
             "metric": "Passes ending box per90",
             "subjectValue": 2.996878,
             "baselineValue": 2.902565,
-            "subjectScore": 42.12,
-            "baselineScore": 40.79,
+            "subjectScore": 36.52,
+            "baselineScore": 35.37,
             "range": {
               "min": 0.0,
-              "max": 7.115813,
-              "count": 655,
+              "max": 8.206687,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Passaggi in area per90"
@@ -1145,35 +1024,63 @@
             "range": {
               "min": 0.0,
               "max": 10.773942,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Conduzioni progressive per90"
           },
           {
-            "metric": "Take-on attempts per90",
+            "metric": "Dribbling tentati per 90",
             "subjectValue": 1.873049,
             "baselineValue": 1.932975,
-            "subjectScore": 18.7,
-            "baselineScore": 19.3,
+            "subjectScore": 14.88,
+            "baselineScore": 15.36,
             "range": {
               "min": 0.0,
-              "max": 10.016287,
-              "count": 655,
+              "max": 12.583587,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling tentati per90"
           },
           {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 55.0,
+            "baselineValue": 43.593292,
+            "subjectScore": 55.0,
+            "baselineScore": 43.59,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1154,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 51.016875,
+            "baselineValue": 60.816043,
+            "subjectScore": 41.85,
+            "baselineScore": 57.39,
+            "range": {
+              "min": 24.6225,
+              "max": 87.6925,
+              "count": 1154,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
+          },
+          {
             "metric": "Average progressive carry distance",
             "subjectValue": 20.730652,
             "baselineValue": 21.509287,
-            "subjectScore": 56.37,
-            "baselineScore": 58.49,
+            "subjectScore": 46.79,
+            "baselineScore": 48.54,
             "range": {
               "min": 0.0,
-              "max": 36.777391,
-              "count": 655,
+              "max": 44.31,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
@@ -1185,28 +1092,28 @@
         "metrics": [
           {
             "metric": "Shot-creating actions per90",
-            "subjectValue": 0.842872,
-            "baselineValue": 1.344318,
-            "subjectScore": 22.51,
-            "baselineScore": 38.11,
+            "subjectValue": 1.030177,
+            "baselineValue": 1.633453,
+            "subjectScore": 22.42,
+            "baselineScore": 36.9,
             "range": {
-              "min": 0.119363,
-              "max": 3.333333,
-              "count": 652,
+              "min": 0.095796,
+              "max": 4.263158,
+              "count": 1144,
               "scale": "role_minmax_raw"
             },
             "label": "Azioni che generano tiro per90"
           },
           {
             "metric": "Expected assists per90",
-            "subjectValue": 0.071528,
-            "baselineValue": 0.082631,
-            "subjectScore": 30.64,
-            "baselineScore": 35.51,
+            "subjectValue": 0.105625,
+            "baselineValue": 0.129591,
+            "subjectScore": 22.03,
+            "baselineScore": 27.25,
             "range": {
-              "min": 0.001706,
-              "max": 0.229601,
-              "count": 652,
+              "min": 0.004623,
+              "max": 0.463187,
+              "count": 1144,
               "scale": "role_minmax_raw"
             },
             "label": "xA per90"
@@ -1215,12 +1122,12 @@
             "metric": "Final third receival share",
             "subjectValue": 0.263824,
             "baselineValue": 0.329075,
-            "subjectScore": 38.79,
-            "baselineScore": 50.61,
+            "subjectScore": 32.62,
+            "baselineScore": 42.57,
             "range": {
               "min": 0.049784,
-              "max": 0.601613,
-              "count": 655,
+              "max": 0.705882,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Quota ricezioni terzo finale"
@@ -1234,54 +1141,54 @@
             "metric": "Shot attempts per90",
             "subjectValue": 1.077003,
             "baselineValue": 1.568575,
-            "subjectScore": 25.86,
-            "baselineScore": 37.67,
+            "subjectScore": 21.65,
+            "baselineScore": 31.54,
             "range": {
               "min": 0.0,
-              "max": 4.164179,
-              "count": 655,
+              "max": 4.973684,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Tiri per90"
           },
           {
             "metric": "xG per90",
-            "subjectValue": 0.054989,
-            "baselineValue": 0.096337,
-            "subjectScore": 10.35,
-            "baselineScore": 18.33,
+            "subjectValue": 0.150417,
+            "baselineValue": 0.142175,
+            "subjectScore": 19.47,
+            "baselineScore": 18.39,
             "range": {
-              "min": 0.001418,
-              "max": 0.519124,
-              "count": 653,
+              "min": 0.001871,
+              "max": 0.764914,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "xG per90"
           },
           {
             "metric": "Shot quality",
-            "subjectValue": 0.058716,
-            "baselineValue": 0.068046,
-            "subjectScore": 27.05,
-            "baselineScore": 31.57,
+            "subjectValue": 0.139663,
+            "baselineValue": 0.086368,
+            "subjectScore": 15.94,
+            "baselineScore": 8.87,
             "range": {
-              "min": 0.002972,
-              "max": 0.209077,
-              "count": 653,
+              "min": 0.019458,
+              "max": 0.773598,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "Qualità del tiro"
           },
           {
             "metric": "Avg shot distance",
-            "subjectValue": 17.374494,
-            "baselineValue": 20.332282,
-            "subjectScore": 28.78,
-            "baselineScore": 40.62,
+            "subjectValue": 16.690231,
+            "baselineValue": 20.048902,
+            "subjectScore": 37.65,
+            "baselineScore": 52.34,
             "range": {
-              "min": 10.179596,
-              "max": 35.174906,
-              "count": 653,
+              "min": 8.077015,
+              "max": 30.951678,
+              "count": 1150,
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media tiro (↓ meglio)"
@@ -1295,12 +1202,12 @@
             "metric": "Tackles padj",
             "subjectValue": 1.551093,
             "baselineValue": 1.29196,
-            "subjectScore": 44.65,
-            "baselineScore": 36.09,
+            "subjectScore": 42.64,
+            "baselineScore": 34.6,
             "range": {
-              "min": 0.199393,
-              "max": 3.226798,
-              "count": 655,
+              "min": 0.177541,
+              "max": 3.398829,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Contrasti (padj)"
@@ -1309,12 +1216,12 @@
             "metric": "Interceptions padj",
             "subjectValue": 6.82481,
             "baselineValue": 6.988241,
-            "subjectScore": 44.21,
-            "baselineScore": 45.51,
+            "subjectScore": 45.22,
+            "baselineScore": 46.5,
             "range": {
-              "min": 1.295851,
+              "min": 1.065247,
               "max": 13.803389,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Intercetti (padj)"
@@ -1323,12 +1230,12 @@
             "metric": "Aerial attempts per90",
             "subjectValue": 1.779396,
             "baselineValue": 1.391396,
-            "subjectScore": 21.73,
-            "baselineScore": 16.7,
+            "subjectScore": 17.12,
+            "baselineScore": 13.39,
             "range": {
-              "min": 0.103846,
-              "max": 7.815242,
-              "count": 655,
+              "min": 0.0,
+              "max": 10.394022,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Duelli aerei per90"
@@ -1337,19 +1244,348 @@
             "metric": "Tackle success rate",
             "subjectValue": 0.7,
             "baselineValue": 0.746356,
-            "subjectScore": 52.0,
-            "baselineScore": 59.42,
+            "subjectScore": 65.0,
+            "baselineScore": 70.41,
             "range": {
-              "min": 0.375,
+              "min": 0.142857,
               "max": 1.0,
-              "count": 655,
+              "count": 1156,
               "scale": "role_minmax_raw"
             },
             "label": "Successo nei contrasti"
           }
         ]
+      },
+      {
+        "label": "Ingaggio difensivo diretto",
+        "metrics": [
+          {
+            "metric": "Direct engagements /90",
+            "subjectValue": 4.120708,
+            "baselineValue": 4.81409,
+            "subjectScore": 35.73,
+            "baselineScore": 42.76,
+            "range": {
+              "min": 0.596026,
+              "max": 10.460922,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi diretti /90"
+          },
+          {
+            "metric": "Median time to engage",
+            "subjectValue": 0.5,
+            "baselineValue": 0.5,
+            "subjectScore": 75.0,
+            "baselineScore": 75.0,
+            "range": {
+              "min": 0.0,
+              "max": 2.0,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Tempo mediano di ingaggio"
+          },
+          {
+            "metric": "Engagements under 2s",
+            "subjectValue": 0.943182,
+            "baselineValue": 0.85954,
+            "subjectScore": 87.82,
+            "baselineScore": 69.9,
+            "range": {
+              "min": 0.533333,
+              "max": 1.0,
+              "count": 1156,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi entro 2s"
+          }
+        ]
       }
     ]
+  },
+  "METRICS": {
+    "355354": {
+      "Pass completion": 0.919484,
+      "Pass share team": 0.082413,
+      "Average pass distance": 15.509394,
+      "Progressive pass share": 0.185003,
+      "Passes ending final third per90": 25.520291,
+      "Passes ending box per90": 2.996878,
+      "Progressive carry attempts per90": 2.154006,
+      "Dribbling tentati per 90": 1.873049,
+      "Dribbling riusciti": 55.0,
+      "Altezza media dei dribbling": 51.016875,
+      "Average progressive carry distance": 20.730652,
+      "Shot-creating actions per90": 1.030177,
+      "Expected assists per90": 0.105625,
+      "Final third receival share": 0.263824,
+      "Shot attempts per90": 1.077003,
+      "xG per90": 0.150417,
+      "Avg shot distance": 16.690231,
+      "Shot quality": 0.139663,
+      "Tackles padj": 1.551093,
+      "Interceptions padj": 6.82481,
+      "Aerial attempts per90": 1.779396,
+      "Tackle success rate": 0.7,
+      "Receival attempts per90": 70.28616,
+      "Direct engagements /90": 4.120708,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.943182
+    },
+    "148684": {
+      "Pass completion": 0.860904,
+      "Pass share team": 0.085903,
+      "Average pass distance": 16.838281,
+      "Progressive pass share": 0.20893,
+      "Passes ending final third per90": 25.117096,
+      "Passes ending box per90": 4.637002,
+      "Progressive carry attempts per90": 2.318501,
+      "Dribbling tentati per 90": 1.967213,
+      "Dribbling riusciti": 44.642857,
+      "Altezza media dei dribbling": 57.5475,
+      "Average progressive carry distance": 22.005455,
+      "Shot-creating actions per90": 1.896956,
+      "Expected assists per90": 0.160769,
+      "Final third receival share": 0.354217,
+      "Shot attempts per90": 1.159251,
+      "xG per90": 0.089865,
+      "Avg shot distance": 18.045457,
+      "Shot quality": 0.10659,
+      "Tackles padj": 1.510855,
+      "Interceptions padj": 5.511821,
+      "Aerial attempts per90": 1.159251,
+      "Tackle success rate": 0.703704,
+      "Receival attempts per90": 58.313817,
+      "Direct engagements /90": 3.934426,
+      "Median time to engage": 0.0,
+      "Engagements under 2s": 0.866071
+    },
+    "118169": {
+      "Pass completion": 0.923861,
+      "Pass share team": 0.072331,
+      "Average pass distance": 16.240622,
+      "Progressive pass share": 0.17743,
+      "Passes ending final third per90": 21.721112,
+      "Passes ending box per90": 1.930765,
+      "Progressive carry attempts per90": 2.764505,
+      "Dribbling tentati per 90": 1.316431,
+      "Dribbling riusciti": 60.0,
+      "Altezza media dei dribbling": 56.567,
+      "Average progressive carry distance": 18.236667,
+      "Shot-creating actions per90": 0.789859,
+      "Expected assists per90": 0.055023,
+      "Final third receival share": 0.221311,
+      "Shot attempts per90": 1.228669,
+      "xG per90": 0.068929,
+      "Avg shot distance": 21.340804,
+      "Shot quality": 0.092401,
+      "Tackles padj": 1.127527,
+      "Interceptions padj": 5.928612,
+      "Aerial attempts per90": 0.877621,
+      "Tackle success rate": 0.645161,
+      "Receival attempts per90": 58.888347,
+      "Direct engagements /90": 3.510483,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.9125
+    },
+    "110373": {
+      "Pass completion": 0.906994,
+      "Pass share team": 0.066086,
+      "Average pass distance": 17.889706,
+      "Progressive pass share": 0.184524,
+      "Passes ending final third per90": 22.284689,
+      "Passes ending box per90": 2.15311,
+      "Progressive carry attempts per90": 2.852871,
+      "Dribbling tentati per 90": 0.753589,
+      "Dribbling riusciti": 35.714286,
+      "Altezza media dei dribbling": 54.315,
+      "Average progressive carry distance": 21.978679,
+      "Shot-creating actions per90": 1.830144,
+      "Expected assists per90": 0.043179,
+      "Final third receival share": 0.213429,
+      "Shot attempts per90": 2.206938,
+      "xG per90": 0.245022,
+      "Avg shot distance": 23.974654,
+      "Shot quality": 0.123026,
+      "Tackles padj": 1.414459,
+      "Interceptions padj": 7.779523,
+      "Aerial attempts per90": 1.076555,
+      "Tackle success rate": 0.617647,
+      "Receival attempts per90": 67.338517,
+      "Direct engagements /90": 5.167464,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.8125
+    },
+    "439534": {
+      "Pass completion": 0.893523,
+      "Pass share team": 0.055416,
+      "Average pass distance": 16.847283,
+      "Progressive pass share": 0.190772,
+      "Passes ending final third per90": 22.104368,
+      "Passes ending box per90": 3.471356,
+      "Progressive carry attempts per90": 3.624504,
+      "Dribbling tentati per 90": 1.888826,
+      "Dribbling riusciti": 40.540541,
+      "Altezza media dei dribbling": 72.004459,
+      "Average progressive carry distance": 19.819859,
+      "Shot-creating actions per90": 1.174135,
+      "Expected assists per90": 0.121774,
+      "Final third receival share": 0.305936,
+      "Shot attempts per90": 1.123086,
+      "xG per90": 0.103512,
+      "Avg shot distance": 18.339538,
+      "Shot quality": 0.112649,
+      "Tackles padj": 2.078376,
+      "Interceptions padj": 6.325493,
+      "Aerial attempts per90": 1.072036,
+      "Tackle success rate": 0.630435,
+      "Receival attempts per90": 55.899036,
+      "Direct engagements /90": 5.053885,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.838384
+    },
+    "28421": {
+      "Pass completion": 0.879276,
+      "Pass share team": 0.048876,
+      "Average pass distance": 15.240573,
+      "Progressive pass share": 0.182093,
+      "Passes ending final third per90": 25.074337,
+      "Passes ending box per90": 3.781513,
+      "Progressive carry attempts per90": 3.199741,
+      "Dribbling tentati per 90": 1.745314,
+      "Dribbling riusciti": 40.0,
+      "Altezza media dei dribbling": 71.078,
+      "Average progressive carry distance": 19.092818,
+      "Shot-creating actions per90": 0.81448,
+      "Expected assists per90": 0.069566,
+      "Final third receival share": 0.366594,
+      "Shot attempts per90": 2.443439,
+      "xG per90": 0.224013,
+      "Avg shot distance": 18.559111,
+      "Shot quality": 0.110015,
+      "Tackles padj": 1.613173,
+      "Interceptions padj": 7.62591,
+      "Aerial attempts per90": 1.221719,
+      "Tackle success rate": 0.939394,
+      "Receival attempts per90": 53.639302,
+      "Direct engagements /90": 5.235941,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.922222
+    },
+    "369875": {
+      "Pass completion": 0.878774,
+      "Pass share team": 0.107385,
+      "Average pass distance": 17.002176,
+      "Progressive pass share": 0.193396,
+      "Passes ending final third per90": 21.276267,
+      "Passes ending box per90": 2.475278,
+      "Progressive carry attempts per90": 2.642151,
+      "Dribbling tentati per 90": 1.58529,
+      "Dribbling riusciti": 45.614035,
+      "Altezza media dei dribbling": 60.640263,
+      "Average progressive carry distance": 20.578895,
+      "Shot-creating actions per90": 2.224969,
+      "Expected assists per90": 0.114596,
+      "Final third receival share": 0.319018,
+      "Shot attempts per90": 1.557478,
+      "xG per90": 0.121411,
+      "Avg shot distance": 23.217937,
+      "Shot quality": 0.076586,
+      "Tackles padj": 1.270559,
+      "Interceptions padj": 8.304012,
+      "Aerial attempts per90": 1.195921,
+      "Tackle success rate": 0.75,
+      "Receival attempts per90": 54.400494,
+      "Direct engagements /90": 4.978368,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.787709
+    },
+    "363884": {
+      "Pass completion": 0.889009,
+      "Pass share team": 0.093557,
+      "Average pass distance": 15.516805,
+      "Progressive pass share": 0.149973,
+      "Passes ending final third per90": 17.174202,
+      "Passes ending box per90": 1.645612,
+      "Progressive carry attempts per90": 2.244016,
+      "Dribbling tentati per 90": 2.094415,
+      "Dribbling riusciti": 45.714286,
+      "Altezza media dei dribbling": 55.869,
+      "Average progressive carry distance": 21.2646,
+      "Shot-creating actions per90": 0.897606,
+      "Expected assists per90": 0.090521,
+      "Final third receival share": 0.222357,
+      "Shot attempts per90": 1.136968,
+      "xG per90": 0.062583,
+      "Avg shot distance": 22.914627,
+      "Shot quality": 0.055044,
+      "Tackles padj": 1.439183,
+      "Interceptions padj": 8.317989,
+      "Aerial attempts per90": 1.43617,
+      "Tackle success rate": 0.694915,
+      "Receival attempts per90": 49.24867,
+      "Direct engagements /90": 4.727394,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.860759
+    },
+    "394786": {
+      "Pass completion": 0.849364,
+      "Pass share team": 0.071624,
+      "Average pass distance": 13.583747,
+      "Progressive pass share": 0.169731,
+      "Passes ending final third per90": 26.570029,
+      "Passes ending box per90": 5.512454,
+      "Progressive carry attempts per90": 1.874234,
+      "Dribbling tentati per 90": 3.013475,
+      "Dribbling riusciti": 47.560976,
+      "Altezza media dei dribbling": 66.30878,
+      "Average progressive carry distance": 19.394118,
+      "Shot-creating actions per90": 2.204982,
+      "Expected assists per90": 0.213184,
+      "Final third receival share": 0.503687,
+      "Shot attempts per90": 1.837485,
+      "xG per90": 0.234046,
+      "Avg shot distance": 16.650743,
+      "Shot quality": 0.127373,
+      "Tackles padj": 1.040102,
+      "Interceptions padj": 4.802826,
+      "Aerial attempts per90": 1.727236,
+      "Tackle success rate": 0.823529,
+      "Receival attempts per90": 49.832585,
+      "Direct engagements /90": 4.189465,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.877193
+    },
+    "345319": {
+      "Pass completion": 0.862773,
+      "Pass share team": 0.071979,
+      "Average pass distance": 15.717758,
+      "Progressive pass share": 0.187192,
+      "Passes ending final third per90": 15.413254,
+      "Passes ending box per90": 1.976917,
+      "Progressive carry attempts per90": 1.440804,
+      "Dribbling tentati per 90": 1.038719,
+      "Dribbling riusciti": 35.483871,
+      "Altezza media dei dribbling": 60.446129,
+      "Average progressive carry distance": 24.799535,
+      "Shot-creating actions per90": 1.206255,
+      "Expected assists per90": 0.100064,
+      "Final third receival share": 0.271239,
+      "Shot attempts per90": 1.742368,
+      "xG per90": 0.150661,
+      "Avg shot distance": 17.412301,
+      "Shot quality": 0.086469,
+      "Tackles padj": 1.417997,
+      "Interceptions padj": 6.528138,
+      "Aerial attempts per90": 1.206255,
+      "Tackle success rate": 0.716981,
+      "Receival attempts per90": 42.989576,
+      "Direct engagements /90": 5.361132,
+      "Median time to engage": 0.0,
+      "Engagements under 2s": 0.9125
+    }
   },
   "HEATMAP_DATA": {
     "355354": {
@@ -30363,27 +30599,27 @@
         {
           "id": 118169,
           "name": "Piotr Zielinski",
-          "score": 95.7
+          "score": 97.3
         },
         {
           "id": 439534,
           "name": "Petar Sucic",
-          "score": 86.2
+          "score": 90.5
         },
         {
           "id": 28421,
           "name": "Henrikh Mkhitaryan",
-          "score": 79.4
+          "score": 85.2
         },
         {
           "id": 148684,
           "name": "Nicolò Barella",
-          "score": 79.0
+          "score": 83.1
         },
         {
           "id": 110373,
           "name": "Hakan Çalhanoglu",
-          "score": 72.5
+          "score": 82.8
         }
       ]
     },
@@ -30427,27 +30663,27 @@
         {
           "id": 118169,
           "name": "Piotr Zielinski",
-          "score": 93.6
-        },
-        {
-          "id": 110373,
-          "name": "Hakan Çalhanoglu",
-          "score": 81.2
+          "score": 94.4
         },
         {
           "id": 439534,
           "name": "Petar Sucic",
-          "score": 81.0
+          "score": 85.9
+        },
+        {
+          "id": 110373,
+          "name": "Hakan Çalhanoglu",
+          "score": 84.9
         },
         {
           "id": 28421,
           "name": "Henrikh Mkhitaryan",
-          "score": 78.3
+          "score": 84.1
         },
         {
           "id": 148684,
           "name": "Nicolò Barella",
-          "score": 72.1
+          "score": 82.6
         }
       ]
     }
@@ -30485,6 +30721,14 @@
     "missingGlobals": [
       "RADAR_AXIS_RANGES"
     ],
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/curtis_jones.with_inline_payload_2026_05_21.html"
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/curtis_jones.with_inline_payload_2026_05_21.html",
+    "source": "soccerdb",
+    "directExport": true,
+    "directDefensiveEngagementsV1": true,
+    "directDefensiveEngagementsV1Metrics": [
+      "direct_engagements_per90",
+      "median_time_to_engage_opponent",
+      "pct_engagement_under_2s"
+    ]
   }
 }

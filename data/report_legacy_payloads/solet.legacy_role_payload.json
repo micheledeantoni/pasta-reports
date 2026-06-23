@@ -167,6 +167,7 @@
         "Passaggi progressivi per 90",
         "Quota passaggi progressivi",
         "Conduzioni progressive per90",
+        "Dribbling tentati per90",
         "Distanza media conduzione progressiva",
         "Passaggi nell'ultimo terzo per 90"
       ]
@@ -191,7 +192,7 @@
         74.16,
         62.37,
         84.64,
-        67.42,
+        70.71,
         53.46
       ]
     },
@@ -207,7 +208,7 @@
         62.31,
         71.81,
         81.86,
-        53.83,
+        50.17,
         52.24
       ]
     },
@@ -223,7 +224,7 @@
         49.65,
         63.83,
         46.82,
-        39.67,
+        42.29,
         39.37
       ]
     },
@@ -237,7 +238,7 @@
           71.79,
           74.63,
           80.02,
-          83.23,
+          76.78,
           75.06
         ]
       },
@@ -248,7 +249,7 @@
           51.54,
           80.22,
           80.53,
-          52.21,
+          52.59,
           55.86
         ]
       },
@@ -259,7 +260,7 @@
           70.64,
           42.32,
           89.83,
-          49.36,
+          43.47,
           48.34
         ]
       },
@@ -270,7 +271,7 @@
           55.27,
           90.08,
           77.07,
-          30.52,
+          27.84,
           29.68
         ]
       }
@@ -294,11 +295,17 @@
     "Progressive pass share": "percent",
     "Progressive carries per90": "number",
     "Average progressive carry distance": "meters",
+    "Dribbling tentati per 90": "number",
+    "Dribbling riusciti": "percent_0_100",
+    "Altezza media dei dribbling": "one_decimal",
     "Passes into final third per90": "number",
     "Passes into penalty area per90": "number",
     "Defensive action mean x": "one_decimal",
     "Mean x action location": "one_decimal",
-    "Cross attempts per90": "number"
+    "Cross attempts per90": "number",
+    "Direct engagements /90": "number",
+    "Median time to engage": "number",
+    "Engagements under 2s": "percent"
   },
   "METRIC_RANGES": {
     "Defensive actions padj": {
@@ -403,6 +410,24 @@
       "count": 1348,
       "scale": "role_minmax_raw"
     },
+    "Dribbling tentati per 90": {
+      "min": 0.0,
+      "max": 7.853042,
+      "count": 1348,
+      "scale": "role_minmax_raw"
+    },
+    "Dribbling riusciti": {
+      "min": 0.0,
+      "max": 100.0,
+      "count": 1302,
+      "scale": "role_minmax_raw"
+    },
+    "Altezza media dei dribbling": {
+      "min": 3.15,
+      "max": 102.9,
+      "count": 1302,
+      "scale": "role_minmax_raw"
+    },
     "Passes into final third per90": {
       "min": 1.302326,
       "max": 34.525862,
@@ -432,224 +457,24 @@
       "max": 7.42268,
       "count": 1348,
       "scale": "role_minmax_raw"
-    }
-  },
-  "METRICS": {
-    "354072": {
-      "Defensive actions padj": 4.422482,
-      "Interceptions padj": 3.013119,
-      "Tackle attempts padj": 0.5207,
-      "Tackles per90": 2.278866,
-      "Interceptions per90": 13.187036,
-      "Defensive actions share team": 0.122949,
-      "Aerial win rate": 0.533333,
-      "Aerial attempts per90": 2.734639,
-      "Tackle success rate": 0.8,
-      "Interception to tackle ratio": 5.786667,
-      "Pass completion": 0.889297,
-      "Pass share team": 0.142814,
-      "Receivals per90": 50.286968,
-      "Progressive passes per90": 10.96894,
-      "Progressive pass share": 0.189402,
-      "Progressive carries per90": 2.157326,
-      "Average progressive carry distance": 21.244014,
-      "Passes into final third per90": 10.877785,
-      "Passes into penalty area per90": 1.883862,
-      "Defensive action mean x": 32.448297,
-      "Mean x action location": 43.62469,
-      "Cross attempts per90": 0.607698
     },
-    "329665": {
-      "Defensive actions padj": 4.743642,
-      "Interceptions padj": 3.303221,
-      "Tackle attempts padj": 0.552342,
-      "Tackles per90": 2.022918,
-      "Interceptions per90": 12.09784,
-      "Defensive actions share team": 0.09637,
-      "Aerial win rate": 0.641975,
-      "Aerial attempts per90": 3.212869,
-      "Tackle success rate": 0.843137,
-      "Interception to tackle ratio": 5.980392,
-      "Pass completion": 0.87178,
-      "Pass share team": 0.085903,
-      "Receivals per90": 64.971353,
-      "Progressive passes per90": 13.882768,
-      "Progressive pass share": 0.200343,
-      "Progressive carries per90": 2.300573,
-      "Average progressive carry distance": 24.345517,
-      "Passes into final third per90": 19.118554,
-      "Passes into penalty area per90": 2.221243,
-      "Defensive action mean x": 35.541541,
-      "Mean x action location": 48.773131,
-      "Cross attempts per90": 3.371529
+    "Direct engagements /90": {
+      "min": 1.075697,
+      "max": 10.180995,
+      "count": 1348,
+      "scale": "role_minmax_raw"
     },
-    "349126": {
-      "Defensive actions padj": 4.493965,
-      "Interceptions padj": 3.135324,
-      "Tackle attempts padj": 0.352724,
-      "Tackles per90": 1.262994,
-      "Interceptions per90": 11.226611,
-      "Defensive actions share team": 0.075688,
-      "Aerial win rate": 0.655172,
-      "Aerial attempts per90": 2.713098,
-      "Tackle success rate": 0.814815,
-      "Interception to tackle ratio": 8.888889,
-      "Pass completion": 0.9297,
-      "Pass share team": 0.062251,
-      "Receivals per90": 53.092516,
-      "Progressive passes per90": 8.232848,
-      "Progressive pass share": 0.139021,
-      "Progressive carries per90": 1.450104,
-      "Average progressive carry distance": 21.575806,
-      "Passes into final third per90": 12.115385,
-      "Passes into penalty area per90": 1.730769,
-      "Defensive action mean x": 32.93093,
-      "Mean x action location": 46.394408,
-      "Cross attempts per90": 0.608108
+    "Median time to engage": {
+      "min": 0.0,
+      "max": 2.0,
+      "count": 1348,
+      "scale": "role_minmax_raw"
     },
-    "297390": {
-      "Defensive actions padj": 4.943374,
-      "Interceptions padj": 3.640273,
-      "Tackle attempts padj": 0.403541,
-      "Tackles per90": 1.535181,
-      "Interceptions per90": 13.848614,
-      "Defensive actions share team": 0.129373,
-      "Aerial win rate": 0.531915,
-      "Aerial attempts per90": 0.0,
-      "Tackle success rate": 0.625,
-      "Interception to tackle ratio": 9.020833,
-      "Pass completion": 0.920565,
-      "Pass share team": 0.1009,
-      "Receivals per90": 56.002132,
-      "Progressive passes per90": 9.434968,
-      "Progressive pass share": 0.143762,
-      "Progressive carries per90": 1.151386,
-      "Average progressive carry distance": 19.985,
-      "Passes into final third per90": 11.513859,
-      "Passes into penalty area per90": 1.055437,
-      "Defensive action mean x": 35.638393,
-      "Mean x action location": 45.664561,
-      "Cross attempts per90": 0.095949
-    },
-    "54968": {
-      "Defensive actions padj": 5.841999,
-      "Interceptions padj": 4.087696,
-      "Tackle attempts padj": 0.170321,
-      "Tackles per90": 0.652647,
-      "Interceptions per90": 15.663524,
-      "Defensive actions share team": 0.075468,
-      "Aerial win rate": 0.692308,
-      "Aerial attempts per90": 4.242204,
-      "Tackle success rate": 0.8,
-      "Interception to tackle ratio": 24.0,
-      "Pass completion": 0.952632,
-      "Pass share team": 0.046713,
-      "Receivals per90": 53.908629,
-      "Progressive passes per90": 5.090645,
-      "Progressive pass share": 0.082105,
-      "Progressive carries per90": 1.044235,
-      "Average progressive carry distance": 24.261563,
-      "Passes into final third per90": 5.482234,
-      "Passes into penalty area per90": 0.587382,
-      "Defensive action mean x": 31.664694,
-      "Mean x action location": 40.8555,
-      "Cross attempts per90": 0.195794
-    },
-    "440029": {
-      "Defensive actions padj": 4.932172,
-      "Interceptions padj": 3.166236,
-      "Tackle attempts padj": 0.202266,
-      "Tackles per90": 0.942788,
-      "Interceptions per90": 14.758259,
-      "Defensive actions share team": 0.12237,
-      "Aerial win rate": 0.653226,
-      "Aerial attempts per90": 0.0,
-      "Tackle success rate": 0.730769,
-      "Interception to tackle ratio": 15.653846,
-      "Pass completion": 0.859049,
-      "Pass share team": 0.08984,
-      "Receivals per90": 36.478646,
-      "Progressive passes per90": 8.231265,
-      "Progressive pass share": 0.189324,
-      "Progressive carries per90": 0.834005,
-      "Average progressive carry distance": 19.484348,
-      "Passes into final third per90": 6.38195,
-      "Passes into penalty area per90": 0.834005,
-      "Defensive action mean x": 27.345875,
-      "Mean x action location": 41.118753,
-      "Cross attempts per90": 0.145044
-    },
-    "68393": {
-      "Defensive actions padj": 4.337463,
-      "Interceptions padj": 2.787125,
-      "Tackle attempts padj": 0.156776,
-      "Tackles per90": 0.705882,
-      "Interceptions per90": 12.54902,
-      "Defensive actions share team": 0.09612,
-      "Aerial win rate": 0.65625,
-      "Aerial attempts per90": 0.0,
-      "Tackle success rate": 0.666667,
-      "Interception to tackle ratio": 17.777778,
-      "Pass completion": 0.879653,
-      "Pass share team": 0.060393,
-      "Receivals per90": 27.058824,
-      "Progressive passes per90": 4.392157,
-      "Progressive pass share": 0.138958,
-      "Progressive carries per90": 0.196078,
-      "Average progressive carry distance": 20.685,
-      "Passes into final third per90": 2.784314,
-      "Passes into penalty area per90": 0.392157,
-      "Defensive action mean x": 28.375301,
-      "Mean x action location": 35.238443,
-      "Cross attempts per90": 0.0
-    },
-    "416238": {
-      "Defensive actions padj": 4.830457,
-      "Interceptions padj": 3.256086,
-      "Tackle attempts padj": 0.441301,
-      "Tackles per90": 1.897436,
-      "Interceptions per90": 14.0,
-      "Defensive actions share team": 0.07817,
-      "Aerial win rate": 0.614035,
-      "Aerial attempts per90": 2.923077,
-      "Tackle success rate": 0.702703,
-      "Interception to tackle ratio": 7.378378,
-      "Pass completion": 0.790816,
-      "Pass share team": 0.058744,
-      "Receivals per90": 33.589744,
-      "Progressive passes per90": 8.102564,
-      "Progressive pass share": 0.201531,
-      "Progressive carries per90": 1.025641,
-      "Average progressive carry distance": 21.33075,
-      "Passes into final third per90": 7.589744,
-      "Passes into penalty area per90": 1.538462,
-      "Defensive action mean x": 32.807704,
-      "Mean x action location": 43.662991,
-      "Cross attempts per90": 0.410256
-    },
-    "239881": {
-      "Defensive actions padj": 3.105951,
-      "Interceptions padj": 2.124001,
-      "Tackle attempts padj": 0.330875,
-      "Tackles per90": 1.481678,
-      "Interceptions per90": 9.511418,
-      "Defensive actions share team": 0.056167,
-      "Aerial win rate": 0.62069,
-      "Aerial attempts per90": 1.386086,
-      "Tackle success rate": 0.806452,
-      "Interception to tackle ratio": 6.419355,
-      "Pass completion": 0.822069,
-      "Pass share team": 0.054323,
-      "Receivals per90": 33.791822,
-      "Progressive passes per90": 6.739246,
-      "Progressive pass share": 0.194483,
-      "Progressive carries per90": 2.819968,
-      "Average progressive carry distance": 20.448305,
-      "Passes into final third per90": 9.989379,
-      "Passes into penalty area per90": 1.242698,
-      "Defensive action mean x": 34.408608,
-      "Mean x action location": 51.255352,
-      "Cross attempts per90": 3.584705
+    "Engagements under 2s": {
+      "min": 0.6,
+      "max": 1.0,
+      "count": 1348,
+      "scale": "role_minmax_raw"
     }
   },
   "TARGET_COMPARISON_BARS": {
@@ -816,6 +641,53 @@
         ]
       },
       {
+        "label": "Ingaggio difensivo diretto",
+        "metrics": [
+          {
+            "metric": "Direct engagements /90",
+            "subjectValue": 5.256583,
+            "baselineValue": 3.719787,
+            "subjectScore": 45.92,
+            "baselineScore": 29.04,
+            "range": {
+              "min": 1.075697,
+              "max": 10.180995,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi diretti /90"
+          },
+          {
+            "metric": "Median time to engage",
+            "subjectValue": 0.5,
+            "baselineValue": 0.875,
+            "subjectScore": 75.0,
+            "baselineScore": 56.25,
+            "range": {
+              "min": 0.0,
+              "max": 2.0,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Tempo mediano di ingaggio"
+          },
+          {
+            "metric": "Engagements under 2s",
+            "subjectValue": 0.913295,
+            "baselineValue": 0.840365,
+            "subjectScore": 78.32,
+            "baselineScore": 60.09,
+            "range": {
+              "min": 0.6,
+              "max": 1.0,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi entro 2s"
+          }
+        ]
+      },
+      {
         "label": "Coinvolgimento in costruzione",
         "metrics": [
           {
@@ -920,6 +792,48 @@
               "scale": "role_minmax_raw"
             },
             "label": "Distanza media conduzione progressiva"
+          },
+          {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 2.096556,
+            "baselineValue": 0.368943,
+            "subjectScore": 26.7,
+            "baselineScore": 4.7,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 59.42029,
+            "baselineValue": 43.621795,
+            "subjectScore": 59.42,
+            "baselineScore": 43.62,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 57.98587,
+            "baselineValue": 61.18875,
+            "subjectScore": 54.97,
+            "baselineScore": 58.18,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
           },
           {
             "metric": "Passes into final third per90",
@@ -1164,6 +1078,53 @@
         ]
       },
       {
+        "label": "Ingaggio difensivo diretto",
+        "metrics": [
+          {
+            "metric": "Direct engagements /90",
+            "subjectValue": 5.256583,
+            "baselineValue": 3.474361,
+            "subjectScore": 45.92,
+            "baselineScore": 26.34,
+            "range": {
+              "min": 1.075697,
+              "max": 10.180995,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi diretti /90"
+          },
+          {
+            "metric": "Median time to engage",
+            "subjectValue": 0.5,
+            "baselineValue": 0.5625,
+            "subjectScore": 75.0,
+            "baselineScore": 71.88,
+            "range": {
+              "min": 0.0,
+              "max": 2.0,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Tempo mediano di ingaggio"
+          },
+          {
+            "metric": "Engagements under 2s",
+            "subjectValue": 0.913295,
+            "baselineValue": 0.88749,
+            "subjectScore": 78.32,
+            "baselineScore": 71.87,
+            "range": {
+              "min": 0.6,
+              "max": 1.0,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Ingaggi entro 2s"
+          }
+        ]
+      },
+      {
         "label": "Coinvolgimento in costruzione",
         "metrics": [
           {
@@ -1270,6 +1231,48 @@
             "label": "Distanza media conduzione progressiva"
           },
           {
+            "metric": "Dribbling tentati per 90",
+            "subjectValue": 2.096556,
+            "baselineValue": 0.933534,
+            "subjectScore": 26.7,
+            "baselineScore": 11.89,
+            "range": {
+              "min": 0.0,
+              "max": 7.853042,
+              "count": 1348,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling tentati per90"
+          },
+          {
+            "metric": "Dribbling riusciti",
+            "subjectValue": 59.42029,
+            "baselineValue": 44.740854,
+            "subjectScore": 59.42,
+            "baselineScore": 44.74,
+            "range": {
+              "min": 0.0,
+              "max": 100.0,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Dribbling riusciti"
+          },
+          {
+            "metric": "Altezza media dei dribbling",
+            "subjectValue": 57.98587,
+            "baselineValue": 54.576135,
+            "subjectScore": 54.97,
+            "baselineScore": 51.56,
+            "range": {
+              "min": 3.15,
+              "max": 102.9,
+              "count": 1302,
+              "scale": "role_minmax_raw"
+            },
+            "label": "Altezza media dei dribbling"
+          },
+          {
             "metric": "Passes into final third per90",
             "subjectValue": 10.877785,
             "baselineValue": 6.686347,
@@ -1347,6 +1350,278 @@
         ]
       }
     ]
+  },
+  "METRICS": {
+    "354072": {
+      "Defensive actions padj": 4.422482,
+      "Interceptions padj": 3.013119,
+      "Tackle attempts padj": 0.5207,
+      "Tackles per90": 2.278866,
+      "Interceptions per90": 13.187036,
+      "Defensive actions share team": 0.122949,
+      "Aerial win rate": 0.533333,
+      "Aerial attempts per90": 2.734639,
+      "Tackle success rate": 0.8,
+      "Interception to tackle ratio": 5.786667,
+      "Pass completion": 0.889297,
+      "Pass share team": 0.142814,
+      "Receivals per90": 50.286968,
+      "Progressive passes per90": 10.96894,
+      "Progressive pass share": 0.189402,
+      "Progressive carries per90": 2.157326,
+      "Average progressive carry distance": 21.244014,
+      "Dribbling tentati per 90": 2.096556,
+      "Dribbling riusciti": 59.42029,
+      "Altezza media dei dribbling": 57.98587,
+      "Passes into final third per90": 10.877785,
+      "Passes into penalty area per90": 1.883862,
+      "Defensive action mean x": 32.448297,
+      "Mean x action location": 43.62469,
+      "Cross attempts per90": 0.607698,
+      "Direct engagements /90": 5.256583,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.913295
+    },
+    "329665": {
+      "Defensive actions padj": 4.743642,
+      "Interceptions padj": 3.303221,
+      "Tackle attempts padj": 0.552342,
+      "Tackles per90": 2.022918,
+      "Interceptions per90": 12.09784,
+      "Defensive actions share team": 0.09637,
+      "Aerial win rate": 0.641975,
+      "Aerial attempts per90": 3.212869,
+      "Tackle success rate": 0.843137,
+      "Interception to tackle ratio": 5.980392,
+      "Pass completion": 0.87178,
+      "Pass share team": 0.085903,
+      "Receivals per90": 64.971353,
+      "Progressive passes per90": 13.882768,
+      "Progressive pass share": 0.200343,
+      "Progressive carries per90": 2.300573,
+      "Average progressive carry distance": 24.345517,
+      "Dribbling tentati per 90": 0.515646,
+      "Dribbling riusciti": 46.153846,
+      "Altezza media dei dribbling": 64.995,
+      "Passes into final third per90": 19.118554,
+      "Passes into penalty area per90": 2.221243,
+      "Defensive action mean x": 35.541541,
+      "Mean x action location": 48.773131,
+      "Cross attempts per90": 3.371529,
+      "Direct engagements /90": 4.521816,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.850877
+    },
+    "349126": {
+      "Defensive actions padj": 4.493965,
+      "Interceptions padj": 3.135324,
+      "Tackle attempts padj": 0.352724,
+      "Tackles per90": 1.262994,
+      "Interceptions per90": 11.226611,
+      "Defensive actions share team": 0.075688,
+      "Aerial win rate": 0.655172,
+      "Aerial attempts per90": 2.713098,
+      "Tackle success rate": 0.814815,
+      "Interception to tackle ratio": 8.888889,
+      "Pass completion": 0.9297,
+      "Pass share team": 0.062251,
+      "Receivals per90": 53.092516,
+      "Progressive passes per90": 8.232848,
+      "Progressive pass share": 0.139021,
+      "Progressive carries per90": 1.450104,
+      "Average progressive carry distance": 21.575806,
+      "Dribbling tentati per 90": 0.701663,
+      "Dribbling riusciti": 53.333333,
+      "Altezza media dei dribbling": 60.9,
+      "Passes into final third per90": 12.115385,
+      "Passes into penalty area per90": 1.730769,
+      "Defensive action mean x": 32.93093,
+      "Mean x action location": 46.394408,
+      "Cross attempts per90": 0.608108,
+      "Direct engagements /90": 3.414761,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.876712
+    },
+    "297390": {
+      "Defensive actions padj": 4.943374,
+      "Interceptions padj": 3.640273,
+      "Tackle attempts padj": 0.403541,
+      "Tackles per90": 1.535181,
+      "Interceptions per90": 13.848614,
+      "Defensive actions share team": 0.129373,
+      "Aerial win rate": 0.531915,
+      "Aerial attempts per90": 0.0,
+      "Tackle success rate": 0.625,
+      "Interception to tackle ratio": 9.020833,
+      "Pass completion": 0.920565,
+      "Pass share team": 0.1009,
+      "Receivals per90": 56.002132,
+      "Progressive passes per90": 9.434968,
+      "Progressive pass share": 0.143762,
+      "Progressive carries per90": 1.151386,
+      "Average progressive carry distance": 19.985,
+      "Dribbling tentati per 90": 0.127932,
+      "Dribbling riusciti": 25.0,
+      "Altezza media dei dribbling": 51.8175,
+      "Passes into final third per90": 11.513859,
+      "Passes into penalty area per90": 1.055437,
+      "Defensive action mean x": 35.638393,
+      "Mean x action location": 45.664561,
+      "Cross attempts per90": 0.095949,
+      "Direct engagements /90": 3.614072,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.849558
+    },
+    "54968": {
+      "Defensive actions padj": 5.841999,
+      "Interceptions padj": 4.087696,
+      "Tackle attempts padj": 0.170321,
+      "Tackles per90": 0.652647,
+      "Interceptions per90": 15.663524,
+      "Defensive actions share team": 0.075468,
+      "Aerial win rate": 0.692308,
+      "Aerial attempts per90": 4.242204,
+      "Tackle success rate": 0.8,
+      "Interception to tackle ratio": 24.0,
+      "Pass completion": 0.952632,
+      "Pass share team": 0.046713,
+      "Receivals per90": 53.908629,
+      "Progressive passes per90": 5.090645,
+      "Progressive pass share": 0.082105,
+      "Progressive carries per90": 1.044235,
+      "Average progressive carry distance": 24.261563,
+      "Dribbling tentati per 90": 0.130529,
+      "Dribbling riusciti": 50.0,
+      "Altezza media dei dribbling": 67.0425,
+      "Passes into final third per90": 5.482234,
+      "Passes into penalty area per90": 0.587382,
+      "Defensive action mean x": 31.664694,
+      "Mean x action location": 40.8555,
+      "Cross attempts per90": 0.195794,
+      "Direct engagements /90": 3.328499,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.784314
+    },
+    "440029": {
+      "Defensive actions padj": 4.932172,
+      "Interceptions padj": 3.166236,
+      "Tackle attempts padj": 0.202266,
+      "Tackles per90": 0.942788,
+      "Interceptions per90": 14.758259,
+      "Defensive actions share team": 0.12237,
+      "Aerial win rate": 0.653226,
+      "Aerial attempts per90": 0.0,
+      "Tackle success rate": 0.730769,
+      "Interception to tackle ratio": 15.653846,
+      "Pass completion": 0.859049,
+      "Pass share team": 0.08984,
+      "Receivals per90": 36.478646,
+      "Progressive passes per90": 8.231265,
+      "Progressive pass share": 0.189324,
+      "Progressive carries per90": 0.834005,
+      "Average progressive carry distance": 19.484348,
+      "Dribbling tentati per 90": 0.435133,
+      "Dribbling riusciti": 50.0,
+      "Altezza media dei dribbling": 46.38375,
+      "Passes into final third per90": 6.38195,
+      "Passes into penalty area per90": 0.834005,
+      "Defensive action mean x": 27.345875,
+      "Mean x action location": 41.118753,
+      "Cross attempts per90": 0.145044,
+      "Direct engagements /90": 3.227236,
+      "Median time to engage": 0.75,
+      "Engagements under 2s": 0.88764
+    },
+    "68393": {
+      "Defensive actions padj": 4.337463,
+      "Interceptions padj": 2.787125,
+      "Tackle attempts padj": 0.156776,
+      "Tackles per90": 0.705882,
+      "Interceptions per90": 12.54902,
+      "Defensive actions share team": 0.09612,
+      "Aerial win rate": 0.65625,
+      "Aerial attempts per90": 0.0,
+      "Tackle success rate": 0.666667,
+      "Interception to tackle ratio": 17.777778,
+      "Pass completion": 0.879653,
+      "Pass share team": 0.060393,
+      "Receivals per90": 27.058824,
+      "Progressive passes per90": 4.392157,
+      "Progressive pass share": 0.138958,
+      "Progressive carries per90": 0.196078,
+      "Average progressive carry distance": 20.685,
+      "Dribbling tentati per 90": 0.313725,
+      "Dribbling riusciti": 62.5,
+      "Altezza media dei dribbling": 53.458125,
+      "Passes into final third per90": 2.784314,
+      "Passes into penalty area per90": 0.392157,
+      "Defensive action mean x": 28.375301,
+      "Mean x action location": 35.238443,
+      "Cross attempts per90": 0.0,
+      "Direct engagements /90": 2.627451,
+      "Median time to engage": 1.0,
+      "Engagements under 2s": 0.835821
+    },
+    "416238": {
+      "Defensive actions padj": 4.830457,
+      "Interceptions padj": 3.256086,
+      "Tackle attempts padj": 0.441301,
+      "Tackles per90": 1.897436,
+      "Interceptions per90": 14.0,
+      "Defensive actions share team": 0.07817,
+      "Aerial win rate": 0.614035,
+      "Aerial attempts per90": 2.923077,
+      "Tackle success rate": 0.702703,
+      "Interception to tackle ratio": 7.378378,
+      "Pass completion": 0.790816,
+      "Pass share team": 0.058744,
+      "Receivals per90": 33.589744,
+      "Progressive passes per90": 8.102564,
+      "Progressive pass share": 0.201531,
+      "Progressive carries per90": 1.025641,
+      "Average progressive carry distance": 21.33075,
+      "Dribbling tentati per 90": 1.025641,
+      "Dribbling riusciti": 25.0,
+      "Altezza media dei dribbling": 51.53925,
+      "Passes into final third per90": 7.589744,
+      "Passes into penalty area per90": 1.538462,
+      "Defensive action mean x": 32.807704,
+      "Mean x action location": 43.662991,
+      "Cross attempts per90": 0.410256,
+      "Direct engagements /90": 4.410256,
+      "Median time to engage": 0.0,
+      "Engagements under 2s": 0.918605
+    },
+    "239881": {
+      "Defensive actions padj": 3.105951,
+      "Interceptions padj": 2.124001,
+      "Tackle attempts padj": 0.330875,
+      "Tackles per90": 1.481678,
+      "Interceptions per90": 9.511418,
+      "Defensive actions share team": 0.056167,
+      "Aerial win rate": 0.62069,
+      "Aerial attempts per90": 1.386086,
+      "Tackle success rate": 0.806452,
+      "Interception to tackle ratio": 6.419355,
+      "Pass completion": 0.822069,
+      "Pass share team": 0.054323,
+      "Receivals per90": 33.791822,
+      "Progressive passes per90": 6.739246,
+      "Progressive pass share": 0.194483,
+      "Progressive carries per90": 2.819968,
+      "Average progressive carry distance": 20.448305,
+      "Dribbling tentati per 90": 1.959639,
+      "Dribbling riusciti": 41.463415,
+      "Altezza media dei dribbling": 66.923415,
+      "Passes into final third per90": 9.989379,
+      "Passes into penalty area per90": 1.242698,
+      "Defensive action mean x": 34.408608,
+      "Mean x action location": 51.255352,
+      "Cross attempts per90": 3.584705,
+      "Direct engagements /90": 3.632501,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.907895
+    }
   },
   "HEATMAP_DATA": {
     "354072": {
@@ -1624,9 +1899,9 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             1,
-            0.0358,
+            0.0304,
             103.8879,
             95.97,
             1.0,
@@ -1637,7 +1912,7 @@
           ],
           [
             3,
-            0.1075,
+            0.0912,
             0,
             0.0,
             7.9083,
@@ -1663,7 +1938,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             6.4029,
@@ -1676,9 +1951,9 @@
           ],
           [
             7,
-            0.2508,
+            0.2127,
             7,
-            0.2508,
+            0.2127,
             18.5349,
             13.08,
             1.0,
@@ -1689,7 +1964,7 @@
           ],
           [
             3,
-            0.1075,
+            0.0912,
             0,
             0.0,
             5.317,
@@ -1704,7 +1979,7 @@
         [
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             25.4355,
@@ -1717,9 +1992,9 @@
           ],
           [
             3,
-            0.1075,
+            0.0912,
             3,
-            0.1075,
+            0.0912,
             15.3668,
             10.5,
             1.0,
@@ -1730,7 +2005,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             8.1765,
@@ -1743,7 +2018,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             7.657,
@@ -1756,7 +2031,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             5.2612,
@@ -1769,7 +2044,7 @@
           ],
           [
             28,
-            1.0032,
+            0.8508,
             0,
             0.0,
             11.4662,
@@ -1782,7 +2057,7 @@
           ],
           [
             20,
-            0.7166,
+            0.6077,
             0,
             0.0,
             8.9479,
@@ -1795,7 +2070,7 @@
           ],
           [
             6,
-            0.215,
+            0.1823,
             0,
             0.0,
             9.5241,
@@ -1823,7 +2098,7 @@
           ],
           [
             11,
-            0.3941,
+            0.3342,
             0,
             0.0,
             9.5238,
@@ -1836,7 +2111,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             8.2768,
@@ -1849,7 +2124,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             7.2719,
@@ -1862,7 +2137,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             8.8047,
@@ -1875,7 +2150,7 @@
           ],
           [
             33,
-            1.1823,
+            1.0027,
             0,
             0.0,
             6.9553,
@@ -1888,7 +2163,7 @@
           ],
           [
             26,
-            0.9315,
+            0.79,
             0,
             0.0,
             8.4203,
@@ -1901,7 +2176,7 @@
           ],
           [
             7,
-            0.2508,
+            0.2127,
             0,
             0.0,
             6.9061,
@@ -1916,7 +2191,7 @@
         [
           [
             7,
-            0.2508,
+            0.2127,
             0,
             0.0,
             9.831,
@@ -1929,7 +2204,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             7.0663,
@@ -1942,7 +2217,7 @@
           ],
           [
             16,
-            0.5732,
+            0.4862,
             0,
             0.0,
             6.9238,
@@ -1955,7 +2230,7 @@
           ],
           [
             20,
-            0.7166,
+            0.6077,
             0,
             0.0,
             9.963,
@@ -1968,7 +2243,7 @@
           ],
           [
             31,
-            1.1107,
+            0.9419,
             0,
             0.0,
             8.5373,
@@ -1981,7 +2256,7 @@
           ],
           [
             63,
-            2.2572,
+            1.9142,
             0,
             0.0,
             9.3399,
@@ -1994,7 +2269,7 @@
           ],
           [
             65,
-            2.3288,
+            1.975,
             0,
             0.0,
             9.8793,
@@ -2007,7 +2282,7 @@
           ],
           [
             22,
-            0.7882,
+            0.6685,
             0,
             0.0,
             6.7929,
@@ -2022,9 +2297,9 @@
         [
           [
             3,
-            0.1075,
+            0.0912,
             3,
-            0.1075,
+            0.0912,
             27.7141,
             12.075,
             1.0,
@@ -2035,7 +2310,7 @@
           ],
           [
             16,
-            0.5732,
+            0.4862,
             0,
             0.0,
             10.6663,
@@ -2048,7 +2323,7 @@
           ],
           [
             11,
-            0.3941,
+            0.3342,
             0,
             0.0,
             5.4855,
@@ -2061,7 +2336,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             8.3271,
@@ -2074,7 +2349,7 @@
           ],
           [
             18,
-            0.6449,
+            0.5469,
             0,
             0.0,
             10.1039,
@@ -2087,7 +2362,7 @@
           ],
           [
             49,
-            1.7556,
+            1.4889,
             0,
             0.0,
             8.1814,
@@ -2100,7 +2375,7 @@
           ],
           [
             56,
-            2.0064,
+            1.7016,
             0,
             0.0,
             8.5638,
@@ -2113,7 +2388,7 @@
           ],
           [
             18,
-            0.6449,
+            0.5469,
             0,
             0.0,
             7.5733,
@@ -2128,7 +2403,7 @@
         [
           [
             4,
-            0.1433,
+            0.1215,
             0,
             0.0,
             12.8406,
@@ -2141,7 +2416,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             8.929,
@@ -2154,7 +2429,7 @@
           ],
           [
             15,
-            0.5374,
+            0.4558,
             0,
             0.0,
             10.6864,
@@ -2167,7 +2442,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             10.0431,
@@ -2180,7 +2455,7 @@
           ],
           [
             17,
-            0.6091,
+            0.5165,
             0,
             0.0,
             9.2665,
@@ -2193,7 +2468,7 @@
           ],
           [
             46,
-            1.6481,
+            1.3977,
             0,
             0.0,
             9.7423,
@@ -2206,7 +2481,7 @@
           ],
           [
             48,
-            1.7197,
+            1.4585,
             0,
             0.0,
             8.839,
@@ -2219,7 +2494,7 @@
           ],
           [
             12,
-            0.4299,
+            0.3646,
             0,
             0.0,
             7.2248,
@@ -2234,7 +2509,7 @@
         [
           [
             2,
-            0.0717,
+            0.0608,
             0,
             0.0,
             7.5257,
@@ -2247,7 +2522,7 @@
           ],
           [
             7,
-            0.2508,
+            0.2127,
             0,
             0.0,
             10.2474,
@@ -2260,7 +2535,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             10.8888,
@@ -2273,7 +2548,7 @@
           ],
           [
             7,
-            0.2508,
+            0.2127,
             0,
             0.0,
             12.8367,
@@ -2286,7 +2561,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             10.8163,
@@ -2299,7 +2574,7 @@
           ],
           [
             26,
-            0.9315,
+            0.79,
             0,
             0.0,
             8.5766,
@@ -2312,7 +2587,7 @@
           ],
           [
             36,
-            1.2898,
+            1.0939,
             0,
             0.0,
             7.1578,
@@ -2325,7 +2600,7 @@
           ],
           [
             19,
-            0.6807,
+            0.5773,
             0,
             0.0,
             8.3125,
@@ -2340,7 +2615,7 @@
         [
           [
             4,
-            0.1433,
+            0.1215,
             0,
             0.0,
             6.2889,
@@ -2353,7 +2628,7 @@
           ],
           [
             2,
-            0.0717,
+            0.0608,
             0,
             0.0,
             5.2961,
@@ -2366,7 +2641,7 @@
           ],
           [
             3,
-            0.1075,
+            0.0912,
             0,
             0.0,
             7.8378,
@@ -2379,9 +2654,9 @@
           ],
           [
             3,
-            0.1075,
+            0.0912,
             3,
-            0.1075,
+            0.0912,
             13.1285,
             12.005,
             1.0,
@@ -2392,7 +2667,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             8.7016,
@@ -2405,7 +2680,7 @@
           ],
           [
             28,
-            1.0032,
+            0.8508,
             0,
             0.0,
             10.0789,
@@ -2418,7 +2693,7 @@
           ],
           [
             35,
-            1.254,
+            1.0635,
             0,
             0.0,
             7.8698,
@@ -2431,7 +2706,7 @@
           ],
           [
             25,
-            0.8957,
+            0.7596,
             0,
             0.0,
             8.2667,
@@ -2446,7 +2721,7 @@
         [
           [
             2,
-            0.0717,
+            0.0608,
             0,
             0.0,
             6.299,
@@ -2459,7 +2734,7 @@
           ],
           [
             6,
-            0.215,
+            0.1823,
             0,
             0.0,
             8.0077,
@@ -2472,7 +2747,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             17.8723,
@@ -2498,7 +2773,7 @@
           ],
           [
             8,
-            0.2866,
+            0.2431,
             0,
             0.0,
             14.9564,
@@ -2511,7 +2786,7 @@
           ],
           [
             10,
-            0.3583,
+            0.3038,
             0,
             0.0,
             8.0112,
@@ -2524,7 +2799,7 @@
           ],
           [
             26,
-            0.9315,
+            0.79,
             0,
             0.0,
             8.7841,
@@ -2537,7 +2812,7 @@
           ],
           [
             9,
-            0.3225,
+            0.2735,
             0,
             0.0,
             7.1612,
@@ -2565,7 +2840,7 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             3.9528,
@@ -2578,7 +2853,7 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             4.658,
@@ -2617,7 +2892,7 @@
           ],
           [
             7,
-            0.2508,
+            0.2127,
             0,
             0.0,
             9.5609,
@@ -2630,7 +2905,7 @@
           ],
           [
             5,
-            0.1791,
+            0.1519,
             0,
             0.0,
             5.3375,
@@ -2643,9 +2918,9 @@
           ],
           [
             2,
-            0.0717,
+            0.0608,
             2,
-            0.0717,
+            0.0608,
             14.0585,
             11.2875,
             1.0,
@@ -2723,7 +2998,7 @@
           ],
           [
             2,
-            0.0717,
+            0.0608,
             0,
             0.0,
             8.1981,
@@ -2736,7 +3011,7 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             8.6773,
@@ -2749,7 +3024,7 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             4.4575,
@@ -2842,7 +3117,7 @@
           ],
           [
             1,
-            0.0358,
+            0.0304,
             0,
             0.0,
             6.0543,
@@ -2855,7 +3130,7 @@
           ],
           [
             2,
-            0.0717,
+            0.0608,
             0,
             0.0,
             5.7318,
@@ -3776,7 +4051,7 @@
           ],
           [
             1,
-            0.0421,
+            0.0397,
             0,
             0.0,
             4.3604,
@@ -3789,9 +4064,9 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             2,
-            0.0842,
+            0.0793,
             10.5708,
             10.3425,
             1.0,
@@ -3802,7 +4077,7 @@
           ],
           [
             4,
-            0.1685,
+            0.1587,
             0,
             0.0,
             9.186,
@@ -3815,7 +4090,7 @@
           ],
           [
             3,
-            0.1263,
+            0.119,
             0,
             0.0,
             4.9787,
@@ -3828,7 +4103,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             5.1402,
@@ -3882,9 +4157,9 @@
           ],
           [
             3,
-            0.1263,
+            0.119,
             3,
-            0.1263,
+            0.119,
             24.1637,
             21.035,
             1.0,
@@ -3895,7 +4170,7 @@
           ],
           [
             6,
-            0.2527,
+            0.238,
             0,
             0.0,
             6.8483,
@@ -3908,7 +4183,7 @@
           ],
           [
             25,
-            1.0529,
+            0.9916,
             0,
             0.0,
             8.6281,
@@ -3921,9 +4196,9 @@
           ],
           [
             16,
-            0.6738,
+            0.6346,
             16,
-            0.6738,
+            0.6346,
             15.0397,
             9.6797,
             1.0,
@@ -3934,7 +4209,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             3.4132,
@@ -3975,7 +4250,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             7.1276,
@@ -3988,7 +4263,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             4.9034,
@@ -4001,7 +4276,7 @@
           ],
           [
             10,
-            0.4212,
+            0.3967,
             0,
             0.0,
             9.9462,
@@ -4014,7 +4289,7 @@
           ],
           [
             21,
-            0.8844,
+            0.833,
             0,
             0.0,
             6.4329,
@@ -4027,7 +4302,7 @@
           ],
           [
             21,
-            0.8844,
+            0.833,
             0,
             0.0,
             8.655,
@@ -4040,7 +4315,7 @@
           ],
           [
             9,
-            0.379,
+            0.357,
             0,
             0.0,
             22.7397,
@@ -4081,7 +4356,7 @@
           ],
           [
             5,
-            0.2106,
+            0.1983,
             0,
             0.0,
             19.6488,
@@ -4094,7 +4369,7 @@
           ],
           [
             7,
-            0.2948,
+            0.2777,
             0,
             0.0,
             6.4028,
@@ -4107,9 +4382,9 @@
           ],
           [
             11,
-            0.4633,
+            0.4363,
             11,
-            0.4633,
+            0.4363,
             15.6058,
             12.6,
             1.0,
@@ -4120,7 +4395,7 @@
           ],
           [
             31,
-            1.3056,
+            1.2296,
             0,
             0.0,
             10.39,
@@ -4133,7 +4408,7 @@
           ],
           [
             30,
-            1.2635,
+            1.19,
             0,
             0.0,
             9.4301,
@@ -4146,7 +4421,7 @@
           ],
           [
             18,
-            0.7581,
+            0.714,
             0,
             0.0,
             7.7306,
@@ -4187,7 +4462,7 @@
           ],
           [
             1,
-            0.0421,
+            0.0397,
             0,
             0.0,
             4.5583,
@@ -4200,7 +4475,7 @@
           ],
           [
             4,
-            0.1685,
+            0.1587,
             0,
             0.0,
             6.9028,
@@ -4213,7 +4488,7 @@
           ],
           [
             10,
-            0.4212,
+            0.3967,
             0,
             0.0,
             10.8931,
@@ -4226,7 +4501,7 @@
           ],
           [
             30,
-            1.2635,
+            1.19,
             0,
             0.0,
             8.9958,
@@ -4239,7 +4514,7 @@
           ],
           [
             29,
-            1.2213,
+            1.1503,
             0,
             0.0,
             6.7128,
@@ -4252,7 +4527,7 @@
           ],
           [
             15,
-            0.6317,
+            0.595,
             0,
             0.0,
             12.2018,
@@ -4280,7 +4555,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             4.9873,
@@ -4293,7 +4568,7 @@
           ],
           [
             3,
-            0.1263,
+            0.119,
             0,
             0.0,
             6.3819,
@@ -4306,7 +4581,7 @@
           ],
           [
             11,
-            0.4633,
+            0.4363,
             0,
             0.0,
             7.7385,
@@ -4319,7 +4594,7 @@
           ],
           [
             9,
-            0.379,
+            0.357,
             0,
             0.0,
             12.7213,
@@ -4332,7 +4607,7 @@
           ],
           [
             26,
-            1.095,
+            1.0313,
             0,
             0.0,
             9.4689,
@@ -4345,7 +4620,7 @@
           ],
           [
             35,
-            1.474,
+            1.3883,
             0,
             0.0,
             10.8019,
@@ -4358,7 +4633,7 @@
           ],
           [
             16,
-            0.6738,
+            0.6346,
             0,
             0.0,
             9.0864,
@@ -4399,7 +4674,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             11.6729,
@@ -4412,7 +4687,7 @@
           ],
           [
             7,
-            0.2948,
+            0.2777,
             0,
             0.0,
             7.8652,
@@ -4425,7 +4700,7 @@
           ],
           [
             11,
-            0.4633,
+            0.4363,
             0,
             0.0,
             6.9633,
@@ -4438,7 +4713,7 @@
           ],
           [
             19,
-            0.8002,
+            0.7536,
             0,
             0.0,
             5.8067,
@@ -4451,7 +4726,7 @@
           ],
           [
             26,
-            1.095,
+            1.0313,
             0,
             0.0,
             6.8629,
@@ -4464,7 +4739,7 @@
           ],
           [
             17,
-            0.716,
+            0.6743,
             0,
             0.0,
             6.9397,
@@ -4492,7 +4767,7 @@
           ],
           [
             1,
-            0.0421,
+            0.0397,
             0,
             0.0,
             5.9392,
@@ -4505,7 +4780,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             7.2567,
@@ -4518,7 +4793,7 @@
           ],
           [
             2,
-            0.0842,
+            0.0793,
             0,
             0.0,
             8.6044,
@@ -4531,7 +4806,7 @@
           ],
           [
             6,
-            0.2527,
+            0.238,
             0,
             0.0,
             4.4317,
@@ -4544,7 +4819,7 @@
           ],
           [
             19,
-            0.8002,
+            0.7536,
             0,
             0.0,
             6.3233,
@@ -4557,7 +4832,7 @@
           ],
           [
             31,
-            1.3056,
+            1.2296,
             0,
             0.0,
             7.2639,
@@ -4570,7 +4845,7 @@
           ],
           [
             27,
-            1.1371,
+            1.071,
             0,
             0.0,
             6.7025,
@@ -4624,7 +4899,7 @@
           ],
           [
             4,
-            0.1685,
+            0.1587,
             0,
             0.0,
             15.1245,
@@ -4637,7 +4912,7 @@
           ],
           [
             5,
-            0.2106,
+            0.1983,
             0,
             0.0,
             6.8316,
@@ -4650,7 +4925,7 @@
           ],
           [
             8,
-            0.3369,
+            0.3173,
             0,
             0.0,
             7.026,
@@ -4663,7 +4938,7 @@
           ],
           [
             19,
-            0.8002,
+            0.7536,
             0,
             0.0,
             7.9178,
@@ -4676,7 +4951,7 @@
           ],
           [
             24,
-            1.0108,
+            0.952,
             0,
             0.0,
             8.9278,
@@ -4756,7 +5031,7 @@
           ],
           [
             4,
-            0.1685,
+            0.1587,
             0,
             0.0,
             9.5266,
@@ -4769,7 +5044,7 @@
           ],
           [
             3,
-            0.1263,
+            0.119,
             0,
             0.0,
             6.1523,
@@ -4782,7 +5057,7 @@
           ],
           [
             11,
-            0.4633,
+            0.4363,
             0,
             0.0,
             5.9203,
@@ -4875,7 +5150,7 @@
           ],
           [
             5,
-            0.2106,
+            0.1983,
             0,
             0.0,
             4.6676,
@@ -4888,7 +5163,7 @@
           ],
           [
             5,
-            0.2106,
+            0.1983,
             0,
             0.0,
             6.458,
@@ -4916,7 +5191,7 @@
           ],
           [
             1,
-            0.0421,
+            0.0397,
             0,
             0.0,
             4.859,
@@ -4994,7 +5269,7 @@
           ],
           [
             1,
-            0.0421,
+            0.0397,
             0,
             0.0,
             3.876,
@@ -5889,7 +6164,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             5.6503,
@@ -5902,7 +6177,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             3.1707,
@@ -5915,7 +6190,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             5.3377,
@@ -5928,7 +6203,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             5.3452,
@@ -5982,7 +6257,7 @@
         [
           [
             7,
-            0.4023,
+            0.3274,
             0,
             0.0,
             7.3366,
@@ -5995,7 +6270,7 @@
           ],
           [
             9,
-            0.5172,
+            0.421,
             0,
             0.0,
             10.6073,
@@ -6008,9 +6283,9 @@
           ],
           [
             6,
-            0.3448,
+            0.2807,
             6,
-            0.3448,
+            0.2807,
             13.9211,
             11.5675,
             1.0,
@@ -6021,7 +6296,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             6.2253,
@@ -6034,7 +6309,7 @@
           ],
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             8.3891,
@@ -6047,9 +6322,9 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             1,
-            0.0575,
+            0.0468,
             13.2434,
             9.345,
             1.0,
@@ -6060,7 +6335,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             9.6612,
@@ -6088,7 +6363,7 @@
         [
           [
             8,
-            0.4598,
+            0.3742,
             0,
             0.0,
             10.5271,
@@ -6101,7 +6376,7 @@
           ],
           [
             18,
-            1.0345,
+            0.842,
             0,
             0.0,
             7.6525,
@@ -6114,7 +6389,7 @@
           ],
           [
             14,
-            0.8046,
+            0.6549,
             0,
             0.0,
             6.9445,
@@ -6127,7 +6402,7 @@
           ],
           [
             10,
-            0.5747,
+            0.4678,
             0,
             0.0,
             5.7433,
@@ -6140,7 +6415,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             5.2007,
@@ -6153,7 +6428,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             7.5411,
@@ -6194,7 +6469,7 @@
         [
           [
             14,
-            0.8046,
+            0.6549,
             0,
             0.0,
             6.3169,
@@ -6207,7 +6482,7 @@
           ],
           [
             23,
-            1.3218,
+            1.0759,
             0,
             0.0,
             8.2388,
@@ -6220,7 +6495,7 @@
           ],
           [
             32,
-            1.8391,
+            1.4969,
             0,
             0.0,
             7.4635,
@@ -6233,7 +6508,7 @@
           ],
           [
             15,
-            0.8621,
+            0.7017,
             0,
             0.0,
             5.7155,
@@ -6246,7 +6521,7 @@
           ],
           [
             8,
-            0.4598,
+            0.3742,
             0,
             0.0,
             12.6537,
@@ -6259,7 +6534,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             6.2744,
@@ -6285,7 +6560,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             6.9083,
@@ -6300,7 +6575,7 @@
         [
           [
             14,
-            0.8046,
+            0.6549,
             0,
             0.0,
             11.2825,
@@ -6313,7 +6588,7 @@
           ],
           [
             29,
-            1.6667,
+            1.3565,
             0,
             0.0,
             8.3954,
@@ -6326,7 +6601,7 @@
           ],
           [
             30,
-            1.7241,
+            1.4033,
             0,
             0.0,
             9.1206,
@@ -6339,7 +6614,7 @@
           ],
           [
             8,
-            0.4598,
+            0.3742,
             0,
             0.0,
             11.0726,
@@ -6352,7 +6627,7 @@
           ],
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             7.1336,
@@ -6365,7 +6640,7 @@
           ],
           [
             9,
-            0.5172,
+            0.421,
             0,
             0.0,
             10.3776,
@@ -6378,7 +6653,7 @@
           ],
           [
             4,
-            0.2299,
+            0.1871,
             0,
             0.0,
             8.6297,
@@ -6391,7 +6666,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             6.5848,
@@ -6406,7 +6681,7 @@
         [
           [
             20,
-            1.1494,
+            0.9356,
             0,
             0.0,
             9.6713,
@@ -6419,7 +6694,7 @@
           ],
           [
             18,
-            1.0345,
+            0.842,
             0,
             0.0,
             6.802,
@@ -6432,7 +6707,7 @@
           ],
           [
             23,
-            1.3218,
+            1.0759,
             0,
             0.0,
             6.8703,
@@ -6445,7 +6720,7 @@
           ],
           [
             12,
-            0.6897,
+            0.5613,
             0,
             0.0,
             10.1467,
@@ -6458,7 +6733,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             12.9365,
@@ -6471,9 +6746,9 @@
           ],
           [
             5,
-            0.2874,
+            0.2339,
             5,
-            0.2874,
+            0.2339,
             13.4888,
             10.374,
             1.0,
@@ -6484,7 +6759,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             3.0618,
@@ -6497,7 +6772,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             12.4211,
@@ -6512,7 +6787,7 @@
         [
           [
             11,
-            0.6322,
+            0.5146,
             0,
             0.0,
             6.9912,
@@ -6525,7 +6800,7 @@
           ],
           [
             13,
-            0.7471,
+            0.6081,
             0,
             0.0,
             8.1875,
@@ -6538,7 +6813,7 @@
           ],
           [
             16,
-            0.9195,
+            0.7484,
             0,
             0.0,
             6.3785,
@@ -6551,7 +6826,7 @@
           ],
           [
             9,
-            0.5172,
+            0.421,
             0,
             0.0,
             8.016,
@@ -6564,7 +6839,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             7.1915,
@@ -6577,7 +6852,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             5.981,
@@ -6590,7 +6865,7 @@
           ],
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             4.3951,
@@ -6603,7 +6878,7 @@
           ],
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             31.8965,
@@ -6618,7 +6893,7 @@
         [
           [
             9,
-            0.5172,
+            0.421,
             0,
             0.0,
             6.371,
@@ -6631,7 +6906,7 @@
           ],
           [
             15,
-            0.8621,
+            0.7017,
             0,
             0.0,
             9.2062,
@@ -6644,7 +6919,7 @@
           ],
           [
             8,
-            0.4598,
+            0.3742,
             0,
             0.0,
             7.7689,
@@ -6657,7 +6932,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             4.8133,
@@ -6670,7 +6945,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             6.3617,
@@ -6683,7 +6958,7 @@
           ],
           [
             4,
-            0.2299,
+            0.1871,
             0,
             0.0,
             14.4951,
@@ -6696,7 +6971,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             4.6707,
@@ -6709,7 +6984,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             3.5862,
@@ -6724,7 +6999,7 @@
         [
           [
             11,
-            0.6322,
+            0.5146,
             0,
             0.0,
             7.5033,
@@ -6737,7 +7012,7 @@
           ],
           [
             11,
-            0.6322,
+            0.5146,
             0,
             0.0,
             8.2594,
@@ -6750,7 +7025,7 @@
           ],
           [
             4,
-            0.2299,
+            0.1871,
             0,
             0.0,
             6.7574,
@@ -6763,7 +7038,7 @@
           ],
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             7.0143,
@@ -6789,7 +7064,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             3.972,
@@ -6802,7 +7077,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             5.9928,
@@ -6815,7 +7090,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             4.1001,
@@ -6830,7 +7105,7 @@
         [
           [
             3,
-            0.1724,
+            0.1403,
             0,
             0.0,
             8.9182,
@@ -6843,7 +7118,7 @@
           ],
           [
             4,
-            0.2299,
+            0.1871,
             0,
             0.0,
             6.459,
@@ -6856,7 +7131,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             4.4962,
@@ -6869,7 +7144,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             54.0496,
@@ -6882,7 +7157,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             4.3287,
@@ -6895,9 +7170,9 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             1,
-            0.0575,
+            0.0468,
             13.5703,
             13.335,
             1.0,
@@ -6908,7 +7183,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             7.094,
@@ -6962,7 +7237,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             4.9658,
@@ -7055,7 +7330,7 @@
           ],
           [
             2,
-            0.1149,
+            0.0936,
             0,
             0.0,
             4.2116,
@@ -7094,7 +7369,7 @@
           ],
           [
             1,
-            0.0575,
+            0.0468,
             0,
             0.0,
             3.1242,
@@ -8015,7 +8290,7 @@
         [
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             3.6775,
@@ -8028,7 +8303,7 @@
           ],
           [
             6,
-            0.205,
+            0.1919,
             0,
             0.0,
             9.2612,
@@ -8041,7 +8316,7 @@
           ],
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             8.6578,
@@ -8054,7 +8329,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             8.1132,
@@ -8067,7 +8342,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             8.431,
@@ -8080,7 +8355,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             11.2793,
@@ -8106,7 +8381,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             5.4115,
@@ -8121,7 +8396,7 @@
         [
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             13.1363,
@@ -8134,7 +8409,7 @@
           ],
           [
             22,
-            0.7517,
+            0.7036,
             0,
             0.0,
             7.9837,
@@ -8147,7 +8422,7 @@
           ],
           [
             16,
-            0.5467,
+            0.5117,
             0,
             0.0,
             9.3516,
@@ -8160,7 +8435,7 @@
           ],
           [
             5,
-            0.1708,
+            0.1599,
             0,
             0.0,
             9.0797,
@@ -8173,7 +8448,7 @@
           ],
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             9.9772,
@@ -8186,7 +8461,7 @@
           ],
           [
             6,
-            0.205,
+            0.1919,
             0,
             0.0,
             6.3484,
@@ -8199,9 +8474,9 @@
           ],
           [
             6,
-            0.205,
+            0.1919,
             6,
-            0.205,
+            0.1919,
             16.3256,
             14.0525,
             1.0,
@@ -8212,7 +8487,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             3.15,
@@ -8227,7 +8502,7 @@
         [
           [
             5,
-            0.1708,
+            0.1599,
             0,
             0.0,
             8.5557,
@@ -8240,7 +8515,7 @@
           ],
           [
             26,
-            0.8884,
+            0.8316,
             0,
             0.0,
             9.7906,
@@ -8253,7 +8528,7 @@
           ],
           [
             21,
-            0.7175,
+            0.6716,
             0,
             0.0,
             6.3193,
@@ -8266,7 +8541,7 @@
           ],
           [
             11,
-            0.3759,
+            0.3518,
             0,
             0.0,
             7.992,
@@ -8279,7 +8554,7 @@
           ],
           [
             5,
-            0.1708,
+            0.1599,
             0,
             0.0,
             7.5762,
@@ -8292,7 +8567,7 @@
           ],
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             11.273,
@@ -8305,7 +8580,7 @@
           ],
           [
             5,
-            0.1708,
+            0.1599,
             0,
             0.0,
             7.3492,
@@ -8318,7 +8593,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             7.3599,
@@ -8333,7 +8608,7 @@
         [
           [
             12,
-            0.41,
+            0.3838,
             0,
             0.0,
             9.6885,
@@ -8346,7 +8621,7 @@
           ],
           [
             29,
-            0.9909,
+            0.9275,
             0,
             0.0,
             10.1173,
@@ -8359,7 +8634,7 @@
           ],
           [
             25,
-            0.8542,
+            0.7996,
             0,
             0.0,
             8.5466,
@@ -8372,7 +8647,7 @@
           ],
           [
             25,
-            0.8542,
+            0.7996,
             0,
             0.0,
             7.2951,
@@ -8385,7 +8660,7 @@
           ],
           [
             19,
-            0.6492,
+            0.6077,
             0,
             0.0,
             8.6684,
@@ -8398,7 +8673,7 @@
           ],
           [
             12,
-            0.41,
+            0.3838,
             0,
             0.0,
             6.3033,
@@ -8411,7 +8686,7 @@
           ],
           [
             6,
-            0.205,
+            0.1919,
             0,
             0.0,
             9.9469,
@@ -8424,7 +8699,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             12.1743,
@@ -8439,7 +8714,7 @@
         [
           [
             14,
-            0.4784,
+            0.4478,
             0,
             0.0,
             10.3402,
@@ -8452,7 +8727,7 @@
           ],
           [
             23,
-            0.7859,
+            0.7356,
             0,
             0.0,
             9.0236,
@@ -8465,7 +8740,7 @@
           ],
           [
             33,
-            1.1276,
+            1.0554,
             0,
             0.0,
             6.684,
@@ -8478,9 +8753,9 @@
           ],
           [
             19,
-            0.6492,
+            0.6077,
             19,
-            0.6492,
+            0.6077,
             11.7055,
             9.8258,
             1.0,
@@ -8491,7 +8766,7 @@
           ],
           [
             22,
-            0.7517,
+            0.7036,
             0,
             0.0,
             8.053,
@@ -8504,7 +8779,7 @@
           ],
           [
             10,
-            0.3417,
+            0.3198,
             0,
             0.0,
             8.1297,
@@ -8517,7 +8792,7 @@
           ],
           [
             5,
-            0.1708,
+            0.1599,
             0,
             0.0,
             5.1409,
@@ -8530,7 +8805,7 @@
           ],
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             24.4231,
@@ -8545,7 +8820,7 @@
         [
           [
             14,
-            0.4784,
+            0.4478,
             0,
             0.0,
             7.927,
@@ -8558,7 +8833,7 @@
           ],
           [
             18,
-            0.615,
+            0.5757,
             0,
             0.0,
             6.9323,
@@ -8571,7 +8846,7 @@
           ],
           [
             30,
-            1.0251,
+            0.9595,
             0,
             0.0,
             7.9028,
@@ -8584,7 +8859,7 @@
           ],
           [
             20,
-            0.6834,
+            0.6397,
             0,
             0.0,
             8.7765,
@@ -8597,7 +8872,7 @@
           ],
           [
             22,
-            0.7517,
+            0.7036,
             0,
             0.0,
             8.0133,
@@ -8610,7 +8885,7 @@
           ],
           [
             20,
-            0.6834,
+            0.6397,
             0,
             0.0,
             6.3027,
@@ -8623,7 +8898,7 @@
           ],
           [
             9,
-            0.3075,
+            0.2878,
             0,
             0.0,
             8.5735,
@@ -8636,9 +8911,9 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             2,
-            0.0683,
+            0.064,
             31.9166,
             10.08,
             1.0,
@@ -8651,7 +8926,7 @@
         [
           [
             17,
-            0.5809,
+            0.5437,
             0,
             0.0,
             6.3157,
@@ -8664,7 +8939,7 @@
           ],
           [
             22,
-            0.7517,
+            0.7036,
             0,
             0.0,
             6.6798,
@@ -8677,7 +8952,7 @@
           ],
           [
             24,
-            0.82,
+            0.7676,
             0,
             0.0,
             6.2781,
@@ -8690,7 +8965,7 @@
           ],
           [
             10,
-            0.3417,
+            0.3198,
             0,
             0.0,
             9.1371,
@@ -8703,7 +8978,7 @@
           ],
           [
             16,
-            0.5467,
+            0.5117,
             0,
             0.0,
             8.3014,
@@ -8716,7 +8991,7 @@
           ],
           [
             15,
-            0.5125,
+            0.4797,
             0,
             0.0,
             6.2204,
@@ -8729,7 +9004,7 @@
           ],
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             4.839,
@@ -8757,7 +9032,7 @@
         [
           [
             10,
-            0.3417,
+            0.3198,
             0,
             0.0,
             4.9107,
@@ -8770,7 +9045,7 @@
           ],
           [
             17,
-            0.5809,
+            0.5437,
             0,
             0.0,
             6.753,
@@ -8783,7 +9058,7 @@
           ],
           [
             20,
-            0.6834,
+            0.6397,
             0,
             0.0,
             6.9866,
@@ -8796,7 +9071,7 @@
           ],
           [
             17,
-            0.5809,
+            0.5437,
             0,
             0.0,
             5.0528,
@@ -8809,7 +9084,7 @@
           ],
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             5.3238,
@@ -8822,7 +9097,7 @@
           ],
           [
             11,
-            0.3759,
+            0.3518,
             0,
             0.0,
             10.0471,
@@ -8835,7 +9110,7 @@
           ],
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             5.5252,
@@ -8848,7 +9123,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             4.0524,
@@ -8863,7 +9138,7 @@
         [
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             4.5917,
@@ -8876,7 +9151,7 @@
           ],
           [
             8,
-            0.2733,
+            0.2559,
             0,
             0.0,
             6.3962,
@@ -8889,7 +9164,7 @@
           ],
           [
             7,
-            0.2392,
+            0.2239,
             0,
             0.0,
             12.9627,
@@ -8902,7 +9177,7 @@
           ],
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             8.4297,
@@ -8915,7 +9190,7 @@
           ],
           [
             4,
-            0.1367,
+            0.1279,
             0,
             0.0,
             4.037,
@@ -8928,7 +9203,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             50.7799,
@@ -8941,7 +9216,7 @@
           ],
           [
             3,
-            0.1025,
+            0.0959,
             0,
             0.0,
             4.6312,
@@ -8954,7 +9229,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             5.2699,
@@ -8995,7 +9270,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             7.2442,
@@ -9008,7 +9283,7 @@
           ],
           [
             2,
-            0.0683,
+            0.064,
             0,
             0.0,
             7.0711,
@@ -9021,7 +9296,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             58.2822,
@@ -9272,7 +9547,7 @@
           ],
           [
             1,
-            0.0342,
+            0.032,
             0,
             0.0,
             14.0541,
@@ -10193,7 +10468,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             5.409,
@@ -10206,7 +10481,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             6.138,
@@ -10219,7 +10494,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             14.0115,
@@ -10232,7 +10507,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             3.7721,
@@ -10245,9 +10520,9 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             1,
-            0.0751,
+            0.0653,
             114.6221,
             98.175,
             1.0,
@@ -10260,7 +10535,7 @@
         [
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             4.2547,
@@ -10273,7 +10548,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             6.8782,
@@ -10286,7 +10561,7 @@
           ],
           [
             9,
-            0.6756,
+            0.5874,
             0,
             0.0,
             7.588,
@@ -10299,7 +10574,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             6.7449,
@@ -10312,7 +10587,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             6.1866,
@@ -10325,7 +10600,7 @@
           ],
           [
             10,
-            0.7506,
+            0.6526,
             0,
             0.0,
             9.339,
@@ -10338,7 +10613,7 @@
           ],
           [
             10,
-            0.7506,
+            0.6526,
             0,
             0.0,
             7.3291,
@@ -10351,7 +10626,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             6.1349,
@@ -10366,7 +10641,7 @@
         [
           [
             3,
-            0.2252,
+            0.1958,
             0,
             0.0,
             8.3677,
@@ -10379,7 +10654,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             3.6348,
@@ -10392,7 +10667,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             4.0657,
@@ -10405,7 +10680,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             6.5318,
@@ -10418,7 +10693,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             11.1592,
@@ -10431,7 +10706,7 @@
           ],
           [
             13,
-            0.9758,
+            0.8484,
             0,
             0.0,
             5.8943,
@@ -10444,7 +10719,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             8.6855,
@@ -10457,7 +10732,7 @@
           ],
           [
             3,
-            0.2252,
+            0.1958,
             0,
             0.0,
             6.2389,
@@ -10485,7 +10760,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             6.4986,
@@ -10498,7 +10773,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             9.1876,
@@ -10511,7 +10786,7 @@
           ],
           [
             14,
-            1.0509,
+            0.9137,
             0,
             0.0,
             6.5193,
@@ -10524,7 +10799,7 @@
           ],
           [
             21,
-            1.5763,
+            1.3706,
             0,
             0.0,
             7.1732,
@@ -10537,7 +10812,7 @@
           ],
           [
             12,
-            0.9008,
+            0.7832,
             0,
             0.0,
             6.7545,
@@ -10550,7 +10825,7 @@
           ],
           [
             7,
-            0.5254,
+            0.4569,
             0,
             0.0,
             15.957,
@@ -10563,7 +10838,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             6.1114,
@@ -10578,7 +10853,7 @@
         [
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             4.7824,
@@ -10591,7 +10866,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             6.4692,
@@ -10604,7 +10879,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             3.9868,
@@ -10617,7 +10892,7 @@
           ],
           [
             17,
-            1.2761,
+            1.1095,
             0,
             0.0,
             7.8786,
@@ -10630,7 +10905,7 @@
           ],
           [
             20,
-            1.5013,
+            1.3053,
             0,
             0.0,
             6.9542,
@@ -10643,7 +10918,7 @@
           ],
           [
             13,
-            0.9758,
+            0.8484,
             0,
             0.0,
             7.9801,
@@ -10656,7 +10931,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             5.7116,
@@ -10669,9 +10944,9 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             2,
-            0.1501,
+            0.1305,
             11.2013,
             11.1825,
             1.0,
@@ -10697,7 +10972,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             10.6696,
@@ -10710,7 +10985,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             9.6553,
@@ -10723,7 +10998,7 @@
           ],
           [
             9,
-            0.6756,
+            0.5874,
             0,
             0.0,
             7.5036,
@@ -10736,7 +11011,7 @@
           ],
           [
             15,
-            1.1259,
+            0.979,
             0,
             0.0,
             5.9985,
@@ -10749,7 +11024,7 @@
           ],
           [
             12,
-            0.9008,
+            0.7832,
             0,
             0.0,
             10.0938,
@@ -10762,7 +11037,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             8.7173,
@@ -10775,7 +11050,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             9.5096,
@@ -10790,7 +11065,7 @@
         [
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             7.4114,
@@ -10803,7 +11078,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             4.1716,
@@ -10816,7 +11091,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             8.4387,
@@ -10829,7 +11104,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             4.9475,
@@ -10842,7 +11117,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             8.1646,
@@ -10855,7 +11130,7 @@
           ],
           [
             5,
-            0.3753,
+            0.3263,
             0,
             0.0,
             8.6264,
@@ -10868,7 +11143,7 @@
           ],
           [
             6,
-            0.4504,
+            0.3916,
             0,
             0.0,
             9.7961,
@@ -10881,7 +11156,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             5.8886,
@@ -10909,7 +11184,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             8.4634,
@@ -10922,7 +11197,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             6.9278,
@@ -10935,7 +11210,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             5.1013,
@@ -10948,7 +11223,7 @@
           ],
           [
             3,
-            0.2252,
+            0.1958,
             0,
             0.0,
             8.7045,
@@ -10961,7 +11236,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             8.4284,
@@ -10974,7 +11249,7 @@
           ],
           [
             7,
-            0.5254,
+            0.4569,
             0,
             0.0,
             8.0356,
@@ -10987,7 +11262,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             7.6239,
@@ -11015,7 +11290,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             56.051,
@@ -11028,7 +11303,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             5.127,
@@ -11054,7 +11329,7 @@
           ],
           [
             2,
-            0.1501,
+            0.1305,
             0,
             0.0,
             5.1534,
@@ -11067,7 +11342,7 @@
           ],
           [
             3,
-            0.2252,
+            0.1958,
             0,
             0.0,
             7.5581,
@@ -11160,7 +11435,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             3.4423,
@@ -11199,7 +11474,7 @@
           ],
           [
             4,
-            0.3003,
+            0.2611,
             0,
             0.0,
             4.8996,
@@ -11253,7 +11528,7 @@
           ],
           [
             1,
-            0.0751,
+            0.0653,
             0,
             0.0,
             5.5397,
@@ -12293,7 +12568,7 @@
         [
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             6.5051,
@@ -12306,7 +12581,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             3.3546,
@@ -12319,9 +12594,9 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             3,
-            0.131,
+            0.1088,
             13.9762,
             13.545,
             1.0,
@@ -12332,7 +12607,7 @@
           ],
           [
             5,
-            0.2183,
+            0.1813,
             0,
             0.0,
             5.6342,
@@ -12345,7 +12620,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             4.5769,
@@ -12358,7 +12633,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             10.9598,
@@ -12371,7 +12646,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             5.1374,
@@ -12384,7 +12659,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             3.5339,
@@ -12399,7 +12674,7 @@
         [
           [
             7,
-            0.3057,
+            0.2538,
             0,
             0.0,
             6.0714,
@@ -12412,7 +12687,7 @@
           ],
           [
             19,
-            0.8297,
+            0.689,
             0,
             0.0,
             12.8412,
@@ -12425,7 +12700,7 @@
           ],
           [
             16,
-            0.6987,
+            0.5802,
             0,
             0.0,
             9.7329,
@@ -12438,9 +12713,9 @@
           ],
           [
             4,
-            0.1747,
+            0.145,
             4,
-            0.1747,
+            0.145,
             16.9829,
             16.6425,
             1.0,
@@ -12451,7 +12726,7 @@
           ],
           [
             4,
-            0.1747,
+            0.145,
             0,
             0.0,
             9.7845,
@@ -12464,7 +12739,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             10.8751,
@@ -12477,7 +12752,7 @@
           ],
           [
             6,
-            0.262,
+            0.2176,
             0,
             0.0,
             5.0967,
@@ -12490,7 +12765,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             3.7675,
@@ -12505,7 +12780,7 @@
         [
           [
             7,
-            0.3057,
+            0.2538,
             0,
             0.0,
             7.9366,
@@ -12518,7 +12793,7 @@
           ],
           [
             17,
-            0.7424,
+            0.6164,
             0,
             0.0,
             7.317,
@@ -12531,7 +12806,7 @@
           ],
           [
             17,
-            0.7424,
+            0.6164,
             0,
             0.0,
             10.5002,
@@ -12544,7 +12819,7 @@
           ],
           [
             9,
-            0.393,
+            0.3263,
             0,
             0.0,
             8.7648,
@@ -12557,7 +12832,7 @@
           ],
           [
             13,
-            0.5677,
+            0.4714,
             0,
             0.0,
             9.5904,
@@ -12570,7 +12845,7 @@
           ],
           [
             15,
-            0.655,
+            0.5439,
             0,
             0.0,
             9.2817,
@@ -12583,7 +12858,7 @@
           ],
           [
             8,
-            0.3493,
+            0.2901,
             0,
             0.0,
             8.6578,
@@ -12596,7 +12871,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             7.3193,
@@ -12611,7 +12886,7 @@
         [
           [
             14,
-            0.6114,
+            0.5077,
             0,
             0.0,
             7.0362,
@@ -12624,7 +12899,7 @@
           ],
           [
             25,
-            1.0917,
+            0.9065,
             0,
             0.0,
             7.6566,
@@ -12637,7 +12912,7 @@
           ],
           [
             24,
-            1.048,
+            0.8703,
             0,
             0.0,
             10.3425,
@@ -12650,7 +12925,7 @@
           ],
           [
             24,
-            1.048,
+            0.8703,
             0,
             0.0,
             8.5429,
@@ -12663,7 +12938,7 @@
           ],
           [
             23,
-            1.0044,
+            0.834,
             0,
             0.0,
             7.7156,
@@ -12676,7 +12951,7 @@
           ],
           [
             18,
-            0.786,
+            0.6527,
             0,
             0.0,
             8.7145,
@@ -12689,7 +12964,7 @@
           ],
           [
             13,
-            0.5677,
+            0.4714,
             0,
             0.0,
             6.3853,
@@ -12702,7 +12977,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             4.5408,
@@ -12717,7 +12992,7 @@
         [
           [
             11,
-            0.4803,
+            0.3989,
             0,
             0.0,
             6.4466,
@@ -12730,7 +13005,7 @@
           ],
           [
             29,
-            1.2664,
+            1.0516,
             0,
             0.0,
             7.3113,
@@ -12743,7 +13018,7 @@
           ],
           [
             30,
-            1.31,
+            1.0878,
             0,
             0.0,
             8.049,
@@ -12756,7 +13031,7 @@
           ],
           [
             17,
-            0.7424,
+            0.6164,
             0,
             0.0,
             8.0041,
@@ -12769,7 +13044,7 @@
           ],
           [
             28,
-            1.2227,
+            1.0153,
             0,
             0.0,
             7.6572,
@@ -12782,7 +13057,7 @@
           ],
           [
             13,
-            0.5677,
+            0.4714,
             0,
             0.0,
             8.3659,
@@ -12795,7 +13070,7 @@
           ],
           [
             9,
-            0.393,
+            0.3263,
             0,
             0.0,
             10.4277,
@@ -12808,7 +13083,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             8.0544,
@@ -12823,7 +13098,7 @@
         [
           [
             15,
-            0.655,
+            0.5439,
             0,
             0.0,
             7.7353,
@@ -12836,7 +13111,7 @@
           ],
           [
             25,
-            1.0917,
+            0.9065,
             0,
             0.0,
             6.7236,
@@ -12849,9 +13124,9 @@
           ],
           [
             7,
-            0.3057,
+            0.2538,
             7,
-            0.3057,
+            0.2538,
             10.9156,
             9.285,
             1.0,
@@ -12862,7 +13137,7 @@
           ],
           [
             22,
-            0.9607,
+            0.7977,
             0,
             0.0,
             7.9459,
@@ -12875,7 +13150,7 @@
           ],
           [
             13,
-            0.5677,
+            0.4714,
             0,
             0.0,
             6.5136,
@@ -12888,7 +13163,7 @@
           ],
           [
             12,
-            0.524,
+            0.4351,
             0,
             0.0,
             6.0269,
@@ -12901,7 +13176,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             6.8384,
@@ -12914,7 +13189,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             9.3611,
@@ -12929,7 +13204,7 @@
         [
           [
             4,
-            0.1747,
+            0.145,
             0,
             0.0,
             12.7016,
@@ -12942,7 +13217,7 @@
           ],
           [
             11,
-            0.4803,
+            0.3989,
             0,
             0.0,
             6.7818,
@@ -12955,7 +13230,7 @@
           ],
           [
             8,
-            0.3493,
+            0.2901,
             0,
             0.0,
             8.0661,
@@ -12968,7 +13243,7 @@
           ],
           [
             13,
-            0.5677,
+            0.4714,
             0,
             0.0,
             8.2335,
@@ -12981,7 +13256,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             4.6501,
@@ -12994,7 +13269,7 @@
           ],
           [
             5,
-            0.2183,
+            0.1813,
             0,
             0.0,
             5.6861,
@@ -13007,9 +13282,9 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             3,
-            0.131,
+            0.1088,
             14.991,
             14.14,
             1.0,
@@ -13020,7 +13295,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             8.191,
@@ -13035,7 +13310,7 @@
         [
           [
             10,
-            0.4367,
+            0.3626,
             0,
             0.0,
             7.4575,
@@ -13048,7 +13323,7 @@
           ],
           [
             4,
-            0.1747,
+            0.145,
             0,
             0.0,
             5.6558,
@@ -13061,7 +13336,7 @@
           ],
           [
             10,
-            0.4367,
+            0.3626,
             0,
             0.0,
             5.8579,
@@ -13074,7 +13349,7 @@
           ],
           [
             3,
-            0.131,
+            0.1088,
             0,
             0.0,
             6.5183,
@@ -13087,7 +13362,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             6.7614,
@@ -13100,7 +13375,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             7.5686,
@@ -13113,7 +13388,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             26.1163,
@@ -13141,7 +13416,7 @@
         [
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             4.2224,
@@ -13154,7 +13429,7 @@
           ],
           [
             4,
-            0.1747,
+            0.145,
             0,
             0.0,
             6.8189,
@@ -13167,7 +13442,7 @@
           ],
           [
             4,
-            0.1747,
+            0.145,
             0,
             0.0,
             8.3606,
@@ -13180,7 +13455,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             4.8582,
@@ -13193,7 +13468,7 @@
           ],
           [
             2,
-            0.0873,
+            0.0725,
             0,
             0.0,
             22.6741,
@@ -13206,7 +13481,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             5.6238,
@@ -13260,7 +13535,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             5.6951,
@@ -13299,7 +13574,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             59.5657,
@@ -13325,7 +13600,7 @@
           ],
           [
             1,
-            0.0437,
+            0.0363,
             0,
             0.0,
             6.7655,
@@ -14445,7 +14720,7 @@
           ],
           [
             6,
-            0.2705,
+            0.2353,
             0,
             0.0,
             6.957,
@@ -14458,7 +14733,7 @@
           ],
           [
             3,
-            0.1353,
+            0.1176,
             0,
             0.0,
             4.5139,
@@ -14471,7 +14746,7 @@
           ],
           [
             3,
-            0.1353,
+            0.1176,
             0,
             0.0,
             5.5792,
@@ -14484,7 +14759,7 @@
           ],
           [
             2,
-            0.0902,
+            0.0784,
             0,
             0.0,
             7.3443,
@@ -14497,7 +14772,7 @@
           ],
           [
             2,
-            0.0902,
+            0.0784,
             0,
             0.0,
             9.0262,
@@ -14510,7 +14785,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             6.418,
@@ -14523,7 +14798,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             5.8232,
@@ -14551,7 +14826,7 @@
           ],
           [
             8,
-            0.3607,
+            0.3137,
             0,
             0.0,
             5.5532,
@@ -14564,7 +14839,7 @@
           ],
           [
             14,
-            0.6313,
+            0.549,
             0,
             0.0,
             6.2238,
@@ -14577,7 +14852,7 @@
           ],
           [
             5,
-            0.2255,
+            0.1961,
             0,
             0.0,
             7.9453,
@@ -14590,7 +14865,7 @@
           ],
           [
             9,
-            0.4058,
+            0.3529,
             0,
             0.0,
             5.5078,
@@ -14603,7 +14878,7 @@
           ],
           [
             5,
-            0.2255,
+            0.1961,
             0,
             0.0,
             7.3991,
@@ -14616,7 +14891,7 @@
           ],
           [
             3,
-            0.1353,
+            0.1176,
             0,
             0.0,
             4.3301,
@@ -14644,9 +14919,9 @@
         [
           [
             2,
-            0.0902,
+            0.0784,
             2,
-            0.0902,
+            0.0784,
             14.8555,
             13.65,
             1.0,
@@ -14657,7 +14932,7 @@
           ],
           [
             5,
-            0.2255,
+            0.1961,
             0,
             0.0,
             9.9345,
@@ -14670,7 +14945,7 @@
           ],
           [
             12,
-            0.5411,
+            0.4706,
             0,
             0.0,
             6.9775,
@@ -14683,7 +14958,7 @@
           ],
           [
             13,
-            0.5862,
+            0.5098,
             0,
             0.0,
             6.9693,
@@ -14696,7 +14971,7 @@
           ],
           [
             8,
-            0.3607,
+            0.3137,
             0,
             0.0,
             7.1035,
@@ -14709,7 +14984,7 @@
           ],
           [
             9,
-            0.4058,
+            0.3529,
             0,
             0.0,
             8.8296,
@@ -14722,7 +14997,7 @@
           ],
           [
             3,
-            0.1353,
+            0.1176,
             0,
             0.0,
             8.5145,
@@ -14750,7 +15025,7 @@
         [
           [
             3,
-            0.1353,
+            0.1176,
             0,
             0.0,
             5.4672,
@@ -14763,7 +15038,7 @@
           ],
           [
             15,
-            0.6764,
+            0.5882,
             0,
             0.0,
             6.5884,
@@ -14776,7 +15051,7 @@
           ],
           [
             24,
-            1.0822,
+            0.9412,
             0,
             0.0,
             7.2218,
@@ -14789,7 +15064,7 @@
           ],
           [
             33,
-            1.488,
+            1.2941,
             0,
             0.0,
             5.8603,
@@ -14802,7 +15077,7 @@
           ],
           [
             20,
-            0.9018,
+            0.7843,
             0,
             0.0,
             6.4755,
@@ -14815,7 +15090,7 @@
           ],
           [
             8,
-            0.3607,
+            0.3137,
             0,
             0.0,
             11.3875,
@@ -14841,7 +15116,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             6.0956,
@@ -14869,7 +15144,7 @@
           ],
           [
             8,
-            0.3607,
+            0.3137,
             0,
             0.0,
             6.5339,
@@ -14882,7 +15157,7 @@
           ],
           [
             22,
-            0.992,
+            0.8627,
             0,
             0.0,
             5.6534,
@@ -14895,7 +15170,7 @@
           ],
           [
             16,
-            0.7214,
+            0.6275,
             0,
             0.0,
             7.2928,
@@ -14908,7 +15183,7 @@
           ],
           [
             18,
-            0.8116,
+            0.7059,
             0,
             0.0,
             7.2719,
@@ -14921,7 +15196,7 @@
           ],
           [
             6,
-            0.2705,
+            0.2353,
             0,
             0.0,
             6.4745,
@@ -14934,7 +15209,7 @@
           ],
           [
             2,
-            0.0902,
+            0.0784,
             0,
             0.0,
             9.9125,
@@ -14947,7 +15222,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             10.4006,
@@ -14962,9 +15237,9 @@
         [
           [
             1,
-            0.0451,
+            0.0392,
             1,
-            0.0451,
+            0.0392,
             14.4674,
             13.86,
             1.0,
@@ -14975,7 +15250,7 @@
           ],
           [
             5,
-            0.2255,
+            0.1961,
             0,
             0.0,
             7.6907,
@@ -14988,7 +15263,7 @@
           ],
           [
             7,
-            0.3156,
+            0.2745,
             0,
             0.0,
             7.3314,
@@ -15001,7 +15276,7 @@
           ],
           [
             16,
-            0.7214,
+            0.6275,
             0,
             0.0,
             7.9091,
@@ -15014,7 +15289,7 @@
           ],
           [
             12,
-            0.5411,
+            0.4706,
             0,
             0.0,
             6.3176,
@@ -15027,7 +15302,7 @@
           ],
           [
             4,
-            0.1804,
+            0.1569,
             0,
             0.0,
             15.9858,
@@ -15040,9 +15315,9 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             1,
-            0.0451,
+            0.0392,
             10.8634,
             9.765,
             1.0,
@@ -15068,7 +15343,7 @@
         [
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             10.5772,
@@ -15094,7 +15369,7 @@
           ],
           [
             7,
-            0.3156,
+            0.2745,
             0,
             0.0,
             10.4956,
@@ -15107,7 +15382,7 @@
           ],
           [
             6,
-            0.2705,
+            0.2353,
             0,
             0.0,
             4.7177,
@@ -15120,7 +15395,7 @@
           ],
           [
             5,
-            0.2255,
+            0.1961,
             0,
             0.0,
             7.935,
@@ -15133,7 +15408,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             13.4973,
@@ -15146,7 +15421,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             5.8572,
@@ -15187,7 +15462,7 @@
           ],
           [
             2,
-            0.0902,
+            0.0784,
             0,
             0.0,
             5.8989,
@@ -15200,9 +15475,9 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             1,
-            0.0451,
+            0.0392,
             10.6059,
             10.605,
             1.0,
@@ -15213,7 +15488,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             3.7199,
@@ -15226,7 +15501,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             6.1146,
@@ -15239,7 +15514,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             3.3301,
@@ -15293,7 +15568,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             53.038,
@@ -15306,7 +15581,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             25.689,
@@ -15345,7 +15620,7 @@
           ],
           [
             1,
-            0.0451,
+            0.0392,
             0,
             0.0,
             47.3861,
@@ -16571,7 +16846,7 @@
         [
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             5.1687,
@@ -16584,7 +16859,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             5.1689,
@@ -16623,7 +16898,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             4.441,
@@ -16649,7 +16924,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             5.2511,
@@ -16662,7 +16937,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             5.7288,
@@ -16677,7 +16952,7 @@
         [
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             7.7896,
@@ -16690,7 +16965,7 @@
           ],
           [
             4,
-            0.2182,
+            0.2051,
             0,
             0.0,
             8.0617,
@@ -16703,7 +16978,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             3.9239,
@@ -16716,7 +16991,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             5.9074,
@@ -16729,7 +17004,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             3.7693,
@@ -16742,7 +17017,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             3.9084,
@@ -16755,7 +17030,7 @@
           ],
           [
             6,
-            0.3273,
+            0.3077,
             0,
             0.0,
             6.0682,
@@ -16768,7 +17043,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             5.2895,
@@ -16783,7 +17058,7 @@
         [
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             7.7294,
@@ -16796,7 +17071,7 @@
           ],
           [
             7,
-            0.3818,
+            0.359,
             0,
             0.0,
             5.9493,
@@ -16809,7 +17084,7 @@
           ],
           [
             7,
-            0.3818,
+            0.359,
             0,
             0.0,
             7.5068,
@@ -16822,7 +17097,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             5.0418,
@@ -16835,7 +17110,7 @@
           ],
           [
             5,
-            0.2727,
+            0.2564,
             0,
             0.0,
             4.4593,
@@ -16848,7 +17123,7 @@
           ],
           [
             4,
-            0.2182,
+            0.2051,
             0,
             0.0,
             13.0857,
@@ -16861,7 +17136,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             5.1841,
@@ -16874,7 +17149,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             7.2413,
@@ -16889,7 +17164,7 @@
         [
           [
             7,
-            0.3818,
+            0.359,
             0,
             0.0,
             6.6339,
@@ -16902,7 +17177,7 @@
           ],
           [
             16,
-            0.8727,
+            0.8205,
             0,
             0.0,
             7.6162,
@@ -16915,7 +17190,7 @@
           ],
           [
             9,
-            0.4909,
+            0.4615,
             0,
             0.0,
             7.7759,
@@ -16928,7 +17203,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             8.6424,
@@ -16941,7 +17216,7 @@
           ],
           [
             6,
-            0.3273,
+            0.3077,
             0,
             0.0,
             11.6714,
@@ -16954,7 +17229,7 @@
           ],
           [
             12,
-            0.6545,
+            0.6154,
             0,
             0.0,
             10.4705,
@@ -16967,7 +17242,7 @@
           ],
           [
             12,
-            0.6545,
+            0.6154,
             0,
             0.0,
             9.6469,
@@ -16980,7 +17255,7 @@
           ],
           [
             13,
-            0.7091,
+            0.6667,
             0,
             0.0,
             7.0915,
@@ -16995,7 +17270,7 @@
         [
           [
             9,
-            0.4909,
+            0.4615,
             0,
             0.0,
             9.2907,
@@ -17008,7 +17283,7 @@
           ],
           [
             21,
-            1.1455,
+            1.0769,
             0,
             0.0,
             8.2462,
@@ -17021,7 +17296,7 @@
           ],
           [
             11,
-            0.6,
+            0.5641,
             0,
             0.0,
             7.0248,
@@ -17034,7 +17309,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             7.6183,
@@ -17047,7 +17322,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             8.2102,
@@ -17060,7 +17335,7 @@
           ],
           [
             7,
-            0.3818,
+            0.359,
             0,
             0.0,
             7.2726,
@@ -17073,7 +17348,7 @@
           ],
           [
             14,
-            0.7636,
+            0.7179,
             0,
             0.0,
             11.8199,
@@ -17086,7 +17361,7 @@
           ],
           [
             9,
-            0.4909,
+            0.4615,
             0,
             0.0,
             9.2637,
@@ -17101,7 +17376,7 @@
         [
           [
             14,
-            0.7636,
+            0.7179,
             0,
             0.0,
             8.6764,
@@ -17114,7 +17389,7 @@
           ],
           [
             8,
-            0.4364,
+            0.4103,
             0,
             0.0,
             7.5066,
@@ -17127,7 +17402,7 @@
           ],
           [
             9,
-            0.4909,
+            0.4615,
             0,
             0.0,
             7.5334,
@@ -17140,7 +17415,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             5.1119,
@@ -17153,7 +17428,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             14.0621,
@@ -17166,7 +17441,7 @@
           ],
           [
             5,
-            0.2727,
+            0.2564,
             0,
             0.0,
             11.4084,
@@ -17179,7 +17454,7 @@
           ],
           [
             8,
-            0.4364,
+            0.4103,
             0,
             0.0,
             6.7792,
@@ -17192,7 +17467,7 @@
           ],
           [
             10,
-            0.5455,
+            0.5128,
             0,
             0.0,
             8.2599,
@@ -17207,7 +17482,7 @@
         [
           [
             10,
-            0.5455,
+            0.5128,
             0,
             0.0,
             6.5119,
@@ -17220,7 +17495,7 @@
           ],
           [
             9,
-            0.4909,
+            0.4615,
             0,
             0.0,
             8.476,
@@ -17233,7 +17508,7 @@
           ],
           [
             4,
-            0.2182,
+            0.2051,
             0,
             0.0,
             9.3192,
@@ -17246,7 +17521,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             6.6818,
@@ -17259,7 +17534,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             4.3661,
@@ -17272,7 +17547,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             7.4525,
@@ -17285,7 +17560,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             5.0438,
@@ -17298,7 +17573,7 @@
           ],
           [
             8,
-            0.4364,
+            0.4103,
             0,
             0.0,
             9.4281,
@@ -17313,7 +17588,7 @@
         [
           [
             8,
-            0.4364,
+            0.4103,
             0,
             0.0,
             7.2875,
@@ -17326,7 +17601,7 @@
           ],
           [
             7,
-            0.3818,
+            0.359,
             0,
             0.0,
             15.0019,
@@ -17339,7 +17614,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             9.3227,
@@ -17352,7 +17627,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             3.2072,
@@ -17365,7 +17640,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             4.4929,
@@ -17378,7 +17653,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             6.1657,
@@ -17391,7 +17666,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             9.3812,
@@ -17404,7 +17679,7 @@
           ],
           [
             8,
-            0.4364,
+            0.4103,
             0,
             0.0,
             6.5681,
@@ -17419,7 +17694,7 @@
         [
           [
             6,
-            0.3273,
+            0.3077,
             0,
             0.0,
             11.2094,
@@ -17432,7 +17707,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             4.1052,
@@ -17445,7 +17720,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             10.476,
@@ -17471,7 +17746,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             6.3418,
@@ -17484,7 +17759,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             6.378,
@@ -17497,7 +17772,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             10.6621,
@@ -17510,7 +17785,7 @@
           ],
           [
             5,
-            0.2727,
+            0.2564,
             0,
             0.0,
             18.5362,
@@ -17603,7 +17878,7 @@
           ],
           [
             2,
-            0.1091,
+            0.1026,
             0,
             0.0,
             5.4155,
@@ -17616,7 +17891,7 @@
           ],
           [
             3,
-            0.1636,
+            0.1538,
             0,
             0.0,
             7.7242,
@@ -17644,7 +17919,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             8.9349,
@@ -17750,7 +18025,7 @@
           ],
           [
             1,
-            0.0545,
+            0.0513,
             0,
             0.0,
             3.4129,
@@ -18723,7 +18998,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             9.5937,
@@ -18749,7 +19024,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             16.5101,
@@ -18775,7 +19050,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             8.6853,
@@ -18788,7 +19063,7 @@
           ],
           [
             6,
-            0.3506,
+            0.2868,
             0,
             0.0,
             8.5902,
@@ -18801,7 +19076,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             5.1641,
@@ -18829,7 +19104,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             7.7826,
@@ -18855,7 +19130,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             12.1761,
@@ -18868,7 +19143,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             14.0764,
@@ -18881,7 +19156,7 @@
           ],
           [
             4,
-            0.2338,
+            0.1912,
             0,
             0.0,
             6.8064,
@@ -18894,7 +19169,7 @@
           ],
           [
             8,
-            0.4675,
+            0.3824,
             0,
             0.0,
             7.3848,
@@ -18907,7 +19182,7 @@
           ],
           [
             7,
-            0.4091,
+            0.3346,
             0,
             0.0,
             8.3797,
@@ -18948,9 +19223,9 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             1,
-            0.0584,
+            0.0478,
             56.8142,
             52.92,
             1.0,
@@ -18961,7 +19236,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             8.6737,
@@ -18974,7 +19249,7 @@
           ],
           [
             3,
-            0.1753,
+            0.1434,
             0,
             0.0,
             8.9954,
@@ -18987,7 +19262,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             9.4132,
@@ -19000,7 +19275,7 @@
           ],
           [
             9,
-            0.526,
+            0.4302,
             0,
             0.0,
             5.1942,
@@ -19013,7 +19288,7 @@
           ],
           [
             15,
-            0.8766,
+            0.7169,
             0,
             0.0,
             7.7359,
@@ -19041,7 +19316,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             3.517,
@@ -19054,7 +19329,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             6.3925,
@@ -19080,9 +19355,9 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             2,
-            0.1169,
+            0.0956,
             18.3212,
             10.5525,
             1.0,
@@ -19093,7 +19368,7 @@
           ],
           [
             9,
-            0.526,
+            0.4302,
             0,
             0.0,
             5.8426,
@@ -19106,7 +19381,7 @@
           ],
           [
             10,
-            0.5844,
+            0.478,
             0,
             0.0,
             7.4961,
@@ -19119,7 +19394,7 @@
           ],
           [
             19,
-            1.1104,
+            0.9081,
             0,
             0.0,
             7.3187,
@@ -19147,7 +19422,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             7.4627,
@@ -19186,7 +19461,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             6.3137,
@@ -19199,7 +19474,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             7.9206,
@@ -19212,7 +19487,7 @@
           ],
           [
             16,
-            0.9351,
+            0.7647,
             0,
             0.0,
             9.497,
@@ -19225,7 +19500,7 @@
           ],
           [
             21,
-            1.2273,
+            1.0037,
             0,
             0.0,
             12.2444,
@@ -19253,7 +19528,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             10.6547,
@@ -19279,7 +19554,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             9.7129,
@@ -19292,9 +19567,9 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             2,
-            0.1169,
+            0.0956,
             18.9061,
             15.0675,
             1.0,
@@ -19305,9 +19580,9 @@
           ],
           [
             6,
-            0.3506,
+            0.2868,
             6,
-            0.3506,
+            0.2868,
             13.0498,
             9.2575,
             1.0,
@@ -19318,9 +19593,9 @@
           ],
           [
             3,
-            0.1753,
+            0.1434,
             3,
-            0.1753,
+            0.1434,
             16.5853,
             15.47,
             1.0,
@@ -19331,9 +19606,9 @@
           ],
           [
             16,
-            0.9351,
+            0.7647,
             16,
-            0.9351,
+            0.7647,
             11.6572,
             9.3647,
             1.0,
@@ -19398,7 +19673,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             13.0953,
@@ -19411,7 +19686,7 @@
           ],
           [
             4,
-            0.2338,
+            0.1912,
             0,
             0.0,
             9.9475,
@@ -19424,9 +19699,9 @@
           ],
           [
             3,
-            0.1753,
+            0.1434,
             3,
-            0.1753,
+            0.1434,
             20.9005,
             20.72,
             1.0,
@@ -19437,7 +19712,7 @@
           ],
           [
             30,
-            1.7532,
+            1.4339,
             0,
             0.0,
             7.4634,
@@ -19452,7 +19727,7 @@
         [
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             6.7327,
@@ -19465,9 +19740,9 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             1,
-            0.0584,
+            0.0478,
             24.6919,
             21.0,
             1.0,
@@ -19504,7 +19779,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             11.1513,
@@ -19517,9 +19792,9 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             2,
-            0.1169,
+            0.0956,
             14.3199,
             13.8075,
             1.0,
@@ -19530,7 +19805,7 @@
           ],
           [
             10,
-            0.5844,
+            0.478,
             0,
             0.0,
             9.6171,
@@ -19543,7 +19818,7 @@
           ],
           [
             50,
-            2.9221,
+            2.3898,
             0,
             0.0,
             11.6347,
@@ -19610,7 +19885,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             4.5121,
@@ -19623,7 +19898,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             3.3676,
@@ -19636,7 +19911,7 @@
           ],
           [
             10,
-            0.5844,
+            0.478,
             0,
             0.0,
             11.0356,
@@ -19649,7 +19924,7 @@
           ],
           [
             31,
-            1.8117,
+            1.4817,
             0,
             0.0,
             12.5486,
@@ -19729,7 +20004,7 @@
           ],
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             3.802,
@@ -19742,7 +20017,7 @@
           ],
           [
             4,
-            0.2338,
+            0.1912,
             0,
             0.0,
             7.6729,
@@ -19755,7 +20030,7 @@
           ],
           [
             15,
-            0.8766,
+            0.7169,
             0,
             0.0,
             6.7552,
@@ -19770,7 +20045,7 @@
         [
           [
             1,
-            0.0584,
+            0.0478,
             0,
             0.0,
             6.3308,
@@ -19848,7 +20123,7 @@
           ],
           [
             3,
-            0.1753,
+            0.1434,
             0,
             0.0,
             6.7969,
@@ -19861,7 +20136,7 @@
           ],
           [
             6,
-            0.3506,
+            0.2868,
             0,
             0.0,
             8.4836,
@@ -19954,7 +20229,7 @@
           ],
           [
             2,
-            0.1169,
+            0.0956,
             0,
             0.0,
             5.3884,
@@ -19967,7 +20242,7 @@
           ],
           [
             3,
-            0.1753,
+            0.1434,
             0,
             0.0,
             6.5918,
@@ -20703,6 +20978,14 @@
     "missingGlobals": [
       "RADAR_AXIS_RANGES"
     ],
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/solet.with_inline_payload_2026_05_21.html"
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/solet.with_inline_payload_2026_05_21.html",
+    "source": "soccerdb",
+    "directExport": true,
+    "directDefensiveEngagementsV1": true,
+    "directDefensiveEngagementsV1Metrics": [
+      "direct_engagements_per90",
+      "median_time_to_engage_opponent",
+      "pct_engagement_under_2s"
+    ]
   }
 }
