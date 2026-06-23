@@ -17,8 +17,12 @@ from typing import Any
 
 
 ROLE_CHOICES = ("GK", "DEF", "MID", "ATT")
-MODE_CHOICES = ("validate-only", "export")
+MODE_CHOICES = ("validate-only", "export", "note-only")
 DEFAULT_SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
+EDITORIAL_METADATA_NOTICE = (
+    "Target-team peers are recorded as editorial workflow metadata only. "
+    "They are not passed to the exporter and do not modify the report payload."
+)
 
 
 class OrchestratorError(RuntimeError):
@@ -31,6 +35,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--role", choices=ROLE_CHOICES, required=True)
     parser.add_argument("--player-id", type=int)
     parser.add_argument("--comparison-player-ids", default="")
+    parser.add_argument("--target-team")
+    parser.add_argument("--target-team-id", type=int)
+    parser.add_argument("--target-role-peer-ids", default="")
+    parser.add_argument("--editorial-note", default="")
+    parser.add_argument("--editorial-notes-file", type=Path)
     parser.add_argument("--season")
     parser.add_argument("--html5up-root", type=Path)
     parser.add_argument("--config", type=Path)
@@ -151,6 +160,68 @@ def write_manifest(path: Path, manifest: dict[str, Any]) -> None:
     print(f"\nManifest: {path}")
 
 
+def read_editorial_notes_file(path: Path | None) -> str:
+    if path is None:
+        return ""
+    if not path.exists():
+        raise OrchestratorError(f"editorial notes file not found: {path}")
+    return path.read_text(encoding="utf-8")
+
+
+def write_editorial_notes(
+    path: Path,
+    *,
+    args: argparse.Namespace,
+    export_command: list[str] | None,
+    validation_command: list[str] | None,
+    editorial_file_text: str,
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "# Role Report Editorial Notes",
+        "",
+        f"- Role: `{args.role}`",
+        f"- Analyzed player ID: `{args.player_id if args.player_id is not None else ''}`",
+        f"- Comparison player IDs: `{args.comparison_player_ids}`",
+        f"- Target team: `{args.target_team or ''}`",
+        f"- Target team ID: `{args.target_team_id if args.target_team_id is not None else ''}`",
+        f"- Target role peer IDs: `{args.target_role_peer_ids}`",
+        "",
+        "## Editorial Metadata Notice",
+        "",
+        EDITORIAL_METADATA_NOTICE,
+        "",
+        "## Editorial Note",
+        "",
+        args.editorial_note or "",
+        "",
+        "## Editorial Notes File",
+        "",
+        f"- Path: `{str(args.editorial_notes_file) if args.editorial_notes_file else ''}`",
+        "",
+        "## Editorial Notes File Content",
+        "",
+    ]
+    if editorial_file_text:
+        lines.extend(["```markdown", editorial_file_text.rstrip(), "```", ""])
+    else:
+        lines.append("")
+    lines.extend(
+        [
+            "## Generated Export Command",
+            "",
+            f"`{command_text(export_command) if export_command else ''}`",
+            "",
+            "## Validation Command",
+            "",
+            f"`{command_text(validation_command) if validation_command else ''}`",
+            "",
+        ]
+    )
+    path.write_text("\n".join(lines), encoding="utf-8")
+    print(f"Editorial notes: {path}")
+
+
 def main() -> int:
     args = parse_args()
     workspace_root = detect_workspace_root()
@@ -158,6 +229,7 @@ def main() -> int:
     commands_planned: list[dict[str, Any]] = []
     commands_executed: list[dict[str, Any]] = []
     errors: list[str] = []
+    warnings: list[str] = []
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     manifest_path = (
@@ -167,10 +239,12 @@ def main() -> int:
         / f"{timestamp}_{args.role}"
         / "run_manifest.json"
     )
+    editorial_notes_path = manifest_path.parent / "editorial_notes.md"
 
     try:
         raw_config = load_config(args.config)
         config = role_config(raw_config, args.role)
+        editorial_file_text = read_editorial_notes_file(args.editorial_notes_file)
         html5up_root = (
             args.html5up_root
             or Path(config.get("html5up_root") or workspace_root / "html5up-forty")
@@ -182,6 +256,7 @@ def main() -> int:
         print(f"[2/4] HTML5UP root: {html5up_root}")
 
         validation_command: list[str] | None = None
+        export_command: list[str] | None = None
 
         if args.mode == "export":
             if args.player_id is None:
@@ -199,10 +274,18 @@ def main() -> int:
             commands_planned.append({"name": "export", "command": export_command, "cwd": str(export_cwd)})
             print("[3/4] Export role payload")
             commands_executed.append(run_step(export_command, export_cwd, args.dry_run))
+        elif args.mode == "note-only":
+            print("[3/4] Export skipped for note-only mode")
         else:
             print("[3/4] Export skipped for validate-only mode")
 
-        if args.skip_validation:
+        if args.target_team or args.target_team_id is not None or args.target_role_peer_ids:
+            warnings.append(EDITORIAL_METADATA_NOTICE)
+            print(f"[info] {EDITORIAL_METADATA_NOTICE}")
+
+        if args.mode == "note-only":
+            print("[4/4] Validation skipped for note-only mode")
+        elif args.skip_validation:
             print("[4/4] Validation skipped by --skip-validation")
         else:
             validation_command = make_validation_command(config)
@@ -212,10 +295,24 @@ def main() -> int:
             print("[4/4] HTML5UP validation")
             commands_executed.append(run_step(validation_command, html5up_root, args.dry_run))
 
+        write_editorial_notes(
+            editorial_notes_path,
+            args=args,
+            export_command=export_command,
+            validation_command=validation_command,
+            editorial_file_text=editorial_file_text,
+        )
+
         manifest = {
             "role": args.role,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
+            "target_team": args.target_team,
+            "target_team_id": args.target_team_id,
+            "target_role_peer_ids": args.target_role_peer_ids,
+            "editorial_note": args.editorial_note,
+            "editorial_notes_file": str(args.editorial_notes_file) if args.editorial_notes_file else "",
+            "editorial_notes_output": str(editorial_notes_path),
             "season": args.season,
             "mode": args.mode,
             "html5up_root": str(html5up_root),
@@ -224,6 +321,7 @@ def main() -> int:
             "validation_command": validation_command,
             "status": "dry-run" if args.dry_run else "success",
             "errors": errors,
+            "warnings": warnings,
         }
         write_manifest(manifest_path, manifest)
         return 0
@@ -234,6 +332,12 @@ def main() -> int:
             "role": args.role,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
+            "target_team": args.target_team,
+            "target_team_id": args.target_team_id,
+            "target_role_peer_ids": args.target_role_peer_ids,
+            "editorial_note": args.editorial_note,
+            "editorial_notes_file": str(args.editorial_notes_file) if args.editorial_notes_file else "",
+            "editorial_notes_output": str(editorial_notes_path),
             "season": args.season,
             "mode": args.mode,
             "html5up_root": str(args.html5up_root or ""),
@@ -242,6 +346,7 @@ def main() -> int:
             "validation_command": None,
             "status": "failed",
             "errors": errors,
+            "warnings": warnings,
         }
         write_manifest(manifest_path, manifest)
         return 2

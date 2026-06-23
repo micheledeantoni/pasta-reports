@@ -33,6 +33,18 @@ DISPLAY_COLUMNS = [
     "minutes",
     "source_file",
 ]
+TARGET_PEER_COLUMNS = [
+    "player_name",
+    "player_id",
+    "team_name",
+    "team_id",
+    "competition",
+    "season",
+    "macro_role",
+    "minutes",
+    "source_file",
+]
+TEAM_COLUMNS = ["team_name", "team_id", "competition", "season", "source_file"]
 
 
 class ResolverError(RuntimeError):
@@ -51,8 +63,16 @@ def parse_args() -> argparse.Namespace:
         description="Find role-report player IDs and suggest same-role comparison players."
     )
     parser.add_argument("--query", help="Partial player name to search for.")
+    parser.add_argument("--query-team", help="Partial team name to search for.")
     parser.add_argument("--player-id", type=int, help="Known subject player ID.")
     parser.add_argument("--list-peers", action="store_true", help="Suggest same-role peer candidates.")
+    parser.add_argument(
+        "--list-target-role-peers",
+        action="store_true",
+        help="Suggest same-role players already in the target team.",
+    )
+    parser.add_argument("--target-team", help="Target team name for destination-squad peer lookup.")
+    parser.add_argument("--target-team-id", type=int, help="Known target team ID.")
     parser.add_argument("--role", choices=ROLE_CHOICES, help="Restrict lookup to one macro role.")
     parser.add_argument("--competition", help="Restrict candidates to this competition.")
     parser.add_argument("--season", help="Restrict candidates to this season, e.g. 2025-2026 or 2526.")
@@ -82,10 +102,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true", help="Print planned data sources without scanning rows.")
     args = parser.parse_args()
 
-    if not args.query and not args.player_id:
-        parser.error("Provide --query or --player-id.")
+    if not any([args.query, args.query_team, args.player_id, args.target_team, args.target_team_id]):
+        parser.error("Provide --query, --query-team, --player-id, --target-team, or --target-team-id.")
     if args.list_peers and not args.player_id:
         parser.error("--list-peers requires --player-id.")
+    if args.list_target_role_peers and not (args.target_team or args.target_team_id):
+        parser.error("--list-target-role-peers requires --target-team or --target-team-id.")
+    if args.list_target_role_peers and not args.role:
+        parser.error("--list-target-role-peers requires --role.")
     if args.limit < 1:
         parser.error("--limit must be >= 1.")
     return args
@@ -265,6 +289,126 @@ def search_players(pool: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame
     return rows
 
 
+def search_teams_in_pool(pool: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
+    rows = apply_common_filters(pool, args)
+    if args.target_team_id:
+        rows = rows[pd.to_numeric(rows["team_id"], errors="coerce").eq(args.target_team_id)]
+    query = args.query_team or args.target_team
+    if query:
+        rows = rows[norm_contains(rows["team_name"], query)]
+    if rows.empty:
+        return pd.DataFrame(columns=TEAM_COLUMNS)
+    rows = rows.copy()
+    rows["_minutes"] = pd.to_numeric(rows["minutes"], errors="coerce").fillna(0)
+    teams = (
+        rows.sort_values(["team_id", "season", "_minutes"], ascending=[True, False, False])
+        .groupby(["team_id", "team_name", "competition", "season", "source_file"], as_index=False, dropna=False)
+        .agg(minutes=("minutes", "sum"))
+        .sort_values(["team_name", "season", "competition"], ascending=[True, False, True])
+    )
+    return teams[TEAM_COLUMNS].reset_index(drop=True)
+
+
+def duckdb_team_fallback(args: argparse.Namespace, roots: DataRoots) -> pd.DataFrame:
+    db_path = next((path for path in roots.duckdb_files if path.exists()), None)
+    if db_path is None:
+        return pd.DataFrame(columns=TEAM_COLUMNS)
+    try:
+        import duckdb
+    except ImportError:
+        return pd.DataFrame(columns=TEAM_COLUMNS)
+
+    query = args.query_team or args.target_team
+    frames = []
+    con = duckdb.connect(str(db_path), read_only=True)
+    try:
+        tables = con.execute(
+            """
+            select table_schema, table_name
+            from information_schema.tables
+            where table_type = 'BASE TABLE'
+            """
+        ).fetchall()
+        for schema, table in tables:
+            cols = {
+                row[3]
+                for row in con.execute(
+                    """
+                    select * from information_schema.columns
+                    where table_schema = ? and table_name = ?
+                    """,
+                    [schema, table],
+                ).fetchall()
+            }
+            if not {"team_id", "team_name"}.issubset(cols):
+                continue
+            qualified = f'"{schema}"."{table}"'
+            where = []
+            params: list[Any] = []
+            if args.target_team_id:
+                where.append("team_id = ?")
+                params.append(args.target_team_id)
+            if query:
+                where.append("lower(cast(team_name as varchar)) like ?")
+                params.append(f"%{query.casefold()}%")
+            if not where:
+                continue
+            sql = f"""
+                select distinct
+                    cast(team_name as varchar) as team_name,
+                    team_id,
+                    '' as competition,
+                    '' as season,
+                    '{db_path}:{schema}.{table}' as source_file
+                from {qualified}
+                where {' and '.join(where)}
+                order by team_name
+                limit 200
+            """
+            frames.append(con.execute(sql, params).fetchdf())
+    finally:
+        con.close()
+    if not frames:
+        return pd.DataFrame(columns=TEAM_COLUMNS)
+    return pd.concat(frames, ignore_index=True).drop_duplicates(subset=["team_id", "team_name"])
+
+
+def resolve_team(pool: pd.DataFrame, args: argparse.Namespace, roots: DataRoots) -> pd.Series:
+    teams = search_teams_in_pool(pool, args)
+    used_duckdb = False
+    if teams.empty:
+        teams = duckdb_team_fallback(args, roots)
+        used_duckdb = not teams.empty
+    if teams.empty:
+        target = f"team_id={args.target_team_id}" if args.target_team_id else f"team query={args.query_team or args.target_team!r}"
+        raise ResolverError(f"no team found for {target}")
+
+    unique = teams.drop_duplicates(subset=["team_id", "team_name"]).reset_index(drop=True)
+    if len(unique) > 1:
+        print("Team candidates" + (" (DuckDB fallback)" if used_duckdb else ""))
+        print_table(teams.head(args.limit), TEAM_COLUMNS)
+        sys.stdout.flush()
+        raise ResolverError(
+            f"team name is ambiguous: {len(unique)} teams match. "
+            "Refine with --target-team-id or a more specific --target-team/--query-team."
+        )
+    team = unique.iloc[0].copy()
+    team["used_duckdb"] = used_duckdb
+    return team
+
+
+def target_role_peers(pool: pd.DataFrame, team: pd.Series, args: argparse.Namespace) -> pd.DataFrame:
+    rows = apply_common_filters(pool, args)
+    rows = rows[pd.to_numeric(rows["team_id"], errors="coerce").eq(int(team["team_id"]))]
+    if rows.empty:
+        raise ResolverError("target role peer candidates not found")
+    rows = rows.copy()
+    if canonical_text(team.get("team_name")):
+        rows["team_name"] = canonical_text(team["team_name"])
+    rows["_minutes"] = pd.to_numeric(rows["minutes"], errors="coerce").fillna(0)
+    return rows.sort_values(["_minutes", "player_name"], ascending=[False, True]).head(args.limit)
+
+
 def load_similarity_scores(features: Path, role: str, player_id: int) -> dict[int, float]:
     suffix = ROLE_TO_SUFFIX[role]
     scores: dict[int, float] = {}
@@ -349,6 +493,10 @@ def print_table(df: pd.DataFrame, columns: list[str]) -> None:
     printable = df[columns].copy()
     for col in printable.columns:
         if col in {"minutes"}:
+            printable[col] = pd.to_numeric(printable[col], errors="coerce").map(
+                lambda v: "" if pd.isna(v) else f"{v:.0f}"
+            )
+        elif col.endswith("_id") or col == "player_id":
             printable[col] = pd.to_numeric(printable[col], errors="coerce").map(
                 lambda v: "" if pd.isna(v) else f"{v:.0f}"
             )
@@ -458,6 +606,39 @@ def main() -> int:
         require_primary_lane(roots.features, roles)
         pool = load_candidate_pool(roots.features, roles, dry_run=args.dry_run)
         if args.dry_run:
+            return 0
+
+        if args.query_team and not args.list_target_role_peers:
+            teams = search_teams_in_pool(pool, args)
+            used_duckdb = False
+            if teams.empty:
+                teams = duckdb_team_fallback(args, roots)
+                used_duckdb = not teams.empty
+            if teams.empty:
+                raise ResolverError(f"no team found for query={args.query_team!r}")
+            if len(teams.drop_duplicates(subset=["team_id", "team_name"])) > args.limit:
+                print_table(teams.head(args.limit), TEAM_COLUMNS)
+                sys.stdout.flush()
+                raise ResolverError(
+                    f"too many ambiguous teams: {len(teams)} matches. "
+                    "Refine with a more specific --query-team."
+                )
+            print("Team candidates" + (" (DuckDB fallback)" if used_duckdb else ""))
+            print_table(teams.head(args.limit), TEAM_COLUMNS)
+            return 0
+
+        if args.list_target_role_peers:
+            team = resolve_team(pool, args, roots)
+            peers = target_role_peers(pool, team, args)
+            print("Target team")
+            print_table(pd.DataFrame([team]), TEAM_COLUMNS)
+            print("\nTarget-team same-role peer candidates (suggestions only; choose manually)")
+            print_table(peers, TARGET_PEER_COLUMNS)
+            ids = ",".join(str(int(pid)) for pid in peers["player_id"].head(6).tolist())
+            print("\nCopy-paste orchestrator target peer args:")
+            print(f'  --target-team "{team["team_name"]}" \\')
+            print(f"  --target-team-id {int(team['team_id'])} \\")
+            print(f"  --target-role-peer-ids {ids or '444,555,666'}")
             return 0
 
         if not args.list_peers:

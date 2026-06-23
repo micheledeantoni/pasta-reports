@@ -17,24 +17,40 @@ automaticamente i comparatori.
 
 Da `/Users/michele/Documents/Data_scouting_app`:
 
+1. Trovare il giocatore analizzato.
+
 ```bash
 make find-player QUERY="paz" ROLE=MID
 ```
 
-Scegliere manualmente il `player_id` corretto dai candidati, poi cercare pari
-ruolo comparabili:
+2. Scegliere manualmente il `player_id` corretto dai candidati, poi trovare
+   comparabili esterni/editoriali dello stesso ruolo.
 
 ```bash
 make find-peers PLAYER_ID=448659 ROLE=MID
 ```
 
-Scegliere manualmente i peer dalla lista suggerita, poi avviare l'export:
+3. Trovare la squadra target.
 
 ```bash
-make role-report ROLE=MID PLAYER_ID=448659 PEERS=111,222,333
+make find-team TEAM="Inter"
 ```
 
-Validare lo stato HTML5UP:
+4. Trovare i pari ruolo gia' presenti nella squadra target.
+
+```bash
+make find-target-role-peers TEAM="Inter" ROLE=MID
+```
+
+5. Scegliere manualmente `PEERS` e, opzionalmente, `TARGET_ROLE_PEERS`, poi
+   avviare l'export. I peer della squadra target sono metadata editoriali:
+   non entrano nel payload esportato.
+
+```bash
+make role-report ROLE=MID PLAYER_ID=448659 PEERS=111,222,333 TARGET_TEAM="Inter" TARGET_ROLE_PEERS=444,555,666 NOTE="Nico Paz evaluated as an internal creativity fit against Inter midfield peers."
+```
+
+6. Validare lo stato HTML5UP.
 
 ```bash
 make role-report-validate ROLE=MID
@@ -45,9 +61,20 @@ Equivalenti Python diretti:
 ```bash
 python scripts/resolve_role_report_players.py --query "paz" --role MID --season 2025-2026
 python scripts/resolve_role_report_players.py --player-id 448659 --list-peers --role MID --season 2025-2026 --min-minutes 900
-python scripts/orchestrate_role_report.py --role MID --player-id 448659 --comparison-player-ids 111,222,333 --mode export
+python scripts/resolve_role_report_players.py --query-team "Inter" --season 2025-2026
+python scripts/resolve_role_report_players.py --target-team "Inter" --list-target-role-peers --role MID --season 2025-2026 --min-minutes 300
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --comparison-player-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode export
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --comparison-player-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode note-only
 python scripts/orchestrate_role_report.py --role MID --mode validate-only
 ```
+
+Nota: `comparison_player_ids` sono comparabili esterni/editoriali scelti
+manualmente. `target_role_peer_ids` sono i pari ruolo della squadra target,
+usati per leggere l'inserimento potenziale nella rosa di destinazione.
+Target-team peers are part of the editorial preparation workflow. They are not
+currently part of the exported payload. L'orchestrator li salva nel manifest e
+in `editorial_notes.md`, ma non li passa all'exporter SoccerDB e non modifica il
+payload del report.
 
 L'orchestrator scrive un manifest in:
 
