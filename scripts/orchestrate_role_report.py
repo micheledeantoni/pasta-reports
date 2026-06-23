@@ -34,7 +34,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mode", choices=MODE_CHOICES, default="export")
     parser.add_argument("--role", choices=ROLE_CHOICES, required=True)
     parser.add_argument("--player-id", type=int)
-    parser.add_argument("--comparison-player-ids", default="")
+    parser.add_argument(
+        "--comparison-player-ids",
+        default="",
+        help="Backward-compatible alias for same-team same-role squad peers.",
+    )
+    parser.add_argument(
+        "--squad-role-peer-ids",
+        default="",
+        help="Same-team, same-role, same-competition, same-season peer IDs passed to the exporter.",
+    )
     parser.add_argument("--target-team")
     parser.add_argument("--target-team-id", type=int)
     parser.add_argument("--target-role-peer-ids", default="")
@@ -45,7 +54,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", type=Path)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--skip-validation", action="store_true")
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.comparison_player_ids and args.squad_role_peer_ids:
+        parser.error("Use only one of --comparison-player-ids or --squad-role-peer-ids.")
+    return args
 
 
 def detect_workspace_root() -> Path:
@@ -101,8 +113,9 @@ def make_export_command(
         "--player-id",
         str(args.player_id),
     ]
-    if args.comparison_player_ids:
-        command.extend(["--comparison-ids", args.comparison_player_ids])
+    squad_role_peer_ids = args.squad_role_peer_ids or args.comparison_player_ids
+    if squad_role_peer_ids:
+        command.extend(["--comparison-ids", squad_role_peer_ids])
     else:
         command.extend(["--comparison-ids", ""])
 
@@ -182,7 +195,8 @@ def write_editorial_notes(
         "",
         f"- Role: `{args.role}`",
         f"- Analyzed player ID: `{args.player_id if args.player_id is not None else ''}`",
-        f"- Comparison player IDs: `{args.comparison_player_ids}`",
+        f"- Squad role peer IDs passed to exporter: `{args.squad_role_peer_ids or args.comparison_player_ids}`",
+        f"- Legacy comparison-player-ids input: `{args.comparison_player_ids}`",
         f"- Target team: `{args.target_team or ''}`",
         f"- Target team ID: `{args.target_team_id if args.target_team_id is not None else ''}`",
         f"- Target role peer IDs: `{args.target_role_peer_ids}`",
@@ -190,6 +204,8 @@ def write_editorial_notes(
         "## Editorial Metadata Notice",
         "",
         EDITORIAL_METADATA_NOTICE,
+        "",
+        "PEERS in the export command means players from the same team, same role, same competition, and same season as the analyzed player.",
         "",
         "## Editorial Note",
         "",
@@ -265,9 +281,10 @@ def main() -> int:
                     f'python scripts/resolve_role_report_players.py --query "paz" --role {args.role}'
                     + (f" --season {args.season}" if args.season else "")
                 )
-            if not args.comparison_player_ids:
+            squad_role_peer_ids = args.squad_role_peer_ids or args.comparison_player_ids
+            if not squad_role_peer_ids:
                 print(
-                    "[info] --comparison-player-ids not provided; continuing because the existing exporter "
+                    "[info] No squad role peer IDs provided; continuing because the existing exporter "
                     "supports an empty comparison group."
                 )
             export_command, export_cwd = make_export_command(args, config, workspace_root)
@@ -307,6 +324,7 @@ def main() -> int:
             "role": args.role,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
+            "squad_role_peer_ids": args.squad_role_peer_ids or args.comparison_player_ids,
             "target_team": args.target_team,
             "target_team_id": args.target_team_id,
             "target_role_peer_ids": args.target_role_peer_ids,
@@ -332,6 +350,7 @@ def main() -> int:
             "role": args.role,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
+            "squad_role_peer_ids": args.squad_role_peer_ids or args.comparison_player_ids,
             "target_team": args.target_team,
             "target_team_id": args.target_team_id,
             "target_role_peer_ids": args.target_role_peer_ids,

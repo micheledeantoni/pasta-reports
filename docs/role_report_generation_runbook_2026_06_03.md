@@ -23,28 +23,29 @@ Da `/Users/michele/Documents/Data_scouting_app`:
 make find-player QUERY="paz" ROLE=MID
 ```
 
-2. Scegliere manualmente il `player_id` corretto dai candidati, poi trovare
-   comparabili esterni/editoriali dello stesso ruolo.
+2. Scegliere manualmente il `player_id` corretto dai candidati, poi trovare i
+   peer di export: stessa squadra, stesso ruolo, stessa competizione e stessa
+   stagione del giocatore analizzato.
 
 ```bash
-make find-peers PLAYER_ID=448659 ROLE=MID
+make find-squad-role-peers PLAYER_ID=448659 ROLE=MID
 ```
 
-3. Trovare la squadra target.
+3. Opzionalmente, trovare la squadra target per preparare note editoriali.
 
 ```bash
 make find-team TEAM="Inter"
 ```
 
-4. Trovare i pari ruolo gia' presenti nella squadra target.
+4. Opzionalmente, trovare i pari ruolo gia' presenti nella squadra target.
 
 ```bash
 make find-target-role-peers TEAM="Inter" ROLE=MID
 ```
 
-5. Scegliere manualmente `PEERS` e, opzionalmente, `TARGET_ROLE_PEERS`, poi
-   avviare l'export. I peer della squadra target sono metadata editoriali:
-   non entrano nel payload esportato.
+5. Scegliere manualmente `PEERS` dalla lista same-team same-role, e
+   opzionalmente `TARGET_ROLE_PEERS` per le note editoriali, poi avviare
+   l'export.
 
 ```bash
 make role-report ROLE=MID PLAYER_ID=448659 PEERS=111,222,333 TARGET_TEAM="Inter" TARGET_ROLE_PEERS=444,555,666 NOTE="Nico Paz evaluated as an internal creativity fit against Inter midfield peers."
@@ -60,17 +61,16 @@ Equivalenti Python diretti:
 
 ```bash
 python scripts/resolve_role_report_players.py --query "paz" --role MID --season 2025-2026
-python scripts/resolve_role_report_players.py --player-id 448659 --list-peers --role MID --season 2025-2026 --min-minutes 900
+python scripts/resolve_role_report_players.py --player-id 448659 --list-squad-role-peers --role MID --season 2025-2026 --min-minutes 300
 python scripts/resolve_role_report_players.py --query-team "Inter" --season 2025-2026
 python scripts/resolve_role_report_players.py --target-team "Inter" --list-target-role-peers --role MID --season 2025-2026 --min-minutes 300
-python scripts/orchestrate_role_report.py --role MID --player-id 448659 --comparison-player-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode export
-python scripts/orchestrate_role_report.py --role MID --player-id 448659 --comparison-player-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode note-only
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --squad-role-peer-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode export
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --squad-role-peer-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode note-only
 python scripts/orchestrate_role_report.py --role MID --mode validate-only
 ```
 
-Nota: `comparison_player_ids` sono comparabili esterni/editoriali scelti
-manualmente. `target_role_peer_ids` sono i pari ruolo della squadra target,
-usati per leggere l'inserimento potenziale nella rosa di destinazione.
+Nota importante: PEERS in the export command means players from the same team,
+same role, same competition, and same season as the analyzed player.
 Target-team peers are part of the editorial preparation workflow. They are not
 currently part of the exported payload. L'orchestrator li salva nel manifest e
 in `editorial_notes.md`, ma non li passa all'exporter SoccerDB e non modifica il

@@ -60,12 +60,31 @@ class DataRoots:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Find role-report player IDs and suggest same-role comparison players."
+        description="Find role-report player IDs and manually chosen candidate groups."
     )
     parser.add_argument("--query", help="Partial player name to search for.")
     parser.add_argument("--query-team", help="Partial team name to search for.")
     parser.add_argument("--player-id", type=int, help="Known subject player ID.")
-    parser.add_argument("--list-peers", action="store_true", help="Suggest same-role peer candidates.")
+    parser.add_argument(
+        "--list-peers",
+        action="store_true",
+        help="Deprecated alias for --list-external-comparison-candidates.",
+    )
+    parser.add_argument(
+        "--list-role-candidates",
+        action="store_true",
+        help="Suggest generic same-role external comparison candidates.",
+    )
+    parser.add_argument(
+        "--list-external-comparison-candidates",
+        action="store_true",
+        help="Suggest generic same-role external comparison candidates.",
+    )
+    parser.add_argument(
+        "--list-squad-role-peers",
+        action="store_true",
+        help="Suggest same-team, same-role, same-competition, same-season peers for export.",
+    )
     parser.add_argument(
         "--list-target-role-peers",
         action="store_true",
@@ -73,6 +92,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--target-team", help="Target team name for destination-squad peer lookup.")
     parser.add_argument("--target-team-id", type=int, help="Known target team ID.")
+    parser.add_argument("--team-id", type=int, help="Disambiguate the analyzed player's team ID.")
     parser.add_argument("--role", choices=ROLE_CHOICES, help="Restrict lookup to one macro role.")
     parser.add_argument("--competition", help="Restrict candidates to this competition.")
     parser.add_argument("--season", help="Restrict candidates to this season, e.g. 2025-2026 or 2526.")
@@ -104,8 +124,14 @@ def parse_args() -> argparse.Namespace:
 
     if not any([args.query, args.query_team, args.player_id, args.target_team, args.target_team_id]):
         parser.error("Provide --query, --query-team, --player-id, --target-team, or --target-team-id.")
-    if args.list_peers and not args.player_id:
-        parser.error("--list-peers requires --player-id.")
+    if args.list_peers:
+        args.list_external_comparison_candidates = True
+    if args.list_role_candidates:
+        args.list_external_comparison_candidates = True
+    if args.list_external_comparison_candidates and not args.player_id:
+        parser.error("--list-external-comparison-candidates requires --player-id.")
+    if args.list_squad_role_peers and not args.player_id:
+        parser.error("--list-squad-role-peers requires --player-id.")
     if args.list_target_role_peers and not (args.target_team or args.target_team_id):
         parser.error("--list-target-role-peers requires --target-team or --target-team-id.")
     if args.list_target_role_peers and not args.role:
@@ -287,6 +313,54 @@ def search_players(pool: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame
         rows = rows[rows["player_id"].eq(args.player_id)]
     rows = rows.sort_values(["player_name", "season", "competition", "minutes"], ascending=[True, False, True, False])
     return rows
+
+
+def subject_candidates(pool: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
+    rows = pool[pool["player_id"].eq(args.player_id)].copy()
+    if args.role:
+        rows = rows[rows["macro_role"].str.upper().eq(args.role)]
+    if args.team_id:
+        rows = rows[pd.to_numeric(rows["team_id"], errors="coerce").eq(args.team_id)]
+    if args.competition:
+        rows = rows[rows["competition"].str.casefold().eq(args.competition.casefold())]
+    seasons = season_variants(args.season)
+    if seasons:
+        rows = rows[rows["season"].astype(str).isin(seasons) | rows["season_display"].astype(str).isin(seasons)]
+    return rows
+
+
+def choose_unambiguous_subject(rows: pd.DataFrame, player_id: int) -> pd.Series:
+    if rows.empty:
+        raise ResolverError(f"no player found for player_id={player_id}")
+    keys = ["team_id", "competition", "season", "macro_role"]
+    unique = rows.drop_duplicates(subset=keys)
+    if len(unique) > 1:
+        print("Analyzed player has multiple role/team/competition/season rows")
+        print_table(unique.sort_values(["season", "competition", "team_id"], ascending=[False, True, True]), TARGET_PEER_COLUMNS)
+        sys.stdout.flush()
+        raise ResolverError(
+            "ambiguous analyzed player context. Re-run with explicit --team-id, --competition, and/or --season."
+        )
+    row = unique.iloc[0].copy()
+    if not canonical_text(row["macro_role"]):
+        raise ResolverError(f"player found but missing role: player_id={player_id}")
+    return row
+
+
+def squad_role_peers(pool: pd.DataFrame, subject: pd.Series, args: argparse.Namespace) -> pd.DataFrame:
+    rows = pool.copy()
+    rows = rows[rows["player_id"].ne(int(subject["player_id"]))]
+    rows = rows[pd.to_numeric(rows["team_id"], errors="coerce").eq(int(subject["team_id"]))]
+    rows = rows[rows["competition"].eq(str(subject["competition"]))]
+    rows = rows[rows["season"].eq(str(subject["season"]))]
+    rows = rows[rows["macro_role"].str.upper().eq(str(subject["macro_role"]).upper())]
+    if args.min_minutes:
+        rows = rows[pd.to_numeric(rows["minutes"], errors="coerce").fillna(0) >= args.min_minutes]
+    if rows.empty:
+        raise ResolverError("squad role peer candidates not found")
+    rows = rows.copy()
+    rows["_minutes"] = pd.to_numeric(rows["minutes"], errors="coerce").fillna(0)
+    return rows.sort_values(["_minutes", "player_name"], ascending=[False, True]).head(args.limit)
 
 
 def search_teams_in_pool(pool: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
@@ -641,7 +715,19 @@ def main() -> int:
             print(f"  --target-role-peer-ids {ids or '444,555,666'}")
             return 0
 
-        if not args.list_peers:
+        if args.list_squad_role_peers:
+            subject = choose_unambiguous_subject(subject_candidates(pool, args), args.player_id)
+            peers = squad_role_peers(pool, subject, args)
+            print("Analyzed player context")
+            print_table(pd.DataFrame([subject]), TARGET_PEER_COLUMNS)
+            print("\nSquad role peers for export (same team, role, competition, and season)")
+            print_table(peers, TARGET_PEER_COLUMNS)
+            ids = ",".join(str(int(pid)) for pid in peers["player_id"].tolist())
+            print("\nCopy-paste orchestrator squad peer args:")
+            print(f"  --squad-role-peer-ids {ids or '111,222,333'}")
+            return 0
+
+        if not args.list_external_comparison_candidates:
             rows = search_players(pool, args)
             used_duckdb = False
             if rows.empty:
@@ -676,7 +762,7 @@ def main() -> int:
         peers = peer_candidates(pool, subject, args, roots.features)
         print("Subject")
         print_table(pd.DataFrame([subject]), DISPLAY_COLUMNS)
-        print("\nPeer candidates (suggestions only; choose manually)")
+        print("\nGeneric external comparison candidates (suggestions only; not squad-role peers)")
         peer_columns = DISPLAY_COLUMNS[:-1] + [
             "same_competition",
             "similarity_score",
