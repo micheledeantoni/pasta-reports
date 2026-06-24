@@ -24,8 +24,9 @@ make find-player QUERY="paz" ROLE=MID
 ```
 
 2. Scegliere manualmente il `player_id` corretto dai candidati, poi trovare i
-   peer di export: stessa squadra, stesso ruolo, stessa competizione e stessa
-   stagione del giocatore analizzato.
+   peer del club sorgente: stessa squadra, stesso ruolo, stessa competizione e
+   stessa stagione del giocatore analizzato. Questi alimentano il contesto
+   sorgente, non il confronto principale.
 
 ```bash
 make find-squad-role-peers PLAYER_ID=448659 ROLE=MID
@@ -37,21 +38,72 @@ make find-squad-role-peers PLAYER_ID=448659 ROLE=MID
 make find-team TEAM="Inter"
 ```
 
-4. Opzionalmente, trovare i pari ruolo gia' presenti nella squadra target.
+4. Trovare i pari ruolo gia' presenti nella squadra target. Per pagine scouting
+   Inter, questi sono il gruppo principale: radar, barre e prima sezione di
+   confronto.
 
 ```bash
 make find-target-role-peers TEAM="Inter" ROLE=MID
 ```
 
-5. Scegliere manualmente `PEERS` dalla lista same-team same-role, e
-   opzionalmente `TARGET_ROLE_PEERS` per le note editoriali, poi avviare
-   l'export.
+5. Scegliere manualmente `PEERS` dalla lista target-team same-role, e
+   `SOURCE_TEAM_PEERS` dalla lista source-team same-role, poi avviare
+   l'export/preparazione.
 
 ```bash
-make role-report ROLE=MID PLAYER_ID=448659 PEERS=111,222,333 TARGET_TEAM="Inter" TARGET_ROLE_PEERS=444,555,666 NOTE="Nico Paz evaluated as an internal creativity fit against Inter midfield peers."
+make role-report ROLE=MID PLAYER_ID=448659 PEERS=444,555,666 SOURCE_TEAM_PEERS=111,222,333 SOURCE_TEAM_PEER_LABEL="Como MID" TARGET_TEAM="Inter" NOTE="Nico Paz evaluated as an internal creativity fit against Inter midfield peers."
 ```
 
-6. Validare lo stato HTML5UP.
+Sintassi Make importante: non mettere spazi attorno a `=` e non inserire spazi
+dentro le liste separate da virgola. Usare `PEERS=425115,424834`, non
+`PEERS= 425115, 424834`. Lo stesso vale per `SOURCE_TEAM_PEERS`.
+
+6. Creare o aggiornare la pagina HTML5UP live.
+
+```bash
+make player-page ROLE=MID PLAYER_ID=448659 PLAYER_NAME="Nico Paz" SLUG=nico-paz PEERS=444,555,666 COMPARISON_LABEL="Inter MID" SOURCE_TEAM_PEERS=111,222,333 SOURCE_TEAM_PEER_LABEL="Como MID" TEAM="Como" COMPETITION="ITA-Serie A" SEASON=2526 TARGET_TEAM="Inter"
+```
+
+`make role-report` prepara l'export e salva metadati editoriali di workflow.
+`make player-page` crea lo snapshot inline, scrive
+`data/report_legacy_payloads/<slug>.legacy_role_payload.json`, aggiorna
+`assets/data/player_index.json` e lancia `generate_pages.py --slug <slug>`.
+
+### Mappa sezioni pagina role report
+
+`oumar-solet.html` e' il modello golden per le pagine ruolo generate.
+La pagina ha queste sezioni, in ordine:
+
+| Sezione pagina | Fonte | Campo / payload | Significato |
+|---|---|---|---|
+| Banner | `player_index.json` + payload minuti | `player_name`, `source_club`, `target_team`, `macro_role`, `competition`, `season`, `PLAYER_META[SUBJECT_ID].mins` | Identita' report e direzione editoriale source → target. |
+| Lettura del profilo | `player_index.json`, fallback payload | `narrative`, fallback `PROFILE_READING.paragraphs` | Lettura sintetica del profilo e fit editoriale. |
+| Profilo sintetico radar | payload | `RADAR_AXES`, `RADAR_DATA`, `COMPARISON_GROUPS` | Assi stilistici normalizzati e selettore confronto. |
+| Confronto individuale | `player_index.json` + payload | `note_confronto`, `TARGET_COMPARISON_BARS` | Barre tecniche contro il gruppo passato come `--comparison-ids`. |
+| Impronta spaziale | `player_index.json` + payload | `note_heatmap`, `HEATMAP_DATA` | Lettura delle quattro mappe; per `DEF` il quarto pannello e' `Azioni difensive`. |
+| Contesto club attuale | `player_index.json` + payload | `note_context`, `source_team_note`, `SOURCE_TEAM_COMPARISON_BARS` | Interpretazione nel club sorgente e, se presente, secondo gruppo contestuale. |
+| Similarita' | `player_index.json` + payload | `note_similarity`, `SIMILARITY_DATA` | Lettura dei profili simili calcolati dall'exporter. |
+
+Campi editoriali supportati in `assets/data/player_index.json`:
+
+```json
+{
+  "narrative": "",
+  "source_team_note": "",
+  "note_confronto": "",
+  "note_heatmap": "",
+  "note_context": "",
+  "note_similarity": ""
+}
+```
+
+Per il workflow corretto attuale, `PEERS` / `--comparison-ids` significa
+pari ruolo della squadra target. Questo e' il modello usato da
+`oumar-solet.html`: Inter DEF alimenta radar, barre principali e similarita'.
+`SOURCE_TEAM_PEERS` / `--context-ids` significa pari ruolo del club sorgente e
+alimenta la sezione "Contesto club attuale".
+
+7. Validare lo stato HTML5UP.
 
 ```bash
 make role-report-validate ROLE=MID
@@ -64,17 +116,71 @@ python scripts/resolve_role_report_players.py --query "paz" --role MID --season 
 python scripts/resolve_role_report_players.py --player-id 448659 --list-squad-role-peers --role MID --season 2025-2026 --min-minutes 300
 python scripts/resolve_role_report_players.py --query-team "Inter" --season 2025-2026
 python scripts/resolve_role_report_players.py --target-team "Inter" --list-target-role-peers --role MID --season 2025-2026 --min-minutes 300
-python scripts/orchestrate_role_report.py --role MID --player-id 448659 --squad-role-peer-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode export
-python scripts/orchestrate_role_report.py --role MID --player-id 448659 --squad-role-peer-ids 111,222,333 --target-team "Inter" --target-role-peer-ids 444,555,666 --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode note-only
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --main-comparison-peer-ids 444,555,666 --source-team-peer-ids 111,222,333 --source-team-peer-label "Como MID" --target-team "Inter" --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode export
+python scripts/orchestrate_role_report.py --role MID --player-id 448659 --main-comparison-peer-ids 444,555,666 --source-team-peer-ids 111,222,333 --source-team-peer-label "Como MID" --target-team "Inter" --editorial-note "Nico Paz evaluated as an internal creativity fit against Inter midfield peers." --mode note-only
+python scripts/create_player_page_from_export.py --role MID --player-id 448659 --player-name "Nico Paz" --slug nico-paz --main-comparison-peer-ids 444,555,666 --comparison-label "Inter MID" --source-team-peer-ids 111,222,333 --source-team-peer-label "Como MID" --team-name "Como" --source-club "Como" --competition "ITA-Serie A" --season 2526 --target-team "Inter" --visibility hidden
 python scripts/orchestrate_role_report.py --role MID --mode validate-only
 ```
 
-Nota importante: PEERS in the export command means players from the same team,
-same role, same competition, and same season as the analyzed player.
-Target-team peers are part of the editorial preparation workflow. They are not
-currently part of the exported payload. L'orchestrator li salva nel manifest e
-in `editorial_notes.md`, ma non li passa all'exporter SoccerDB e non modifica il
-payload del report.
+Nota importante: PEERS in the export command means target-team same-role peers
+for the main comparison/radar group. SOURCE_TEAM_PEERS means current/source-team
+same-role peers for source context. Source-team peers are not mapped to
+`--comparison-ids`.
+
+Esempio DEF Leo Ostigard:
+
+```bash
+make find-squad-role-peers PLAYER_ID=369971 ROLE=DEF
+make find-target-role-peers TEAM="Inter" ROLE=DEF
+make role-report ROLE=DEF PLAYER_ID=369971 PEERS=297390,54968,82399 SOURCE_TEAM_PEERS=425115,424834,494398 SOURCE_TEAM_PEER_LABEL="Genoa DEF" TARGET_TEAM="Inter"
+make player-page ROLE=DEF PLAYER_ID=369971 PLAYER_NAME="Leo Østigård" SLUG=leo-ostigard PEERS=297390,54968,82399 COMPARISON_LABEL="Inter DEF" SOURCE_TEAM_PEERS=425115,424834,494398 SOURCE_TEAM_PEER_LABEL="Genoa DEF" TEAM="Genoa" COMPETITION="ITA-Serie A" SEASON=2526 TARGET_TEAM="Inter"
+```
+
+GUI locale opzionale:
+
+```bash
+make report-builder
+```
+
+Poi aprire `http://127.0.0.1:8011/`. La GUI espone due selettori separati:
+main/radar peers, passati all'exporter come `--comparison-ids`, e source-context
+peers, passati come `--context-ids`.
+
+Per cercare un giocatore senza vincolare subito il ruolo:
+
+```bash
+make find-player-all QUERY="ostigard"
+```
+
+### Hybrid roles / role override
+
+Usare `ROLE` come report/analysis role: e' il ruolo del contesto target, quello
+usato per scegliere i target-team peers, costruire radar/confronti e chiamare
+l'exporter SoccerDB con `--role`.
+
+Usare `SOURCE_ROLE` solo quando il ruolo rilevato nel club sorgente e' diverso
+dal ruolo di valutazione nel club target. Esempio: un esterno/wing-back rilevato
+come `DEF` nel club sorgente ma valutato come `MID` nel contesto Napoli.
+
+Regole:
+
+- non c'e' remapping automatico: l'override va scelto esplicitamente;
+- se `SOURCE_ROLE != ROLE`, serve `ROLE_OVERRIDE_REASON`;
+- i main/radar peers devono essere del target team nel `ROLE` di report;
+- i source-context peers possono essere scelti dal `SOURCE_ROLE`;
+- se i ruoli divergono, i source-context peers restano metadati editoriali e
+  non vengono passati all'exporter come `--context-ids`;
+- non cambiare backend analytics, metriche, radar, PCA, similarity o heatmap.
+
+Esempio DEF → MID:
+
+```bash
+make player-page ROLE=MID SOURCE_ROLE=DEF ROLE_OVERRIDE_REASON="Player is evaluated as a wing-back / wide midfielder in the target-team context." PLAYER_ID=123 PLAYER_NAME="Player Name" SLUG=player-name PEERS=336915,111892,349561 COMPARISON_LABEL="Napoli MID" SOURCE_TEAM_PEERS=111,222 SOURCE_TEAM_PEER_LABEL="Source DEF" TEAM="Union Saint-Gilloise" COMPETITION="BEL-Jupiler Pro League" SEASON=2526 TARGET_TEAM="Napoli"
+```
+
+Nella GUI, la stessa regola vive nella sezione `Role interpretation`: scegliere
+detected/source role, report/analysis role, abilitare `Allow cross-role report`
+e compilare il motivo.
 
 L'orchestrator scrive un manifest in:
 

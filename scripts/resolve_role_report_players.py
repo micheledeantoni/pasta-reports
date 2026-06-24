@@ -83,12 +83,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--list-squad-role-peers",
         action="store_true",
-        help="Suggest same-team, same-role, same-competition, same-season peers for export.",
+        help="Suggest source/current-team same-role peers for source context.",
     )
     parser.add_argument(
         "--list-target-role-peers",
         action="store_true",
-        help="Suggest same-role players already in the target team.",
+        help="Suggest target-team same-role peers for main radar/export comparison.",
     )
     parser.add_argument("--target-team", help="Target team name for destination-squad peer lookup.")
     parser.add_argument("--target-team-id", type=int, help="Known target team ID.")
@@ -706,13 +706,13 @@ def main() -> int:
             peers = target_role_peers(pool, team, args)
             print("Target team")
             print_table(pd.DataFrame([team]), TEAM_COLUMNS)
-            print("\nTarget-team same-role peer candidates (suggestions only; choose manually)")
+            print("\nTarget-team same-role peer candidates for main/radar comparison (suggestions only; choose manually)")
             print_table(peers, TARGET_PEER_COLUMNS)
             ids = ",".join(str(int(pid)) for pid in peers["player_id"].head(6).tolist())
-            print("\nCopy-paste orchestrator target peer args:")
+            print("\nCopy-paste main comparison args:")
             print(f'  --target-team "{team["team_name"]}" \\')
             print(f"  --target-team-id {int(team['team_id'])} \\")
-            print(f"  --target-role-peer-ids {ids or '444,555,666'}")
+            print(f"  --main-comparison-peer-ids {ids or '444,555,666'}")
             return 0
 
         if args.list_squad_role_peers:
@@ -720,11 +720,11 @@ def main() -> int:
             peers = squad_role_peers(pool, subject, args)
             print("Analyzed player context")
             print_table(pd.DataFrame([subject]), TARGET_PEER_COLUMNS)
-            print("\nSquad role peers for export (same team, role, competition, and season)")
+            print("\nSource-team role peers for source context (same team, role, competition, and season)")
             print_table(peers, TARGET_PEER_COLUMNS)
             ids = ",".join(str(int(pid)) for pid in peers["player_id"].tolist())
-            print("\nCopy-paste orchestrator squad peer args:")
-            print(f"  --squad-role-peer-ids {ids or '111,222,333'}")
+            print("\nCopy-paste source context args:")
+            print(f"  --source-team-peer-ids {ids or '111,222,333'}")
             return 0
 
         if not args.list_external_comparison_candidates:

@@ -20,8 +20,12 @@ ROLE_CHOICES = ("GK", "DEF", "MID", "ATT")
 MODE_CHOICES = ("validate-only", "export", "note-only")
 DEFAULT_SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
 EDITORIAL_METADATA_NOTICE = (
-    "Target-team peers are recorded as editorial workflow metadata only. "
-    "They are not passed to the exporter and do not modify the report payload."
+    "Source-team peers are recorded as context workflow metadata and are passed "
+    "only as exporter context IDs when provided. They are not mapped to comparison IDs."
+)
+CROSS_ROLE_CONTEXT_NOTICE = (
+    "Source-team peers are recorded as editorial workflow metadata only because "
+    "source_role differs from report_role. They are not passed to exporter context IDs."
 )
 
 
@@ -33,17 +37,24 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run the conservative role-report workflow.")
     parser.add_argument("--mode", choices=MODE_CHOICES, default="export")
     parser.add_argument("--role", choices=ROLE_CHOICES, required=True)
+    parser.add_argument("--source-role", choices=ROLE_CHOICES)
+    parser.add_argument("--role-override-reason", default="")
+    parser.add_argument("--allow-cross-role-report", action="store_true")
     parser.add_argument("--player-id", type=int)
     parser.add_argument(
         "--comparison-player-ids",
         default="",
-        help="Backward-compatible alias for same-team same-role squad peers.",
+        help="Backward-compatible alias for main comparison peers.",
     )
     parser.add_argument(
         "--squad-role-peer-ids",
         default="",
-        help="Same-team, same-role, same-competition, same-season peer IDs passed to the exporter.",
+        help="Deprecated alias for main comparison peers.",
     )
+    parser.add_argument("--main-comparison-peer-ids", default="")
+    parser.add_argument("--target-team-peer-ids", default="")
+    parser.add_argument("--source-team-peer-ids", default="")
+    parser.add_argument("--source-team-peer-label", default="")
     parser.add_argument("--target-team")
     parser.add_argument("--target-team-id", type=int)
     parser.add_argument("--target-role-peer-ids", default="")
@@ -55,8 +66,26 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--skip-validation", action="store_true")
     args = parser.parse_args()
-    if args.comparison_player_ids and args.squad_role_peer_ids:
-        parser.error("Use only one of --comparison-player-ids or --squad-role-peer-ids.")
+    peer_inputs = [
+        value
+        for value in (
+            args.comparison_player_ids,
+            args.squad_role_peer_ids,
+            args.main_comparison_peer_ids,
+            args.target_team_peer_ids,
+        )
+        if value
+    ]
+    if len(peer_inputs) > 1:
+        parser.error(
+            "Use only one of --main-comparison-peer-ids, --target-team-peer-ids, "
+            "--comparison-player-ids, or --squad-role-peer-ids."
+        )
+    args.source_role = args.source_role or args.role
+    if args.source_role != args.role and not args.allow_cross_role_report:
+        parser.error("--allow-cross-role-report is required when --source-role differs from --role.")
+    if args.source_role != args.role and not args.role_override_reason.strip():
+        parser.error("--role-override-reason is required when --source-role differs from --role.")
     return args
 
 
@@ -96,6 +125,16 @@ def command_text(command: list[str]) -> str:
     return " ".join(command)
 
 
+def selected_main_comparison_peer_ids(args: argparse.Namespace) -> str:
+    return (
+        args.main_comparison_peer_ids
+        or args.target_team_peer_ids
+        or args.squad_role_peer_ids
+        or args.comparison_player_ids
+        or ""
+    ).strip()
+
+
 def make_export_command(
     args: argparse.Namespace,
     config: dict[str, Any],
@@ -113,17 +152,24 @@ def make_export_command(
         "--player-id",
         str(args.player_id),
     ]
-    squad_role_peer_ids = args.squad_role_peer_ids or args.comparison_player_ids
-    if squad_role_peer_ids:
-        command.extend(["--comparison-ids", squad_role_peer_ids])
+    main_comparison_peer_ids = selected_main_comparison_peer_ids(args)
+    if main_comparison_peer_ids:
+        command.extend(["--comparison-ids", main_comparison_peer_ids])
     else:
         command.extend(["--comparison-ids", ""])
+    if args.source_team_peer_ids and args.source_role == args.role:
+        command.extend(
+            [
+                "--context-ids",
+                args.source_team_peer_ids,
+                "--context-label",
+                args.source_team_peer_label or f"Source {args.role}",
+            ]
+        )
 
     optional_map = {
         "player_name": "--player-name",
         "comparison_label": "--comparison-label",
-        "context_ids": "--context-ids",
-        "context_label": "--context-label",
         "colors": "--colors",
         "top_n_sim": "--top-n-sim",
     }
@@ -194,18 +240,24 @@ def write_editorial_notes(
         "# Role Report Editorial Notes",
         "",
         f"- Role: `{args.role}`",
+        f"- Source/detected role: `{args.source_role}`",
+        f"- Report/analysis role: `{args.role}`",
+        f"- Role override reason: `{args.role_override_reason}`",
         f"- Analyzed player ID: `{args.player_id if args.player_id is not None else ''}`",
-        f"- Squad role peer IDs passed to exporter: `{args.squad_role_peer_ids or args.comparison_player_ids}`",
+        f"- Main/radar peer IDs passed to exporter comparison group: `{selected_main_comparison_peer_ids(args)}`",
         f"- Legacy comparison-player-ids input: `{args.comparison_player_ids}`",
+        f"- Source-team context peer IDs: `{args.source_team_peer_ids}`",
+        f"- Source-team context label: `{args.source_team_peer_label}`",
+        f"- Source-context peers exported as context IDs: `{bool(args.source_team_peer_ids and args.source_role == args.role)}`",
         f"- Target team: `{args.target_team or ''}`",
         f"- Target team ID: `{args.target_team_id if args.target_team_id is not None else ''}`",
-        f"- Target role peer IDs: `{args.target_role_peer_ids}`",
+        f"- Deprecated target role peer IDs metadata: `{args.target_role_peer_ids}`",
         "",
         "## Editorial Metadata Notice",
         "",
         EDITORIAL_METADATA_NOTICE,
         "",
-        "PEERS in the export command means players from the same team, same role, same competition, and same season as the analyzed player.",
+        "PEERS in the export command means main comparison players. For Inter scouting pages, this should be target-team same-role peers.",
         "",
         "## Editorial Note",
         "",
@@ -281,11 +333,14 @@ def main() -> int:
                     f'python scripts/resolve_role_report_players.py --query "paz" --role {args.role}'
                     + (f" --season {args.season}" if args.season else "")
                 )
-            squad_role_peer_ids = args.squad_role_peer_ids or args.comparison_player_ids
-            if not squad_role_peer_ids:
-                print(
-                    "[info] No squad role peer IDs provided; continuing because the existing exporter "
-                    "supports an empty comparison group."
+            main_comparison_peer_ids = selected_main_comparison_peer_ids(args)
+            if not main_comparison_peer_ids:
+                raise OrchestratorError(
+                    "missing main comparison peer IDs. For Inter scouting pages, PEERS must be "
+                    "target-team same-role players used by the radar/primary comparison. Run: "
+                    "python scripts/resolve_role_report_players.py "
+                    f"--target-team \"{args.target_team or 'Inter'}\" --list-target-role-peers --role {args.role}"
+                    + (f" --season {args.season}" if args.season else "")
                 )
             export_command, export_cwd = make_export_command(args, config, workspace_root)
             commands_planned.append({"name": "export", "command": export_command, "cwd": str(export_cwd)})
@@ -296,9 +351,10 @@ def main() -> int:
         else:
             print("[3/4] Export skipped for validate-only mode")
 
-        if args.target_team or args.target_team_id is not None or args.target_role_peer_ids:
-            warnings.append(EDITORIAL_METADATA_NOTICE)
-            print(f"[info] {EDITORIAL_METADATA_NOTICE}")
+        if args.source_team_peer_ids or args.target_role_peer_ids:
+            notice = CROSS_ROLE_CONTEXT_NOTICE if args.source_team_peer_ids and args.source_role != args.role else EDITORIAL_METADATA_NOTICE
+            warnings.append(notice)
+            print(f"[info] {notice}")
 
         if args.mode == "note-only":
             print("[4/4] Validation skipped for note-only mode")
@@ -322,9 +378,17 @@ def main() -> int:
 
         manifest = {
             "role": args.role,
+            "source_role": args.source_role,
+            "report_role": args.role,
+            "role_override_reason": args.role_override_reason,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
-            "squad_role_peer_ids": args.squad_role_peer_ids or args.comparison_player_ids,
+            "main_comparison_peer_ids": selected_main_comparison_peer_ids(args),
+            "target_team_peer_ids": selected_main_comparison_peer_ids(args),
+            "source_team_peer_ids": args.source_team_peer_ids,
+            "source_team_peer_label": args.source_team_peer_label,
+            "source_context_exported": bool(args.source_team_peer_ids and args.source_role == args.role),
+            "squad_role_peer_ids": args.squad_role_peer_ids,
             "target_team": args.target_team,
             "target_team_id": args.target_team_id,
             "target_role_peer_ids": args.target_role_peer_ids,
@@ -348,9 +412,17 @@ def main() -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         manifest = {
             "role": args.role,
+            "source_role": args.source_role,
+            "report_role": args.role,
+            "role_override_reason": args.role_override_reason,
             "player_id": args.player_id,
             "comparison_player_ids": args.comparison_player_ids,
-            "squad_role_peer_ids": args.squad_role_peer_ids or args.comparison_player_ids,
+            "main_comparison_peer_ids": selected_main_comparison_peer_ids(args),
+            "target_team_peer_ids": selected_main_comparison_peer_ids(args),
+            "source_team_peer_ids": args.source_team_peer_ids,
+            "source_team_peer_label": args.source_team_peer_label,
+            "source_context_exported": bool(args.source_team_peer_ids and args.source_role == args.role),
+            "squad_role_peer_ids": args.squad_role_peer_ids,
             "target_team": args.target_team,
             "target_team_id": args.target_team_id,
             "target_role_peer_ids": args.target_role_peer_ids,

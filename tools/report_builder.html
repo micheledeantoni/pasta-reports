@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PASTA Report Builder</title>
+  <link rel="stylesheet" href="report_builder.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Report Builder</h1>
+      <p>Build role reports with Solet semantics: target-team peers drive radar, source-team peers drive context.</p>
+    </div>
+    <a id="openPage" class="button subtle" href="http://127.0.0.1:8001/leo-ostigard.html" target="_blank">Open page</a>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>1. Player</h2>
+      <div class="grid two">
+        <label>Search role<select id="searchRole"><option>ALL</option><option selected>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
+        <label>Season<input id="season" value="2526" /></label>
+        <label>Search player<input id="playerQuery" value="ostigard" /></label>
+        <button id="searchPlayer" class="button">Search</button>
+      </div>
+      <div id="playerResults" class="results"></div>
+      <div class="role-interpretation">
+        <h3>Role interpretation</h3>
+        <div class="grid two">
+          <label>Detected/source role<select id="sourceRole"><option>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
+          <label>Report/analysis role<select id="role"><option>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
+          <label class="inline-check"><input id="allowCrossRole" type="checkbox" /> Allow cross-role report</label>
+          <label>Role override reason<input id="roleOverrideReason" placeholder="Required if source role differs from report role" /></label>
+        </div>
+        <p id="roleWarning" class="warn"></p>
+      </div>
+      <div class="grid two">
+        <label>Player ID<input id="playerId" value="369971" /></label>
+        <label>Player name<input id="playerName" value="Leo Østigård" /></label>
+        <label>Slug<input id="slug" value="leo-ostigard" /></label>
+        <label>Source team<input id="teamName" value="Genoa" /></label>
+        <label>Competition<input id="competition" value="ITA-Serie A" /></label>
+        <label>Target team<input id="targetTeam" value="Inter" /></label>
+        <label>Visibility<select id="visibility"><option>hidden</option><option>public</option></select></label>
+        <label>Report status<select id="reportStatus"><option>live</option><option>draft</option></select></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Peers</h2>
+      <div class="peer-block main-peer">
+        <h3>Main comparison peers — used by exporter/radar</h3>
+        <p>Uses report/analysis role.</p>
+        <div class="grid two">
+          <label>Target team search<input id="targetPeerTeam" value="Inter" /></label>
+          <label>Min minutes<input id="targetMinMinutes" value="300" /></label>
+        </div>
+        <button id="loadTargetPeers" class="button">Load target peers</button>
+        <div id="targetPeers" class="checkbox-list"></div>
+      </div>
+      <div class="peer-block source-peer">
+        <h3>Source-team context peers — used for editorial/source context</h3>
+        <p>Uses detected/source role by default. If roles differ, these are editorial metadata only.</p>
+        <label>Min minutes<input id="sourceMinMinutes" value="300" /></label>
+        <button id="loadSourcePeers" class="button">Load source peers</button>
+        <div id="sourcePeers" class="checkbox-list"></div>
+      </div>
+      <div class="grid two">
+        <label>Comparison label<input id="comparisonLabel" value="Inter DEF" /></label>
+        <label>Source context label<input id="sourcePeerLabel" value="Genoa DEF" /></label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Editorial</h2>
+      <button id="generatePrompt" class="button">Generate LLM prompt</button>
+      <textarea id="promptBox" class="mono" rows="10" placeholder="Prompt appears here"></textarea>
+      <textarea id="jsonPaste" class="mono" rows="8" placeholder='Paste JSON with narrative, source_team_note, note_confronto, note_heatmap, note_context, note_similarity'></textarea>
+      <button id="applyJson" class="button">Apply pasted JSON</button>
+      <label>narrative<textarea id="narrative" rows="4"></textarea></label>
+      <label>source_team_note<textarea id="sourceTeamNote" rows="2"></textarea></label>
+      <label>note_confronto<textarea id="noteConfronto" rows="3"></textarea></label>
+      <label>note_heatmap<textarea id="noteHeatmap" rows="3"></textarea></label>
+      <label>note_context<textarea id="noteContext" rows="3"></textarea></label>
+      <label>note_similarity<textarea id="noteSimilarity" rows="3"></textarea></label>
+    </section>
+
+    <section class="panel wide">
+      <h2>4. Review and Run</h2>
+      <div id="review" class="review"></div>
+      <div class="actions">
+        <button id="dryRun" class="button">Dry-run</button>
+        <button id="createPage" class="button primary">Create page</button>
+        <button id="regenCards" class="button">Regenerate cards/listing</button>
+      </div>
+      <pre id="output" class="output"></pre>
+    </section>
+  </main>
+  <script src="report_builder.js"></script>
+</body>
+</html>

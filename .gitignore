@@ -8,9 +8,15 @@ scripts/*
 !scripts/
 !scripts/resolve_role_report_players.py
 !scripts/orchestrate_role_report.py
+!scripts/create_player_page_from_export.py
 outputs/
 config/
 tools/
+!tools/
+!tools/report_builder.html
+!tools/report_builder.js
+!tools/report_builder.css
+!tools/report_builder_server.py
 data/report_payload_v1_examples/
 data/editorial/
 !Makefile
