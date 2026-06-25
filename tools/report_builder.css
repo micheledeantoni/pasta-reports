@@ -160,6 +160,41 @@ textarea { resize: vertical; }
   min-height: 120px;
   overflow: auto;
 }
+.override-panel {
+  margin-top: .75rem;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid #b45309;
+  border-radius: 8px;
+  background: #fffbeb;
+}
+.override-status { font-size: .85rem; margin-bottom: .5rem; }
+.override-status .tag {
+  display: inline-block;
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  font-size: .75rem;
+  font-weight: 650;
+}
+.override-status .tag.yes { background: #d1fae5; color: #065f46; }
+.override-status .tag.no { background: #fee2e2; color: #991b1b; }
+.override-status .tag.warn { background: #fef3c7; color: #92400e; }
+.override-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.override-output {
+  white-space: pre-wrap;
+  font-size: .78rem;
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: .5rem;
+  margin-top: .5rem;
+  max-height: 200px;
+  overflow: auto;
+  display: none;
+}
+.review .block-status { font-size: .82rem; }
+.review .block-status .available { color: #065f46; }
+.review .block-status .unavailable { color: #991b1b; }
 @media (max-width: 980px) {
   .layout { grid-template-columns: 1fr; }
   .grid.two { grid-template-columns: 1fr; }

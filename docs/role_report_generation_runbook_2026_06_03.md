@@ -828,3 +828,95 @@ python3 scripts/exports/build_gk_page_v1_payloads.py 118667 35758 321236
 Nota importante: `export_gk_report_data.py` e' legacy per injection inline e puo'
 fallire se `gk_report.html` non contiene piu' marker `DATA:START` / `DATA:END`.
 Nel sito attuale usare payload JSON esterno e loader GK.
+
+---
+
+## Manual role override / role projection
+
+### When to use
+
+When a player is classified in one role by SoccerDB (e.g. MID) but you want to
+evaluate them against a different role group in the target team (e.g. DEF for a
+wing-back / fullback profile at Napoli).
+
+### What it does
+
+This is **not** copying MID percentiles into DEF. The override system:
+
+1. Reads the player's raw event data (tackles, passes, carries, etc.) from the
+   position-agnostic source files.
+2. Runs the exact same DEF metric computation pipeline on that player's data.
+3. Appends the resulting row to the DEF cohort.
+4. Recomputes z-scores and percentiles for the **entire** DEF cohort with the
+   override player included, so percentiles are honest DEF-cohort rankings.
+5. Rebuilds volume and action-mix similarity against the DEF cohort.
+6. Writes all outputs as `_with_overrides` variants — canonical parquet files
+   are never modified.
+
+### Block availability
+
+| Block | Status |
+|-------|--------|
+| Radar | Available |
+| Metric bars | Available |
+| Heatmap | Available — rebuilt from position-agnostic spatial/event data |
+| Volume similarity | Available |
+| Action mix similarity | Available |
+| Territorial similarity | Available — rebuilt from spatial grid features |
+| PCA | Not rebuilt — not used in report rendering |
+
+### How to use (GUI)
+
+1. Select a player (e.g. search for a MID player).
+2. Set **Report/analysis role** to the target role (e.g. DEF).
+3. Enable **Allow cross-role report**.
+4. Fill in the **Role override reason**.
+5. The override panel appears:
+   - Click **Create / update manual role override** to register the override.
+   - Click **Rebuild override artifacts** to run the SoccerDB pipeline.
+   - Wait for the build to complete (30–60 seconds).
+6. The panel shows block availability after rebuild.
+7. Proceed with peer selection and page generation as normal.
+8. The `--use-manual-role-overrides` flag is passed automatically.
+
+### How to use (CLI)
+
+```bash
+# 1. Add entry to override registry
+# Edit: SoccerDB/config/manual_role_overrides.csv
+
+# 2. Build override artifacts
+cd /Users/michele/Documents/SoccerDB
+.venv/bin/python scripts/build_manual_role_override_artifacts.py
+
+# 3. Generate page with override
+cd /Users/michele/Documents/Data_scouting_app/html5up-forty
+python scripts/create_player_page_from_export.py \
+  --role DEF --source-role MID \
+  --player-id 355377 --player-name "Dennis Eckert Ayensa" \
+  --slug dennis-eckert-ayensa \
+  --main-comparison-peer-ids "361252,399358" \
+  --comparison-label "Napoli DEF" \
+  --team-name "Union Saint-Gilloise" \
+  --competition "BEL-Jupiler Pro League" \
+  --season 2526 \
+  --target-team Napoli \
+  --role-override-reason "Wing-back/fullback profile in Napoli context" \
+  --use-manual-role-overrides
+```
+
+### Provenance
+
+Override pages carry provenance in the payload's `PAGE_META`:
+
+```json
+{
+  "is_manual_role_override": true,
+  "source_role": "MID",
+  "role_override_reason": "Evaluated as wing-back/fullback profile in Napoli context"
+}
+```
+
+The player_index.json entry includes `source_role`, `report_role`, and
+`role_override_reason` fields, plus a note_context prepend explaining the
+role projection.

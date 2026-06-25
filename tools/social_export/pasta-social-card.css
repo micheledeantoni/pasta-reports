@@ -1,0 +1,172 @@
+:root {
+    --paper: #f3eadc;
+    --paper-soft: #f8f1e7;
+    --ink: #171310;
+    --ink-soft: #4d443c;
+    --rule: #221b16;
+    --stankovic: #244f73;
+    --comparison-one: #b5753d;
+    --comparison-two: #74835b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background: #d8d0c2;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.social-export-controls {
+    width: min(920px, calc(100vw - 48px));
+    margin: 28px auto 0;
+    padding: 18px 20px;
+    display: grid;
+    gap: 12px;
+    background: #f8f1e7;
+    border: 1px solid rgba(28, 21, 16, .22);
+    color: var(--ink-soft);
+    box-shadow: 0 14px 38px rgba(29, 24, 18, .12);
+}
+
+.social-export-controls > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.social-export-controls strong,
+.social-export-controls label {
+    color: var(--ink);
+    font-weight: 800;
+}
+
+.social-export-controls textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 10px 12px;
+    border: 1px solid rgba(28, 21, 16, .24);
+    background: #fffaf2;
+    color: var(--ink);
+    font: 15px/1.45 Arial, Helvetica, sans-serif;
+}
+
+.social-export-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.social-export-actions button {
+    appearance: none;
+    border: 1px solid var(--rule);
+    background: var(--rule);
+    color: var(--paper-soft);
+    padding: 10px 14px;
+    font: 800 13px/1 Arial, Helvetica, sans-serif;
+    letter-spacing: .04em;
+    cursor: pointer;
+}
+
+.social-export-actions button + button {
+    background: transparent;
+    color: var(--rule);
+}
+
+.social-export-shell {
+    min-height: 100vh;
+    padding: 48px;
+    display: grid;
+    place-items: center;
+}
+
+.social-card {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.social-card--radar-only {
+    display: grid;
+    place-items: center;
+    padding: 74px 80px 62px;
+}
+
+.social-radar-panel {
+    position: relative;
+    z-index: 2;
+    width: 920px;
+}
+
+.social-radar-frame {
+    width: 820px;
+    height: 820px;
+    margin: 0 auto;
+}
+
+.social-radar-frame canvas {
+    display: block;
+    width: 820px !important;
+    height: 820px !important;
+}
+
+.social-radar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    margin-top: 24px;
+    color: var(--ink-soft);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.social-radar-legend-item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.social-radar-legend-swatch {
+    width: 42px;
+    height: 6px;
+    margin-right: 13px;
+    flex: 0 0 auto;
+}
+
+html[data-export-mode="true"],
+html[data-export-mode="true"] body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: transparent;
+}
+
+html[data-export-mode="true"] .social-export-controls {
+    display: none;
+}
+
+html[data-export-mode="true"] .social-export-shell {
+    width: 1080px;
+    height: 1080px;
+    min-height: 0;
+    padding: 0;
+}
+
+html[data-export-mode="true"] .social-card {
+    box-shadow: none;
+    border: 0;
+}

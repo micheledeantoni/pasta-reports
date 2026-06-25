@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Private PASTA social export — home banner 1200×630 -->
+<meta charset="utf-8">
+<style>
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1200px; height: 630px; overflow: hidden; }
+
+/* ── PASTA theme tokens (hardcoded — no variable lookup needed) ── */
+/* --ei2-bg:      #f6f2ec  */
+/* --ei2-ink:     #1c1917  */
+/* --ei2-ink-2:   #44403c  */
+/* --ei2-muted:   #78716c  */
+/* --ei2-faint:   #a8a29e  */
+/* --ei2-border:  #ddd6cc  */
+/* --ei2-accent:  #831843  */
+
+/* ── Shell ──────────────────────────────────────────────────── */
+body {
+    background: #f0ebe3;          /* slightly deeper parchment for depth */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    position: relative;
+}
+
+/* Top rule */
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: #1c1917;
+}
+
+/* ── Ghost letter ────────────────────────────────────────────── */
+.deco {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 560px;
+    font-weight: 900;
+    letter-spacing: -.06em;
+    color: rgba(28, 25, 23, .055);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* ── Left column ─────────────────────────────────────────────── */
+.left {
+    position: absolute;
+    left: 80px;
+    top: 0; bottom: 0;
+    width: 580px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+}
+
+.site-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ddd6cc;
+}
+
+.wordmark {
+    font-size: 128px;
+    font-weight: 900;
+    line-height: .88;
+    letter-spacing: -.045em;
+    color: #1c1917;
+    margin-bottom: 26px;
+}
+
+.desc {
+    font-size: 19px;
+    line-height: 1.65;
+    color: #78716c;
+    margin-bottom: 36px;
+    max-width: 440px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: #831843;
+    border: 1.5px solid rgba(131, 24, 67, .30);
+    background: rgba(131, 24, 67, .05);
+    padding: 10px 18px;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+.badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #831843;
+    flex-shrink: 0;
+}
+
+/* ── Separator ───────────────────────────────────────────────── */
+.sep {
+    position: absolute;
+    left: 700px;
+    top: 80px; bottom: 80px;
+    width: 1px;
+    background: #ddd6cc;
+}
+
+/* ── Right column ────────────────────────────────────────────── */
+.right {
+    position: absolute;
+    left: 740px; right: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.stat { padding: 20px 0; }
+.stat + .stat { border-top: 1px solid #ddd6cc; }
+
+.stat-val {
+    font-size: 38px;
+    font-weight: 800;
+    color: #1c1917;
+    letter-spacing: -.03em;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+.stat-val.accent { color: #831843; }
+
+.stat-key {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-bottom: 3px;
+}
+
+.stat-sub {
+    font-size: 13px;
+    color: #78716c;
+}
+</style>
+</head>
+<body>
+
+<div class="deco" aria-hidden="true">P</div>
+
+<!-- Left -->
+<div class="left">
+    <span class="site-label">pasta-reports.com</span>
+    <h1 class="wordmark">PASTA</h1>
+    <p class="desc">Scouting data-driven per leggere il mercato calcistico. Metriche avanzate, confronto visivo e logica replicabile.</p>
+    <div class="badge">
+        <span class="badge-dot"></span>
+        Player Analysis System for Transfer Assessment
+    </div>
+</div>
+
+<!-- Divider -->
+<div class="sep" aria-hidden="true"></div>
+
+<!-- Right -->
+<div class="right">
+    <div class="stat">
+        <div class="stat-val">6</div>
+        <div class="stat-key">Profili analizzati</div>
+        <div class="stat-sub">MID · ATT · DEF · GK</div>
+    </div>
+    <div class="stat">
+        <div class="stat-val">2025–26</div>
+        <div class="stat-key">Stagione</div>
+        <div class="stat-sub">Serie A · Premier League</div>
+    </div>
+    <div class="stat">
+        <div class="stat-val accent">Live</div>
+        <div class="stat-key">Report attivi</div>
+        <div class="stat-sub">Dati, contesto e compatibilità</div>
+    </div>
+</div>
+
+</body>
+</html>

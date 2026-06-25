@@ -34,11 +34,19 @@
           <label>Role override reason<input id="roleOverrideReason" placeholder="Required if source role differs from report role" /></label>
         </div>
         <p id="roleWarning" class="warn"></p>
+        <div id="overridePanel" class="override-panel" style="display:none;">
+          <div id="overrideStatus" class="override-status"></div>
+          <div class="override-actions">
+            <button id="createOverride" class="button" type="button">Create / update manual role override</button>
+            <button id="rebuildOverrides" class="button" type="button">Rebuild override artifacts</button>
+          </div>
+          <pre id="overrideOutput" class="override-output"></pre>
+        </div>
       </div>
       <div class="grid two">
         <label>Player ID<input id="playerId" value="369971" /></label>
         <label>Player name<input id="playerName" value="Leo Østigård" /></label>
-        <label>Slug<input id="slug" value="leo-ostigard" /></label>
+        <label>Slug<input id="slug" value="leo-ostigard" readonly /></label>
         <label>Source team<input id="teamName" value="Genoa" /></label>
         <label>Competition<input id="competition" value="ITA-Serie A" /></label>
         <label>Target team<input id="targetTeam" value="Inter" /></label>
@@ -75,7 +83,7 @@
     <section class="panel">
       <h2>3. Editorial</h2>
       <button id="generatePrompt" class="button">Generate LLM prompt</button>
-      <textarea id="promptBox" class="mono" rows="10" placeholder="Prompt appears here"></textarea>
+      <textarea id="promptBox" class="mono" rows="18" placeholder="Prompt with editorial brief appears here"></textarea>
       <textarea id="jsonPaste" class="mono" rows="8" placeholder='Paste JSON with narrative, source_team_note, note_confronto, note_heatmap, note_context, note_similarity'></textarea>
       <button id="applyJson" class="button">Apply pasted JSON</button>
       <label>narrative<textarea id="narrative" rows="4"></textarea></label>

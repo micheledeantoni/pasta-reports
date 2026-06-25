@@ -91,13 +91,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--soccerdb-root", type=Path, default=SOCCERDB_ROOT)
+    parser.add_argument(
+        "--use-manual-role-overrides",
+        action="store_true",
+        help="Pass --use-manual-role-overrides to the SoccerDB exporter for cross-role override players.",
+    )
     args = parser.parse_args()
     args.source_role = args.source_role or args.role
     if not args.main_comparison_peer_ids:
         parser.error("--main-comparison-peer-ids / --target-team-peer-ids is required.")
     if args.source_role != args.role and not args.role_override_reason.strip():
         parser.error("--role-override-reason is required when --source-role differs from --role.")
-    if args.source_role != args.role:
+    if args.source_role != args.role and not args.use_manual_role_overrides:
         args.source_context_editorial_only = True
     return args
 
@@ -386,6 +391,10 @@ def main() -> int:
             "--output",
             str(snapshot_path),
         ]
+        if args.use_manual_role_overrides:
+            export_command.append("--use-manual-role-overrides")
+            if args.source_role != args.role:
+                export_command.extend(["--source-context-role", args.source_role])
         if args.source_team_peer_ids and not args.source_context_editorial_only:
             export_command.extend(
                 [

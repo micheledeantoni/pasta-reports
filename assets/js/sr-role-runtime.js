@@ -187,6 +187,8 @@ function initRoleReport() {
         // Each stored axis score (0-100 role-minmax) is linearly rescaled into
         // the population range so every axis has equal visual headroom.
         // Stored DATA values are never modified; this is display-only.
+        const radarMax  = 85;
+        const radarStep = 20;
         const _axisRanges = (typeof RADAR_AXIS_RANGES !== "undefined" && Array.isArray(RADAR_AXIS_RANGES))
             ? RADAR_AXIS_RANGES : null;
         function normAxisVals(rawArr) {
@@ -194,7 +196,8 @@ function initRoleReport() {
             return rawArr.map((v, i) => {
                 const r = _axisRanges[i];
                 if (!r || r.max <= r.min || !Number.isFinite(v)) return v;
-                return Math.round(Math.min(1, Math.max(0, (v - r.min) / (r.max - r.min))) * 10000) / 100;
+                const scaled = Math.round(Math.min(1, Math.max(0, (v - r.min) / (r.max - r.min))) * 10000) / 100;
+                return Math.min(scaled, radarMax);
             });
         }
         const normSubjectValues  = normAxisVals(subjectValues);
@@ -329,8 +332,7 @@ function initRoleReport() {
         // 59–94% of the radius instead of 50–80% with radarMax=100.
         // Truly exceptional players (>85) visually reach or slightly exceed the
         // outer ring — which is accurate and matches how DATAMB-style radars look.
-        const radarMax  = 85;
-        const radarStep = 20;   // rings at 20 / 40 / 60 / 80 (clean 4-ring grid)
+        // radarMax and radarStep are declared earlier (before normAxisVals)
 
         const radarChart = new Chart(ctx, {
             type: "radar",

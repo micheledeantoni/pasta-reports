@@ -4,6 +4,7 @@ const state = {
   sourcePeers: [],
   selectedTargetPeerIds: new Set(["297390", "54968", "82399"]),
   selectedSourcePeerIds: new Set(["425115", "494398", "505567"]),
+  overrideStatus: null,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -18,6 +19,23 @@ function checked(id) {
 
 function setValue(id, next) {
   $(id).value = next || "";
+}
+
+function slugifyName(raw) {
+  return String(raw || "")
+    .trim()
+    .toLowerCase()
+    .replace(/ø/g, "o")
+    .replace(/đ|ð/g, "d")
+    .replace(/ß/g, "ss")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function syncSlugFromName() {
+  setValue("slug", slugifyName(value("playerName")));
 }
 
 function idsFromSet(set) {
@@ -98,9 +116,7 @@ function renderPlayerResults() {
           setValue("role", selected.macro_role);
         }
       }
-      if (!value("slug")) {
-        setValue("slug", selected.player_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""));
-      }
+      syncSlugFromName();
       updateLabels();
       updateReview();
     }));
@@ -141,6 +157,15 @@ function selectedPlayers(players, selectedSet) {
   return [...selectedSet].map((id) => byId.get(id) || { player_id: id, player_name: "Missing in loaded list", availability: "not loaded" });
 }
 
+function keepOnlyLoaded(players, selectedSet) {
+  const loaded = new Set(players.map((player) => String(player.player_id)));
+  [...selectedSet].forEach((id) => {
+    if (!loaded.has(String(id))) {
+      selectedSet.delete(id);
+    }
+  });
+}
+
 function sourceContextExported() {
   return sourceRole() === reportRole();
 }
@@ -159,8 +184,99 @@ function validationErrors() {
   return errors;
 }
 
+function needsOverride() {
+  return sourceRole() !== reportRole() && state.overrideStatus && !state.overrideStatus.in_canonical;
+}
+
+function overrideReady() {
+  return state.overrideStatus && state.overrideStatus.in_overrides;
+}
+
+async function checkOverrideStatus() {
+  if (sourceRole() === reportRole()) {
+    state.overrideStatus = null;
+    $("overridePanel").style.display = "none";
+    return;
+  }
+  const url = `/api/check_role_override?player_id=${encodeURIComponent(value("playerId"))}&source_role=${encodeURIComponent(sourceRole())}&report_role=${encodeURIComponent(reportRole())}&season=${encodeURIComponent(value("season"))}`;
+  const status = await getJson(url);
+  state.overrideStatus = status;
+
+  const panel = $("overridePanel");
+  const statusDiv = $("overrideStatus");
+  panel.style.display = "block";
+
+  const tag = (yes, label) => `<span class="tag ${yes ? "yes" : "no"}">${label}: ${yes ? "yes" : "no"}</span>`;
+  const warnTag = (label) => `<span class="tag warn">${label}</span>`;
+
+  if (status.in_canonical) {
+    statusDiv.innerHTML = `${tag(true, `In canonical ${status.report_role}`)} Player exists in canonical ${status.report_role} metrics. No override needed.`;
+    panel.style.display = "none";
+    return;
+  }
+
+  let html = `<p><strong>Player not found in canonical ${escapeHtml(status.report_role)} metrics. Manual role override required.</strong></p>`;
+  html += `<p>${tag(false, "Canonical " + status.report_role)} `;
+  html += `${tag(status.override_registered, "Override registered")} `;
+  html += `${tag(status.in_overrides, "Override artifacts built")} `;
+  html += `</p>`;
+
+  if (status.in_overrides) {
+    const b = status.available_blocks;
+    html += `<p>Available blocks: `;
+    html += b.radar ? tag(true, "Radar") + " " : tag(false, "Radar") + " ";
+    html += b.metric_bars ? tag(true, "Metric bars") + " " : tag(false, "Metric bars") + " ";
+    html += b.heatmap ? tag(true, "Heatmap") + " " : warnTag("Heatmap unavailable") + " ";
+    html += b.volume_similarity ? tag(true, "Volume sim") + " " : warnTag("Volume sim unavailable") + " ";
+    html += b.action_mix_similarity ? tag(true, "Action mix sim") + " " : warnTag("Action mix sim unavailable") + " ";
+    html += b.territorial_similarity ? tag(true, "Territorial sim") + " " : warnTag("Territorial sim unavailable") + " ";
+    html += b.pca ? tag(true, "PCA") + " " : warnTag("PCA unavailable") + " ";
+    html += `</p>`;
+  }
+
+  statusDiv.innerHTML = html;
+  updateReview();
+}
+
+async function createOverride() {
+  const reason = value("roleOverrideReason");
+  if (!reason) {
+    $("overrideOutput").style.display = "block";
+    $("overrideOutput").textContent = "Error: role override reason is required.";
+    return;
+  }
+  const payload = {
+    player_id: value("playerId"),
+    player_name: value("playerName"),
+    source_role: sourceRole(),
+    report_role: reportRole(),
+    season: value("season"),
+    competition: value("competition"),
+    team_name: value("teamName"),
+    target_team: value("targetTeam"),
+    reason,
+  };
+  const out = $("overrideOutput");
+  out.style.display = "block";
+  out.textContent = "Writing override to CSV...";
+  const result = await postJson("/api/upsert_role_override", payload);
+  out.textContent = `Override ${result.action}: ${JSON.stringify(result.row, null, 2)}`;
+  await checkOverrideStatus();
+}
+
+async function rebuildOverrides() {
+  const out = $("overrideOutput");
+  out.style.display = "block";
+  out.textContent = "Rebuilding override artifacts... this may take 30–60 seconds.";
+  const result = await postJson("/api/rebuild_override_artifacts", {});
+  out.textContent = result.ok
+    ? `Build complete.\n\n${result.stdout}`
+    : `Build failed (exit ${result.returncode}).\n\nstdout:\n${result.stdout}\n\nstderr:\n${result.stderr}`;
+  await checkOverrideStatus();
+}
+
 function buildPayload() {
-  return {
+  const payload = {
     role: reportRole(),
     report_role: reportRole(),
     source_role: sourceRole(),
@@ -188,6 +304,10 @@ function buildPayload() {
     note_context: value("noteContext"),
     note_similarity: value("noteSimilarity"),
   };
+  if (needsOverride() && overrideReady()) {
+    payload.use_manual_role_overrides = true;
+  }
+  return payload;
 }
 
 function updateLabels() {
@@ -209,6 +329,20 @@ function updateReview() {
     ? ""
     : `This page will be generated as ${reportRole()} although the player was found as ${sourceRole()}.`;
   $("roleWarning").textContent = roleWarning;
+  const isOverrideMode = needsOverride() && overrideReady();
+  const modeLabel = isOverrideMode ? "Manual role override report" : "Canonical role report";
+
+  let blocksHtml = "";
+  if (state.overrideStatus && sourceRole() !== reportRole()) {
+    const b = state.overrideStatus.available_blocks;
+    const s = (ok, label) => `<span class="${ok ? "available" : "unavailable"}">${label}: ${ok ? "available" : "unavailable"}</span>`;
+    blocksHtml = `<div class="block-status">
+      <h3>Block availability</h3>
+      <p>${s(b.radar, "Radar")} · ${s(b.metric_bars, "Metric bars")} · ${s(b.heatmap, "Heatmap")} · ${s(b.volume_similarity, "Volume similarity")} · ${s(b.action_mix_similarity, "Action mix similarity")} · ${s(b.territorial_similarity, "Territorial similarity")} · ${s(b.pca, "PCA")}</p>
+      ${!b.heatmap ? '<p class="warn">Heatmap is unavailable for this override player. The page will generate without heatmap data.</p>' : ""}
+    </div>`;
+  }
+
   $("review").innerHTML = `
     <div class="review-grid">
       <div>
@@ -217,10 +351,12 @@ function updateReview() {
       </div>
       <div>
         <h3>Role interpretation</h3>
+        <p>Mode: <strong>${escapeHtml(modeLabel)}</strong></p>
         <p>Source: ${escapeHtml(sourceRole())} · Report/exporter: ${escapeHtml(reportRole())}</p>
         ${roleWarning ? `<p class="warn">${escapeHtml(roleWarning)}</p>` : ""}
         <p>${escapeHtml(value("roleOverrideReason") || "No override reason")}</p>
       </div>
+      ${blocksHtml}
       <div>
         <h3>Main/radar peers: ${escapeHtml(value("comparisonLabel"))}</h3>
         <p>Uses report role ${escapeHtml(reportRole())}; passed to exporter as comparison IDs.</p>
@@ -256,6 +392,7 @@ async function loadTargetPeers() {
   const url = `/api/target_peers?role=${encodeURIComponent(reportRole())}&team=${encodeURIComponent(value("targetPeerTeam"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("targetMinMinutes"))}`;
   const payload = await getJson(url);
   state.targetPeers = payload.players || [];
+  keepOnlyLoaded(state.targetPeers, state.selectedTargetPeerIds);
   renderCheckboxList("targetPeers", state.targetPeers, state.selectedTargetPeerIds, "No target-team peers found.");
   updateReview();
 }
@@ -264,6 +401,7 @@ async function loadSourcePeers() {
   const url = `/api/source_peers?role=${encodeURIComponent(sourceRole())}&player_id=${encodeURIComponent(value("playerId"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("sourceMinMinutes"))}`;
   const payload = await getJson(url);
   state.sourcePeers = payload.players || [];
+  keepOnlyLoaded(state.sourcePeers, state.selectedSourcePeerIds);
   renderCheckboxList("sourcePeers", state.sourcePeers, state.selectedSourcePeerIds, payload.error || "No source-team peers found.");
   updateReview();
 }
@@ -346,6 +484,11 @@ function bind(id, event, fn) {
   $(id).addEventListener("change", () => { updateLabels(); updateReview(); });
 });
 
+$("playerName").addEventListener("input", () => {
+  syncSlugFromName();
+  updateReview();
+});
+
 bind("searchPlayer", "click", searchPlayers);
 bind("loadTargetPeers", "click", loadTargetPeers);
 bind("loadSourcePeers", "click", loadSourcePeers);
@@ -354,6 +497,12 @@ bind("applyJson", "click", applyJson);
 bind("dryRun", "click", () => runEndpoint("/api/dry_run"));
 bind("createPage", "click", () => runEndpoint("/api/create_page"));
 bind("regenCards", "click", () => runEndpoint("/api/regenerate_cards"));
+bind("createOverride", "click", createOverride);
+bind("rebuildOverrides", "click", rebuildOverrides);
+
+["sourceRole", "role", "playerId", "allowCrossRole"].forEach((id) => {
+  $(id).addEventListener("change", () => checkOverrideStatus().catch(() => {}));
+});
 
 updateLabels();
 updateReview();

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Private PASTA social export tool. Not linked from public site. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Private PASTA Social Card Export — Stankovic</title>
+    <link rel="stylesheet" href="pasta-social-card.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <aside class="social-export-controls" aria-label="Private export controls">
+        <div>
+            <strong>Export radar Stankovic</strong>
+            <span id="socialExportStatus">Caricamento...</span>
+        </div>
+        <label for="socialCaption">Didascalia</label>
+        <textarea id="socialCaption" rows="4"></textarea>
+        <div class="social-export-actions">
+            <button type="button" id="copyRadarWithCaption">Copia immagine + didascalia</button>
+            <button type="button" id="downloadRadarHd">Scarica PNG HD</button>
+        </div>
+    </aside>
+
+    <main class="social-export-shell" data-payload-url="../../data/report_legacy_payloads/stankovic.legacy_role_payload.json">
+        <article class="social-card social-card--radar-only" aria-label="PASTA radar export for Aleksandar Stankovic">
+            <section class="social-radar-panel" aria-label="Static radar chart">
+                <div class="social-radar-frame">
+                    <canvas id="socialRadarChart" width="820" height="820"></canvas>
+                </div>
+                <div class="social-radar-legend" id="socialRadarLegend"></div>
+            </section>
+        </article>
+    </main>
+
+    <script src="pasta-social-card-runtime.js"></script>
+</body>
+</html>
