@@ -214,3 +214,31 @@
 127.0.0.1 - - [25/Jun/2026 14:02:10] "GET /assets/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 -
 127.0.0.1 - - [25/Jun/2026 14:02:10] code 404, message File not found
 127.0.0.1 - - [25/Jun/2026 14:02:10] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/css/main.css HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/css/pasta-theme.css HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/oumar-solet.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/curtis-jones.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/css/fontawesome-all.min.css HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/jquery.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/marco-palestra.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/aleksandar-stankovic.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/ivan-provedel.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/jquery.scrollex.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/jquery.scrolly.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/breakpoints.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/util.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/js/browser.min.js HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/alexander-sorloth.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic06.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic01.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/cards/mason-greenwood.png HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic02.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic03.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /images/pic05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /assets/webfonts/fa-brands-400.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 14:09:18] code 404, message File not found
+127.0.0.1 - - [25/Jun/2026 14:09:18] "GET /favicon.ico HTTP/1.1" 404 -

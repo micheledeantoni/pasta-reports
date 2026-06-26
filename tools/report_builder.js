@@ -34,6 +34,20 @@ function slugifyName(raw) {
     .replace(/^-+|-+$/g, "");
 }
 
+function doganaSlug(raw) {
+  return String(raw || "")
+    .trim()
+    .toLowerCase()
+    .replace(/ø/g, "o")
+    .replace(/đ|ð/g, "d")
+    .replace(/ß/g, "ss")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .replace(/_+/g, "_");
+}
+
 function syncSlugFromName() {
   setValue("slug", slugifyName(value("playerName")));
 }
@@ -143,6 +157,7 @@ function renderCheckboxList(targetId, players, selectedSet, emptyText) {
       } else {
         selectedSet.delete(id);
       }
+      if (typeof updateCrossRolePanel === "function") updateCrossRolePanel();
       updateReview();
     });
     const text = document.createElement("span");
@@ -297,6 +312,7 @@ function buildPayload() {
     source_team_peer_ids: idsFromSet(state.selectedSourcePeerIds),
     source_team_peer_label: value("sourcePeerLabel"),
     source_context_exported: sourceContextExported(),
+    dogana_slug: doganaSlug(value("playerName") || value("slug")),
     narrative: value("narrative"),
     source_team_note: value("sourceTeamNote"),
     note_confronto: value("noteConfronto"),
@@ -388,13 +404,79 @@ async function searchPlayers() {
   renderPlayerResults();
 }
 
-async function loadTargetPeers() {
-  const url = `/api/target_peers?role=${encodeURIComponent(reportRole())}&team=${encodeURIComponent(value("targetPeerTeam"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("targetMinMinutes"))}`;
+async function loadTargetPeers(addMode) {
+  const role = value("targetPeerRole") || reportRole();
+  const url = `/api/target_peers?role=${encodeURIComponent(role)}&team=${encodeURIComponent(value("targetPeerTeam"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("targetMinMinutes"))}`;
   const payload = await getJson(url);
-  state.targetPeers = payload.players || [];
-  keepOnlyLoaded(state.targetPeers, state.selectedTargetPeerIds);
+  const newPeers = (payload.players || []).map(p => ({ ...p, _loaded_role: role }));
+  if (addMode) {
+    const existingIds = new Set(state.targetPeers.map(p => String(p.player_id)));
+    for (const p of newPeers) {
+      if (!existingIds.has(String(p.player_id))) {
+        state.targetPeers.push(p);
+      }
+    }
+  } else {
+    state.targetPeers = newPeers;
+    keepOnlyLoaded(state.targetPeers, state.selectedTargetPeerIds);
+  }
   renderCheckboxList("targetPeers", state.targetPeers, state.selectedTargetPeerIds, "No target-team peers found.");
+  updateCrossRolePanel();
   updateReview();
+}
+
+function crossRolePeers() {
+  const rr = reportRole();
+  return [...state.selectedTargetPeerIds]
+    .map(id => state.targetPeers.find(p => String(p.player_id) === id))
+    .filter(p => p && p._loaded_role && p._loaded_role !== rr);
+}
+
+function updateCrossRolePanel() {
+  const cross = crossRolePeers();
+  const panel = $("targetCrossRoleActions");
+  if (!cross.length) {
+    panel.style.display = "none";
+    return;
+  }
+  panel.style.display = "block";
+  const names = cross.map(p => `${p.player_name} (${p._loaded_role}→${reportRole()})`).join(", ");
+  $("targetCrossRoleInfo").textContent = `${cross.length} peer(s) from other roles need override to ${reportRole()}: ${names}`;
+}
+
+async function createPeerOverrides() {
+  const cross = crossRolePeers();
+  if (!cross.length) return;
+  const out = $("peerOverrideOutput");
+  out.style.display = "block";
+  out.textContent = `Creating ${cross.length} override(s)...\n`;
+  for (const p of cross) {
+    const payload = {
+      player_id: String(p.player_id),
+      player_name: p.player_name,
+      source_role: p._loaded_role || p.macro_role,
+      report_role: reportRole(),
+      season: value("season"),
+      competition: p.competition || value("competition"),
+      team_name: p.team_name || "",
+      target_team: value("targetTeam"),
+      reason: `Cross-role peer: ${p._loaded_role} analyzed as ${reportRole()} for ${value("targetTeam")} target group`,
+    };
+    const result = await postJson("/api/upsert_role_override", payload);
+    out.textContent += `  ${result.action}: ${p.player_name} (${p._loaded_role}→${reportRole()})\n`;
+  }
+  out.textContent += "Done. Now click 'Rebuild override artifacts'.";
+}
+
+async function rebuildPeerOverrides() {
+  const out = $("peerOverrideOutput");
+  out.style.display = "block";
+  out.textContent = "Rebuilding override artifacts... this may take 30-60 seconds.\n";
+  const result = await postJson("/api/rebuild_override_artifacts", {});
+  out.textContent = result.ok
+    ? `Build complete.\n\n${result.stdout}`
+    : `Build failed (exit ${result.returncode}).\n\nstdout:\n${result.stdout}\n\nstderr:\n${result.stderr}`;
+  await checkOverrideStatus();
 }
 
 async function loadSourcePeers() {
@@ -465,6 +547,26 @@ async function runEndpoint(endpoint) {
   }
 }
 
+async function runDogana() {
+  const response = await fetch("/api/generate_dogana", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(buildPayload()),
+  });
+  const payload = await response.json();
+  showOutput({
+    ok: payload.ok,
+    status: payload.status,
+    config_path: payload.config_path,
+    output_folder: payload.output_folder,
+    generated_files: payload.generated_files,
+    stdout: payload.stdout,
+    stderr: payload.stderr,
+    warnings: payload.warnings,
+    errors: payload.errors,
+  });
+}
+
 function bind(id, event, fn) {
   $(id).addEventListener(event, async () => {
     try {
@@ -490,12 +592,16 @@ $("playerName").addEventListener("input", () => {
 });
 
 bind("searchPlayer", "click", searchPlayers);
-bind("loadTargetPeers", "click", loadTargetPeers);
+bind("loadTargetPeers", "click", () => loadTargetPeers(false));
+bind("loadTargetPeersAdd", "click", () => loadTargetPeers(true));
+bind("createPeerOverrides", "click", createPeerOverrides);
+bind("rebuildPeerOverrides", "click", rebuildPeerOverrides);
 bind("loadSourcePeers", "click", loadSourcePeers);
 bind("generatePrompt", "click", generatePrompt);
 bind("applyJson", "click", applyJson);
 bind("dryRun", "click", () => runEndpoint("/api/dry_run"));
 bind("createPage", "click", () => runEndpoint("/api/create_page"));
+bind("generateDogana", "click", runDogana);
 bind("regenCards", "click", () => runEndpoint("/api/regenerate_cards"));
 bind("createOverride", "click", createOverride);
 bind("rebuildOverrides", "click", rebuildOverrides);
@@ -506,4 +612,4 @@ bind("rebuildOverrides", "click", rebuildOverrides);
 
 updateLabels();
 updateReview();
-loadTargetPeers().then(loadSourcePeers).catch((error) => showOutput(error.message));
+loadTargetPeers(false).then(loadSourcePeers).catch((error) => showOutput(error.message));

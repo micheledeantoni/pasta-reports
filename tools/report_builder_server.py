@@ -8,6 +8,7 @@ It does not change analytics, payload structure, or frontend rendering.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import unicodedata
@@ -21,6 +22,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
+DOGANA_ROOT = Path("/Users/michele/Documents/soccerdb_experiments/dogana_visuals")
+DOGANA_CONFIG_DIR = DOGANA_ROOT / "configs" / "players"
+DOGANA_OUTPUT_ROOT = Path("/Users/michele/Documents/soccerdb_experiments/outputs/dogana")
 FEATURES = SOCCERDB_ROOT / "data" / "features"
 PYTHON = SOCCERDB_ROOT / ".venv" / "bin" / "python"
 PLAYER_INDEX = ROOT / "assets" / "data" / "player_index.json"
@@ -108,6 +112,21 @@ def slugify_name(value: Any) -> str:
             chars.append("-")
             previous_dash = True
     return "".join(chars).strip("-")
+
+
+def slugify_underscore(value: Any) -> str:
+    return slugify_name(value).replace("-", "_")
+
+
+def season_to_int(raw: Any) -> int:
+    value = str(raw or "").strip()
+    if len(value) == 4 and value.isdigit():
+        return int(value)
+    variants = season_variants(value)
+    compact = next((item for item in variants if len(item) == 4 and item.isdigit()), "")
+    if compact:
+        return int(compact)
+    raise ValueError(f"invalid season for Dogana config: {raw!r}")
 
 
 def db_team_names() -> dict[str, str]:
@@ -485,7 +504,16 @@ def validate_workflow_payload(data: dict[str, Any]) -> tuple[str, str, str, bool
     found_target_ids = set(target_peer_rows["player_id"].astype(str).tolist()) if not target_peer_rows.empty else set()
     missing_target = [pid for pid in split_ids(data.get("main_comparison_peer_ids")) if pid not in found_target_ids]
     if missing_target:
-        raise ValueError(f"main/radar peer IDs missing in {report_role} metrics: {','.join(missing_target)}")
+        override_path = FEATURES / f"scouting_view_metrics_v1_{report_role.lower()}_with_overrides.parquet"
+        if override_path.exists():
+            override_df = pd.read_parquet(override_path)
+            override_ids = set(override_df["player_id"].astype(str).unique())
+            still_missing = [pid for pid in missing_target if pid not in override_ids]
+            if still_missing:
+                raise ValueError(f"main/radar peer IDs missing in {report_role} metrics and overrides: {','.join(still_missing)}")
+            data["use_manual_role_overrides"] = True
+        else:
+            raise ValueError(f"main/radar peer IDs missing in {report_role} metrics: {','.join(missing_target)}")
     target_team = str(data.get("target_team") or "").strip()
     if target_team and not target_peer_rows.empty:
         bad_team = target_peer_rows[
@@ -772,6 +800,269 @@ def regenerate_cards(data: dict[str, Any]) -> dict[str, Any]:
     return {"ok": result.returncode == 0, "returncode": result.returncode, "command": cmd, "stdout": result.stdout, "stderr": result.stderr}
 
 
+def _path_inside(path: Path, parent: Path) -> bool:
+    try:
+        path.resolve().relative_to(parent.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def assert_dogana_output_allowed(output_root: Path) -> None:
+    if _path_inside(output_root, SOCCERDB_ROOT):
+        raise ValueError(f"output path rejected: Dogana output root cannot be inside SoccerDB: {output_root}")
+
+
+def _yaml_scalar(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, int | float):
+        return str(value)
+    return json.dumps(str(value), ensure_ascii=False)
+
+
+def write_simple_yaml(path: Path, payload: dict[str, Any]) -> None:
+    lines: list[str] = []
+    for key, value in payload.items():
+        if isinstance(value, list):
+            lines.append(f"{key}:")
+            if value:
+                lines.extend(f"  - {_yaml_scalar(item)}" for item in value)
+            else:
+                lines.append("  []")
+        else:
+            lines.append(f"{key}: {_yaml_scalar(value)}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def dogana_required_field_errors(data: dict[str, Any]) -> list[str]:
+    required = {
+        "player_id": "player id",
+        "player_name": "player name",
+        "role": "report role",
+        "competition": "source competition",
+        "season": "source season",
+        "target_team": "target team",
+    }
+    return [label for key, label in required.items() if not str(data.get(key) or "").strip()]
+
+
+def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str], list[str], str]:
+    warnings: list[str] = []
+    errors = dogana_required_field_errors(data)
+    if errors:
+        return None, warnings, [f"missing required fields: {', '.join(errors)}"], "missing required fields"
+
+    target_peer_ids = [int(pid) for pid in split_ids(data.get("main_comparison_peer_ids"))]
+    if not target_peer_ids:
+        return None, warnings, ["no target peers selected"], "no target peers selected"
+
+    report_role = str(data.get("report_role") or data.get("role") or "").upper()
+    source_role = str(data.get("source_role") or report_role).upper()
+    if report_role not in ROLE_CHOICES:
+        return None, warnings, [f"missing required fields: report role must be one of {', '.join(ROLE_CHOICES)}"], "missing required fields"
+
+    season = season_to_int(data.get("season"))
+    slug = slugify_underscore(data.get("dogana_slug") or data.get("player_name") or data.get("slug"))
+    use_manual_role_overrides = bool(data.get("use_manual_role_overrides")) or bool(data.get("role_override_reason"))
+    if use_manual_role_overrides:
+        warnings.append(
+            "Manual role override present. Dogana V1 uses canonical role artifacts; _with_overrides artifacts are not read yet."
+        )
+
+    return (
+        {
+            "player_id": int(data["player_id"]),
+            "player_name": str(data["player_name"]).strip(),
+            "player_slug": slug,
+            "macro_role": report_role,
+            "source_competition": str(data["competition"]).strip(),
+            "source_season": season,
+            "target_competition": "ITA-Serie A",
+            "target_season": season,
+            "target_team_name": str(data["target_team"]).strip(),
+            "target_same_role_player_ids": target_peer_ids,
+            "min_minutes": 100,
+            "meaningful_peer_minutes": 600,
+            "top_n_metrics": 8,
+            "context_visual_mode": "two_evidence_blocks",
+            "show_target_peer_chip": False,
+            "seriea_similarity_methods": ["pasta_distilled", "pca_knn", "euclidean_zscore"],
+            "selected_seriea_similarity_method": None,
+            "selected_seriea_comparable_player_id": None,
+            "use_manual_role_overrides": use_manual_role_overrides,
+            "source_role": source_role,
+            "role_override_reason": str(data.get("role_override_reason") or "").strip(),
+        },
+        warnings,
+        [],
+        "config ready",
+    )
+
+
+def dogana_generated_files(output_folder: Path) -> list[str]:
+    if not output_folder.exists():
+        return []
+    return [str(path) for path in sorted(output_folder.iterdir()) if path.is_file()]
+
+
+def dogana_summary_warnings(output_folder: Path) -> list[str]:
+    summary_path = output_folder / "dogana_summary.json"
+    if not summary_path.exists():
+        return []
+    try:
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [f"Could not read Dogana summary warnings: {exc}"]
+
+    warnings: list[str] = []
+    quality_maps = summary.get("part_1_player_quality", {}).get("quality_maps", {})
+    missing_warning = quality_maps.get("missing_heatmap_warning")
+    if missing_warning:
+        warnings.append(f"Heatmap warning: {missing_warning}")
+    if quality_maps.get("fallback_used"):
+        warnings.append(
+            "Heatmap fallback used: "
+            f"{quality_maps.get('selected_heatmap_block') or 'unknown'} "
+            f"instead of {quality_maps.get('preferred_heatmap_block') or 'preferred block'}."
+        )
+    missing_blocks = quality_maps.get("missing_panels_or_blocks") or []
+    if missing_blocks:
+        warnings.append(f"Missing heatmap blocks: {', '.join(str(item) for item in missing_blocks)}")
+
+    summary_warnings = summary.get("warnings", {})
+    missing_panels = summary_warnings.get("missing_heatmap_panels") or []
+    if missing_panels and missing_panels != missing_blocks:
+        warnings.append(f"Missing heatmap panels: {', '.join(str(item) for item in missing_panels)}")
+    return warnings
+
+
+def dogana_clean_failure(stderr: str, config: dict[str, Any]) -> dict[str, Any] | None:
+    artifact = f"global_benchmarks_{config.get('macro_role')}.parquet"
+    needle = f"Player {config.get('player_id')} not found in global_benchmarks_{config.get('macro_role')}."
+    if needle not in stderr:
+        return None
+    error: dict[str, Any] = {
+        "message": "Player not found in canonical role artifacts for selected role.",
+        "player_id": config.get("player_id"),
+        "selected_macro_role": config.get("macro_role"),
+        "source_competition": config.get("source_competition"),
+        "source_season": config.get("source_season"),
+        "artifact": artifact,
+    }
+    if config.get("use_manual_role_overrides"):
+        error["hint"] = "Manual role overrides are passed as metadata, but Dogana does not yet read _with_overrides artifacts."
+    return {
+        "status": "missing canonical role artifact player",
+        "errors": [error],
+    }
+
+
+def run_dogana(data: dict[str, Any]) -> dict[str, Any]:
+    warnings: list[str] = []
+    errors: list[str] = []
+    stdout = ""
+    stderr = ""
+    config_path = ""
+    output_folder = ""
+
+    try:
+        assert_dogana_output_allowed(DOGANA_OUTPUT_ROOT)
+    except Exception as exc:
+        return {
+            "ok": False,
+            "status": "output path rejected",
+            "config_path": config_path,
+            "output_folder": output_folder,
+            "generated_files": [],
+            "stdout": stdout,
+            "stderr": stderr,
+            "warnings": warnings,
+            "errors": [str(exc)],
+        }
+
+    try:
+        config, cfg_warnings, cfg_errors, status = build_dogana_config(data)
+    except Exception as exc:
+        return {
+            "ok": False,
+            "status": "missing required fields",
+            "config_path": config_path,
+            "output_folder": output_folder,
+            "generated_files": [],
+            "stdout": stdout,
+            "stderr": stderr,
+            "warnings": warnings,
+            "errors": [str(exc)],
+        }
+
+    warnings.extend(cfg_warnings)
+    errors.extend(cfg_errors)
+    if config is None:
+        return {
+            "ok": False,
+            "status": status,
+            "config_path": config_path,
+            "output_folder": output_folder,
+            "generated_files": [],
+            "stdout": stdout,
+            "stderr": stderr,
+            "warnings": warnings,
+            "errors": errors,
+        }
+
+    slug = str(config["player_slug"])
+    config_file = DOGANA_CONFIG_DIR / f"{slug}.yml"
+    out_dir = DOGANA_OUTPUT_ROOT / slug
+    config_path = str(config_file)
+    output_folder = str(out_dir)
+    write_simple_yaml(config_file, config)
+
+    python = str(Path(sys.executable))
+    cmd = [
+        python,
+        "-m",
+        "dogana_visuals.cli",
+        "--config",
+        str(config_file),
+        "--soccerdb-root",
+        str(SOCCERDB_ROOT),
+        "--output-root",
+        str(DOGANA_OUTPUT_ROOT),
+    ]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(DOGANA_ROOT) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    result = subprocess.run(cmd, cwd=DOGANA_ROOT, env=env, text=True, capture_output=True, timeout=300)
+    stdout = result.stdout
+    stderr = result.stderr
+    ok = result.returncode == 0
+    clean_failure = None if ok else dogana_clean_failure(stderr, config)
+    if ok:
+        warnings.extend(dogana_summary_warnings(out_dir))
+    if not ok:
+        if clean_failure:
+            errors.extend(clean_failure["errors"])
+        else:
+            errors.append(f"generation failed with exit code {result.returncode}")
+    return {
+        "ok": ok,
+        "status": "Dogana generated" if ok else clean_failure["status"] if clean_failure else "generation failed",
+        "config_path": config_path,
+        "output_folder": output_folder,
+        "generated_files": dogana_generated_files(out_dir),
+        "stdout": stdout,
+        "stderr": "" if clean_failure else stderr,
+        "debug_stderr": stderr if clean_failure else "",
+        "warnings": warnings,
+        "errors": errors,
+        "command": cmd,
+        "returncode": result.returncode,
+    }
+
+
 class Handler(BaseHTTPRequestHandler):
     def send_json(self, payload: dict[str, Any], status: int = 200) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -823,6 +1114,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(run_create(data, False))
             elif self.path == "/api/regenerate_cards":
                 self.send_json(regenerate_cards(data))
+            elif self.path == "/api/generate_dogana":
+                self.send_json(run_dogana(data))
             elif self.path == "/api/upsert_role_override":
                 self.send_json(upsert_role_override(data))
             elif self.path == "/api/rebuild_override_artifacts":

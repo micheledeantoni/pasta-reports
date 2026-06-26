@@ -59,13 +59,23 @@
       <h2>2. Peers</h2>
       <div class="peer-block main-peer">
         <h3>Main comparison peers — used by exporter/radar</h3>
-        <p>Uses report/analysis role.</p>
+        <p>Load peers by role. Select players from multiple roles to build a cross-role target group.</p>
         <div class="grid two">
           <label>Target team search<input id="targetPeerTeam" value="Inter" /></label>
           <label>Min minutes<input id="targetMinMinutes" value="300" /></label>
+          <label>Load role<select id="targetPeerRole"><option>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
+          <div style="display:flex;gap:.4rem;align-items:end">
+            <button id="loadTargetPeers" class="button">Load peers</button>
+            <button id="loadTargetPeersAdd" class="button">+ Add role</button>
+          </div>
         </div>
-        <button id="loadTargetPeers" class="button">Load target peers</button>
         <div id="targetPeers" class="checkbox-list"></div>
+        <div id="targetCrossRoleActions" style="display:none;margin-top:.5rem">
+          <p id="targetCrossRoleInfo" class="warn" style="font-size:.82rem"></p>
+          <button id="createPeerOverrides" class="button">Create overrides for cross-role peers</button>
+          <button id="rebuildPeerOverrides" class="button">Rebuild override artifacts</button>
+          <pre id="peerOverrideOutput" class="override-output"></pre>
+        </div>
       </div>
       <div class="peer-block source-peer">
         <h3>Source-team context peers — used for editorial/source context</h3>
@@ -100,6 +110,7 @@
       <div class="actions">
         <button id="dryRun" class="button">Dry-run</button>
         <button id="createPage" class="button primary">Create page</button>
+        <button id="generateDogana" class="button">DOGANA</button>
         <button id="regenCards" class="button">Regenerate cards/listing</button>
       </div>
       <pre id="output" class="output"></pre>
