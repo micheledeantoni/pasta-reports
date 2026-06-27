@@ -25,32 +25,23 @@
       "macroRole": "DEF",
       "color": "#4ade80"
     },
-    "388567": {
-      "name": "Luis Henrique",
-      "team": "75",
-      "mins": 1617,
+    "122469": {
+      "name": "Giovanni Di Lorenzo",
+      "team": "276",
+      "mins": 2278,
       "competition": "ITA-Serie A",
       "season": "2526",
       "macroRole": "DEF",
       "color": "#fb923c"
     },
-    "322153": {
-      "name": "Denzel Dumfries",
-      "team": "75",
-      "mins": 1331,
+    "122683": {
+      "name": "Matteo Politano",
+      "team": "276",
+      "mins": 2259,
       "competition": "ITA-Serie A",
       "season": "2526",
       "macroRole": "DEF",
       "color": "#60a5fa"
-    },
-    "415415": {
-      "name": "Andy Diouf",
-      "team": "75",
-      "mins": 463,
-      "competition": "ITA-Serie A",
-      "season": "2526",
-      "macroRole": "DEF",
-      "color": "#f472b6"
     },
     "422197": {
       "name": "Adem Zorgane",
@@ -59,7 +50,7 @@
       "competition": "BEL-Jupiler Pro League",
       "season": "2526",
       "macroRole": "DEF",
-      "color": "#a78bfa"
+      "color": "#f472b6"
     },
     "530542": {
       "name": "Kamiel Van de Perre",
@@ -68,7 +59,7 @@
       "competition": "BEL-Jupiler Pro League",
       "season": "2526",
       "macroRole": "DEF",
-      "color": "#34d399"
+      "color": "#a78bfa"
     },
     "539156": {
       "name": "Ousseynou Niang",
@@ -77,7 +68,7 @@
       "competition": "BEL-Jupiler Pro League",
       "season": "2526",
       "macroRole": "DEF",
-      "color": "#fbbf24"
+      "color": "#34d399"
     }
   },
   "PROFILE_READING": {
@@ -90,11 +81,10 @@
   "COMPARISON_GROUPS": [
     {
       "key": "target",
-      "label": "Inter DEF",
+      "label": "Napoli DEF",
       "ids": [
-        388567,
-        322153,
-        415415
+        122469,
+        122683
       ]
     },
     {
@@ -180,18 +170,17 @@
       ]
     },
     "target": {
-      "label": "Inter DEF",
+      "label": "Napoli DEF",
       "ids": [
-        388567,
-        322153,
-        415415
+        122469,
+        122683
       ],
       "values": [
-        20.2,
-        49.87,
-        40.26,
-        50.54,
-        86.25
+        24.42,
+        47.87,
+        58.1,
+        64.5,
+        86.31
       ]
     },
     "sourceTeam": {
@@ -213,36 +202,25 @@
     "usesPca": false,
     "targetProfiles": [
       {
-        "id": 388567,
-        "label": "Luis Henrique",
+        "id": 122469,
+        "label": "Giovanni Di Lorenzo",
         "values": [
-          13.6,
-          63.5,
-          55.94,
-          57.98,
-          87.24
+          42.89,
+          55.84,
+          69.93,
+          62.18,
+          76.42
         ]
       },
       {
-        "id": 322153,
-        "label": "Denzel Dumfries",
+        "id": 122683,
+        "label": "Matteo Politano",
         "values": [
-          11.02,
-          53.67,
-          17.17,
-          35.72,
-          82.96
-        ]
-      },
-      {
-        "id": 415415,
-        "label": "Andy Diouf",
-        "values": [
-          35.99,
-          32.44,
-          47.68,
-          57.91,
-          88.56
+          5.95,
+          39.89,
+          46.26,
+          66.82,
+          96.2
         ]
       }
     ]
@@ -475,95 +453,65 @@
       "Mean x action location": 58.887164,
       "Cross attempts per90": 3.774574
     },
-    "388567": {
-      "Defensive actions padj": 2.120123,
-      "Interceptions padj": 1.536321,
-      "Tackle attempts padj": 0.307264,
-      "Tackles per90": 1.113173,
-      "Interceptions per90": 5.565863,
-      "Defensive actions share team": 0.030363,
-      "Aerial win rate": 0.833333,
-      "Aerial attempts per90": 0.333952,
-      "Tackle success rate": 0.8,
-      "Interception to tackle ratio": 5.0,
-      "Pass completion": 0.871951,
-      "Pass share team": 0.040321,
-      "Receivals per90": 42.634508,
-      "Progressive passes per90": 7.458256,
-      "Progressive pass share": 0.163415,
-      "Progressive carries per90": 2.615955,
-      "Average progressive carry distance": 18.375,
-      "Dribbling tentati per 90": 1.6141,
-      "Dribbling riusciti": 44.827586,
-      "Altezza media dei dribbling": 60.487241,
-      "Passes into final third per90": 17.643785,
-      "Passes into penalty area per90": 1.892393,
-      "Defensive action mean x": 44.691957,
-      "Mean x action location": 57.856537,
-      "Cross attempts per90": 2.282004,
-      "Direct engagements /90": 2.83859,
+    "122469": {
+      "Defensive actions padj": 3.110418,
+      "Interceptions padj": 2.164207,
+      "Tackle attempts padj": 0.452974,
+      "Tackles per90": 1.777875,
+      "Interceptions per90": 8.494293,
+      "Defensive actions share team": 0.071844,
+      "Aerial win rate": 0.614035,
+      "Aerial attempts per90": 2.251975,
+      "Tackle success rate": 0.733333,
+      "Interception to tackle ratio": 4.777778,
+      "Pass completion": 0.861484,
+      "Pass share team": 0.069588,
+      "Receivals per90": 52.546093,
+      "Progressive passes per90": 10.272169,
+      "Progressive pass share": 0.183746,
+      "Progressive carries per90": 1.224759,
+      "Average progressive carry distance": 20.515645,
+      "Dribbling tentati per 90": 0.987709,
+      "Dribbling riusciti": 32.0,
+      "Altezza media dei dribbling": 57.4896,
+      "Passes into final third per90": 15.882353,
+      "Passes into penalty area per90": 2.251975,
+      "Defensive action mean x": 38.014078,
+      "Mean x action location": 52.254382,
+      "Cross attempts per90": 1.501317,
+      "Direct engagements /90": 3.555751,
       "Median time to engage": 0.0,
-      "Engagements under 2s": 0.882353
+      "Engagements under 2s": 0.877778
     },
-    "322153": {
-      "Defensive actions padj": 2.13965,
-      "Interceptions padj": 1.437845,
-      "Tackle attempts padj": 0.273875,
-      "Tackles per90": 1.081893,
-      "Interceptions per90": 5.67994,
-      "Defensive actions share team": 0.027503,
-      "Aerial win rate": 0.588235,
-      "Aerial attempts per90": 3.448535,
-      "Tackle success rate": 0.6875,
-      "Interception to tackle ratio": 5.25,
-      "Pass completion": 0.801061,
-      "Pass share team": 0.018538,
-      "Receivals per90": 27.453043,
-      "Progressive passes per90": 3.110443,
-      "Progressive pass share": 0.122016,
-      "Progressive carries per90": 1.352367,
-      "Average progressive carry distance": 15.9915,
-      "Dribbling tentati per 90": 1.62284,
-      "Dribbling riusciti": 25.0,
-      "Altezza media dei dribbling": 64.61,
-      "Passes into final third per90": 9.872276,
-      "Passes into penalty area per90": 2.096168,
-      "Defensive action mean x": 37.2204,
-      "Mean x action location": 62.07561,
-      "Cross attempts per90": 2.299023,
-      "Direct engagements /90": 2.83997,
-      "Median time to engage": 0.25,
-      "Engagements under 2s": 0.857143
-    },
-    "415415": {
-      "Defensive actions padj": 2.747236,
-      "Interceptions padj": 1.794113,
-      "Tackle attempts padj": 0.672792,
-      "Tackles per90": 2.332613,
-      "Interceptions per90": 6.220302,
-      "Defensive actions share team": 0.010781,
-      "Aerial win rate": 0.6,
-      "Aerial attempts per90": 0.0,
+    "122683": {
+      "Defensive actions padj": 1.695746,
+      "Interceptions padj": 1.358704,
+      "Tackle attempts padj": 0.157989,
+      "Tackles per90": 0.59761,
+      "Interceptions per90": 5.139442,
+      "Defensive actions share team": 0.037433,
+      "Aerial win rate": 0.347826,
+      "Aerial attempts per90": 0.916335,
       "Tackle success rate": 0.666667,
-      "Interception to tackle ratio": 2.666667,
-      "Pass completion": 0.867521,
-      "Pass share team": 0.011506,
-      "Receivals per90": 47.041037,
-      "Progressive passes per90": 5.637149,
-      "Progressive pass share": 0.123932,
-      "Progressive carries per90": 5.637149,
-      "Average progressive carry distance": 19.935517,
-      "Dribbling tentati per 90": 5.442765,
-      "Dribbling riusciti": 42.857143,
-      "Altezza media dei dribbling": 76.8075,
-      "Passes into final third per90": 20.215983,
-      "Passes into penalty area per90": 4.665227,
-      "Defensive action mean x": 53.545714,
-      "Mean x action location": 65.231474,
-      "Cross attempts per90": 1.166307,
-      "Direct engagements /90": 4.859611,
-      "Median time to engage": 0.0,
-      "Engagements under 2s": 0.84
+      "Interception to tackle ratio": 8.6,
+      "Pass completion": 0.820372,
+      "Pass share team": 0.0449,
+      "Receivals per90": 41.2749,
+      "Progressive passes per90": 6.972112,
+      "Progressive pass share": 0.191676,
+      "Progressive carries per90": 4.900398,
+      "Average progressive carry distance": 19.804878,
+      "Dribbling tentati per 90": 3.306773,
+      "Dribbling riusciti": 39.759036,
+      "Altezza media dei dribbling": 75.417831,
+      "Passes into final third per90": 14.661355,
+      "Passes into penalty area per90": 1.992032,
+      "Defensive action mean x": 59.726739,
+      "Mean x action location": 60.283111,
+      "Cross attempts per90": 5.139442,
+      "Direct engagements /90": 2.270916,
+      "Median time to engage": 0.5,
+      "Engagements under 2s": 0.859649
     },
     "422197": {
       "Defensive actions padj": 2.929664,
@@ -649,13 +597,12 @@
   },
   "TARGET_COMPARISON_BARS": {
     "key": "target",
-    "label": "Anan Khalaili vs Inter DEF",
-    "baselineLabel": "Inter DEF",
+    "label": "Anan Khalaili vs Napoli DEF",
+    "baselineLabel": "Napoli DEF",
     "subjectId": 444136,
     "baselineIds": [
-      388567,
-      322153,
-      415415
+      122469,
+      122683
     ],
     "showAverage": false,
     "groups": [
@@ -665,9 +612,9 @@
           {
             "metric": "Defensive actions padj",
             "subjectValue": 3.699787,
-            "baselineValue": 2.33567,
+            "baselineValue": 2.403082,
             "subjectScore": 33.17,
-            "baselineScore": 14.15,
+            "baselineScore": 15.09,
             "range": {
               "min": 1.320633,
               "max": 8.493126,
@@ -679,9 +626,9 @@
           {
             "metric": "Tackle attempts padj",
             "subjectValue": 0.455054,
-            "baselineValue": 0.417977,
+            "baselineValue": 0.305481,
             "subjectScore": 27.75,
-            "baselineScore": 25.27,
+            "baselineScore": 17.75,
             "range": {
               "min": 0.039945,
               "max": 1.535621,
@@ -693,9 +640,9 @@
           {
             "metric": "Interceptions padj",
             "subjectValue": 2.532475,
-            "baselineValue": 1.589426,
+            "baselineValue": 1.761456,
             "subjectScore": 33.47,
-            "baselineScore": 14.83,
+            "baselineScore": 18.23,
             "range": {
               "min": 0.839385,
               "max": 5.898004,
@@ -707,9 +654,9 @@
           {
             "metric": "Tackles per90",
             "subjectValue": 1.80865,
-            "baselineValue": 1.509226,
+            "baselineValue": 1.187743,
             "subjectScore": 27.88,
-            "baselineScore": 22.82,
+            "baselineScore": 17.39,
             "range": {
               "min": 0.157895,
               "max": 6.079614,
@@ -721,9 +668,9 @@
           {
             "metric": "Interceptions per90",
             "subjectValue": 10.065531,
-            "baselineValue": 5.822035,
+            "baselineValue": 6.816868,
             "subjectScore": 42.41,
-            "baselineScore": 23.73,
+            "baselineScore": 28.11,
             "range": {
               "min": 0.434211,
               "max": 23.142857,
@@ -735,9 +682,9 @@
           {
             "metric": "Defensive actions share team",
             "subjectValue": 0.078654,
-            "baselineValue": 0.022882,
+            "baselineValue": 0.054639,
             "subjectScore": 40.47,
-            "baselineScore": 10.53,
+            "baselineScore": 27.58,
             "range": {
               "min": 0.003258,
               "max": 0.189562,
@@ -754,9 +701,9 @@
           {
             "metric": "Aerial attempts per90",
             "subjectValue": 2.516383,
-            "baselineValue": 1.260829,
+            "baselineValue": 1.584155,
             "subjectScore": 29.16,
-            "baselineScore": 14.61,
+            "baselineScore": 18.36,
             "range": {
               "min": 0.0,
               "max": 8.628955,
@@ -768,9 +715,9 @@
           {
             "metric": "Aerial win rate",
             "subjectValue": 0.671875,
-            "baselineValue": 0.673856,
+            "baselineValue": 0.480931,
             "subjectScore": 67.19,
-            "baselineScore": 67.39,
+            "baselineScore": 48.09,
             "range": {
               "min": 0.0,
               "max": 1.0,
@@ -782,9 +729,9 @@
           {
             "metric": "Tackle success rate",
             "subjectValue": 0.869565,
-            "baselineValue": 0.718056,
+            "baselineValue": 0.7,
             "subjectScore": 82.61,
-            "baselineScore": 62.41,
+            "baselineScore": 60.0,
             "range": {
               "min": 0.25,
               "max": 1.0,
@@ -796,9 +743,9 @@
           {
             "metric": "Interception to tackle ratio",
             "subjectValue": 5.565217,
-            "baselineValue": 4.305556,
+            "baselineValue": 6.688889,
             "subjectScore": 3.61,
-            "baselineScore": 2.48,
+            "baselineScore": 4.61,
             "range": {
               "min": 1.545455,
               "max": 113.0,
@@ -815,9 +762,9 @@
           {
             "metric": "Direct engagements /90",
             "subjectValue": null,
-            "baselineValue": 3.512724,
+            "baselineValue": 2.913334,
             "subjectScore": null,
-            "baselineScore": 26.76,
+            "baselineScore": 20.18,
             "range": {
               "min": 1.075697,
               "max": 10.180995,
@@ -829,9 +776,9 @@
           {
             "metric": "Median time to engage",
             "subjectValue": null,
-            "baselineValue": 0.083333,
+            "baselineValue": 0.25,
             "subjectScore": null,
-            "baselineScore": 95.83,
+            "baselineScore": 87.5,
             "range": {
               "min": 0.0,
               "max": 2.0,
@@ -843,9 +790,9 @@
           {
             "metric": "Engagements under 2s",
             "subjectValue": null,
-            "baselineValue": 0.859832,
+            "baselineValue": 0.868713,
             "subjectScore": null,
-            "baselineScore": 64.96,
+            "baselineScore": 67.18,
             "range": {
               "min": 0.6,
               "max": 1.0,
@@ -862,9 +809,9 @@
           {
             "metric": "Pass completion",
             "subjectValue": 0.798464,
-            "baselineValue": 0.846844,
+            "baselineValue": 0.840928,
             "subjectScore": 61.87,
-            "baselineScore": 73.0,
+            "baselineScore": 71.64,
             "range": {
               "min": 0.529412,
               "max": 0.964266,
@@ -876,9 +823,9 @@
           {
             "metric": "Pass share team",
             "subjectValue": 0.081052,
-            "baselineValue": 0.023455,
+            "baselineValue": 0.057244,
             "subjectScore": 49.8,
-            "baselineScore": 12.23,
+            "baselineScore": 34.27,
             "range": {
               "min": 0.00471,
               "max": 0.157997,
@@ -890,9 +837,9 @@
           {
             "metric": "Receivals per90",
             "subjectValue": 40.655308,
-            "baselineValue": 39.042863,
+            "baselineValue": 46.910497,
             "subjectScore": 47.7,
-            "baselineScore": 45.62,
+            "baselineScore": 55.77,
             "range": {
               "min": 3.671053,
               "max": 81.206897,
@@ -909,9 +856,9 @@
           {
             "metric": "Progressive passes per90",
             "subjectValue": 6.920052,
-            "baselineValue": 5.401949,
+            "baselineValue": 8.622141,
             "subjectScore": 30.36,
-            "baselineScore": 23.3,
+            "baselineScore": 38.28,
             "range": {
               "min": 0.394737,
               "max": 21.885992,
@@ -923,9 +870,9 @@
           {
             "metric": "Progressive pass share",
             "subjectValue": 0.168906,
-            "baselineValue": 0.136454,
+            "baselineValue": 0.187711,
             "subjectScore": 23.39,
-            "baselineScore": 16.5,
+            "baselineScore": 27.39,
             "range": {
               "min": 0.058824,
               "max": 0.529412,
@@ -937,9 +884,9 @@
           {
             "metric": "Progressive carries per90",
             "subjectValue": 2.791612,
-            "baselineValue": 3.201824,
+            "baselineValue": 3.062578,
             "subjectScore": 44.26,
-            "baselineScore": 50.76,
+            "baselineScore": 48.55,
             "range": {
               "min": 0.0,
               "max": 6.307531,
@@ -951,9 +898,9 @@
           {
             "metric": "Average progressive carry distance",
             "subjectValue": 19.748873,
-            "baselineValue": 18.100672,
+            "baselineValue": 20.160261,
             "subjectScore": 21.54,
-            "baselineScore": 19.75,
+            "baselineScore": 21.99,
             "range": {
               "min": 0.0,
               "max": 91.665,
@@ -965,9 +912,9 @@
           {
             "metric": "Dribbling tentati per 90",
             "subjectValue": 3.420708,
-            "baselineValue": 2.893235,
+            "baselineValue": 2.147241,
             "subjectScore": 43.56,
-            "baselineScore": 36.84,
+            "baselineScore": 27.34,
             "range": {
               "min": 0.0,
               "max": 7.853042,
@@ -979,9 +926,9 @@
           {
             "metric": "Dribbling riusciti",
             "subjectValue": 45.977011,
-            "baselineValue": 37.561576,
+            "baselineValue": 35.879518,
             "subjectScore": 45.98,
-            "baselineScore": 37.56,
+            "baselineScore": 35.88,
             "range": {
               "min": 0.0,
               "max": 100.0,
@@ -993,9 +940,9 @@
           {
             "metric": "Altezza media dei dribbling",
             "subjectValue": 70.041034,
-            "baselineValue": 67.30158,
+            "baselineValue": 66.453716,
             "subjectScore": 67.06,
-            "baselineScore": 64.31,
+            "baselineScore": 63.46,
             "range": {
               "min": 3.15,
               "max": 102.9,
@@ -1007,9 +954,9 @@
           {
             "metric": "Passes into final third per90",
             "subjectValue": 15.412844,
-            "baselineValue": 15.910681,
+            "baselineValue": 15.271854,
             "subjectScore": 42.47,
-            "baselineScore": 43.97,
+            "baselineScore": 42.05,
             "range": {
               "min": 1.302326,
               "max": 34.525862,
@@ -1026,9 +973,9 @@
           {
             "metric": "Cross attempts per90",
             "subjectValue": 3.774574,
-            "baselineValue": 1.915778,
+            "baselineValue": 3.32038,
             "subjectScore": 50.85,
-            "baselineScore": 25.81,
+            "baselineScore": 44.73,
             "range": {
               "min": 0.0,
               "max": 7.42268,
@@ -1040,9 +987,9 @@
           {
             "metric": "Passes into penalty area per90",
             "subjectValue": 2.712975,
-            "baselineValue": 2.884596,
+            "baselineValue": 2.122003,
             "subjectScore": 43.21,
-            "baselineScore": 45.94,
+            "baselineScore": 33.79,
             "range": {
               "min": 0.0,
               "max": 6.27907,
@@ -1054,9 +1001,9 @@
           {
             "metric": "Mean x action location",
             "subjectValue": 58.887164,
-            "baselineValue": 61.721207,
+            "baselineValue": 56.268746,
             "subjectScore": 73.83,
-            "baselineScore": 81.17,
+            "baselineScore": 67.05,
             "range": {
               "min": 30.387256,
               "max": 68.988639,
@@ -1068,9 +1015,9 @@
           {
             "metric": "Defensive action mean x",
             "subjectValue": 38.129037,
-            "baselineValue": 45.15269,
+            "baselineValue": 48.870408,
             "subjectScore": 41.79,
-            "baselineScore": 59.4,
+            "baselineScore": 68.71,
             "range": {
               "min": 21.453793,
               "max": 61.353241,
@@ -3458,246 +3405,246 @@
       "defN": 374,
       "defOppPct": 0.2941
     },
-    "388567": {
+    "122469": {
       "ip": [
         [
-          0.003895,
-          0.000487,
-          0.001461,
-          0.000974,
-          0.000487,
-          0.000974,
-          0.002434,
-          0.000974
-        ],
-        [
-          0.012658,
-          0.00925,
-          0.002921,
-          0.001947,
-          0.000974,
-          0.000487,
-          0.003408,
-          0.001947
-        ],
-        [
-          0.013145,
-          0.015093,
-          0.003408,
-          0.001461,
-          0.000974,
-          0.000487,
-          0.001947,
-          0.006329
-        ],
-        [
-          0.042843,
-          0.015093,
-          0.005842,
-          0.000487,
-          0.001461,
-          0.000974,
-          0.002921,
-          0.001461
-        ],
-        [
-          0.059396,
-          0.024343,
-          0.00925,
-          0.003895,
-          0.003408,
-          0.001947,
-          0.002434,
-          0.00779
-        ],
-        [
-          0.047225,
-          0.015093,
-          0.008763,
-          0.002921,
-          0.000487,
-          0.001461,
-          0.006816,
-          0.006329
-        ],
-        [
-          0.046251,
-          0.028724,
-          0.011685,
-          0.005842,
-          0.001947,
-          0.003408,
-          0.002921,
-          0.005842
-        ],
-        [
-          0.098832,
-          0.036027,
-          0.020448,
-          0.005355,
-          0.001947,
-          0.004382,
-          0.004869,
-          0.003895
-        ],
-        [
-          0.073028,
-          0.035054,
-          0.016553,
-          0.003895,
-          0.001947,
-          0.003895,
-          0.003408,
-          0.003408
-        ],
-        [
-          0.061344,
-          0.026777,
-          0.015093,
-          0.001461,
-          0.000974,
-          0.000487,
-          0.003408,
-          0.002434
-        ],
-        [
-          0.031159,
-          0.025316,
-          0.012171,
-          0.001947,
-          0.000974,
-          0.002434,
-          0.001947,
-          0.005355
-        ],
-        [
-          0.004382,
-          0.011198,
-          0.005842,
+          0.002135,
+          0.002135,
+          0.002441,
+          0.000915,
+          0.000305,
           0.0,
           0.0,
-          0.0,
-          0.000974,
           0.0
+        ],
+        [
+          0.017999,
+          0.013423,
+          0.003661,
+          0.001525,
+          0.00183,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.039353,
+          0.015558,
+          0.007627,
+          0.003356,
+          0.00061,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.055217,
+          0.040268,
+          0.020439,
+          0.008542,
+          0.0,
+          0.00061,
+          0.0,
+          0.0
+        ],
+        [
+          0.057657,
+          0.041794,
+          0.027151,
+          0.004271,
+          0.004271,
+          0.000915,
+          0.0,
+          0.0
+        ],
+        [
+          0.04576,
+          0.030811,
+          0.021965,
+          0.006711,
+          0.003051,
+          0.00122,
+          0.00061,
+          0.0
+        ],
+        [
+          0.053081,
+          0.045149,
+          0.02227,
+          0.006101,
+          0.00122,
+          0.00061,
+          0.0,
+          0.0
+        ],
+        [
+          0.076876,
+          0.052776,
+          0.020744,
+          0.006711,
+          0.000915,
+          0.00122,
+          0.000305,
+          0.0
+        ],
+        [
+          0.054606,
+          0.029286,
+          0.014033,
+          0.005796,
+          0.002135,
+          0.000915,
+          0.0,
+          0.0
+        ],
+        [
+          0.030201,
+          0.015863,
+          0.004881,
+          0.000915,
+          0.00061,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.020744,
+          0.011592,
+          0.006101,
+          0.003661,
+          0.002441,
+          0.0,
+          0.000305,
+          0.0
+        ],
+        [
+          0.002135,
+          0.009457,
+          0.003661,
+          0.004576,
+          0.002135,
+          0.00061,
+          0.000915,
+          0.000305
         ]
       ],
       "def": [
         [
-          0.007246,
           0.0,
-          0.043478,
-          0.028986,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.065217,
-          0.014493,
-          0.014493,
-          0.014493,
-          0.014493,
-          0.021739,
-          0.007246,
-          0.021739
-        ],
-        [
-          0.028986,
-          0.050725,
-          0.014493,
-          0.0,
-          0.0,
-          0.0,
-          0.007246,
-          0.0
-        ],
-        [
-          0.014493,
-          0.014493,
-          0.021739,
-          0.007246,
-          0.0,
-          0.0,
+          0.016181,
+          0.035599,
+          0.016181,
+          0.016181,
+          0.003236,
           0.0,
           0.0
         ],
         [
-          0.021739,
-          0.036232,
-          0.028986,
-          0.007246,
-          0.014493,
-          0.0,
-          0.0,
-          0.007246
-        ],
-        [
-          0.014493,
-          0.007246,
-          0.0,
-          0.007246,
-          0.0,
-          0.0,
-          0.014493,
-          0.0
-        ],
-        [
-          0.021739,
-          0.036232,
-          0.014493,
-          0.021739,
-          0.0,
-          0.0,
+          0.019417,
+          0.012945,
+          0.058252,
+          0.048544,
+          0.016181,
+          0.006472,
           0.0,
           0.0
         ],
         [
-          0.036232,
-          0.036232,
-          0.021739,
+          0.029126,
+          0.038835,
+          0.012945,
+          0.016181,
           0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.050725,
-          0.014493,
-          0.014493,
-          0.007246,
-          0.007246,
-          0.0,
+          0.003236,
           0.0,
           0.0
         ],
         [
-          0.028986,
+          0.058252,
+          0.035599,
+          0.042071,
+          0.029126,
           0.0,
-          0.014493,
-          0.014493,
-          0.0,
-          0.0,
-          0.0,
-          0.007246
+          0.003236,
+          0.003236,
+          0.0
         ],
         [
-          0.007246,
-          0.021739,
-          0.028986,
+          0.058252,
+          0.022654,
+          0.012945,
           0.0,
-          0.0,
-          0.0,
+          0.006472,
+          0.006472,
           0.0,
           0.0
         ],
         [
-          0.007246,
-          0.007246,
+          0.012945,
+          0.02589,
+          0.019417,
+          0.012945,
+          0.006472,
+          0.003236,
+          0.003236,
+          0.003236
+        ],
+        [
+          0.038835,
+          0.022654,
+          0.012945,
           0.0,
           0.0,
-          0.007246,
+          0.006472,
+          0.0,
+          0.0
+        ],
+        [
+          0.035599,
+          0.016181,
+          0.009709,
+          0.006472,
+          0.0,
+          0.0,
+          0.003236,
+          0.003236
+        ],
+        [
+          0.038835,
+          0.012945,
+          0.016181,
+          0.006472,
+          0.0,
+          0.0,
+          0.003236,
+          0.003236
+        ],
+        [
+          0.012945,
+          0.003236,
+          0.003236,
+          0.0,
+          0.0,
+          0.0,
+          0.003236,
+          0.0
+        ],
+        [
+          0.009709,
+          0.003236,
+          0.0,
+          0.006472,
+          0.0,
+          0.0,
+          0.0,
+          0.003236
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.003236,
+          0.0,
           0.0,
           0.0,
           0.0
@@ -3706,19 +3653,6 @@
       "carry": [
         [
           [
-            3,
-            0.167,
-            0,
-            0.0,
-            10.5597,
-            3.955,
-            0.0,
-            null,
-            3.955,
-            -1.088,
-            true
-          ],
-          [
             0,
             0.0,
             0,
@@ -3732,228 +3666,161 @@
             false
           ],
           [
+            1,
+            0.0395,
             0,
             0.0,
-            0,
+            5.0441,
+            5.04,
             0.0,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            5.04,
+            0.204,
             false
           ],
           [
             2,
-            0.1113,
+            0.079,
             0,
             0.0,
-            4.9208,
-            -4.8825,
+            6.4161,
+            -0.3675,
             0.0,
             null,
-            -4.8825,
-            -0.136,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            8.7917,
-            4.62,
-            0.0,
-            null,
-            4.62,
-            -7.48,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            8.3083,
-            3.885,
-            0.0,
-            null,
-            3.885,
-            7.344,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            10.8629,
-            -1.05,
-            0.0,
-            null,
-            -1.05,
-            -10.812,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            5.3076,
-            1.47,
-            0.0,
-            null,
-            1.47,
+            -0.3675,
             -5.1,
             false
-          ]
-        ],
-        [
-          [
-            4,
-            0.2226,
-            0,
-            0.0,
-            12.5826,
-            0.6037,
-            0.0,
-            null,
-            0.6037,
-            6.783,
-            true
           ],
           [
             3,
-            0.167,
-            3,
-            0.167,
-            19.1362,
-            18.935,
-            1.0,
-            null,
-            18.935,
-            0.0453,
-            true
-          ],
-          [
-            2,
-            0.1113,
+            0.1185,
             0,
             0.0,
-            17.6239,
-            7.2975,
+            7.8629,
+            3.57,
             0.0,
             null,
-            7.2975,
-            -5.576,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            19.8569,
-            4.62,
-            0.0,
-            null,
-            4.62,
-            -19.312,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            4.0921,
-            0.315,
-            0.0,
-            null,
-            0.315,
-            -4.08,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            3,
-            0.167,
-            0,
-            0.0,
-            10.0159,
-            6.685,
-            0.0,
-            null,
-            6.685,
-            -3.8987,
+            3.57,
+            -6.3693,
             true
           ],
           [
             1,
-            0.0557,
+            0.0395,
             0,
             0.0,
-            6.324,
-            0.0,
+            3.081,
+            0.735,
             0.0,
             null,
+            0.735,
+            2.992,
+            false
+          ],
+          [
+            0,
             0.0,
-            -6.324,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ]
         ],
         [
           [
             7,
-            0.3896,
+            0.2766,
             0,
             0.0,
-            11.7308,
-            -5.805,
+            7.9859,
+            3.435,
             0.0,
             null,
-            -5.805,
-            1.428,
+            3.435,
+            -0.1749,
             true
           ],
           [
-            5,
-            0.2783,
+            9,
+            0.3556,
             0,
             0.0,
-            8.2377,
-            1.659,
+            9.7967,
+            6.65,
             0.0,
             null,
-            1.659,
-            1.632,
+            6.65,
+            -2.5991,
             true
+          ],
+          [
+            4,
+            0.158,
+            4,
+            0.158,
+            27.5594,
+            23.2313,
+            1.0,
+            null,
+            23.2313,
+            2.261,
+            true
+          ],
+          [
+            2,
+            0.079,
+            0,
+            0.0,
+            4.9182,
+            1.68,
+            0.0,
+            null,
+            1.68,
+            -4.556,
+            false
           ],
           [
             1,
-            0.0557,
+            0.0395,
             0,
             0.0,
-            14.2241,
-            -11.97,
+            6.0529,
+            -0.105,
             0.0,
             null,
-            -11.97,
-            -7.684,
+            -0.105,
+            -6.052,
             false
           ],
           [
@@ -3970,19 +3837,6 @@
             false
           ],
           [
-            2,
-            0.1113,
-            0,
-            0.0,
-            17.2824,
-            -0.0525,
-            0.0,
-            null,
-            -0.0525,
-            1.088,
-            false
-          ],
-          [
             0,
             0.0,
             0,
@@ -3996,71 +3850,84 @@
             false
           ],
           [
-            2,
-            0.1113,
             0,
             0.0,
-            10.0793,
-            6.615,
+            0,
             0.0,
             null,
-            6.615,
-            0.85,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
-          ],
-          [
-            3,
-            0.167,
-            0,
-            0.0,
-            11.4811,
-            8.925,
-            0.0,
-            null,
-            8.925,
-            -7.072,
-            true
           ]
         ],
         [
           [
-            15,
-            0.8349,
+            11,
+            0.4346,
             0,
             0.0,
-            7.7938,
-            4.067,
+            6.5291,
+            2.5964,
             0.0,
             null,
-            4.067,
-            2.5341,
+            2.5964,
+            0.136,
             true
           ],
           [
-            10,
-            0.5566,
-            10,
-            0.5566,
-            13.1945,
-            11.1405,
+            11,
+            0.4346,
+            0,
+            0.0,
+            8.0822,
+            -1.8232,
+            0.0,
+            null,
+            -1.8232,
+            -1.6691,
+            true
+          ],
+          [
+            8,
+            0.3161,
+            8,
+            0.3161,
+            11.5616,
+            9.3187,
             1.0,
             null,
-            11.1405,
-            -0.7956,
+            9.3187,
+            -4.573,
             true
           ],
           [
-            5,
-            0.2783,
+            3,
+            0.1185,
             0,
             0.0,
-            7.9467,
-            1.638,
+            7.1123,
+            -0.63,
             0.0,
             null,
-            1.638,
-            -1.3192,
+            -0.63,
+            -3.536,
             true
+          ],
+          [
+            1,
+            0.0395,
+            0,
+            0.0,
+            8.3175,
+            -7.56,
+            0.0,
+            null,
+            -7.56,
+            -3.468,
+            false
           ],
           [
             0,
@@ -4074,6 +3941,86 @@
             null,
             null,
             false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            20,
+            0.7902,
+            0,
+            0.0,
+            7.542,
+            3.9795,
+            0.0,
+            null,
+            3.9795,
+            1.7782,
+            true
+          ],
+          [
+            20,
+            0.7902,
+            0,
+            0.0,
+            7.8898,
+            4.431,
+            0.0,
+            null,
+            4.431,
+            -0.1836,
+            true
+          ],
+          [
+            13,
+            0.5136,
+            0,
+            0.0,
+            7.5978,
+            4.7412,
+            0.0,
+            null,
+            4.7412,
+            -1.9092,
+            true
+          ],
+          [
+            4,
+            0.158,
+            0,
+            0.0,
+            5.3812,
+            3.4125,
+            0.0,
+            null,
+            3.4125,
+            1.071,
+            true
           ],
           [
             0,
@@ -4090,307 +4037,333 @@
           ],
           [
             1,
-            0.0557,
+            0.0395,
             0,
             0.0,
-            3.1617,
-            -3.15,
+            6.0961,
+            -6.09,
             0.0,
             null,
-            -3.15,
+            -6.09,
             -0.272,
             false
           ],
           [
-            1,
-            0.0557,
             0,
             0.0,
-            3.5797,
-            1.47,
+            0,
             0.0,
             null,
-            1.47,
-            -3.264,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
-            1,
-            0.0557,
             0,
             0.0,
-            4.517,
-            -4.515,
+            0,
             0.0,
             null,
-            -4.515,
-            -0.136,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ]
         ],
         [
           [
-            15,
-            0.8349,
+            23,
+            0.9087,
             0,
             0.0,
-            7.4951,
-            -1.197,
+            6.8968,
+            3.675,
             0.0,
             null,
-            -1.197,
-            4.5379,
+            3.675,
+            0.6889,
             true
           ],
           [
-            12,
-            0.6679,
+            16,
+            0.6321,
             0,
             0.0,
-            9.5819,
-            1.715,
+            6.749,
+            3.3272,
             0.0,
             null,
-            1.715,
-            0.3683,
+            3.3272,
+            0.0892,
             true
           ],
           [
-            4,
-            0.2226,
-            4,
-            0.2226,
-            14.4153,
-            10.2375,
+            26,
+            1.0272,
+            0,
+            0.0,
+            9.0021,
+            5.0925,
+            0.0,
+            null,
+            5.0925,
+            -1.8177,
+            true
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            6,
+            0.2371,
+            0,
+            0.0,
+            10.7118,
+            3.0625,
+            0.0,
+            null,
+            3.0625,
+            -5.5873,
+            true
+          ],
+          [
+            1,
+            0.0395,
+            1,
+            0.0395,
+            40.9674,
+            25.2,
             1.0,
             null,
-            10.2375,
-            3.791,
+            25.2,
+            -32.3,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            22,
+            0.8692,
+            0,
+            0.0,
+            8.6192,
+            6.7295,
+            0.0,
+            null,
+            6.7295,
+            -0.4142,
+            true
+          ],
+          [
+            18,
+            0.7112,
+            0,
+            0.0,
+            11.5081,
+            7.3092,
+            0.0,
+            null,
+            7.3092,
+            0.6498,
+            true
+          ],
+          [
+            14,
+            0.5531,
+            0,
+            0.0,
+            7.8289,
+            4.29,
+            0.0,
+            null,
+            4.29,
+            -1.2289,
             true
           ],
           [
             4,
-            0.2226,
+            0.158,
             0,
             0.0,
-            11.9921,
-            4.5937,
+            8.702,
+            1.9425,
             0.0,
             null,
-            4.5937,
-            -9.265,
+            1.9425,
+            -5.117,
             true
-          ],
-          [
-            2,
-            0.1113,
-            0,
-            0.0,
-            5.5106,
-            -2.1525,
-            0.0,
-            null,
-            -2.1525,
-            4.964,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            0.1113,
-            0,
-            0.0,
-            6.2723,
-            3.15,
-            0.0,
-            null,
-            3.15,
-            3.536,
-            false
           ],
           [
             3,
-            0.167,
+            0.1185,
             0,
             0.0,
-            5.3226,
-            0.77,
+            7.9075,
+            7.245,
             0.0,
             null,
-            0.77,
-            -4.42,
+            7.245,
+            -1.8813,
             true
+          ],
+          [
+            1,
+            0.0395,
+            1,
+            0.0395,
+            15.7174,
+            15.33,
+            1.0,
+            null,
+            15.33,
+            -3.468,
+            false
+          ],
+          [
+            1,
+            0.0395,
+            0,
+            0.0,
+            5.8228,
+            -3.255,
+            0.0,
+            null,
+            -3.255,
+            4.828,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
           ]
         ],
         [
           [
             18,
-            1.0019,
+            0.7112,
             0,
             0.0,
-            10.3743,
-            6.7608,
+            6.9388,
+            2.1933,
             0.0,
             null,
-            6.7608,
-            3.298,
+            2.1933,
+            1.6056,
             true
           ],
           [
-            5,
-            0.2783,
-            5,
-            0.2783,
-            9.5188,
-            9.45,
-            1.0,
+            23,
+            0.9087,
+            0,
+            0.0,
+            7.7193,
+            0.4565,
+            0.0,
             null,
-            9.45,
-            -0.7616,
+            0.4565,
+            -0.541,
             true
           ],
           [
+            9,
+            0.3556,
             0,
             0.0,
-            0,
+            6.8353,
+            1.26,
             0.0,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            3,
-            0.167,
-            0,
-            0.0,
-            5.5434,
-            -0.525,
-            0.0,
-            null,
-            -0.525,
-            -2.2667,
-            true
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            5,
-            0.2783,
-            0,
-            0.0,
-            11.6352,
-            3.759,
-            0.0,
-            null,
-            3.759,
-            -6.6912,
-            true
-          ],
-          [
-            4,
-            0.2226,
-            4,
-            0.2226,
-            13.2562,
-            9.5288,
-            1.0,
-            null,
-            9.5288,
-            -3.553,
-            true
-          ]
-        ],
-        [
-          [
-            17,
-            0.9462,
-            0,
-            0.0,
-            13.2697,
-            -2.1556,
-            0.0,
-            null,
-            -2.1556,
-            6.336,
-            true
-          ],
-          [
-            10,
-            0.5566,
-            0,
-            0.0,
-            10.3555,
-            2.7195,
-            0.0,
-            null,
-            2.7195,
-            2.5024,
-            true
-          ],
-          [
-            7,
-            0.3896,
-            0,
-            0.0,
-            5.55,
-            0.69,
-            0.0,
-            null,
-            0.69,
-            -1.904,
+            1.26,
+            3.2413,
             true
           ],
           [
             2,
-            0.1113,
+            0.079,
             0,
             0.0,
-            8.1334,
-            4.41,
+            8.1749,
+            4.8825,
             0.0,
             null,
-            4.41,
-            2.754,
+            4.8825,
+            -6.256,
+            false
+          ],
+          [
+            2,
+            0.079,
+            0,
+            0.0,
+            6.0713,
+            -3.5175,
+            0.0,
+            null,
+            -3.5175,
+            -1.904,
+            false
+          ],
+          [
+            1,
+            0.0395,
+            0,
+            0.0,
+            4.7646,
+            0.21,
+            0.0,
+            null,
+            0.21,
+            4.76,
             false
           ],
           [
@@ -4407,97 +4380,71 @@
             false
           ],
           [
-            1,
-            0.0557,
-            1,
-            0.0557,
-            15.688,
-            13.44,
-            1.0,
-            null,
-            13.44,
-            -8.092,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            1,
-            0.0557,
-            19.6748,
-            12.285,
-            1.0,
-            null,
-            12.285,
-            -15.368,
-            false
-          ],
-          [
-            4,
-            0.2226,
             0,
             0.0,
-            5.6461,
-            1.9162,
+            0,
             0.0,
             null,
-            1.9162,
-            -4.981,
-            true
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
           ]
         ],
         [
           [
             31,
-            1.7254,
+            1.2248,
             0,
             0.0,
-            8.6114,
-            3.3837,
+            7.4888,
+            2.8756,
             0.0,
             null,
-            3.3837,
-            4.5867,
+            2.8756,
+            1.0375,
             true
           ],
           [
-            14,
-            0.7792,
+            23,
+            0.9087,
             0,
             0.0,
-            13.0915,
-            8.0625,
+            6.8631,
+            3.433,
             0.0,
             null,
-            8.0625,
-            1.4329,
+            3.433,
+            -0.5174,
             true
           ],
           [
-            8,
-            0.4453,
+            6,
+            0.2371,
             0,
             0.0,
-            8.0055,
-            1.785,
+            5.0814,
+            1.4525,
             0.0,
             null,
-            1.785,
-            -0.5525,
+            1.4525,
+            -0.2607,
             true
           ],
           [
-            2,
-            0.1113,
+            3,
+            0.1185,
             0,
             0.0,
-            6.4096,
-            4.2525,
+            7.1528,
+            1.33,
             0.0,
             null,
-            4.2525,
-            -1.734,
-            false
+            1.33,
+            0.4307,
+            true
           ],
           [
             0,
@@ -4514,134 +4461,134 @@
           ],
           [
             1,
-            0.0557,
+            0.0395,
             0,
             0.0,
-            13.5324,
-            7.035,
+            20.4591,
+            -11.97,
             0.0,
             null,
-            7.035,
-            -11.56,
-            false
-          ],
-          [
-            2,
-            0.1113,
-            0,
-            0.0,
-            4.8102,
-            4.305,
-            0.0,
-            null,
-            4.305,
-            -0.714,
+            -11.97,
+            -16.592,
             false
           ],
           [
             1,
-            0.0557,
-            1,
-            0.0557,
-            10.1538,
-            9.66,
-            1.0,
+            0.0395,
+            0,
+            0.0,
+            56.7798,
+            -32.76,
+            0.0,
             null,
-            9.66,
-            -3.128,
+            -32.76,
+            -46.376,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ]
         ],
         [
           [
-            33,
-            1.8367,
+            13,
+            0.5136,
             0,
             0.0,
-            8.2425,
-            0.7414,
+            5.7599,
+            2.8269,
             0.0,
             null,
-            0.7414,
-            4.4901,
+            2.8269,
+            2.3068,
             true
           ],
           [
             8,
-            0.4453,
+            0.3161,
             0,
             0.0,
-            7.9668,
-            3.7275,
+            6.2218,
+            4.8431,
             0.0,
             null,
-            3.7275,
-            0.9775,
+            4.8431,
+            -1.9465,
             true
           ],
           [
             7,
-            0.3896,
+            0.2766,
             0,
             0.0,
-            8.1649,
-            4.68,
+            4.9834,
+            -1.095,
             0.0,
             null,
-            4.68,
-            -1.1269,
+            -1.095,
+            -1.7971,
             true
           ],
           [
-            2,
-            0.1113,
+            1,
+            0.0395,
             0,
             0.0,
-            8.106,
-            2.8875,
+            3.8982,
+            2.415,
             0.0,
             null,
-            2.8875,
-            -7.004,
+            2.415,
+            -3.06,
             false
           ],
           [
             1,
-            0.0557,
+            0.0395,
             0,
             0.0,
-            6.0569,
-            5.145,
+            3.2832,
+            -2.625,
             0.0,
             null,
-            5.145,
-            3.196,
+            -2.625,
+            1.972,
             false
           ],
           [
-            1,
-            0.0557,
             0,
             0.0,
-            6.6706,
-            4.935,
+            0,
             0.0,
             null,
-            4.935,
-            4.488,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
-            2,
-            0.1113,
             0,
             0.0,
-            4.7944,
-            1.995,
+            0,
             0.0,
             null,
-            1.995,
-            -0.068,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
@@ -4660,41 +4607,253 @@
         ],
         [
           [
-            32,
-            1.7811,
+            11,
+            0.4346,
             0,
             0.0,
-            8.2445,
-            1.5225,
+            5.4522,
+            1.3841,
             0.0,
             null,
-            1.5225,
-            3.9376,
+            1.3841,
+            1.768,
             true
           ],
           [
-            10,
-            0.5566,
+            6,
+            0.2371,
             0,
             0.0,
-            9.9879,
-            4.2,
+            10.2781,
+            5.495,
             0.0,
             null,
-            4.2,
-            0.9044,
+            5.495,
+            -3.9893,
             true
           ],
           [
-            1,
-            0.0557,
-            1,
-            0.0557,
-            14.9323,
-            14.91,
-            1.0,
+            2,
+            0.079,
+            0,
+            0.0,
+            6.479,
+            -2.2575,
+            0.0,
             null,
-            14.91,
+            -2.2575,
+            -5.474,
+            false
+          ],
+          [
+            1,
+            0.0395,
+            0,
+            0.0,
+            8.8472,
+            -2.205,
+            0.0,
+            null,
+            -2.205,
+            8.568,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            7,
+            0.2766,
+            0,
+            0.0,
+            6.3837,
+            1.11,
+            0.0,
+            null,
+            1.11,
+            1.7097,
+            true
+          ],
+          [
+            7,
+            0.2766,
+            0,
+            0.0,
+            6.1196,
+            0.345,
+            0.0,
+            null,
+            0.345,
+            1.1851,
+            true
+          ],
+          [
+            2,
+            0.079,
+            0,
+            0.0,
+            11.4789,
+            2.3625,
+            0.0,
+            null,
+            2.3625,
+            -10.846,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            0.0395,
+            0,
+            0.0,
+            4.4849,
+            4.41,
+            0.0,
+            null,
+            4.41,
             -0.816,
             false
           ],
@@ -4751,218 +4910,6 @@
             false
           ],
           [
-            2,
-            0.1113,
-            0,
-            0.0,
-            11.0031,
-            4.305,
-            0.0,
-            null,
-            4.305,
-            -6.8,
-            false
-          ]
-        ],
-        [
-          [
-            11,
-            0.6122,
-            0,
-            0.0,
-            8.4833,
-            1.2027,
-            0.0,
-            null,
-            1.2027,
-            4.4324,
-            true
-          ],
-          [
-            8,
-            0.4453,
-            0,
-            0.0,
-            7.2915,
-            -1.1419,
-            0.0,
-            null,
-            -1.1419,
-            3.06,
-            true
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            3.2014,
-            1.89,
-            0.0,
-            null,
-            1.89,
-            -2.584,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            11.9866,
-            -4.725,
-            0.0,
-            null,
-            -4.725,
-            -11.016,
-            false
-          ],
-          [
-            2,
-            0.1113,
-            0,
-            0.0,
-            9.0563,
-            -2.205,
-            0.0,
-            null,
-            -2.205,
-            -4.012,
-            false
-          ]
-        ],
-        [
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            8.3343,
-            4.41,
-            0.0,
-            null,
-            4.41,
-            7.072,
-            false
-          ],
-          [
-            3,
-            0.167,
-            0,
-            0.0,
-            11.5167,
-            -10.045,
-            0.0,
-            null,
-            -10.045,
-            3.196,
-            true
-          ],
-          [
-            1,
-            0.0557,
-            0,
-            0.0,
-            3.0511,
-            2.94,
-            0.0,
-            null,
-            2.94,
-            0.816,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
             0,
             0.0,
             0,
@@ -4980,571 +4927,127 @@
       "pass": [
         [
           [
-            4,
-            17.535,
-            2.72,
-            true
-          ],
-          [
-            1,
-            0.945,
-            13.26,
-            false
-          ],
-          [
-            2,
-            29.19,
-            12.104,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            19.845,
-            -40.188,
-            false
-          ],
-          [
-            2,
-            1.995,
-            0.51,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            11,
-            26.4791,
-            7.5604,
-            true
-          ],
-          [
-            9,
-            9.8933,
-            9.6333,
-            true
-          ],
-          [
-            4,
-            -2.1787,
-            7.225,
-            true
-          ],
-          [
-            2,
-            -3.2025,
-            -2.04,
-            false
-          ],
-          [
-            1,
-            22.995,
-            -31.552,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            9.345,
-            -2.346,
-            false
-          ],
-          [
-            2,
-            15.1725,
-            -12.954,
-            false
-          ]
-        ],
-        [
-          [
-            9,
-            4.7367,
-            9.452,
-            true
-          ],
-          [
-            16,
-            7.2909,
-            4.5135,
-            true
-          ],
-          [
-            6,
-            13.65,
-            0.1247,
-            true
-          ],
-          [
-            1,
-            19.425,
-            -16.252,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            6.72,
-            -5.576,
-            false
-          ],
-          [
-            1,
-            18.165,
-            3.264,
-            false
-          ],
-          [
-            4,
-            -1.1813,
-            -11.968,
-            true
-          ]
-        ],
-        [
-          [
-            34,
-            7.4828,
-            9.098,
-            true
-          ],
-          [
-            9,
-            2.905,
-            12.0209,
-            true
-          ],
-          [
-            4,
-            -2.9925,
-            9.384,
-            true
-          ],
-          [
-            1,
-            3.465,
-            -21.42,
-            false
-          ],
-          [
-            2,
-            13.335,
-            4.114,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            3,
-            24.465,
-            -22.3493,
-            true
-          ],
-          [
-            1,
-            -13.965,
-            -14.212,
-            false
-          ]
-        ],
-        [
-          [
-            54,
-            4.1339,
-            9.3324,
-            true
-          ],
-          [
-            20,
-            0.0893,
-            11.0262,
-            true
-          ],
-          [
-            8,
-            1.1419,
-            3.961,
-            true
-          ],
-          [
-            2,
-            16.3275,
-            1.428,
-            false
-          ],
-          [
-            4,
-            18.0862,
-            5.576,
-            true
-          ],
-          [
-            4,
-            1.575,
-            -6.29,
-            true
-          ],
-          [
-            1,
-            7.035,
-            -1.632,
-            false
-          ],
-          [
-            6,
-            -1.155,
-            -5.8367,
-            true
-          ]
-        ],
-        [
-          [
-            37,
-            0.4257,
-            11.1318,
-            true
-          ],
-          [
-            16,
-            7.4484,
-            7.8795,
-            true
-          ],
-          [
-            13,
-            0.7512,
-            5.9997,
-            true
-          ],
-          [
-            1,
-            1.995,
-            8.772,
-            false
-          ],
-          [
-            1,
-            -7.035,
-            10.404,
-            false
-          ],
-          [
-            2,
-            -11.655,
-            -15.64,
-            false
-          ],
-          [
-            4,
-            5.6175,
-            -11.747,
-            true
-          ],
-          [
-            4,
-            -2.205,
-            -14.705,
-            true
-          ]
-        ],
-        [
-          [
-            39,
-            -0.2988,
-            12.4545,
-            true
-          ],
-          [
-            29,
-            -2.5888,
-            7.8552,
-            true
-          ],
-          [
-            8,
-            4.1213,
-            -4.658,
-            true
-          ],
-          [
-            6,
-            2.2575,
-            16.3653,
+            5,
+            27.006,
+            4.556,
             true
           ],
           [
             3,
-            8.785,
-            14.1213,
+            0.21,
+            4.964,
             true
           ],
           [
-            2,
-            0.5775,
-            2.924,
+            3,
+            15.645,
+            0.476,
+            true
+          ],
+          [
+            0,
+            null,
+            null,
             false
           ],
           [
-            3,
-            9.8,
-            -7.004,
-            true
+            0,
+            null,
+            null,
+            false
           ],
           [
-            3,
-            -3.64,
-            -22.1,
-            true
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
           ]
         ],
         [
           [
-            78,
-            0.459,
-            7.5654,
+            26,
+            10.5969,
+            2.8691,
             true
           ],
           [
-            36,
-            -0.1692,
-            5.8593,
-            true
-          ],
-          [
-            17,
-            4.5459,
-            -4.66,
+            15,
+            11.83,
+            1.3555,
             true
           ],
           [
             5,
-            4.83,
-            0.0272,
+            3.276,
+            5.2768,
             true
           ],
           [
             3,
-            5.25,
-            11.8093,
-            true
-          ],
-          [
-            4,
-            2.0738,
-            7.344,
+            1.26,
+            5.984,
             true
           ],
           [
             3,
-            3.325,
-            -14.5067,
+            -3.99,
+            -3.4453,
             true
           ],
           [
-            3,
-            -1.4,
-            -6.4147,
-            true
-          ]
-        ],
-        [
-          [
-            51,
-            -1.0232,
-            9.7133,
-            true
-          ],
-          [
-            38,
-            2.5117,
-            3.3374,
-            true
-          ],
-          [
-            17,
-            2.9091,
-            1.904,
-            true
-          ],
-          [
-            4,
-            2.0475,
-            -7.123,
-            true
-          ],
-          [
-            3,
-            9.1,
-            3.536,
-            true
-          ],
-          [
-            3,
-            2.24,
-            -3.5587,
-            true
-          ],
-          [
-            3,
-            -2.905,
-            -4.216,
-            true
-          ],
-          [
-            4,
-            4.2263,
-            -9.35,
-            true
-          ]
-        ],
-        [
-          [
-            40,
-            -0.1417,
-            8.1906,
-            true
-          ],
-          [
-            20,
-            2.5778,
-            6.8102,
-            true
-          ],
-          [
-            17,
-            0.4632,
-            -0.708,
-            true
-          ],
-          [
-            1,
-            -5.67,
-            6.596,
+            0,
+            null,
+            null,
             false
           ],
           [
-            1,
-            -6.405,
-            5.304,
+            0,
+            null,
+            null,
             false
           ],
           [
-            1,
-            5.88,
-            -12.784,
-            false
-          ],
-          [
-            5,
-            4.683,
-            -0.1088,
-            true
-          ],
-          [
-            1,
-            -13.65,
-            -5.916,
+            0,
+            null,
+            null,
             false
           ]
         ],
         [
+          [
+            58,
+            7.9275,
+            5.753,
+            true
+          ],
           [
             19,
-            -6.0568,
-            7.2653,
-            true
-          ],
-          [
-            17,
-            -6.9671,
-            3.596,
-            true
-          ],
-          [
-            4,
-            -3.2288,
-            6.137,
-            true
-          ],
-          [
-            1,
-            -6.825,
-            -1.632,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            3,
-            -7.14,
-            -11.492,
-            true
-          ],
-          [
-            2,
-            -0.0,
-            -0.782,
-            false
-          ],
-          [
-            4,
-            -1.47,
-            -10.421,
-            true
-          ]
-        ],
-        [
-          [
-            1,
-            -15.435,
-            4.284,
-            false
-          ],
-          [
-            3,
-            -7.42,
-            6.4373,
+            2.0226,
+            8.8794,
             true
           ],
           [
             5,
-            -3.402,
-            12.1176,
+            1.659,
+            -1.3328,
+            true
+          ],
+          [
+            4,
+            -11.9438,
+            6.426,
             true
           ],
           [
@@ -5570,6 +5073,50 @@
             null,
             null,
             false
+          ]
+        ],
+        [
+          [
+            83,
+            7.2399,
+            6.0889,
+            true
+          ],
+          [
+            58,
+            4.6544,
+            4.8831,
+            true
+          ],
+          [
+            31,
+            5.2534,
+            1.2108,
+            true
+          ],
+          [
+            15,
+            7.21,
+            1.1968,
+            true
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            10.5,
+            -5.032,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
           ],
           [
             0,
@@ -5577,373 +5124,52 @@
             null,
             false
           ]
-        ]
-      ],
-      "prog": null,
-      "twinNote": "",
-      "ipNote": "Impronta evento · 2054 eventi",
-      "defNote": "Azioni difensive · 138 eventi",
-      "ipCx": 59.5,
-      "ipCy": 15.1,
-      "ipN": 2054,
-      "carryCx": null,
-      "carryCy": null,
-      "carryN": 382,
-      "carryProgN": 30,
-      "passN": 820,
-      "progN": null,
-      "defCx": 44.8,
-      "defCy": 18.8,
-      "defN": 138,
-      "defOppPct": 0.4275
-    },
-    "322153": {
-      "ip": [
-        [
-          0.000991,
-          0.0,
-          0.0,
-          0.000991,
-          0.0,
-          0.0,
-          0.0,
-          0.0
         ],
-        [
-          0.003964,
-          0.006938,
-          0.0,
-          0.000991,
-          0.000991,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.017839,
-          0.006938,
-          0.004955,
-          0.000991,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.049554,
-          0.013875,
-          0.006938,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.068385,
-          0.029732,
-          0.016848,
-          0.002973,
-          0.0,
-          0.000991,
-          0.0,
-          0.0
-        ],
-        [
-          0.046581,
-          0.023786,
-          0.004955,
-          0.000991,
-          0.0,
-          0.001982,
-          0.0,
-          0.0
-        ],
-        [
-          0.057483,
-          0.009911,
-          0.012884,
-          0.000991,
-          0.000991,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.080278,
-          0.021804,
-          0.013875,
-          0.001982,
-          0.0,
-          0.000991,
-          0.0,
-          0.0
-        ],
-        [
-          0.099108,
-          0.031715,
-          0.006938,
-          0.001982,
-          0.0,
-          0.001982,
-          0.0,
-          0.0
-        ],
-        [
-          0.08226,
-          0.034688,
-          0.004955,
-          0.002973,
-          0.0,
-          0.0,
-          0.002973,
-          0.002973
-        ],
-        [
-          0.022795,
-          0.065411,
-          0.023786,
-          0.020813,
-          0.001982,
-          0.003964,
-          0.003964,
-          0.0
-        ],
-        [
-          0.013875,
-          0.010902,
-          0.022795,
-          0.012884,
-          0.005946,
-          0.002973,
-          0.000991,
-          0.0
-        ]
-      ],
-      "def": [
-        [
-          0.008,
-          0.024,
-          0.04,
-          0.088,
-          0.024,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.032,
-          0.04,
-          0.024,
-          0.024,
-          0.048,
-          0.008,
-          0.0,
-          0.0
-        ],
-        [
-          0.032,
-          0.048,
-          0.024,
-          0.008,
-          0.016,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.024,
-          0.0,
-          0.024,
-          0.008,
-          0.0,
-          0.008,
-          0.0,
-          0.0
-        ],
-        [
-          0.048,
-          0.048,
-          0.008,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.016,
-          0.032,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.008
-        ],
-        [
-          0.0,
-          0.024,
-          0.008,
-          0.008,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.056,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.008,
-          0.0,
-          0.0
-        ],
-        [
-          0.016,
-          0.024,
-          0.008,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.04,
-          0.008,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.008,
-          0.032,
-          0.0,
-          0.008,
-          0.0,
-          0.016,
-          0.0,
-          0.0
-        ],
-        [
-          0.016,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.008,
-          0.0
-        ]
-      ],
-      "carry": [
         [
           [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
+            83,
+            3.8167,
+            7.7307,
+            true
           ],
           [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
+            67,
+            6.4426,
+            5.4989,
+            true
           ],
           [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
+            31,
+            8.8065,
+            1.6649,
+            true
+          ],
+          [
+            9,
+            0.735,
+            7.9258,
+            true
+          ],
+          [
+            4,
+            8.4,
+            4.539,
+            true
           ],
           [
             1,
-            0.0676,
-            1,
-            0.0676,
-            31.4176,
-            15.12,
-            1.0,
-            null,
-            15.12,
-            -27.54,
+            -3.885,
+            7.752,
             false
           ],
           [
             0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
           ],
           [
             0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
@@ -5951,105 +5177,299 @@
         ],
         [
           [
-            2,
-            0.1352,
-            0,
-            0.0,
-            5.0586,
-            -1.9425,
-            0.0,
-            null,
-            -1.9425,
-            2.244,
+            60,
+            1.7692,
+            8.5068,
+            true
+          ],
+          [
+            48,
+            3.6509,
+            6.069,
+            true
+          ],
+          [
+            32,
+            7.9045,
+            3.995,
+            true
+          ],
+          [
+            9,
+            2.2283,
+            5.7347,
+            true
+          ],
+          [
+            5,
+            3.696,
+            5.8752,
+            true
+          ],
+          [
+            1,
+            4.305,
+            13.056,
             false
           ],
           [
-            2,
-            0.1352,
-            0,
-            0.0,
-            4.5319,
-            1.89,
-            0.0,
-            null,
-            1.89,
-            -3.842,
+            1,
+            30.765,
+            -7.276,
             false
           ],
           [
             0,
-            0.0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            86,
+            3.4003,
+            7.6041,
+            true
+          ],
+          [
+            61,
+            6.0315,
+            2.4781,
+            true
+          ],
+          [
+            35,
+            4.008,
+            -0.7091,
+            true
+          ],
+          [
+            11,
+            -0.3245,
+            4.8527,
+            true
+          ],
+          [
             0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
           ],
           [
             1,
-            0.0676,
+            -34.125,
+            -3.536,
+            false
+          ],
+          [
             0,
-            0.0,
-            5.759,
-            1.89,
-            0.0,
             null,
-            1.89,
-            5.44,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            114,
+            -0.1096,
+            7.4579,
+            true
+          ],
+          [
+            78,
+            2.419,
+            0.9677,
+            true
+          ],
+          [
+            33,
+            4.5627,
+            -2.7468,
+            true
+          ],
+          [
+            11,
+            3.1786,
+            5.0258,
+            true
+          ],
+          [
+            2,
+            8.0325,
+            12.852,
+            false
+          ],
+          [
+            2,
+            7.035,
+            2.822,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            84,
+            1.02,
+            6.5005,
+            true
+          ],
+          [
+            49,
+            3.6129,
+            -0.698,
+            true
+          ],
+          [
+            22,
+            7.3691,
+            -6.8618,
+            true
+          ],
+          [
+            9,
+            5.2033,
+            -6.1276,
+            true
+          ],
+          [
+            3,
+            11.9,
+            6.0747,
+            true
+          ],
+          [
+            2,
+            -5.25,
+            -0.85,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            46,
+            0.226,
+            5.9648,
+            true
+          ],
+          [
+            17,
+            0.42,
+            -2.008,
+            true
+          ],
+          [
+            5,
+            3.486,
+            10.6624,
+            true
+          ],
+          [
+            0,
+            null,
+            null,
             false
           ],
           [
             1,
-            0.0676,
-            0,
-            0.0,
-            11.0565,
-            0.945,
-            0.0,
-            null,
-            0.945,
+            21.42,
             11.016,
             false
           ],
           [
             0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
           ],
           [
             0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
           ],
           [
             0,
-            0.0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            21,
+            -10.005,
+            4.3876,
+            true
+          ],
+          [
+            6,
+            3.4125,
+            5.0773,
+            true
+          ],
+          [
+            6,
+            -1.295,
+            4.4653,
+            true
+          ],
+          [
+            4,
+            3.4125,
+            -3.145,
+            true
+          ],
+          [
             0,
-            0.0,
             null,
             null,
+            false
+          ],
+          [
+            0,
             null,
             null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
             null,
             null,
             false
@@ -6058,610 +5478,501 @@
         [
           [
             4,
-            0.2705,
-            0,
-            0.0,
-            4.6881,
-            1.575,
-            0.0,
-            null,
-            1.575,
-            0.867,
-            true
-          ],
-          [
-            2,
-            0.1352,
-            0,
-            0.0,
-            5.8418,
-            4.725,
-            0.0,
-            null,
-            4.725,
-            -0.986,
-            false
-          ],
-          [
-            2,
-            0.1352,
-            0,
-            0.0,
-            6.5973,
-            -0.9975,
-            0.0,
-            null,
-            -0.9975,
-            -4.318,
-            false
-          ],
-          [
-            1,
-            0.0676,
-            0,
-            0.0,
-            10.3254,
-            7.77,
-            0.0,
-            null,
-            7.77,
-            -6.8,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            7,
-            0.4733,
-            0,
-            0.0,
-            10.0893,
-            4.065,
-            0.0,
-            null,
-            4.065,
-            1.8943,
-            true
-          ],
-          [
-            2,
-            0.1352,
-            0,
-            0.0,
-            8.0408,
-            1.5225,
-            0.0,
-            null,
-            1.5225,
-            -4.59,
-            false
-          ],
-          [
-            1,
-            0.0676,
-            0,
-            0.0,
-            6.0866,
-            -2.73,
-            0.0,
-            null,
-            -2.73,
-            -5.44,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            8,
-            0.5409,
-            0,
-            0.0,
-            4.9426,
-            -3.2156,
-            0.0,
-            null,
-            -3.2156,
-            2.2355,
+            -6.6412,
+            1.938,
             true
           ],
           [
             8,
-            0.5409,
-            0,
-            0.0,
-            6.8296,
-            0.4462,
-            0.0,
-            null,
-            0.4462,
-            -2.21,
+            -5.5388,
+            8.3895,
             true
           ],
           [
             3,
-            0.2029,
-            0,
-            0.0,
-            7.1298,
-            6.755,
-            0.0,
-            null,
-            6.755,
-            1.972,
-            true
-          ],
-          [
-            2,
-            0.1352,
-            0,
-            0.0,
-            12.5501,
-            6.195,
-            0.0,
-            null,
-            6.195,
-            -10.914,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.0676,
-            0,
-            0.0,
-            16.4895,
-            1.05,
-            0.0,
-            null,
-            1.05,
-            -16.456,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            2,
-            0.1352,
-            0,
-            0.0,
-            4.0021,
-            0.63,
-            0.0,
-            null,
-            0.63,
-            0.884,
-            false
-          ],
-          [
-            6,
-            0.4057,
-            6,
-            0.4057,
-            12.2075,
-            9.8875,
-            1.0,
-            null,
-            9.8875,
-            -3.0373,
-            true
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.0676,
-            1,
-            0.0676,
-            35.9605,
-            14.49,
-            1.0,
-            null,
-            14.49,
-            -32.912,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            6,
-            0.4057,
-            0,
-            0.0,
-            7.076,
-            1.8725,
-            0.0,
-            null,
-            1.8725,
-            1.5867,
-            true
-          ],
-          [
-            4,
-            0.2705,
-            0,
-            0.0,
-            7.4881,
-            4.305,
-            0.0,
-            null,
-            4.305,
-            -4.148,
-            true
-          ],
-          [
-            3,
-            0.2029,
-            0,
-            0.0,
-            5.7443,
-            0.21,
-            0.0,
-            null,
-            0.21,
-            -0.9973,
-            true
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            9,
-            0.6086,
-            0,
-            0.0,
-            8.9024,
-            0.9217,
-            0.0,
-            null,
-            0.9217,
-            2.8333,
-            true
-          ],
-          [
-            3,
-            0.2029,
-            3,
-            0.2029,
-            10.278,
-            9.835,
-            1.0,
-            null,
-            9.835,
-            -1.632,
+            -5.775,
+            16.8413,
             true
           ],
           [
             1,
-            0.0676,
-            1,
-            0.0676,
-            23.2255,
-            22.995,
-            1.0,
-            null,
-            22.995,
+            -10.08,
             3.264,
             false
           ],
           [
             0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
             null,
             null,
             false
           ],
           [
             0,
-            0.0,
+            null,
+            null,
+            false
+          ],
+          [
+            2,
+            -6.1425,
+            6.256,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ]
+      ],
+      "prog": null,
+      "twinNote": "",
+      "ipNote": "Impronta evento · 3278 eventi",
+      "defNote": "Azioni difensive · 309 eventi",
+      "ipCx": 53.1,
+      "ipCy": 11.9,
+      "ipN": 3278,
+      "carryCx": null,
+      "carryCy": null,
+      "carryN": 444,
+      "carryProgN": 14,
+      "passN": 1415,
+      "progN": null,
+      "defCx": 38.2,
+      "defCy": 18.1,
+      "defN": 309,
+      "defOppPct": 0.2848
+    },
+    "122683": {
+      "ip": [
+        [
+          0.004315,
+          0.001798,
+          0.00036,
+          0.001079,
+          0.0,
+          0.001079,
+          0.00036,
+          0.0
+        ],
+        [
+          0.012585,
+          0.004315,
+          0.001438,
+          0.00036,
+          0.0,
+          0.0,
+          0.00036,
+          0.0
+        ],
+        [
+          0.01726,
+          0.00827,
+          0.001438,
+          0.002158,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.05214,
+          0.013305,
+          0.002517,
+          0.002158,
+          0.000719,
+          0.000719,
+          0.000719,
+          0.0
+        ],
+        [
+          0.066523,
+          0.014743,
+          0.003236,
+          0.000719,
+          0.001438,
+          0.00036,
+          0.00036,
+          0.001438
+        ],
+        [
+          0.045667,
+          0.011507,
+          0.002158,
+          0.001798,
+          0.001079,
+          0.001438,
+          0.000719,
+          0.000719
+        ],
+        [
+          0.059331,
+          0.010787,
+          0.007551,
+          0.001438,
+          0.00036,
+          0.001438,
+          0.0,
+          0.000719
+        ],
+        [
+          0.118303,
+          0.016541,
+          0.006832,
+          0.001438,
+          0.003955,
+          0.001438,
+          0.00036,
+          0.000719
+        ],
+        [
+          0.134844,
+          0.030205,
+          0.011866,
+          0.007911,
+          0.001079,
+          0.00036,
+          0.002517,
+          0.000719
+        ],
+        [
+          0.107156,
+          0.028767,
+          0.011147,
+          0.007551,
+          0.001079,
+          0.0,
+          0.00036,
+          0.00036
+        ],
+        [
+          0.058252,
+          0.025171,
+          0.013664,
+          0.001798,
+          0.000719,
+          0.001438,
+          0.0,
+          0.000719
+        ],
+        [
+          0.009349,
+          0.019417,
+          0.006472,
+          0.000719,
+          0.000719,
+          0.00036,
+          0.000719,
+          0.0
+        ]
+      ],
+      "def": [
+        [
+          0.006211,
+          0.018634,
+          0.018634,
+          0.006211,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.037267,
+          0.049689,
+          0.024845,
+          0.031056,
+          0.006211,
+          0.006211,
+          0.0,
+          0.0
+        ],
+        [
+          0.018634,
+          0.018634,
+          0.018634,
+          0.012422,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.024845,
+          0.018634,
+          0.006211,
+          0.012422,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.024845,
+          0.018634,
+          0.0,
+          0.0,
+          0.0,
+          0.006211,
+          0.0,
+          0.0
+        ],
+        [
+          0.006211,
+          0.037267,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.024845,
+          0.018634,
+          0.006211,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.018634,
+          0.006211,
+          0.006211,
+          0.0,
+          0.0,
+          0.0,
+          0.006211,
+          0.0
+        ],
+        [
+          0.037267,
+          0.012422,
+          0.012422,
+          0.012422,
+          0.0,
+          0.0,
+          0.0,
+          0.006211
+        ],
+        [
+          0.018634,
+          0.018634,
+          0.018634,
+          0.018634,
+          0.006211,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.018634,
+          0.024845,
+          0.043478,
+          0.018634,
+          0.0,
+          0.0,
+          0.0,
+          0.006211
+        ],
+        [
+          0.167702,
+          0.018634,
+          0.018634,
+          0.006211,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "carry": [
+        [
+          [
+            1,
+            0.0398,
             0,
             0.0,
+            3.6221,
+            -3.57,
+            0.0,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            -3.57,
+            0.612,
             false
           ],
           [
             1,
-            0.0676,
+            0.0398,
             0,
             0.0,
-            35.1298,
-            -28.98,
+            4.1299,
+            1.89,
             0.0,
             null,
-            -28.98,
-            -19.856,
+            1.89,
+            -3.672,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            5.254,
+            4.41,
+            0.0,
+            null,
+            4.41,
+            -2.856,
+            false
+          ],
+          [
+            3,
+            0.1195,
+            0,
+            0.0,
+            12.0472,
+            4.165,
+            0.0,
+            null,
+            4.165,
+            -9.7467,
+            true
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            6,
+            0.239,
+            6,
+            0.239,
+            27.2642,
+            21.0525,
+            1.0,
+            null,
+            21.0525,
+            12.648,
+            true
+          ],
+          [
+            7,
+            0.2789,
+            0,
+            0.0,
+            8.1207,
+            4.365,
+            0.0,
+            null,
+            4.365,
+            -3.9926,
+            true
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            14.544,
+            8.19,
+            0.0,
+            null,
+            8.19,
+            -9.826,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            16.846,
+            7.875,
+            0.0,
+            null,
+            7.875,
+            -14.892,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
@@ -6694,80 +6005,80 @@
         [
           [
             10,
-            0.6762,
+            0.3984,
             0,
             0.0,
-            8.293,
-            3.9165,
+            8.9479,
+            4.4415,
             0.0,
             null,
-            3.9165,
-            2.72,
+            4.4415,
+            0.4488,
             true
           ],
           [
-            6,
-            0.4057,
-            6,
-            0.4057,
-            13.4538,
-            10.78,
+            10,
+            0.3984,
+            10,
+            0.3984,
+            17.5124,
+            12.9885,
             1.0,
             null,
-            10.78,
-            1.2127,
+            12.9885,
+            0.6664,
             true
           ],
           [
-            2,
-            0.1352,
-            0,
-            0.0,
-            4.5344,
-            -1.155,
-            0.0,
-            null,
-            -1.155,
-            1.87,
-            false
-          ],
-          [
             1,
-            0.0676,
-            0,
-            0.0,
-            4.9773,
-            -3.36,
-            0.0,
-            null,
-            -3.36,
-            -3.672,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
+            0.0398,
             1,
-            0.0676,
+            0.0398,
+            38.4048,
+            36.75,
+            1.0,
+            null,
+            36.75,
+            -11.152,
+            false
+          ],
+          [
+            4,
+            0.1594,
             0,
             0.0,
-            8.6232,
-            7.56,
+            22.2711,
+            7.4812,
             0.0,
             null,
-            7.56,
-            4.148,
+            7.4812,
+            -14.28,
+            true
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
@@ -6799,200 +6110,94 @@
         ],
         [
           [
-            12,
-            0.8114,
+            21,
+            0.8367,
             0,
             0.0,
-            6.834,
-            2.1437,
+            13.5894,
+            8.15,
             0.0,
             null,
-            2.1437,
-            2.8333,
+            8.15,
+            4.0055,
             true
           ],
           [
             7,
-            0.4733,
+            0.2789,
             0,
             0.0,
-            6.4185,
-            4.92,
+            21.7733,
+            8.925,
             0.0,
             null,
-            4.92,
-            2.1663,
+            8.925,
+            3.7206,
             true
           ],
           [
-            1,
-            0.0676,
-            0,
-            0.0,
-            5.1422,
-            5.04,
-            0.0,
-            null,
-            5.04,
-            1.02,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.0676,
-            1,
-            0.0676,
-            15.3022,
-            13.965,
+            3,
+            0.1195,
+            3,
+            0.1195,
+            21.469,
+            19.705,
             1.0,
             null,
-            13.965,
-            -6.256,
-            false
+            19.705,
+            1.632,
+            true
           ],
           [
-            1,
-            0.0676,
-            0,
-            0.0,
-            5.8006,
-            -5.775,
-            0.0,
+            4,
+            0.1594,
+            4,
+            0.1594,
+            13.6652,
+            11.0775,
+            1.0,
             null,
-            -5.775,
-            -0.544,
-            false
-          ]
-        ],
-        [
+            11.0775,
+            3.893,
+            true
+          ],
           [
             2,
-            0.1352,
+            0.0797,
             0,
             0.0,
-            7.2796,
-            0.6825,
+            19.5358,
+            6.8775,
             0.0,
             null,
-            0.6825,
-            2.822,
-            false
-          ],
-          [
-            7,
-            0.4733,
-            0,
-            0.0,
-            7.7413,
-            2.85,
-            0.0,
-            null,
-            2.85,
-            -1.5543,
-            true
-          ],
-          [
-            3,
-            0.2029,
-            0,
-            0.0,
-            7.9867,
-            3.78,
-            0.0,
-            null,
-            3.78,
-            -1.1107,
-            true
-          ],
-          [
-            1,
-            0.0676,
-            0,
-            0.0,
-            3.1179,
-            2.52,
-            0.0,
-            null,
-            2.52,
-            -1.836,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            6.8775,
+            -18.054,
             false
           ],
           [
             1,
-            0.0676,
+            0.0398,
             0,
             0.0,
-            4.8237,
-            -4.305,
+            7.4068,
+            6.615,
             0.0,
             null,
-            -4.305,
-            -2.176,
+            6.615,
+            3.332,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             false
           ],
           [
@@ -7011,45 +6216,720 @@
         ],
         [
           [
-            3,
-            0.2029,
+            16,
+            0.6375,
             0,
             0.0,
-            6.3566,
-            -5.11,
+            7.4859,
+            1.6275,
             0.0,
             null,
-            -5.11,
-            3.5133,
+            1.6275,
+            1.8318,
             true
           ],
           [
+            10,
+            0.3984,
             0,
             0.0,
-            0,
+            9.5877,
+            0.714,
             0.0,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
+            0.714,
+            0.0884,
+            true
           ],
           [
             1,
-            0.0676,
-            0,
-            0.0,
-            3.3662,
-            3.36,
-            0.0,
+            0.0398,
+            1,
+            0.0398,
+            34.8606,
+            34.86,
+            1.0,
             null,
-            3.36,
+            34.86,
             -0.204,
             false
           ],
           [
+            1,
+            0.0398,
+            0,
+            0.0,
+            9.9968,
+            3.255,
+            0.0,
+            null,
+            3.255,
+            -9.452,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            14.9311,
+            1.785,
+            0.0,
+            null,
+            1.785,
+            -14.824,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            1,
+            0.0398,
+            33.9659,
+            20.16,
+            1.0,
+            null,
+            20.16,
+            -27.336,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            21,
+            0.8367,
+            0,
+            0.0,
+            8.1585,
+            3.19,
+            0.0,
+            null,
+            3.19,
+            1.9234,
+            true
+          ],
+          [
+            5,
+            0.1992,
+            5,
+            0.1992,
+            15.1555,
+            12.432,
+            1.0,
+            null,
+            12.432,
+            -0.2584,
+            true
+          ],
+          [
+            1,
+            0.0398,
+            1,
+            0.0398,
+            55.6369,
+            55.545,
+            1.0,
+            null,
+            55.545,
+            -3.196,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            17.9642,
+            5.04,
+            0.0,
+            null,
+            5.04,
+            -15.368,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            6.596,
+            0.945,
+            0.0,
+            null,
+            0.945,
+            6.528,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            1,
+            0.0398,
+            15.7298,
+            14.28,
+            1.0,
+            null,
+            14.28,
+            6.596,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            3.8601,
+            -2.52,
+            0.0,
+            null,
+            -2.52,
+            -2.924,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            1,
+            0.0398,
+            24.6454,
+            24.36,
+            1.0,
+            null,
+            24.36,
+            3.74,
+            false
+          ]
+        ],
+        [
+          [
+            27,
+            1.0757,
+            0,
+            0.0,
+            13.9173,
+            7.7078,
+            0.0,
+            null,
+            7.7078,
+            3.9062,
+            true
+          ],
+          [
+            7,
+            0.2789,
+            0,
+            0.0,
+            17.4855,
+            7.965,
+            0.0,
+            null,
+            7.965,
+            10.1806,
+            true
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            4.8024,
+            4.2525,
+            0.0,
+            null,
+            4.2525,
+            2.21,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            8.7312,
+            1.05,
+            0.0,
+            null,
+            1.05,
+            -5.44,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            14.9189,
+            1.68,
+            0.0,
+            null,
+            1.68,
+            -14.824,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            3.7903,
+            1.365,
+            0.0,
+            null,
+            1.365,
+            -3.536,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            73,
+            2.9084,
+            0,
+            0.0,
+            9.664,
+            3.9699,
+            0.0,
+            null,
+            3.9699,
+            4.1582,
+            true
+          ],
+          [
+            6,
+            0.239,
+            0,
+            0.0,
+            10.9846,
+            2.59,
+            0.0,
+            null,
+            2.59,
+            1.02,
+            true
+          ],
+          [
+            3,
+            0.1195,
+            0,
+            0.0,
+            9.001,
+            -4.48,
+            0.0,
+            null,
+            -4.48,
+            -4.896,
+            true
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            5.9953,
+            2.52,
+            0.0,
+            null,
+            2.52,
+            5.44,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            8.8073,
+            3.4125,
+            0.0,
+            null,
+            3.4125,
+            -0.578,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            2,
+            0.0797,
+            23.7526,
+            14.91,
+            1.0,
+            null,
+            14.91,
+            -9.282,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            46.4996,
+            -19.32,
+            0.0,
+            null,
+            -19.32,
+            -42.296,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            111,
+            4.4223,
+            0,
+            0.0,
+            11.4448,
+            5.5338,
+            0.0,
+            null,
+            5.5338,
+            5.2881,
+            true
+          ],
+          [
+            16,
+            0.6375,
+            0,
+            0.0,
+            7.907,
+            4.9941,
+            0.0,
+            null,
+            4.9941,
+            1.0157,
+            true
+          ],
+          [
+            6,
+            0.239,
+            0,
+            0.0,
+            14.2991,
+            -4.6725,
+            0.0,
+            null,
+            -4.6725,
+            1.768,
+            true
+          ],
+          [
+            4,
+            0.1594,
+            0,
+            0.0,
+            8.8134,
+            3.0712,
+            0.0,
+            null,
+            3.0712,
+            -1.207,
+            true
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            7.6299,
+            4.7775,
+            0.0,
+            null,
+            4.7775,
+            5.542,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            93,
+            3.7052,
+            0,
+            0.0,
+            10.0106,
+            4.8718,
+            0.0,
+            null,
+            4.8718,
+            5.3705,
+            true
+          ],
+          [
+            9,
+            0.3586,
+            0,
+            0.0,
+            8.8066,
+            5.565,
+            0.0,
+            null,
+            5.565,
+            1.6093,
+            true
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            3.5181,
+            -0.84,
+            0.0,
+            null,
+            -0.84,
+            2.72,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            4.9392,
+            -4.935,
+            0.0,
+            null,
+            -4.935,
+            0.204,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            33,
+            1.3147,
+            0,
+            0.0,
+            8.8267,
+            4.1077,
+            0.0,
+            null,
+            4.1077,
+            4.2593,
+            true
+          ],
+          [
+            8,
+            0.3187,
+            0,
+            0.0,
+            7.4089,
+            3.3731,
+            0.0,
+            null,
+            3.3731,
+            4.063,
+            true
+          ],
+          [
+            3,
+            0.1195,
+            0,
+            0.0,
+            6.4397,
+            2.275,
+            0.0,
+            null,
+            2.275,
+            -3.6493,
+            true
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            16.8111,
+            -16.695,
+            0.0,
+            null,
+            -16.695,
+            -1.972,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            17.5944,
+            8.19,
+            0.0,
+            null,
+            8.19,
+            15.572,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            3.0616,
+            2.835,
+            0.0,
+            null,
+            2.835,
+            -1.156,
+            false
+          ],
+          [
             0,
             0.0,
             0,
@@ -7064,15 +6944,82 @@
           ],
           [
             1,
-            0.0676,
+            0.0398,
             0,
             0.0,
-            10.2311,
-            -3.57,
+            5.9293,
+            5.46,
             0.0,
             null,
-            -3.57,
-            -9.588,
+            5.46,
+            -2.312,
+            false
+          ]
+        ],
+        [
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            5.5743,
+            -5.4075,
+            0.0,
+            null,
+            -5.4075,
+            1.156,
+            false
+          ],
+          [
+            2,
+            0.0797,
+            0,
+            0.0,
+            6.232,
+            1.155,
+            0.0,
+            null,
+            1.155,
+            6.12,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            9.195,
+            -8.4,
+            0.0,
+            null,
+            -8.4,
+            -3.74,
+            false
+          ],
+          [
+            0,
+            0.0,
+            0,
+            0.0,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            0.0398,
+            0,
+            0.0,
+            22.938,
+            -16.905,
+            0.0,
+            null,
+            -16.905,
+            -15.504,
             false
           ],
           [
@@ -7119,121 +7066,71 @@
       "pass": [
         [
           [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            2,
-            13.1775,
-            1.088,
-            false
-          ],
-          [
-            3,
-            -3.78,
-            9.996,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            8,
-            6.1688,
-            10.1065,
+            6,
+            11.2525,
+            7.4913,
             true
           ],
           [
             4,
-            8.1638,
-            -2.346,
+            9.9225,
+            5.593,
+            true
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            16,
+            7.3172,
+            8.2408,
             true
           ],
           [
             1,
-            6.93,
-            14.688,
+            21.105,
+            -7.276,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
             false
           ],
           [
@@ -7270,444 +7167,132 @@
         [
           [
             20,
-            -5.9535,
-            9.996,
-            true
-          ],
-          [
-            6,
-            6.2125,
-            5.5647,
-            true
-          ],
-          [
-            4,
-            -5.2237,
-            8.534,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            34,
-            1.8931,
-            9.0,
-            true
-          ],
-          [
-            10,
-            -0.1575,
-            8.4456,
-            true
-          ],
-          [
-            8,
-            0.2231,
-            4.148,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            23,
-            0.0411,
-            8.6922,
-            true
-          ],
-          [
-            9,
-            0.7933,
-            8.8929,
-            true
-          ],
-          [
-            4,
-            13.7287,
-            11.135,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            23,
-            -0.7167,
-            7.4652,
-            true
-          ],
-          [
-            3,
-            -0.35,
-            -2.2893,
-            true
-          ],
-          [
-            4,
-            -6.6937,
-            20.961,
-            true
-          ],
-          [
-            1,
-            -8.085,
-            2.652,
-            false
-          ],
-          [
-            1,
-            21.315,
-            9.316,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            37,
-            -2.3724,
-            8.6856,
-            true
-          ],
-          [
-            10,
-            6.762,
-            1.9856,
-            true
-          ],
-          [
-            6,
-            1.7675,
-            7.412,
-            true
-          ],
-          [
-            1,
-            -19.215,
-            0.612,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            41,
-            -3.8287,
-            8.626,
-            true
-          ],
-          [
-            13,
-            1.1146,
-            7.3597,
-            true
-          ],
-          [
-            2,
-            3.6225,
-            12.24,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            29,
-            -8.3493,
-            4.6052,
-            true
-          ],
-          [
-            11,
-            -1.5177,
-            2.1142,
-            true
-          ],
-          [
-            1,
-            5.355,
-            13.328,
-            false
-          ],
-          [
-            2,
-            -0.105,
-            13.396,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            -7.98,
-            -1.972,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            9,
-            -7.3967,
-            7.8653,
-            true
-          ],
-          [
-            16,
-            -10.0931,
-            6.29,
-            true
-          ],
-          [
-            6,
-            -1.4875,
-            5.9047,
-            true
-          ],
-          [
-            3,
-            -0.98,
-            2.6293,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            -5.775,
-            -9.622,
-            false
-          ],
-          [
-            1,
-            -24.045,
-            -4.08,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            3,
-            -12.705,
-            10.0867,
-            true
-          ],
-          [
-            4,
-            -6.9563,
-            3.587,
+            6.3787,
+            13.9774,
             true
           ],
           [
             5,
-            -9.051,
-            5.7528,
+            -2.037,
+            7.616,
             true
           ],
           [
             1,
-            3.675,
-            10.404,
+            -11.97,
+            -8.5,
             false
           ],
           [
+            1,
+            10.605,
+            4.964,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            62,
+            5.6632,
+            8.9859,
+            true
+          ],
+          [
+            18,
+            1.3417,
+            3.196,
+            true
+          ],
+          [
             2,
+            -9.0825,
+            11.186,
+            false
+          ],
+          [
+            1,
+            -15.855,
+            22.984,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            3.15,
+            13.056,
+            false
+          ],
+          [
+            1,
+            14.28,
+            2.924,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ]
+        ],
+        [
+          [
+            85,
+            5.8701,
+            8.5632,
+            true
+          ],
+          [
+            18,
+            4.9817,
+            4.6769,
+            true
+          ],
+          [
+            5,
+            -3.969,
+            -2.0536,
+            true
+          ],
+          [
+            1,
             -2.94,
-            2.958,
-            false
-          ],
-          [
-            2,
-            -96.81,
-            -12.58,
+            12.104,
             false
           ],
           [
             1,
-            -7.98,
-            5.236,
+            2.625,
+            5.44,
             false
           ],
           [
@@ -7715,1657 +7300,42 @@
             null,
             null,
             false
-          ]
-        ]
-      ],
-      "prog": null,
-      "twinNote": "",
-      "ipNote": "Impronta evento · 1009 eventi",
-      "defNote": "Azioni difensive · 125 eventi",
-      "ipCx": 65.5,
-      "ipCy": 11.1,
-      "ipN": 1009,
-      "carryCx": null,
-      "carryCy": null,
-      "carryN": 145,
-      "carryProgN": 19,
-      "passN": 377,
-      "progN": null,
-      "defCx": 37.0,
-      "defCy": 18.2,
-      "defN": 125,
-      "defOppPct": 0.288
-    },
-    "415415": {
-      "ip": [
-        [
-          0.003106,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          0.001553,
-          0.0,
-          0.001553,
-          0.0,
-          0.0
-        ],
-        [
-          0.009317,
-          0.007764,
-          0.004658,
-          0.001553,
-          0.0,
-          0.0,
-          0.0,
-          0.001553
-        ],
-        [
-          0.031056,
-          0.012422,
-          0.007764,
-          0.0,
-          0.009317,
-          0.003106,
-          0.006211,
-          0.0
-        ],
-        [
-          0.029503,
-          0.02795,
-          0.009317,
-          0.007764,
-          0.004658,
-          0.001553,
-          0.0,
-          0.001553
-        ],
-        [
-          0.037267,
-          0.021739,
-          0.013975,
-          0.01087,
-          0.001553,
-          0.0,
-          0.006211,
-          0.0
-        ],
-        [
-          0.059006,
-          0.013975,
-          0.01087,
-          0.0,
-          0.001553,
-          0.004658,
-          0.006211,
-          0.0
-        ],
-        [
-          0.062112,
-          0.055901,
-          0.026398,
-          0.0,
-          0.006211,
-          0.003106,
-          0.003106,
-          0.001553
-        ],
-        [
-          0.063665,
-          0.034161,
-          0.049689,
-          0.009317,
-          0.004658,
-          0.013975,
-          0.007764,
-          0.003106
-        ],
-        [
-          0.031056,
-          0.037267,
-          0.029503,
-          0.01087,
-          0.012422,
-          0.004658,
-          0.006211,
-          0.001553
-        ],
-        [
-          0.018634,
-          0.035714,
-          0.031056,
-          0.007764,
-          0.004658,
-          0.006211,
-          0.004658,
-          0.0
-        ],
-        [
-          0.0,
-          0.01087,
-          0.031056,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ]
-      ],
-      "def": [
-        [
-          0.020408,
-          0.0,
-          0.0,
-          0.102041,
-          0.0,
-          0.0,
-          0.020408,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          0.020408,
-          0.020408,
-          0.020408,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.020408,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.020408,
-          0.020408,
-          0.0,
-          0.040816,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.020408,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.040816,
-          0.0,
-          0.020408,
-          0.020408,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.040816,
-          0.020408,
-          0.0,
-          0.0,
-          0.0,
-          0.020408,
-          0.0,
-          0.0
-        ],
-        [
-          0.020408,
-          0.020408,
-          0.040816,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.020408
-        ],
-        [
-          0.081633,
-          0.0,
-          0.040816,
-          0.0,
-          0.0,
-          0.061224,
-          0.0,
-          0.0
-        ],
-        [
-          0.040816,
-          0.0,
-          0.020408,
-          0.020408,
-          0.061224,
-          0.020408,
-          0.0,
-          0.0
-        ],
-        [
-          0.040816,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.020408,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0
-        ]
-      ],
-      "carry": [
-        [
+          ],
+          [
+            1,
+            13.755,
+            8.772,
+            false
+          ],
           [
             2,
-            0.3888,
-            2,
-            0.3888,
-            17.4164,
-            14.595,
-            1.0,
-            null,
-            14.595,
-            0.714,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            8.61,
+            0.782,
             false
           ]
         ],
         [
           [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            7.692,
-            -7.245,
-            0.0,
-            null,
-            -7.245,
-            2.584,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            1,
-            0.1944,
-            1,
-            0.1944,
-            37.8446,
-            37.8,
-            1.0,
-            null,
-            37.8,
-            1.836,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            1,
-            0.1944,
-            14.0042,
-            12.495,
-            1.0,
-            null,
-            12.495,
-            -6.324,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            2,
-            0.3888,
-            32.8536,
-            26.145,
-            1.0,
-            null,
-            26.145,
-            13.328,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            3,
-            0.5832,
-            0,
-            0.0,
-            11.8728,
-            7.595,
-            0.0,
-            null,
-            7.595,
-            3.74,
+            50,
+            1.7388,
+            9.9416,
             true
           ],
           [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            5.6131,
-            5.145,
-            0.0,
-            null,
-            5.145,
-            -2.244,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            3,
-            0.5832,
-            3,
-            0.5832,
-            21.3937,
-            19.145,
-            1.0,
-            null,
-            19.145,
-            8.8173,
-            true
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            6.596,
-            0.0,
-            0.0,
-            null,
-            0.0,
-            6.596,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            2,
-            0.3888,
-            33.8158,
-            24.99,
-            1.0,
-            null,
-            24.99,
-            -13.838,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            4,
-            0.7775,
-            0,
-            0.0,
-            12.6715,
-            8.5575,
-            0.0,
-            null,
-            8.5575,
-            8.415,
-            true
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            13.9495,
-            0.7875,
-            0.0,
-            null,
-            0.7875,
-            13.498,
-            false
-          ],
-          [
-            3,
-            0.5832,
-            3,
-            0.5832,
-            26.5931,
-            21.595,
-            1.0,
-            null,
-            21.595,
-            1.7907,
-            true
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            9.3955,
-            6.4575,
-            0.0,
-            null,
-            6.4575,
-            -2.278,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            3.9427,
-            -3.675,
-            0.0,
-            null,
-            -3.675,
-            1.428,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            3,
-            0.5832,
-            0,
-            0.0,
-            11.4956,
-            8.33,
-            0.0,
-            null,
-            8.33,
-            -0.476,
+            14,
+            7.5225,
+            8.9906,
             true
           ],
           [
             4,
-            0.7775,
-            0,
-            0.0,
-            12.3673,
-            8.1637,
-            0.0,
-            null,
-            8.1637,
-            -0.952,
-            true
-          ],
-          [
-            2,
-            0.3888,
-            2,
-            0.3888,
-            22.1814,
-            9.2925,
-            1.0,
-            null,
-            9.2925,
-            12.206,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            5.6288,
-            1.68,
-            0.0,
-            null,
-            1.68,
-            5.134,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            9,
-            1.7495,
-            0,
-            0.0,
-            10.899,
-            1.0617,
-            0.0,
-            null,
-            1.0617,
-            5.4853,
-            true
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            8.9558,
-            5.3025,
-            0.0,
-            null,
-            5.3025,
-            -7.14,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            33.9728,
-            1.575,
-            0.0,
-            null,
-            1.575,
-            -32.266,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            8,
-            1.5551,
-            0,
-            0.0,
-            9.1724,
-            5.8538,
-            0.0,
-            null,
-            5.8538,
-            4.6155,
-            true
-          ],
-          [
-            7,
-            1.3607,
-            0,
-            0.0,
-            16.0798,
-            -1.23,
-            0.0,
-            null,
-            -1.23,
-            10.6274,
+            9.6863,
+            13.753,
             true
           ],
           [
             1,
-            0.1944,
-            0,
-            0.0,
-            4.5919,
-            3.885,
-            0.0,
-            null,
-            3.885,
-            -2.448,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            4.4672,
-            -2.73,
-            0.0,
-            null,
-            -2.73,
-            -3.536,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            1,
-            0.1944,
-            13.1423,
-            11.445,
-            1.0,
-            null,
-            11.445,
-            6.46,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            11,
-            2.1382,
-            0,
-            0.0,
-            12.2425,
-            7.0541,
-            0.0,
-            null,
-            7.0541,
-            8.8895,
-            true
-          ],
-          [
-            3,
-            0.5832,
-            0,
-            0.0,
-            6.59,
-            2.87,
-            0.0,
-            null,
-            2.87,
-            5.1227,
-            true
-          ],
-          [
-            5,
-            0.9719,
-            0,
-            0.0,
-            6.7685,
-            2.982,
-            0.0,
-            null,
-            2.982,
-            2.8832,
-            true
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            11.7274,
-            2.835,
-            0.0,
-            null,
-            2.835,
-            -5.848,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            7.886,
-            7.56,
-            0.0,
-            null,
-            7.56,
-            -2.244,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            8,
-            1.5551,
-            0,
-            0.0,
-            11.2469,
-            5.8931,
-            0.0,
-            null,
-            5.8931,
-            8.245,
-            true
-          ],
-          [
-            5,
-            0.9719,
-            0,
-            0.0,
-            11.4117,
-            3.108,
-            0.0,
-            null,
-            3.108,
-            5.2768,
-            true
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            7.1794,
-            2.835,
-            0.0,
-            null,
-            2.835,
-            -6.596,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            3.1507,
-            3.15,
-            0.0,
-            null,
-            3.15,
-            0.068,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            4,
-            0.7775,
-            0,
-            0.0,
-            9.7558,
-            4.9612,
-            0.0,
-            null,
-            4.9612,
-            5.287,
-            true
-          ],
-          [
-            8,
-            1.5551,
-            0,
-            0.0,
-            10.4079,
-            8.4,
-            0.0,
-            null,
-            8.4,
-            5.3635,
-            true
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            4.8971,
-            -0.105,
-            0.0,
-            null,
-            -0.105,
-            4.896,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            0.1944,
-            0,
-            0.0,
-            5.0167,
-            2.1,
-            0.0,
-            null,
-            2.1,
-            -4.556,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            0.3888,
-            0,
-            0.0,
-            4.1363,
-            1.89,
-            0.0,
-            null,
-            1.89,
-            -2.21,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            0.0,
-            0,
-            0.0,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-          ]
-        ]
-      ],
-      "pass": [
-        [
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            2,
-            5.4075,
-            7.48,
-            false
-          ],
-          [
-            2,
-            3.465,
+            25.305,
             3.4,
             false
           ],
@@ -9376,9 +7346,9 @@
             false
           ],
           [
-            1,
-            -1.68,
-            10.404,
+            2,
+            6.6675,
+            7.888,
             false
           ],
           [
@@ -9391,39 +7361,95 @@
             0,
             null,
             null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            -0.42,
-            -8.568,
             false
           ]
         ],
         [
           [
-            7,
-            0.855,
-            6.5863,
+            63,
+            -0.9917,
+            8.4234,
             true
+          ],
+          [
+            12,
+            2.2312,
+            10.863,
+            true
+          ],
+          [
+            13,
+            1.0338,
+            12.8415,
+            true
+          ],
+          [
+            1,
+            1.365,
+            15.096,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            5.985,
+            5.984,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            1,
+            8.505,
+            -3.468,
+            false
+          ]
+        ],
+        [
+          [
+            105,
+            -3.481,
+            8.4592,
+            true
+          ],
+          [
+            25,
+            -3.0492,
+            8.7802,
+            true
+          ],
+          [
+            13,
+            1.6881,
+            11.6489,
+            true
+          ],
+          [
+            1,
+            -2.835,
+            8.364,
+            false
           ],
           [
             5,
-            1.26,
-            -5.2224,
+            3.465,
+            0.5168,
             true
           ],
           [
-            3,
-            -1.995,
-            12.9653,
-            true
+            1,
+            -10.815,
+            -10.336,
+            false
           ],
           [
             0,
@@ -9433,252 +7459,46 @@
           ],
           [
             1,
-            2.415,
-            7.548,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
+            -10.29,
+            -12.988,
             false
           ]
         ],
         [
           [
-            7,
-            4.17,
-            8.568,
+            92,
+            -1.1995,
+            7.157,
             true
           ],
           [
-            7,
-            -6.72,
-            2.1566,
+            35,
+            2.628,
+            5.1097,
             true
           ],
           [
-            1,
-            4.83,
-            7.208,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            4.2,
-            9.18,
-            false
-          ],
-          [
-            1,
-            17.115,
-            9.996,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            17.43,
-            5.984,
-            false
-          ]
-        ],
-        [
-          [
-            10,
-            -7.245,
-            7.5072,
+            17,
+            3.0388,
+            4.972,
             true
           ],
-          [
-            4,
-            -15.33,
-            6.528,
-            true
-          ],
-          [
-            3,
-            -11.515,
-            -9.6787,
-            true
-          ],
-          [
-            3,
-            6.335,
-            3.6947,
-            true
-          ],
-          [
-            1,
-            -20.055,
-            14.756,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            2.4675,
-            -5.746,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            11,
-            -7.35,
-            7.4985,
-            true
-          ],
-          [
-            6,
-            4.5325,
-            -3.1393,
-            true
-          ],
-          [
-            2,
-            0.5775,
-            5.712,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            -6.405,
-            4.08,
-            false
-          ],
-          [
-            1,
-            -3.045,
-            -22.032,
-            false
-          ],
-          [
-            2,
-            -2.0475,
-            -4.012,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            14,
-            -0.0675,
-            6.7174,
-            true
-          ],
-          [
-            15,
-            -3.689,
-            6.9677,
-            true
-          ],
-          [
-            11,
-            -2.2718,
-            6.0891,
-            true
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            2,
-            -3.4125,
-            6.528,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            7.875,
-            -4.828,
-            false
-          ]
-        ],
-        [
           [
             9,
-            4.6783,
-            6.732,
-            true
-          ],
-          [
-            11,
-            -1.0786,
-            3.4927,
-            true
-          ],
-          [
-            14,
-            3.0525,
-            -0.4177,
+            0.875,
+            5.4627,
             true
           ],
           [
             2,
-            11.6025,
-            -1.428,
+            16.905,
+            16.932,
+            false
+          ],
+          [
+            1,
+            0.63,
+            10.54,
             false
           ],
           [
@@ -9688,141 +7508,129 @@
             false
           ],
           [
-            5,
-            -4.116,
-            -2.5976,
+            1,
+            -11.025,
+            -0.612,
+            false
+          ]
+        ],
+        [
+          [
+            47,
+            -5.6365,
+            8.9138,
             true
           ],
           [
-            3,
-            -7.455,
-            4.624,
+            29,
+            -0.5793,
+            7.6418,
             true
+          ],
+          [
+            13,
+            5.88,
+            6.6902,
+            true
+          ],
+          [
+            5,
+            -1.344,
+            0.0544,
+            true
+          ],
+          [
+            2,
+            7.0875,
+            19.618,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
           ],
           [
             1,
-            -24.99,
-            -13.6,
+            11.235,
+            -12.648,
+            false
+          ],
+          [
+            1,
+            -4.62,
+            -8.84,
+            false
+          ]
+        ],
+        [
+          [
+            39,
+            -8.19,
+            6.5629,
+            true
+          ],
+          [
+            21,
+            -6.12,
+            4.8377,
+            true
+          ],
+          [
+            11,
+            -1.3268,
+            1.2611,
+            true
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
+            false
+          ],
+          [
+            0,
+            null,
+            null,
             false
           ]
         ],
         [
           [
             2,
-            -9.555,
-            5.984,
+            -15.015,
+            3.332,
             false
           ],
           [
             10,
-            2.7405,
-            8.3708,
+            -5.6595,
+            7.4256,
             true
-          ],
-          [
-            11,
-            -2.2814,
-            7.548,
-            true
-          ],
-          [
-            2,
-            5.0925,
-            -0.918,
-            false
-          ],
-          [
-            3,
-            2.31,
-            -4.8053,
-            true
-          ],
-          [
-            2,
-            1.785,
-            -4.114,
-            false
-          ],
-          [
-            1,
-            2.31,
-            1.156,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            2,
-            -23.0475,
-            9.826,
-            false
-          ],
-          [
-            5,
-            -9.303,
-            2.0536,
-            true
-          ],
-          [
-            6,
-            -0.385,
-            3.0827,
-            true
-          ],
-          [
-            3,
-            -5.565,
-            3.0147,
-            true
-          ],
-          [
-            1,
-            13.65,
-            8.092,
-            false
-          ],
-          [
-            1,
-            0.105,
-            2.04,
-            false
-          ],
-          [
-            2,
-            -5.3025,
-            4.454,
-            false
-          ],
-          [
-            0,
-            null,
-            null,
-            false
-          ]
-        ],
-        [
-          [
-            0,
-            null,
-            null,
-            false
-          ],
-          [
-            1,
-            -5.88,
-            -0.136,
-            false
           ],
           [
             8,
-            -12.5606,
-            13.2175,
+            -26.25,
+            11.9,
             true
           ],
           [
@@ -9838,15 +7646,15 @@
             false
           ],
           [
-            0,
-            null,
-            null,
+            1,
+            -0.84,
+            -35.836,
             false
           ],
           [
-            0,
-            null,
-            null,
+            1,
+            -4.515,
+            0.748,
             false
           ],
           [
@@ -9859,21 +7667,21 @@
       ],
       "prog": null,
       "twinNote": "",
-      "ipNote": "Impronta evento · 644 eventi",
-      "defNote": "Azioni difensive · 49 eventi",
-      "ipCx": 65.4,
-      "ipCy": 17.1,
-      "ipN": 644,
+      "ipNote": "Impronta evento · 2781 eventi",
+      "defNote": "Azioni difensive · 161 eventi",
+      "ipCx": 64.5,
+      "ipCy": 9.1,
+      "ipN": 2781,
       "carryCx": null,
       "carryCy": null,
-      "carryN": 124,
-      "carryProgN": 17,
-      "passN": 234,
+      "carryN": 574,
+      "carryProgN": 36,
+      "passN": 913,
       "progN": null,
-      "defCx": 53.5,
-      "defCy": 24.4,
-      "defN": 49,
-      "defOppPct": 0.5918
+      "defCx": 59.2,
+      "defCy": 14.4,
+      "defN": 161,
+      "defOppPct": 0.5714
     },
     "422197": {
       "ip": [
@@ -16300,19 +14108,14 @@
       "description": "Volume di coinvolgimento: lavoro difensivo, duelli, progressione, circolazione e azioni laterali.",
       "matches": [
         {
-          "id": 322153,
-          "name": "Denzel Dumfries",
-          "score": 85.6
+          "id": 122683,
+          "name": "Matteo Politano",
+          "score": 85.9
         },
         {
-          "id": 388567,
-          "name": "Luis Henrique",
-          "score": 77.8
-        },
-        {
-          "id": 415415,
-          "name": "Andy Diouf",
-          "score": 61.3
+          "id": 122469,
+          "name": "Giovanni Di Lorenzo",
+          "score": 74.8
         }
       ]
     },
@@ -16322,19 +14125,14 @@
       "description": "Somiglianza territoriale: dove agisce in possesso e nelle azioni difensive.",
       "matches": [
         {
-          "id": 388567,
-          "name": "Luis Henrique",
-          "score": 73.3
+          "id": 122469,
+          "name": "Giovanni Di Lorenzo",
+          "score": 68.7
         },
         {
-          "id": 322153,
-          "name": "Denzel Dumfries",
-          "score": 66.1
-        },
-        {
-          "id": 415415,
-          "name": "Andy Diouf",
-          "score": 47.2
+          "id": 122683,
+          "name": "Matteo Politano",
+          "score": 53.9
         }
       ]
     },
@@ -16344,19 +14142,14 @@
       "description": "Mix di azioni: composizione stilistica fra costruzione, duelli, progressione e ampiezza.",
       "matches": [
         {
-          "id": 388567,
-          "name": "Luis Henrique",
-          "score": 86.7
+          "id": 122469,
+          "name": "Giovanni Di Lorenzo",
+          "score": 87.1
         },
         {
-          "id": 322153,
-          "name": "Denzel Dumfries",
-          "score": 84.6
-        },
-        {
-          "id": 415415,
-          "name": "Andy Diouf",
-          "score": 74.1
+          "id": 122683,
+          "name": "Matteo Politano",
+          "score": 67.3
         }
       ]
     }
@@ -16413,8 +14206,8 @@
   ],
   "payloadMeta": {
     "payloadType": "legacy_role_payload",
-    "sourcePage": "anan-khalaili.html#20260627_135037_598250.html",
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/anan-khalaili.with_inline_payload_20260627_135037_598250.html",
+    "sourcePage": "anan-khalaili_1.html#20260627_135303_144852.html",
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/anan-khalaili_1.with_inline_payload_20260627_135303_144852.html",
     "loadedByProductionRuntime": true,
     "fallbackInlineAvailable": false,
     "extractedGlobals": [

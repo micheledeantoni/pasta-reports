@@ -251,7 +251,7 @@
     "role_override_reason": "May be fit for 352",
     "target_team": "Inter",
     "target_team_peer_ids": "388567,322153,415415",
-    "source_team_peer_ids": "422197,539156,530542",
+    "source_team_peer_ids": "422197,530542,539156",
     "source_team_peer_label": "Union St.Gilloise MID",
     "target_role_peer_ids": "",
     "report_file": "anan-khalaili.html",
@@ -263,7 +263,7 @@
     "source_team_note": "All’Union St.Gilloise Khalaili emerge in una funzione più avanzata, da esterno coinvolto nella circolazione e nella progressione. Questo contesto spiega bene il suo profilo, ma non lo trasferisce in modo automatico all’Inter: il punto non è solo dove può giocare, ma quali compiti gli verrebbero dati da quinto.",
     "note_confronto": "Il confronto con i quinti a destra dell’Inter serve a costruire un’ipotesi, non una conclusione. Dumfries, Luis Henrique e Diouf rappresentano riferimenti utili perché occupano quella zona dentro una struttura a 3-5-2; Khalaili porta un profilo diverso, più da esterno di conduzione, pressione e duello, con meno certezze sul peso fisico e sull’impatto in area rispetto al modello più verticale dell’Inter.",
     "note_heatmap": "L’impronta spaziale va letta cercando segnali di compatibilità con la corsia, non prove definitive di ruolo. Il quarto riquadro, sulle azioni difensive, resta centrale: se mostra attività alta e laterale, rafforza l’idea di un giocatore utile per aggredire in avanti; se invece gli venisse chiesto di difendere più basso e proteggere l’area con continuità, la proiezione diventerebbe più incerta.",
-    "note_context": "Role override: in the source team the player is recorded as MID; in this report he is evaluated as DEF. May be fit for 352\n\nNel contesto Union, il confronto con gli altri esterni/centrocampisti laterali aiuta a capire da dove nasce Khalaili. Rapidità di ingaggio, tackle e volume di ricezioni sono segnali forti, ma parlano del suo ambiente di partenza: all’Inter andrebbero ricalibrati dentro una fascia destra molto codificata, con richieste fisiche, tempi di attacco dell’area e responsabilità difensive diverse.",
+    "note_context": "Role override: in the source team the player is recorded as MID; in this report he is evaluated as DEF. May be fit for 352\n\nNel contesto Union St.Gilloise, il confronto sorgente usa Adem Zorgane, Kamiel Van de Perre e Ousseynou Niang come pari ruolo MID ricomputati negli artifact DEF di override. Questo blocco serve a spiegare da dove nasce Khalaili: volume di corsa, pressione, mobilità laterale e partecipazione alta. La stanza radar principale resta invece Inter DEF, quindi il contesto USG non va letto come confronto difensivo puro ma come ponte editoriale tra il suo ruolo di partenza e la proiezione da quinto nel 3-5-2.",
     "note_similarity": "La similarità rispetto al gruppo Inter va letta come compatibilità potenziale con il ruolo di quinto destro, non come previsione secca di utilizzo. Una distanza da Dumfries, Luis Henrique o Diouf non sarebbe per forza negativa: può indicare un profilo diverso, più associativo e aggressivo sulla pressione, ma il peso di questa differenza dipende da quanto l’Inter cerchi continuità con i suoi quinti attuali o una soluzione più ibrida."
   },
   {
@@ -352,5 +352,34 @@
     "note_heatmap": "L’impronta spaziale va letta cercando la sua relazione con la zona centrale e con l’area, più che aspettandosi un attaccante che risalga il campo in conduzione. Nel quarto riquadro, la progressione via passaggio serve a capire se partecipa alla catena offensiva solo come terminale o anche come appoggio per rifinire il possesso verso la porta.",
     "note_context": "Nel contesto PSG il suo profilo emerge per contrasto: intorno a lui ci sono attaccanti con molti tocchi, alta creazione e forte progressione palla al piede. Ramos non replica quel tipo di peso creativo, ma lo completa: dà alla squadra un riferimento più verticale, più vicino alla porta e più orientato alla conclusione.",
     "note_similarity": "La similarità con il gruppo Milan va letta nel ruolo di attaccante e non come semplice ricerca di un doppione. Ramos può risultare vicino ad alcuni peer per efficienza in area o qualità del tiro, ma la sua funzione tattica è più specifica: aggiunge una punta di riferimento, mentre il gruppo rossonero resta più misto tra finalizzazione, conduzione e creazione."
+  },
+  {
+    "player_id": "444136",
+    "player_name": "Anan Khalaili",
+    "slug": "anan-khalaili_1",
+    "team_name": "Union St.Gilloise",
+    "source_club": "Union St.Gilloise",
+    "competition": "BEL-Jupiler Pro League",
+    "season": "2526",
+    "macro_role": "DEF",
+    "source_role": "MID",
+    "report_role": "DEF",
+    "role_override_reason": "May be fit for 352",
+    "target_team": "Napoli",
+    "target_team_peer_ids": "122469,122683",
+    "source_team_peer_ids": "422197,530542,539156",
+    "source_team_peer_label": "Union St.Gilloise MID",
+    "target_role_peer_ids": "",
+    "report_file": "anan-khalaili_1.html",
+    "report_status": "live",
+    "visibility": "hidden",
+    "payload_file": "data/report_legacy_payloads/anan-khalaili_1.legacy_role_payload.json",
+    "payload_source": "soccerdb",
+    "narrative": "Anan Khalaili è un profilo da leggere come proiezione di corsia: all’Union St.Gilloise nasce da compiti da esterno/centrocampista laterale, mentre in ottica Napoli viene testato dentro una stanza DEF di fascia. Il confronto principale è con Giovanni Di Lorenzo e Matteo Politano, perché rappresentano riferimenti di corsia nel contesto Napoli; Khalaili può aggiungere pressione, conduzione e mobilità alta, ma la conversione va letta come ipotesi tattica e non come ruolo già consolidato.",
+    "source_team_note": "All’Union St.Gilloise Khalaili emerge come MID laterale: il contesto sorgente serve a spiegare volume, pressione e partecipazione alta prima della proiezione da quinto/esterno difensivo.",
+    "note_confronto": "Il confronto con Napoli DEF va letto come compatibilità di corsia. Di Lorenzo dà una baseline più strutturale e Politano una lettura più alta e associativa: Khalaili non deve replicare nessuno dei due, ma può portare un accento diverso fatto di aggressione, corsa e conduzione. La domanda è quanto questa energia possa essere assorbita dentro responsabilità difensive più codificate.",
+    "note_heatmap": "L’impronta spaziale va letta cercando segnali di ampiezza, altezza e recupero in avanti. Poiché Khalaili nasce nel layer MID ed è ricomputato come DEF tramite override, il dato aiuta a valutare una proiezione: non certifica un difensore puro, ma mostra se il suo territorio può sostenere compiti da corsia nel contesto Napoli.",
+    "note_context": "Role override: in the source team the player is recorded as MID; in this report he is evaluated as DEF. May be fit for 352\n\nNel contesto Union St.Gilloise, il confronto sorgente usa Adem Zorgane, Kamiel Van de Perre e Ousseynou Niang come pari ruolo MID ricomputati negli artifact DEF di override. Questo blocco serve a spiegare da dove nasce Khalaili: volume di corsa, pressione, mobilità laterale e partecipazione alta. La stanza radar principale resta invece Napoli DEF, quindi il contesto USG non va letto come confronto difensivo puro ma come ponte editoriale tra il suo ruolo di partenza e la proiezione da quinto/esterno nel sistema Napoli.",
+    "note_similarity": "La similarità rispetto al gruppo Napoli va letta come compatibilità funzionale, non come ricerca di un doppione. Se Khalaili si avvicina ai riferimenti di corsia per mix di azioni o territorio, il valore sta nel capire quale tipo di compito potrebbe assorbire; se resta distante, può comunque indicare un profilo più ibrido e meno codificato."
   }
 ]
