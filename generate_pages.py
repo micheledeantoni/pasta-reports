@@ -319,7 +319,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
     out = template_text
     out = re.sub(r"<title>.*?</title>", f"<title>Player Report · {name} | PASTA</title>", out, count=1, flags=re.S)
     out = re.sub(
-        r'(<meta name="viewport" content="[^"]+" />)\s*(?:<!-- Open Graph -->.*?)(?=\s*<link rel="stylesheet" href="assets/css/main\.css" />)',
+        r'(<meta name="viewport" content="[^"]+" />)\s*(?:<meta name="description"[^>]*/>\s*)?(?:<!-- Open Graph -->.*?)(?=\s*<link rel="stylesheet" href="assets/css/main\.css" />)',
         r"\1\n",
         out,
         count=1,
@@ -329,6 +329,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         r'<meta name="viewport" content="[^"]+" />',
         (
             '<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
+            f'    <meta name="description" content="{og_description}" />\n'
             '    <!-- Open Graph -->\n'
             f'    <meta property="og:title"       content="{name} · Analisi PASTA" />\n'
             f'    <meta property="og:description" content="{og_description}" />\n'
@@ -342,7 +343,19 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
             '    <meta name="twitter:site"        content="@macnonesiste" />\n'
             f'    <meta name="twitter:title"       content="{name} · Analisi PASTA" />\n'
             f'    <meta name="twitter:description" content="{og_description}" />\n'
-            f'    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{slug}.png" />'
+            f'    <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{slug}.png" />\n'
+            '    <!-- JSON-LD -->\n'
+            '    <script type="application/ld+json">\n'
+            '    {\n'
+            '      "@context": "https://schema.org",\n'
+            '      "@type": "Article",\n'
+            f'      "headline": "{name} · Analisi PASTA",\n'
+            f'      "description": "{og_description}",\n'
+            f'      "url": "{report_url}",\n'
+            '      "author": {"@type": "Person", "name": "Michele Deantoni", "url": "https://www.linkedin.com/in/mdeantoni/"},\n'
+            '      "publisher": {"@type": "Organization", "name": "PASTA · Player Analysis System for Transfer Assessment", "url": "https://pasta-reports.com/"}\n'
+            '    }\n'
+            '    </script>'
         ),
         out,
         count=1,
@@ -500,6 +513,12 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         out,
         count=1,
         flags=re.S,
+    )
+    out = re.sub(
+        r'<canvas id="gkRadarChart"[^>]*>',
+        f'<canvas id="gkRadarChart" role="img" aria-label="Radar statistico GK — {name}">',
+        out,
+        count=1,
     )
     out = re.sub(r"(?m)^[ \t]+$", "", out)
     out = re.sub(r"\n{3,}", "\n\n", out)

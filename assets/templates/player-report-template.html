@@ -4,6 +4,7 @@
     <title>Player Report · {{PLAYER_NAME}} | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{OG_DESCRIPTION}}" />
     <!-- Open Graph -->
     <meta property="og:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
     <meta property="og:description" content="{{OG_DESCRIPTION}}" />
@@ -18,6 +19,18 @@
     <meta name="twitter:title"       content="{{PLAYER_NAME}} · Analisi PASTA" />
     <meta name="twitter:description" content="{{OG_DESCRIPTION}}" />
     <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/{{PLAYER_SLUG}}.png" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{PLAYER_NAME}} · Analisi PASTA",
+      "description": "{{OG_DESCRIPTION}}",
+      "url": "{{REPORT_URL}}",
+      "author": {"@type": "Person", "name": "Michele Deantoni", "url": "https://www.linkedin.com/in/mdeantoni/"},
+      "publisher": {"@type": "Organization", "name": "PASTA · Player Analysis System for Transfer Assessment", "url": "https://pasta-reports.com/"}
+    }
+    </script>
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css?v={{COMMON_ASSET_VERSION}}" />
@@ -114,7 +127,7 @@
             </div>
             <div class="sr-radar-scroll-wrap">
                 <div class="sr-radar-wrap-full">
-                    <canvas id="radarChart"></canvas>
+                    <canvas id="radarChart" role="img" aria-label="Radar statistico comparativo — {{PLAYER_NAME}}"></canvas>
                 </div>
             </div>
             <div class="sr-radar-context-note">

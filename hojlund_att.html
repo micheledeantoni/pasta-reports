@@ -4,6 +4,7 @@
     <title>Player Report · Rasmus Højlund | PASTA</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compatibilità Inter — Attaccante · ITA · Serie A 2025–26" />
     <!-- Open Graph -->
     <meta property="og:title"       content="Rasmus Højlund · Analisi PASTA" />
     <meta property="og:description" content="Compatibilità Inter — Attaccante · ITA · Serie A 2025–26" />
@@ -18,6 +19,18 @@
     <meta name="twitter:title"       content="Rasmus Højlund · Analisi PASTA" />
     <meta name="twitter:description" content="Compatibilità Inter — Attaccante · ITA · Serie A 2025–26" />
     <meta name="twitter:image"       content="https://pasta-reports.com/images/cards/rasmus-hojlund.png" />
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Rasmus Højlund · Analisi PASTA",
+      "description": "Compatibilità Inter — Attaccante · ITA · Serie A 2025–26",
+      "url": "https://pasta-reports.com/hojlund_att.html",
+      "author": {"@type": "Person", "name": "Michele Deantoni", "url": "https://www.linkedin.com/in/mdeantoni/"},
+      "publisher": {"@type": "Organization", "name": "PASTA · Player Analysis System for Transfer Assessment", "url": "https://pasta-reports.com/"}
+    }
+    </script>
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
     <link rel="stylesheet" href="assets/css/sr-report-common.css?v=sprint1-mobile-20260605-role-percent" />
@@ -28,7 +41,7 @@
     <style>
         /* ── Banner: player photo (template-specific — uses rasmus-hojlund) ── */
         #banner.style2 {
-            background-image: url('images/players/rasmus-hojlund.webp') !important;
+            background-image: url('images/cards/rasmus-hojlund.png') !important;
             background-attachment: scroll !important;
             background-position: right 3.5rem !important;
             background-size: auto 90% !important;
@@ -87,7 +100,7 @@
                     <span class="sr-banner-chip">Attaccante</span>
                     <span class="sr-banner-chip">ITA · Serie A</span>
                     <span class="sr-banner-chip">Stagione 2025–26</span>
-                    <span class="sr-banner-chip">2 792 min</span>
+                    <span class="sr-banner-chip">2 368 min</span>
                 </div>
             </div>
         </div>
@@ -100,7 +113,7 @@
         <div class="sr-card" id="profileReading" data-static="true">
             <p class="sr-section-label">Lettura del profilo</p>
             <div class="sr-narrative sr-editorial-markdown"><p class="sr-narrative-p">Rasmus Højlund viene letto come attaccante attraverso assi ATT osservabili: finalizzazione, qualità del tiro, rifinitura, partecipazione/link-up e lavoro offensivo.</p>
-<p class="sr-narrative-p">Contesto: ITA-Serie A 2526, squadra 276, 2,792 minuti. Radar e barre usano metriche governate ATT; le metriche di gol e conversione sono mostrate come contesto, non come driver unico.</p></div>
+<p class="sr-narrative-p">Contesto: ITA-Serie A 2526, squadra 276, 2,368 minuti. Radar e barre usano metriche governate ATT; le metriche di gol e conversione sono mostrate come contesto, non come driver unico.</p></div>
         </div>
 
         <!-- ── 2. PROFILO RADAR ───────────────────────────────────── -->
@@ -115,7 +128,7 @@
             </div>
             <div class="sr-radar-scroll-wrap">
                 <div class="sr-radar-wrap-full">
-                    <canvas id="radarChart"></canvas>
+                    <canvas id="radarChart" role="img" aria-label="Radar statistico comparativo — Rasmus Højlund"></canvas>
                 </div>
             </div>
             <div class="sr-radar-context-note">
@@ -173,6 +186,7 @@
                     <svg class="sr-pitch-svg" viewBox="0 0 180 90" id="pitchGoalmouth"></svg>
                     <span class="sr-pitch-note" id="pitchGoalmouthNote"></span>
                 </div>
+
             </div>
             <div class="sr-def-summary" id="defSummaryBlock"></div>
             <p class="sr-pitch-note" style="margin-top:.55rem;">
@@ -229,6 +243,6 @@
   window.SR_EXTERNAL_PAYLOAD_URL = "data/report_legacy_payloads/hojlund_att.legacy_role_payload.json";
 </script>
 <script src="assets/js/sr-report-loader.js"></script>
-<script src="assets/js/sr-role-runtime.js?v=radar-mobile-20260605-percent"></script>
+<script src="assets/js/sr-role-runtime.js?v=direct-engagement-display-20260623"></script>
 </body>
 </html>
