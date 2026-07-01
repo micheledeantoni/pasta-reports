@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime
@@ -18,7 +19,9 @@ from typing import Any
 
 ROLE_CHOICES = ("GK", "DEF", "MID", "ATT")
 MODE_CHOICES = ("validate-only", "export", "note-only")
-DEFAULT_SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
+DEFAULT_SOCCERDB_ROOT = Path(
+    os.environ.get("SOCCERDB_ROOT", Path(__file__).resolve().parents[3] / "SoccerDB")
+).expanduser().resolve()
 EDITORIAL_METADATA_NOTICE = (
     "Source-team peers are recorded as context workflow metadata and are passed "
     "only as exporter context IDs when provided. They are not mapped to comparison IDs."
@@ -117,8 +120,11 @@ def role_config(config: dict[str, Any], role: str) -> dict[str, Any]:
 
 
 def python_for(root: Path) -> str:
-    venv_python = root / ".venv" / "bin" / "python"
-    return str(venv_python if venv_python.exists() else Path(sys.executable))
+    candidates = [
+        root / ".venv" / "bin" / "python",
+        root / ".venv" / "Scripts" / "python.exe",
+    ]
+    return str(next((candidate for candidate in candidates if candidate.exists()), Path(sys.executable)))
 
 
 def command_text(command: list[str]) -> str:

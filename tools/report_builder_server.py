@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import argparse
 import subprocess
 import sys
 import unicodedata
@@ -21,15 +22,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
-DOGANA_ROOT = Path("/Users/michele/Documents/soccerdb_experiments/dogana_visuals")
-DOGANA_CONFIG_DIR = DOGANA_ROOT / "configs" / "players"
-DOGANA_OUTPUT_ROOT = Path("/Users/michele/Documents/soccerdb_experiments/outputs/dogana")
-FEATURES = SOCCERDB_ROOT / "data" / "features"
-PYTHON = SOCCERDB_ROOT / ".venv" / "bin" / "python"
 PLAYER_INDEX = ROOT / "assets" / "data" / "player_index.json"
-ANALYTICS_DB = SOCCERDB_ROOT / "data" / "analytics.duckdb"
-CORE_DB = SOCCERDB_ROOT / "data" / "football_core.duckdb"
 ROLE_FILES = {
     "GK": "scouting_view_metrics_v1_gk.parquet",
     "DEF": "scouting_view_metrics_v1_def.parquet",
@@ -37,8 +30,6 @@ ROLE_FILES = {
     "ATT": "scouting_view_metrics_v1_att.parquet",
 }
 ROLE_CHOICES = tuple(ROLE_FILES)
-OVERRIDE_CSV = SOCCERDB_ROOT / "config" / "manual_role_overrides.csv"
-OVERRIDE_BUILDER = SOCCERDB_ROOT / "scripts" / "build_manual_role_override_artifacts.py"
 EDITORIAL_FIELDS = [
     "narrative",
     "source_team_note",
@@ -47,6 +38,106 @@ EDITORIAL_FIELDS = [
     "note_context",
     "note_similarity",
 ]
+
+
+def _bundle_root() -> Path:
+    return ROOT.parent.parent
+
+
+def _path_from(value: Any, base: Path) -> Path:
+    path = Path(str(value)).expanduser()
+    if not path.is_absolute():
+        path = base / path
+    return path.resolve()
+
+
+def _load_runtime_config(config_path: Path | None = None) -> dict[str, Any]:
+    candidates = []
+    if config_path is not None:
+        candidates.append(config_path)
+    else:
+        candidates.extend([
+            ROOT / "config" / "report_builder_paths.json",
+            ROOT / "tools" / "report_builder_paths.json",
+        ])
+    for candidate in candidates:
+        if candidate.exists():
+            return json.loads(candidate.read_text(encoding="utf-8"))
+    return {}
+
+
+def _python_for(root: Path) -> Path:
+    candidates = [
+        root / ".venv" / "bin" / "python",
+        root / ".venv" / "Scripts" / "python.exe",
+    ]
+    return next((candidate for candidate in candidates if candidate.exists()), Path(sys.executable))
+
+
+def apply_runtime_paths(config_path: Path | None = None) -> None:
+    config = _load_runtime_config(config_path)
+    bundle = _path_from(config.get("bundle_root") or os.environ.get("VACATION_BUNDLE_ROOT") or _bundle_root(), ROOT)
+    experiments = _path_from(
+        config.get("experiments_root") or os.environ.get("SOCCERDB_EXPERIMENTS_ROOT") or bundle / "soccerdb_experiments",
+        bundle,
+    )
+    soccerdb = _path_from(config.get("soccerdb_root") or os.environ.get("SOCCERDB_ROOT") or bundle / "SoccerDB", bundle)
+    dogana = _path_from(config.get("dogana_root") or os.environ.get("DOGANA_ROOT") or experiments / "dogana_visuals", bundle)
+    dogana_output = _path_from(
+        config.get("dogana_output_root") or os.environ.get("DOGANA_OUTPUT_ROOT") or experiments / "outputs" / "dogana",
+        bundle,
+    )
+
+    global BUNDLE_ROOT, SOCCERDB_ROOT, EXPERIMENTS_ROOT, DOGANA_ROOT, DOGANA_CONFIG_DIR
+    global DOGANA_OUTPUT_ROOT, FEATURES, PYTHON, ANALYTICS_DB, CORE_DB, OVERRIDE_CSV, OVERRIDE_BUILDER
+    BUNDLE_ROOT = bundle
+    SOCCERDB_ROOT = soccerdb
+    EXPERIMENTS_ROOT = experiments
+    DOGANA_ROOT = dogana
+    DOGANA_CONFIG_DIR = DOGANA_ROOT / "configs" / "players"
+    DOGANA_OUTPUT_ROOT = dogana_output
+    FEATURES = SOCCERDB_ROOT / "data" / "features"
+    PYTHON = _path_from(config.get("python") or os.environ.get("SOCCERDB_PYTHON") or _python_for(SOCCERDB_ROOT), ROOT)
+    ANALYTICS_DB = SOCCERDB_ROOT / "data" / "analytics.duckdb"
+    CORE_DB = SOCCERDB_ROOT / "data" / "football_core.duckdb"
+    OVERRIDE_CSV = SOCCERDB_ROOT / "config" / "manual_role_overrides.csv"
+    OVERRIDE_BUILDER = SOCCERDB_ROOT / "scripts" / "build_manual_role_override_artifacts.py"
+
+
+apply_runtime_paths()
+
+
+def status_payload() -> dict[str, Any]:
+    exporter = SOCCERDB_ROOT / "scripts" / "exports" / "export_role_report_data.py"
+    create_script = ROOT / "scripts" / "create_player_page_from_export.py"
+    template = ROOT / "assets" / "templates" / "player-report-template.html"
+    checks = {
+        "soccerdb_found": SOCCERDB_ROOT.is_dir(),
+        "export_script_found": exporter.is_file(),
+        "features_found": FEATURES.is_dir(),
+        "frontend_template_found": template.is_file(),
+        "player_index_found": PLAYER_INDEX.is_file(),
+        "create_page_script_found": create_script.is_file(),
+        "export_command_executable": PYTHON.exists() and exporter.is_file(),
+        "dogana_found": DOGANA_ROOT.is_dir(),
+    }
+    return {
+        "ok": all(checks.values()),
+        "root": str(ROOT),
+        "bundle_root": str(BUNDLE_ROOT),
+        "soccerdb_root": str(SOCCERDB_ROOT),
+        "experiments_root": str(EXPERIMENTS_ROOT),
+        "dogana_root": str(DOGANA_ROOT),
+        "dogana_output_root": str(DOGANA_OUTPUT_ROOT),
+        "features": str(FEATURES),
+        "python": str(PYTHON),
+        "export_script": str(exporter),
+        "create_page_script": str(create_script),
+        "frontend_template": str(template),
+        "player_index": str(PLAYER_INDEX),
+        "checks": checks,
+        "export_help_command": [str(PYTHON), str(exporter), "--help"],
+    }
 
 
 def season_variants(raw: str | None) -> set[str]:
@@ -595,6 +686,7 @@ def build_create_command(data: dict[str, Any], dry_run: bool) -> list[str]:
         "scripts/create_player_page_from_export.py",
         "--role", report_role,
         "--source-role", source_role,
+        "--soccerdb-root", str(SOCCERDB_ROOT),
         "--player-id", str(data["player_id"]),
         "--player-name", data["player_name"],
         "--slug", slug,
@@ -1089,7 +1181,7 @@ class Handler(BaseHTTPRequestHandler):
             elif parsed.path == "/api/source_peers":
                 self.send_json(source_peers(params))
             elif parsed.path == "/api/status":
-                self.send_json({"ok": True, "root": str(ROOT), "soccerdb_root": str(SOCCERDB_ROOT)})
+                self.send_json(status_payload())
             elif parsed.path == "/api/check_role_override":
                 self.send_json(check_role_override_status({
                     "player_id": params.get("player_id", [""])[0],
@@ -1134,12 +1226,31 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
 
-def main() -> None:
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8011
-    server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
-    print(f"Report builder: http://127.0.0.1:{port}/")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run the local PASTA report builder server.")
+    parser.add_argument("legacy_port", nargs="?", type=int, help="Backward-compatible positional port.")
+    parser.add_argument("--port", type=int, default=None)
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--config", type=Path, help="Optional JSON path config for portable roots.")
+    parser.add_argument("--check", action="store_true", help="Print portable path checks and exit.")
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    if args.config:
+        apply_runtime_paths(args.config)
+    if args.check:
+        payload = status_payload()
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        return 0 if payload["ok"] else 1
+    port = args.port or args.legacy_port or 8011
+    server = ThreadingHTTPServer((args.host, port), Handler)
+    print(f"Report builder: http://{args.host}:{port}/")
+    print(f"SoccerDB: {SOCCERDB_ROOT}")
     server.serve_forever()
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

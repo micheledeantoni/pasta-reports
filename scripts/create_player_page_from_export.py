@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -23,7 +24,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOCCERDB_ROOT = Path("/Users/michele/Documents/SoccerDB")
+SOCCERDB_ROOT = Path(os.environ.get("SOCCERDB_ROOT", ROOT.parent.parent / "SoccerDB")).expanduser().resolve()
 ROLE_CHOICES = ("GK", "DEF", "MID", "ATT")
 VISIBILITY_CHOICES = ("hidden", "public")
 
@@ -108,8 +109,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def python_for(root: Path) -> str:
-    venv_python = root / ".venv" / "bin" / "python"
-    return str(venv_python if venv_python.exists() else Path(sys.executable))
+    candidates = [
+        root / ".venv" / "bin" / "python",
+        root / ".venv" / "Scripts" / "python.exe",
+    ]
+    return str(next((candidate for candidate in candidates if candidate.exists()), Path(sys.executable)))
 
 
 def command_text(command: list[str]) -> str:
