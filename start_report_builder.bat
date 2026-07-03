@@ -20,7 +20,7 @@ if errorlevel 1 (
 
 echo.
 echo Starting PASTA report builder
-echo URL: http://127.0.0.1:%REPORT_BUILDER_PORT%/
+echo Preferred port: %REPORT_BUILDER_PORT% ^(will try 8011-8020 when using the default^)
 "%PYTHON_CMD%" tools\report_builder_server.py --port "%REPORT_BUILDER_PORT%"
 
 echo.

@@ -390,7 +390,7 @@ function updateReview() {
       ${errors.length ? `<div><h3 class="warn">Blocking issues</h3><ul>${errors.map((error) => `<li>${escapeHtml(error)}</li>`).join("")}</ul></div>` : ""}
     </div>
   `;
-  $("openPage").href = `http://127.0.0.1:8001/${encodeURIComponent(value("slug"))}.html`;
+  $("openPage").href = `/${encodeURIComponent(value("slug"))}.html`;
 }
 
 function showOutput(payload) {

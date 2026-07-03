@@ -10,7 +10,7 @@ echo "Checking portable PASTA paths..."
 
 echo
 echo "Starting PASTA report builder"
-echo "URL: http://127.0.0.1:${PORT}/"
+echo "Preferred port: ${PORT} (will try 8011-8020 when using the default)"
 "${PYTHON_BIN}" tools/report_builder_server.py --port "${PORT}"
 
 echo

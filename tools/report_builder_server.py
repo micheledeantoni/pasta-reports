@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import os
 import argparse
+import errno
 import subprocess
 import sys
 import unicodedata
@@ -398,6 +399,62 @@ def peer_group_summary(role: str, ids: str, season: str | None, limit: int = 8) 
     return {"players": players, "metric_averages": averages}
 
 
+def target_similarity_summary(
+    role: str,
+    player_id: str,
+    comparison_ids: str,
+    use_overrides: bool = False,
+    top_n: int = 4,
+) -> dict[str, Any]:
+    wanted = [int(pid) for pid in split_ids(comparison_ids)]
+    if not wanted:
+        return {"available": False, "reason": "no target comparison peers selected", "spaces": []}
+    exporter_path = SOCCERDB_ROOT / "scripts" / "exports" / "export_role_report_data.py"
+    if not exporter_path.exists():
+        return {"available": False, "reason": f"exporter not found: {exporter_path}", "spaces": []}
+    try:
+        import importlib.util
+
+        module_name = "_pasta_export_role_report_data"
+        spec = importlib.util.spec_from_file_location(module_name, exporter_path)
+        if spec is None or spec.loader is None:
+            return {"available": False, "reason": "could not load role exporter module", "spaces": []}
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        spec.loader.exec_module(module)
+        module.DATA = FEATURES
+        module.PLAYER_DATA = SOCCERDB_ROOT / "data" / "players"
+        files = module.role_files(role, use_overrides=use_overrides)
+        dfs = module.load_files(files)
+        spaces = module.get_direct_similarity(dfs, role, int(player_id), wanted, top_n)
+    except Exception as exc:
+        return {"available": False, "reason": str(exc), "spaces": []}
+
+    compact_spaces = []
+    for space in spaces:
+        matches = [
+            {
+                "player_id": item.get("id"),
+                "player_name": item.get("name"),
+                "score": item.get("score"),
+            }
+            for item in space.get("matches", [])
+        ]
+        compact_spaces.append(
+            {
+                "key": space.get("key"),
+                "space": space.get("space"),
+                "description": space.get("description", ""),
+                "matches": matches,
+            }
+        )
+    return {
+        "available": any(space["matches"] for space in compact_spaces),
+        "scope": "selected target-team comparison peers",
+        "spaces": compact_spaces,
+    }
+
+
 def prompt_data(data: dict[str, Any], source_role: str, report_role: str, source_context_exported: bool) -> dict[str, Any]:
     season = str(data.get("season") or "")
     return {
@@ -405,6 +462,12 @@ def prompt_data(data: dict[str, Any], source_role: str, report_role: str, source
         "subject_report_role_metrics": metric_highlights(report_role, str(data.get("player_id")), season),
         "target_team_peers_report_role": peer_group_summary(report_role, str(data.get("main_comparison_peer_ids") or ""), season),
         "source_context_peers_source_role": peer_group_summary(source_role, str(data.get("source_team_peer_ids") or ""), season),
+        "target_similarity_report_role": target_similarity_summary(
+            report_role,
+            str(data.get("player_id")),
+            str(data.get("main_comparison_peer_ids") or ""),
+            bool(data.get("use_manual_role_overrides")),
+        ),
         "source_context_exported": source_context_exported,
     }
 
@@ -631,7 +694,17 @@ def prompt_from_payload(data: dict[str, Any]) -> str:
     source_role, report_role, reason, source_context_exported = validate_workflow_payload(data)
     data_block = prompt_data(data, source_role, report_role, source_context_exported)
     asset_brief = existing_asset_editorial_brief(str(data.get("slug") or ""))
-    brief = asset_brief or planned_editorial_brief(data, data_block, source_role, report_role, reason)
+    if asset_brief:
+        brief = f"""{asset_brief}
+
+---
+## Dati disponibili per questo prompt
+```json
+{json.dumps(data_block, ensure_ascii=False, indent=2)}
+```
+"""
+    else:
+        brief = planned_editorial_brief(data, data_block, source_role, report_role, reason)
     brief_source = "asset/generated payload brief" if asset_brief else "planned GUI brief"
     return f"""Return only JSON with these exact keys:
 {{
@@ -728,7 +801,7 @@ def run_create(data: dict[str, Any], dry_run: bool) -> dict[str, Any]:
         "command": cmd,
         "stdout": result.stdout,
         "stderr": result.stderr,
-        "url": f"http://127.0.0.1:8001/{data.get('slug')}.html",
+        "url": f"/{data.get('slug')}.html",
     }
 
 
@@ -942,6 +1015,70 @@ def dogana_required_field_errors(data: dict[str, Any]) -> list[str]:
     return [label for key, label in required.items() if not str(data.get(key) or "").strip()]
 
 
+POSITION_TO_DOGANA_SPATIAL_FAMILY = {
+    "CB": "centre_back",
+    "LCB": "centre_back",
+    "RCB": "centre_back",
+    "FB": "fullback",
+    "LB": "fullback",
+    "RB": "fullback",
+    "LWB": "wingback",
+    "RWB": "wingback",
+    "WB": "wingback",
+    "DM": "holding_midfielder",
+    "CDM": "holding_midfielder",
+    "MID": "central_midfielder",
+    "CM": "central_midfielder",
+    "AM": "attacking_midfielder",
+    "CAM": "attacking_midfielder",
+    "LM": "wide_midfielder",
+    "RM": "wide_midfielder",
+    "ST": "striker",
+    "CF": "striker",
+    "ATT": "wide_forward",
+    "LW": "wide_forward",
+    "RW": "wide_forward",
+    "SS": "second_striker",
+}
+
+
+def dogana_target_team_id(role: str, ids: list[int], season: str | None) -> tuple[int | None, list[str]]:
+    rows = records_by_ids(role, ",".join(str(pid) for pid in ids), season)
+    if rows.empty or "team_id" not in rows.columns:
+        return None, []
+    team_ids = sorted({int(value) for value in rows["team_id"].dropna().tolist()})
+    if len(team_ids) == 1:
+        return team_ids[0], []
+    if len(team_ids) > 1:
+        return None, [f"Dogana target_team_id not set because selected peers span multiple team IDs: {team_ids}"]
+    return None, []
+
+
+def dogana_spatial_role_family(role: str, player_id: str, season: str | None) -> str | None:
+    rows = records_by_ids(role, player_id, season)
+    if not rows.empty and "dominant_position" in rows.columns:
+        position = str(rows.iloc[0].get("dominant_position") or "").strip().upper()
+        family = POSITION_TO_DOGANA_SPATIAL_FAMILY.get(position)
+        if family:
+            return family
+    benchmark_path = FEATURES / f"global_benchmarks_{role}.parquet"
+    if not benchmark_path.exists():
+        return None
+    try:
+        benchmark = pd.read_parquet(benchmark_path, columns=["player_id", "season", "minutes_played", "dominant_position"])
+    except Exception:
+        return None
+    rows = benchmark[benchmark["player_id"].astype(str).eq(str(player_id))].copy()
+    variants = season_variants(season)
+    if variants and "season" in rows.columns:
+        rows = rows[rows["season"].astype(str).isin(variants)]
+    if rows.empty:
+        return None
+    rows["minutes_played"] = pd.to_numeric(rows.get("minutes_played"), errors="coerce").fillna(0.0)
+    position = str(rows.sort_values("minutes_played", ascending=False).iloc[0].get("dominant_position") or "").strip().upper()
+    return POSITION_TO_DOGANA_SPATIAL_FAMILY.get(position)
+
+
 def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str], list[str], str]:
     warnings: list[str] = []
     errors = dogana_required_field_errors(data)
@@ -959,6 +1096,9 @@ def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, li
 
     season = season_to_int(data.get("season"))
     slug = slugify_underscore(data.get("dogana_slug") or data.get("player_name") or data.get("slug"))
+    target_team_id, team_id_warnings = dogana_target_team_id(report_role, target_peer_ids, str(data.get("season") or ""))
+    warnings.extend(team_id_warnings)
+    spatial_role_family = dogana_spatial_role_family(report_role, str(data.get("player_id")), str(data.get("season") or ""))
     use_manual_role_overrides = bool(data.get("use_manual_role_overrides")) or bool(data.get("role_override_reason"))
     if use_manual_role_overrides:
         warnings.append(
@@ -975,6 +1115,7 @@ def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, li
             "source_season": season,
             "target_competition": "ITA-Serie A",
             "target_season": season,
+            "target_team_id": target_team_id,
             "target_team_name": str(data["target_team"]).strip(),
             "target_same_role_player_ids": target_peer_ids,
             "min_minutes": 100,
@@ -982,9 +1123,23 @@ def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, li
             "top_n_metrics": 8,
             "context_visual_mode": "two_evidence_blocks",
             "show_target_peer_chip": False,
+            "enable_context_threshold_lines": False,
+            "enable_context_quadrant_labels": False,
             "seriea_similarity_methods": ["pasta_distilled", "pca_knn", "euclidean_zscore"],
             "selected_seriea_similarity_method": None,
             "selected_seriea_comparable_player_id": None,
+            "spatial_role_family": spatial_role_family,
+            "enable_origin_uniqueness": False,
+            "origin_uniqueness_root": str(EXPERIMENTS_ROOT / "player_uniqueness"),
+            "origin_uniqueness_scope": "local",
+            "origin_uniqueness_top_pairs": 3,
+            "origin_uniqueness_min_minutes": 300,
+            "origin_uniqueness_method_status": "provisional",
+            "slide03_extreme_metric_count": 3,
+            "generate_short_video_pack": bool(data.get("generate_short_video_pack")),
+            "short_video_mode": bool(data.get("short_video_mode")),
+            "context_status": str(data.get("context_status") or "stable"),
+            "context_note": str(data.get("context_note") or ""),
             "use_manual_role_overrides": use_manual_role_overrides,
             "source_role": source_role,
             "role_override_reason": str(data.get("role_override_reason") or "").strip(),
@@ -998,7 +1153,7 @@ def build_dogana_config(data: dict[str, Any]) -> tuple[dict[str, Any] | None, li
 def dogana_generated_files(output_folder: Path) -> list[str]:
     if not output_folder.exists():
         return []
-    return [str(path) for path in sorted(output_folder.iterdir()) if path.is_file()]
+    return [str(path) for path in sorted(output_folder.rglob("*")) if path.is_file()]
 
 
 def dogana_summary_warnings(output_folder: Path) -> list[str]:
@@ -1189,6 +1344,8 @@ class Handler(BaseHTTPRequestHandler):
                     "report_role": params.get("report_role", [""])[0],
                     "season": params.get("season", [""])[0],
                 }))
+            elif self.serve_root_asset(parsed.path):
+                return
             else:
                 self.send_error(404)
         except Exception as exc:
@@ -1225,6 +1382,35 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def serve_root_asset(self, raw_path: str) -> bool:
+        relative = urllib.parse.unquote(raw_path.lstrip("/"))
+        if not relative or relative.startswith("tools/") or ".." in Path(relative).parts:
+            return False
+        path = (ROOT / relative).resolve()
+        try:
+            path.relative_to(ROOT)
+        except ValueError:
+            return False
+        if not path.is_file():
+            return False
+        suffix_types = {
+            ".html": "text/html",
+            ".css": "text/css",
+            ".js": "text/javascript",
+            ".json": "application/json",
+            ".png": "image/png",
+            ".jpg": "image/jpeg",
+            ".jpeg": "image/jpeg",
+            ".webp": "image/webp",
+            ".svg": "image/svg+xml",
+            ".woff": "font/woff",
+            ".woff2": "font/woff2",
+            ".ttf": "font/ttf",
+            ".eot": "application/vnd.ms-fontobject",
+        }
+        self.serve_file(path, suffix_types.get(path.suffix.lower(), "application/octet-stream"))
+        return True
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run the local PASTA report builder server.")
@@ -1236,6 +1422,21 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def bind_server(host: str, start_port: int, end_port: int = 8020) -> tuple[ThreadingHTTPServer, int]:
+    last_error: OSError | None = None
+    stop_port = max(start_port, end_port) if start_port == 8011 else start_port
+    for port in range(start_port, stop_port + 1):
+        try:
+            return ThreadingHTTPServer((host, port), Handler), port
+        except OSError as exc:
+            if exc.errno != errno.EADDRINUSE:
+                raise
+            last_error = exc
+    if last_error is not None:
+        raise OSError(errno.EADDRINUSE, f"no free report-builder port in range {start_port}-{stop_port}") from last_error
+    raise OSError(f"could not bind report-builder server on {host}:{start_port}")
+
+
 def main() -> int:
     args = parse_args()
     if args.config:
@@ -1244,8 +1445,8 @@ def main() -> int:
         payload = status_payload()
         print(json.dumps(payload, indent=2, ensure_ascii=False))
         return 0 if payload["ok"] else 1
-    port = args.port or args.legacy_port or 8011
-    server = ThreadingHTTPServer((args.host, port), Handler)
+    requested_port = args.port or args.legacy_port or 8011
+    server, port = bind_server(args.host, requested_port)
     print(f"Report builder: http://{args.host}:{port}/")
     print(f"SoccerDB: {SOCCERDB_ROOT}")
     server.serve_forever()
