@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Man In Pasta · Chi eccelle di più?</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sai riconoscere il profilo giusto dai dati? Sfida il tuo occhio analitico con Man In Pasta." />
+
+    <!-- Open Graph / Twitter card -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:title"        content="Man In Pasta · Chi eccelle di più?" />
+    <meta property="og:description"  content="10 domande, 10 secondi ciascuna. Sai riconoscere i giocatori dai dati?" />
+    <meta property="og:image"        content="https://pasta-reports.com/images/man-in-pasta/header/mip-head.png" />
+    <meta property="og:image:width"  content="800" />
+    <meta property="og:image:height" content="1000" />
+    <meta property="og:url"          content="https://pasta-reports.com/quiz.html" />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@macnonesiste" />
+    <meta name="twitter:title"       content="Man In Pasta · Chi eccelle di più?" />
+    <meta name="twitter:description" content="10 domande, 10 secondi ciascuna. Sai riconoscere i giocatori dai dati?" />
+    <meta name="twitter:image"       content="https://pasta-reports.com/images/man-in-pasta/header/mip-head.png" />
+
+    <!-- Google Fonts — same as main PASTA pages -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,800" />
+    <!-- Quiz styles (standalone — does not depend on main.css) -->
+    <link rel="stylesheet" href="assets/css/pasta-quiz.css" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="pq-back-link">← PASTA</a>
+
+<div class="pq-page">
+  <div class="pq-inner">
+
+    <!-- ── HERO SCREEN ─────────────────────────────────────────────── -->
+    <div id="pq-hero" class="pq-screen pq-hero">
+      <img id="mip-cover-img" class="mip-cover-image" src="" alt="Man In Pasta" style="display:none" />
+      <div class="pq-logo-badge">PASTA · Player Analysis System</div>
+      <h1><span>Man In Pasta</span></h1>
+      <p>Chi eccelle di più in questa metrica? 10 domande, 10 secondi ciascuna. Dimostra di saper leggere i dati come uno scout vero.</p>
+      <button id="pq-start-btn" class="pq-btn">Inizia il quiz</button>
+    </div>
+
+    <!-- ── LOADING SCREEN ──────────────────────────────────────────── -->
+    <div id="pq-loading" class="pq-screen pq-loading">
+      <div class="pq-spinner"></div>
+      <p>Caricamento dati in corso…</p>
+    </div>
+
+    <!-- ── QUESTION SCREEN ─────────────────────────────────────────── -->
+    <div id="pq-question" class="pq-screen pq-question-screen">
+
+      <!-- Progress bar -->
+      <div class="pq-progress-bar">
+        <div id="pq-progress-fill" class="pq-progress-fill" style="width:0%"></div>
+      </div>
+
+      <!-- Header row -->
+      <div class="pq-question-header">
+        <span id="pq-question-counter" class="pq-question-counter">Domanda 1 / 10</span>
+        <span id="pq-difficulty-badge" class="pq-difficulty-badge pq-diff-easy">Facile</span>
+      </div>
+
+      <!-- Timer -->
+      <div class="pq-timer-row">
+        <div class="pq-timer-track">
+          <div id="pq-timer-fill" class="pq-timer-fill"></div>
+        </div>
+        <span id="pq-timer-label" class="pq-timer-label">10</span>
+      </div>
+
+      <!-- Metric -->
+      <div class="pq-metric-box">
+        <div class="pq-metric-label-hint">Chi eccelle di più in questa metrica?</div>
+        <div id="pq-metric-name" class="pq-metric-name">—</div>
+      </div>
+
+      <!-- Player cards -->
+      <div class="pq-cards">
+        <div id="pq-card-A" class="pq-player-card">
+          <div class="pq-card-letter">A</div>
+          <div class="pq-card-name">—</div>
+          <div class="pq-card-role">—</div>
+        </div>
+        <div id="pq-card-B" class="pq-player-card">
+          <div class="pq-card-letter">B</div>
+          <div class="pq-card-name">—</div>
+          <div class="pq-card-role">—</div>
+        </div>
+      </div>
+
+      <!-- Feedback panel -->
+      <div id="pq-feedback" class="pq-feedback">
+        <div id="pq-feedback-verdict" class="pq-feedback-verdict"></div>
+        <div class="pq-feedback-values">
+          <div id="pq-fb-row-a" class="pq-fb-val">
+            <div id="pq-fb-name-a" class="pq-fb-val-name">—</div>
+            <div id="pq-fb-val-a"  class="pq-fb-val-num">—</div>
+          </div>
+          <div id="pq-fb-row-b" class="pq-fb-val">
+            <div id="pq-fb-name-b" class="pq-fb-val-name">—</div>
+            <div id="pq-fb-val-b"  class="pq-fb-val-num">—</div>
+          </div>
+        </div>
+        <div id="pq-feedback-explanation" class="pq-feedback-explanation"></div>
+      </div>
+
+    </div><!-- /pq-question -->
+
+    <!-- ── RESULT SCREEN ────────────────────────────────────────────── -->
+    <div id="pq-result" class="pq-screen pq-result-screen">
+      <img id="mip-result-banner" class="mip-result-banner" src="" alt="" style="display:none" />
+      <div class="pq-score-circle">
+        <div id="pq-score-number" class="pq-score-number">0</div>
+        <div id="pq-score-total-label" class="pq-score-total">/ 10</div>
+      </div>
+
+      <div class="pq-badge-title">Il tuo badge</div>
+      <div id="pq-badge-name" class="pq-badge-name">"Data Rookie"</div>
+      <p id="pq-badge-phrase" class="pq-badge-phrase">—</p>
+
+      <div class="pq-result-actions">
+        <button id="pq-replay-btn" class="pq-btn">Rigioca</button>
+        <button id="pq-share-btn" class="pq-btn pq-btn-share">Condividi su X</button>
+      </div>
+    </div>
+
+  </div><!-- /pq-inner -->
+</div><!-- /pq-page -->
+
+<script src="assets/js/pasta-quiz.js"></script>
+</body>
+</html>

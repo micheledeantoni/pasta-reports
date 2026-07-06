@@ -43,27 +43,3 @@ assets/sass/
 # Playwright (card generation only, not needed in prod)
 playwright-report/
 test-results/
-
-# ── Mini-games (Man In Pasta + Legend of Ziti) ───────────────────────────────
-# Exclude all game pages and assets until ready to ship.
-# To include a file: git add -f <path>  or remove the line below.
-
-# Game HTML pages
-quiz.html
-legend-of-ziti.html
-index-quiz.html
-
-# Game JS
-assets/js/pasta-quiz.js
-assets/js/legend-of-ziti.js
-
-# Game CSS
-assets/css/pasta-quiz.css
-assets/css/legend-of-ziti.css
-
-# Image manifests and quiz data
-data/quiz/
-
-# Game images
-images/man-in-pasta/
-images/legend-of-ziti/

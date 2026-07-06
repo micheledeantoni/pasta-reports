@@ -1,0 +1,46 @@
+{
+  "cover": "images/legend-of-ziti/cover/ChatGPT Image 2 juil. 2026, 10_19_18 (1).png",
+  "icon":  "images/legend-of-ziti/icons/ChatGPT Image 2 juil. 2026, 10_16_04.png",
+  "categories": [
+    {
+      "min": 850,
+      "max": 960,
+      "title": "Triforc Suprema",
+      "description": "Tre punte, zero dubbi. Hai riconosciuto i profili senza perdere la strada.",
+      "image": "images/legend-of-ziti/categories/ChatGPT Image 2 juil. 2026, 10_19_19 (2).png",
+      "shareUrl": "https://pasta-reports.com/share/legend-of-ziti/triforc-suprema.html"
+    },
+    {
+      "min": 700,
+      "max": 849,
+      "title": "Triforc Affilata",
+      "description": "Hai tagliato via quasi tutte le false piste.",
+      "image": "images/legend-of-ziti/categories/ChatGPT Image 2 juil. 2026, 10_19_20 (3).png",
+      "shareUrl": "https://pasta-reports.com/share/legend-of-ziti/triforc-affilata.html"
+    },
+    {
+      "min": 500,
+      "max": 699,
+      "title": "Triforc in Viaggio",
+      "description": "La quest procede bene, anche se qualche profilo ti ha fatto deviare.",
+      "image": "images/legend-of-ziti/categories/ChatGPT Image 2 juil. 2026, 10_19_20 (4).png",
+      "shareUrl": "https://pasta-reports.com/share/legend-of-ziti/triforc-in-viaggio.html"
+    },
+    {
+      "min": 300,
+      "max": 499,
+      "title": "Triforc Piegata",
+      "description": "Qualche scelta buona c'è, ma la mappa va letta meglio.",
+      "image": "images/legend-of-ziti/categories/ChatGPT Image 2 juil. 2026, 10_19_21 (6).png",
+      "shareUrl": "https://pasta-reports.com/share/legend-of-ziti/triforc-piegata.html"
+    },
+    {
+      "min": 0,
+      "max": 299,
+      "title": "Riparti dal Villaggio",
+      "description": "La leggenda può aspettare: meglio ripartire con calma, quattro dati alla volta.",
+      "image": "images/legend-of-ziti/categories/ChatGPT Image 2 juil. 2026, 10_19_20 (5).png",
+      "shareUrl": "https://pasta-reports.com/share/legend-of-ziti/riparti-dal-villaggio.html"
+    }
+  ]
+}

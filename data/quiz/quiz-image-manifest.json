@@ -1,0 +1,45 @@
+{
+  "cover": "images/man-in-pasta/header/mip-head.png",
+  "categories": [
+    {
+      "min": 9,
+      "max": 10,
+      "title": "Michelin Star PASTA chef",
+      "description": "",
+      "image": "images/man-in-pasta/categories/mip-5.png",
+      "shareUrl": "https://pasta-reports.com/share/man-in-pasta/michelin-star.html"
+    },
+    {
+      "min": 7,
+      "max": 8,
+      "title": "Mi dai la ricetta?",
+      "description": "",
+      "image": "images/man-in-pasta/categories/mip-4.png",
+      "shareUrl": "https://pasta-reports.com/share/man-in-pasta/mi-dai-la-ricetta.html"
+    },
+    {
+      "min": 5,
+      "max": 6,
+      "title": "C'avevo questo in frigo",
+      "description": "Buono, ma non prendo il bis.",
+      "image": "images/man-in-pasta/categories/mip-3.png",
+      "shareUrl": "https://pasta-reports.com/share/man-in-pasta/frigo.html"
+    },
+    {
+      "min": 3,
+      "max": 4,
+      "title": "Pasta bianca",
+      "description": "Fai uno sforzo, che abbiamo ospiti dai.",
+      "image": "images/man-in-pasta/categories/mip-2.png",
+      "shareUrl": "https://pasta-reports.com/share/man-in-pasta/pasta-bianca.html"
+    },
+    {
+      "min": 0,
+      "max": 2,
+      "title": "PASTA col Ketchup",
+      "description": "",
+      "image": "images/man-in-pasta/categories/mip-1.png",
+      "shareUrl": "https://pasta-reports.com/share/man-in-pasta/ketchup.html"
+    }
+  ]
+}

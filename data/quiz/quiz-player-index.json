@@ -1,0 +1,80 @@
+[
+  {
+    "playerId": 302497,
+    "playerName": "Alexander Sørloth",
+    "macroRole": "ATT",
+    "payloadUrl": "data/report_legacy_payloads/alexander-sorloth.legacy_role_payload.json"
+  },
+  {
+    "playerId": 444136,
+    "playerName": "Anan Khalaili",
+    "macroRole": "DEF",
+    "payloadUrl": "data/report_legacy_payloads/anan-khalaili.legacy_role_payload.json"
+  },
+  {
+    "playerId": 355354,
+    "playerName": "Curtis Jones",
+    "macroRole": "MID",
+    "payloadUrl": "data/report_legacy_payloads/curtis_jones.legacy_role_payload.json"
+  },
+  {
+    "playerId": 395802,
+    "playerName": "Gonçalo Ramos",
+    "macroRole": "ATT",
+    "payloadUrl": "data/report_legacy_payloads/goncalo-ramos.legacy_role_payload.json"
+  },
+  {
+    "playerId": 439584,
+    "playerName": "Rasmus Højlund",
+    "macroRole": "ATT",
+    "payloadUrl": "data/report_legacy_payloads/hojlund_att.legacy_role_payload.json"
+  },
+  {
+    "playerId": 535736,
+    "playerName": "Jeff Ekhator",
+    "macroRole": "ATT",
+    "payloadUrl": "data/report_legacy_payloads/jeff-ekhator.legacy_role_payload.json"
+  },
+  {
+    "playerId": 369570,
+    "playerName": "Manu Koné",
+    "macroRole": "MID",
+    "payloadUrl": "data/report_legacy_payloads/kone.legacy_role_payload.json"
+  },
+  {
+    "playerId": 369971,
+    "playerName": "Leo Østigård",
+    "macroRole": "DEF",
+    "payloadUrl": "data/report_legacy_payloads/leo-ostigard.legacy_role_payload.json"
+  },
+  {
+    "playerId": 481154,
+    "playerName": "Marco Palestra",
+    "macroRole": "DEF",
+    "payloadUrl": "data/report_legacy_payloads/marco-palestra.legacy_role_payload.json"
+  },
+  {
+    "playerId": 367782,
+    "playerName": "Mason Greenwood",
+    "macroRole": "ATT",
+    "payloadUrl": "data/report_legacy_payloads/mason-greenwood.legacy_role_payload.json"
+  },
+  {
+    "playerId": 515755,
+    "playerName": "Sami Ouaissa",
+    "macroRole": "DEF",
+    "payloadUrl": "data/report_legacy_payloads/sami-ouaissa.legacy_role_payload.json"
+  },
+  {
+    "playerId": 354072,
+    "playerName": "Oumar Solet",
+    "macroRole": "DEF",
+    "payloadUrl": "data/report_legacy_payloads/solet.legacy_role_payload.json"
+  },
+  {
+    "playerId": 459075,
+    "playerName": "Aleksandar Stankovic",
+    "macroRole": "MID",
+    "payloadUrl": "data/report_legacy_payloads/stankovic.legacy_role_payload.json"
+  }
+]

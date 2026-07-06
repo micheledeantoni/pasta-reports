@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <title>Legend of Ziti · PASTA</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Quattro dati. Tre giocatori. Una leggenda da riconoscere. Gioca a Legend of Ziti su PASTA." />
+
+  <!-- Open Graph / Twitter card -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Legend of Ziti · PASTA" />
+  <meta property="og:description" content="Quattro dati. Tre giocatori. Una leggenda da riconoscere." />
+  <meta property="og:url"         content="https://pasta-reports.com/legend-of-ziti.html" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:site"       content="@macnonesiste" />
+  <meta name="twitter:title"      content="Legend of Ziti · PASTA" />
+  <meta name="twitter:description" content="Quattro dati. Tre giocatori. Una leggenda da riconoscere." />
+  <meta property="og:image"        content="https://pasta-reports.com/images/legend-of-ziti/cover/ChatGPT Image 2 juil. 2026, 10_19_18 (1).png" />
+  <meta property="og:image:width"  content="800" />
+  <meta property="og:image:height" content="420" />
+  <meta name="twitter:image"       content="https://pasta-reports.com/images/legend-of-ziti/cover/ChatGPT Image 2 juil. 2026, 10_19_18 (1).png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,800" />
+  <link rel="stylesheet" href="assets/css/legend-of-ziti.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="lz-back-link">← PASTA</a>
+
+<div class="lz-page">
+  <div class="lz-inner">
+
+    <!-- ── HERO SCREEN ─────────────────────────────────────────────── -->
+    <div id="lz-hero" class="lz-screen lz-hero">
+      <img id="lz-cover-img" class="lz-cover-image" src="" alt="Legend of Ziti" style="display:none" />
+      <div class="lz-logo-badge">PASTA · Player Analysis System</div>
+      <h1>Legend of <span>Ziti</span></h1>
+      <p class="lz-tagline">Quattro dati. Tre giocatori. Una leggenda da riconoscere.</p>
+      <p class="lz-hero-desc">Osserva il profilo statistico, scegli il giocatore giusto e usa la Triforc solo se sei davvero nei guai.</p>
+      <button id="lz-start-btn" class="lz-btn">Inizia la quest</button>
+    </div>
+
+    <!-- ── LOADING SCREEN ──────────────────────────────────────────── -->
+    <div id="lz-loading" class="lz-screen lz-loading">
+      <div class="lz-spinner"></div>
+      <p>Caricamento dati in corso…</p>
+    </div>
+
+    <!-- ── QUESTION SCREEN ─────────────────────────────────────────── -->
+    <div id="lz-question" class="lz-screen lz-question-screen">
+
+      <!-- Progress bar -->
+      <div class="lz-progress-bar">
+        <div id="lz-progress-fill" class="lz-progress-fill" style="width:0%"></div>
+      </div>
+
+      <!-- Header row -->
+      <div class="lz-question-header">
+        <span id="lz-question-counter" class="lz-question-counter">Domanda 1 / 8</span>
+        <span id="lz-difficulty-badge" class="lz-difficulty-badge lz-diff-easy">Facile</span>
+        <span id="lz-score-running"    class="lz-score-running">0 pt</span>
+      </div>
+
+      <!-- Timer -->
+      <div class="lz-timer-row">
+        <div class="lz-timer-track">
+          <div id="lz-timer-fill" class="lz-timer-fill"></div>
+        </div>
+        <span id="lz-timer-label" class="lz-timer-label">20</span>
+      </div>
+
+      <!-- Clue section -->
+      <div class="lz-clue-header">Tra questi tre giocatori, il profilo misterioso…</div>
+      <ul id="lz-clue-grid" class="lz-clue-grid">
+        <!-- Populated by JS -->
+      </ul>
+
+      <!-- Triforc -->
+      <div class="lz-triforc-row">
+        <button id="lz-triforc-btn" class="lz-triforc-btn">🍴 Triforc</button>
+      </div>
+
+      <!-- Player option cards -->
+      <div class="lz-options">
+        <div id="lz-card-A" class="lz-player-card">
+          <div class="lz-card-letter">A</div>
+          <div class="lz-card-info">
+            <div class="lz-card-name">—</div>
+            <div class="lz-card-role">—</div>
+          </div>
+        </div>
+        <div id="lz-card-B" class="lz-player-card">
+          <div class="lz-card-letter">B</div>
+          <div class="lz-card-info">
+            <div class="lz-card-name">—</div>
+            <div class="lz-card-role">—</div>
+          </div>
+        </div>
+        <div id="lz-card-C" class="lz-player-card">
+          <div class="lz-card-letter">C</div>
+          <div class="lz-card-info">
+            <div class="lz-card-name">—</div>
+            <div class="lz-card-role">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback panel -->
+      <div id="lz-feedback" class="lz-feedback">
+        <div id="lz-feedback-verdict" class="lz-feedback-verdict"></div>
+        <div id="lz-pts-earned"       class="lz-pts-earned"></div>
+        <div id="lz-feedback-text"    class="lz-feedback-text"></div>
+      </div>
+
+    </div><!-- /lz-question -->
+
+    <!-- ── RESULT SCREEN ────────────────────────────────────────────── -->
+    <div id="lz-result" class="lz-screen lz-result-screen">
+      <img id="lz-result-banner" class="lz-result-banner" src="" alt="" style="display:none" />
+      <div class="lz-score-circle">
+        <div id="lz-score-number" class="lz-score-number">0</div>
+        <div id="lz-score-max"    class="lz-score-max">/ 960</div>
+      </div>
+
+      <div class="lz-badge-title">Il tuo badge</div>
+      <div id="lz-badge-name"   class="lz-badge-name">"—"</div>
+      <p   id="lz-badge-phrase" class="lz-badge-phrase">—</p>
+
+      <div class="lz-result-actions">
+        <button id="lz-replay-btn" class="lz-btn lz-btn-secondary">Rigioca</button>
+        <button id="lz-share-btn"  class="lz-btn">Condividi su X</button>
+      </div>
+    </div>
+
+  </div><!-- /lz-inner -->
+</div><!-- /lz-page -->
+
+<script src="assets/js/legend-of-ziti.js"></script>
+</body>
+</html>
