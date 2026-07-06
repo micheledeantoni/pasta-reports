@@ -297,6 +297,18 @@ body { margin: 0; padding: 0; background: var(--lz-bg); }
 .lz-feedback-text    { font-size: .85rem; color: var(--lz-muted); line-height: 1.5; }
 .lz-feedback-text strong { color: var(--lz-ink); }
 
+.lz-feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .9rem;
+}
+
+.lz-next-btn {
+  min-height: 2.45rem;
+  padding: 0 1.1rem;
+  font-size: .78rem;
+}
+
 /* Comparison mini-table in feedback */
 .lz-comp-table       { margin-top: .75rem; display: flex; flex-direction: column; gap: .6rem; }
 .lz-comp-metric      { background: var(--lz-bg); border: 1px solid var(--lz-border); border-radius: 8px; padding: .6rem .75rem; }

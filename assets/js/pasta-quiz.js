@@ -147,7 +147,6 @@ let questions     = [];
 let currentQ      = 0;
 let score         = 0;
 let timerInterval  = null;
-let advanceTimeout = null;
 let timeLeft      = 10;
 let answered      = false;
 let imageManifest  = null;
@@ -161,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('pq-start-btn').addEventListener('click',  startQuiz);
   $('pq-replay-btn').addEventListener('click', startQuiz);
   $('pq-share-btn').addEventListener('click',  shareResult);
+  $('pq-next-btn').addEventListener('click',   goToNextQuestion);
   // Pre-load while user reads hero
   loadActiveQuizPool().catch(e => log('Pre-load error:', e.message));
   loadImageManifest().catch(e => log('Manifest error:', e.message));
@@ -214,7 +214,6 @@ function applyResultBanner(score) {
    QUIZ START
    ══════════════════════════════════════════════════════════════════ */
 async function startQuiz() {
-  clearTimeout(advanceTimeout);
   clearInterval(timerInterval);
   score = 0; currentQ = 0; answered = false;
   showScreen('pq-loading');
@@ -532,6 +531,7 @@ function renderQuestion() {
   renderCard('B', q.playerB);
 
   $('pq-feedback').className = 'pq-feedback';
+  $('pq-next-btn').style.display = 'none';
 
   startTimer();
 }
@@ -578,7 +578,7 @@ function handleAnswer(letter) {
   if (!correct) markCorrectCard();
   disableCards();
   showFeedback(correct ? 'correct' : 'wrong');
-  scheduleNext();
+  showNextButton();
 }
 
 function handleTimeout() {
@@ -587,7 +587,7 @@ function handleTimeout() {
   disableCards();
   markCorrectCard();
   showFeedback('timeout');
-  scheduleNext();
+  showNextButton();
 }
 
 function markCorrectCard() {
@@ -598,12 +598,17 @@ function disableCards() {
   ['A', 'B'].forEach(l => { const c = $(`pq-card-${l}`); c.classList.add('disabled'); c.onclick = null; });
 }
 
-function scheduleNext() {
-  advanceTimeout = setTimeout(() => {
-    currentQ++;
-    if (currentQ >= questions.length) showResult();
-    else renderQuestion();
-  }, 3200);
+function showNextButton() {
+  const btn = $('pq-next-btn');
+  btn.textContent = currentQ >= questions.length - 1 ? 'Vedi risultato' : 'Next';
+  btn.style.display = '';
+}
+
+function goToNextQuestion() {
+  if (!answered) return;
+  currentQ++;
+  if (currentQ >= questions.length) showResult();
+  else renderQuestion();
 }
 
 /* ── Feedback ────────────────────────────────────────────────────── */

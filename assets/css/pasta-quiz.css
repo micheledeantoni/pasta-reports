@@ -423,6 +423,18 @@
   margin-top: .1rem;
 }
 
+.pq-feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .9rem;
+}
+
+.pq-next-btn {
+  min-height: 2.45rem;
+  padding: 0 1.1rem;
+  font-size: .78rem;
+}
+
 /* ── Rule / divider ──────────────────────────────────────────────── */
 .pq-rule {
   border: none;

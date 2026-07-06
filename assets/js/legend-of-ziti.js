@@ -13,7 +13,7 @@ const IMAGE_MANIFEST_URL  = 'data/quiz/legend-of-ziti-image-manifest.json';
 
 /* ── Game constants ──────────────────────────────────────────────── */
 const TOTAL_QUESTIONS   = 8;
-const QUESTION_TIMER    = 20;
+const QUESTION_TIMER    = 24;
 const BASE_PTS          = 100;
 const TRIFORC_PTS       = 60;
 const BONUS_FAST        = 20;   // elapsed < 7s
@@ -216,7 +216,6 @@ let questions       = [];
 let currentQ        = 0;
 let score           = 0;
 let timerInterval   = null;
-let advanceTimeout  = null;
 let timeLeft        = QUESTION_TIMER;
 let answered        = false;
 let triforcUsed      = false;
@@ -232,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('lz-replay-btn').addEventListener('click',      startGame);
   $('lz-share-btn').addEventListener('click',       shareResult);
   $('lz-triforc-btn').addEventListener('click', useTriforc);
+  $('lz-next-btn').addEventListener('click',    goToNextQuestion);
   loadPlayerPool().catch(e => log('Pre-load error:', e.message));
   loadImageManifest().catch(e => log('Manifest error:', e.message));
 });
@@ -310,7 +310,6 @@ function _setTriforcLabel(text) {
    GAME START
    ══════════════════════════════════════════════════════════════════ */
 async function startGame() {
-  clearTimeout(advanceTimeout);
   clearInterval(timerInterval);
   score = 0; currentQ = 0; answered = false;
   showScreen('lz-loading');
@@ -665,6 +664,7 @@ function renderQuestion() {
 
   // Feedback hidden
   $('lz-feedback').className = 'lz-feedback';
+  $('lz-next-btn').style.display = 'none';
 
   startTimer();
 }
@@ -742,7 +742,7 @@ function handleAnswer(idx) {
   if (!correct) markCorrect(q);
   disableCards();
   showFeedback(correct ? 'correct' : 'wrong', pts, q);
-  scheduleNext();
+  showNextButton();
 }
 
 function handleTimeout() {
@@ -751,7 +751,7 @@ function handleTimeout() {
   disableCards();
   markCorrect(questions[currentQ]);
   showFeedback('timeout', 0, questions[currentQ]);
-  scheduleNext();
+  showNextButton();
 }
 
 function markCorrect(q) {
@@ -767,12 +767,17 @@ function disableCards() {
   });
 }
 
-function scheduleNext() {
-  advanceTimeout = setTimeout(() => {
-    currentQ++;
-    if (currentQ >= questions.length) showResult();
-    else renderQuestion();
-  }, 3000);
+function showNextButton() {
+  const btn = $('lz-next-btn');
+  btn.textContent = currentQ >= questions.length - 1 ? 'Vedi risultato' : 'Next';
+  btn.style.display = '';
+}
+
+function goToNextQuestion() {
+  if (!answered) return;
+  currentQ++;
+  if (currentQ >= questions.length) showResult();
+  else renderQuestion();
 }
 
 /* ── Feedback ────────────────────────────────────────────────────── */
