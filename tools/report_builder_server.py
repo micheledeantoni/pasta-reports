@@ -31,6 +31,7 @@ ROLE_FILES = {
     "ATT": "scouting_view_metrics_v1_att.parquet",
 }
 ROLE_CHOICES = tuple(ROLE_FILES)
+COMBINED_CHAMPIONS_COMPETITION = "ENG-Premier League + UEFA-Champions League"
 EDITORIAL_FIELDS = [
     "narrative",
     "source_team_note",
@@ -52,6 +53,13 @@ def _path_from(value: Any, base: Path) -> Path:
     return path.resolve()
 
 
+def _executable_path_from(value: Any, base: Path) -> Path:
+    path = Path(str(value)).expanduser()
+    if not path.is_absolute():
+        path = base / path
+    return path.absolute()
+
+
 def _load_runtime_config(config_path: Path | None = None) -> dict[str, Any]:
     candidates = []
     if config_path is not None:
@@ -68,11 +76,26 @@ def _load_runtime_config(config_path: Path | None = None) -> dict[str, Any]:
 
 
 def _python_for(root: Path) -> Path:
+    current = Path(sys.executable)
     candidates = [
+        current,
         root / ".venv" / "bin" / "python",
         root / ".venv" / "Scripts" / "python.exe",
+        Path("/Users/michele/.pyenv/versions/lewagon/bin/python3"),
     ]
-    return next((candidate for candidate in candidates if candidate.exists()), Path(sys.executable))
+    for candidate in candidates:
+        if candidate.exists() and _python_has_report_deps(candidate):
+            return candidate
+    return current
+
+
+def _python_has_report_deps(python: Path) -> bool:
+    code = "import numpy, pandas, duckdb, pyarrow"
+    try:
+        result = subprocess.run([str(python), "-c", code], text=True, capture_output=True, timeout=10)
+    except Exception:
+        return False
+    return result.returncode == 0
 
 
 def apply_runtime_paths(config_path: Path | None = None) -> None:
@@ -98,7 +121,10 @@ def apply_runtime_paths(config_path: Path | None = None) -> None:
     DOGANA_CONFIG_DIR = DOGANA_ROOT / "configs" / "players"
     DOGANA_OUTPUT_ROOT = dogana_output
     FEATURES = SOCCERDB_ROOT / "data" / "features"
-    PYTHON = _path_from(config.get("python") or os.environ.get("SOCCERDB_PYTHON") or _python_for(SOCCERDB_ROOT), ROOT)
+    PYTHON = _executable_path_from(
+        config.get("python") or os.environ.get("SOCCERDB_PYTHON") or _python_for(SOCCERDB_ROOT),
+        ROOT,
+    )
     ANALYTICS_DB = SOCCERDB_ROOT / "data" / "analytics.duckdb"
     CORE_DB = SOCCERDB_ROOT / "data" / "football_core.duckdb"
     OVERRIDE_CSV = SOCCERDB_ROOT / "config" / "manual_role_overrides.csv"
@@ -172,6 +198,33 @@ def role_pool(role: str) -> pd.DataFrame:
             frames.append(apply_team_overrides(unique_players(role_df(candidate)), candidate))
         return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
     return apply_team_overrides(unique_players(role_df(role)), role)
+
+
+def index_player_pool(role: str, season: str | None) -> pd.DataFrame:
+    if not PLAYER_INDEX.exists():
+        return pd.DataFrame()
+    variants = season_variants(season)
+    rows = []
+    for entry in json.loads(PLAYER_INDEX.read_text(encoding="utf-8")):
+        entry_role = str(entry.get("macro_role") or entry.get("report_role") or entry.get("source_role") or "").upper()
+        if role.upper() != "ALL" and entry_role != role.upper():
+            continue
+        entry_season = str(entry.get("season") or "")
+        if variants and entry_season not in variants:
+            continue
+        rows.append(
+            {
+                "player_id": entry.get("player_id"),
+                "player_name": entry.get("player_name"),
+                "team_name": entry.get("source_club") or entry.get("team_name"),
+                "competition": entry.get("competition"),
+                "season": entry.get("season"),
+                "macro_role": entry_role,
+                "minutes": -1,
+                "availability": "index",
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def unique_players(df: pd.DataFrame) -> pd.DataFrame:
@@ -286,6 +339,112 @@ def apply_season(df: pd.DataFrame, season: str | None) -> pd.DataFrame:
     return df
 
 
+def combined_minutes_peer_pool(role: str, season: str | None) -> pd.DataFrame:
+    """Aggregate domestic + UEFA Champions League minutes for peer loading.
+
+    This powers builder selection only; report export still needs governed
+    combined artifacts before the final HTML can render aggregate metrics.
+    """
+    variants = [item for item in season_variants(season) if len(item) == 4 and item.isdigit()]
+    if not variants:
+        return pd.DataFrame()
+    season_code = variants[0]
+    player_dir = SOCCERDB_ROOT / "data" / "players"
+    features_dir = SOCCERDB_ROOT / "data" / "features"
+    minutes_paths = [
+        path for path in sorted(player_dir.glob(f"minutes_*_{season_code}.parquet"))
+        if "UEFA-Europa_League" not in path.name
+    ]
+    if not minutes_paths:
+        return pd.DataFrame()
+
+    role_positions = {
+        "DEF": {"CB", "FB"},
+        "MID": {"MID"},
+        "ATT": {"ATT", "ST"},
+        "GK": {"GK"},
+    }.get(role.upper(), set())
+    frames = []
+    name_frames = []
+    for path in minutes_paths:
+        df = pd.read_parquet(path)
+        if not {"player_id", "team_id", "minutes_played", "position_code"}.issubset(df.columns):
+            continue
+        if role_positions:
+            df = df[df["position_code"].astype(str).isin(role_positions)].copy()
+        if df.empty:
+            continue
+        frames.append(df[["player_id", "team_id", "minutes_played"]])
+
+        slug = path.stem.removeprefix("minutes_")
+        events_path = features_dir / f"player_events_{slug}.parquet"
+        if events_path.exists():
+            events = pd.read_parquet(events_path, columns=["player_id", "player"])
+            name_frames.append(events.dropna(subset=["player_id"]).drop_duplicates("player_id"))
+
+    if not frames:
+        return pd.DataFrame()
+    minutes = pd.concat(frames, ignore_index=True)
+    out = (
+        minutes.assign(minutes_played=pd.to_numeric(minutes["minutes_played"], errors="coerce").fillna(0.0))
+        .groupby(["player_id", "team_id"], as_index=False)["minutes_played"]
+        .sum()
+        .rename(columns={"minutes_played": "minutes", "player": "player_name"})
+    )
+    if name_frames:
+        names = pd.concat(name_frames, ignore_index=True).drop_duplicates("player_id")
+        out = out.merge(names.rename(columns={"player": "player_name"}), on="player_id", how="left")
+    else:
+        out["player_name"] = out["player_id"].map(lambda x: f"Player {int(x)}")
+    out["player_name"] = out["player_name"].fillna(out["player_id"].map(lambda x: f"Player {int(x)}"))
+    out["team_name"] = out["team_id"].map(lambda x: f"Team {int(x)}")
+    out["competition"] = "Domestic leagues + UEFA-Champions League"
+    out["season"] = int(season_code)
+    out["macro_role"] = role.upper()
+    out = apply_team_overrides(out, role)
+    return out[["player_id", "player_name", "team_id", "team_name", "competition", "season", "macro_role", "minutes"]]
+
+
+def combined_champions_metric_pool(role: str, season: str | None) -> pd.DataFrame:
+    if role.upper() == "ALL":
+        frames = [combined_champions_metric_pool(candidate, season) for candidate in ROLE_CHOICES]
+        frames = [frame for frame in frames if not frame.empty]
+        return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+    df = apply_team_overrides(unique_players(apply_season(role_df(role), season)), role)
+    if "competition" not in df.columns:
+        return pd.DataFrame()
+    return df[df["competition"].astype(str).eq(COMBINED_CHAMPIONS_COMPETITION)].copy()
+
+
+def domestic_metric_pool(role: str, season: str | None) -> pd.DataFrame:
+    if role.upper() == "ALL":
+        frames = [domestic_metric_pool(candidate, season) for candidate in ROLE_CHOICES]
+        frames = [frame for frame in frames if not frame.empty]
+        return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+    df = apply_team_overrides(unique_players(apply_season(role_df(role), season)), role)
+    if "competition" in df.columns:
+        df = df[~df["competition"].astype(str).eq(COMBINED_CHAMPIONS_COMPETITION)].copy()
+    return df
+
+
+def filter_peer_pool(df: pd.DataFrame, role: str, team: str, min_minutes: float) -> pd.DataFrame:
+    out = df.copy()
+    if team:
+        matching_ids = [
+            team_id for team_id, team_name in team_name_overrides(role).items()
+            if search_key(team) in search_key(team_name)
+        ]
+        if {"team_name", "team_id"}.issubset(out.columns):
+            by_name = out["team_name"].map(search_key).str.contains(search_key(team), regex=False, na=False)
+            by_id = out["team_id"].astype(str).isin(matching_ids) if matching_ids else False
+            out = out[by_name | by_id]
+    if min_minutes and "minutes" in out.columns:
+        out = out[pd.to_numeric(out["minutes"], errors="coerce").fillna(0) >= min_minutes]
+    if {"minutes", "player_name"}.issubset(out.columns):
+        out = out.sort_values(["minutes", "player_name"], ascending=[False, True])
+    return out
+
+
 def rows_for_response(df: pd.DataFrame, limit: int = 50) -> list[dict[str, Any]]:
     out = []
     for row in df.head(limit).to_dict("records"):
@@ -296,10 +455,12 @@ def rows_for_response(df: pd.DataFrame, limit: int = 50) -> list[dict[str, Any]]
             elif key in {"player_id", "team_id"}:
                 clean[key] = int(value)
             elif key == "minutes":
-                clean[key] = int(float(value))
+                numeric = float(value)
+                clean[key] = "" if numeric < 0 else int(numeric)
             else:
                 clean[key] = value
-        clean["availability"] = "metrics"
+        if not clean.get("availability"):
+            clean["availability"] = "metrics"
         out.append(clean)
     return out
 
@@ -324,11 +485,13 @@ def player_records(role: str, ids: str, season: str | None) -> list[dict[str, An
     return rows_for_response(rows.sort_values("_order"))
 
 
-def records_by_ids(role: str, ids: str, season: str | None) -> pd.DataFrame:
+def records_by_ids(role: str, ids: str, season: str | None, competition: str | None = None) -> pd.DataFrame:
     wanted = split_ids(ids)
     if not wanted:
         return pd.DataFrame()
     df = apply_team_overrides(unique_players(metric_frame(role, season)), role)
+    if competition and "competition" in df.columns:
+        df = df[df["competition"].astype(str).eq(str(competition))]
     rows = df[df["player_id"].astype(str).isin(wanted)].copy()
     if rows.empty:
         return rows
@@ -568,11 +731,33 @@ def search_players(params: dict[str, list[str]]) -> dict[str, Any]:
     role = params.get("role", ["ALL"])[0].upper()
     query = params.get("query", [""])[0]
     season = params.get("season", ["2025-2026"])[0]
-    df = apply_season(role_pool(role), season)
+    include_champions = params.get("include_champions", ["0"])[0] in {"1", "true", "yes", "on"}
+    if include_champions:
+        df = combined_champions_metric_pool(role, season)
+        if df.empty:
+            df = domestic_metric_pool(role, season)
+    else:
+        df = domestic_metric_pool(role, season)
+    index_df = index_player_pool(role, season)
+    if not index_df.empty:
+        if df.empty:
+            df = index_df
+        else:
+            df = pd.concat([df, index_df], ignore_index=True)
+            subset = [col for col in ["player_id", "competition", "season", "macro_role"] if col in df.columns]
+            if subset:
+                df = df.drop_duplicates(subset=subset, keep="first")
     if query:
         needle = search_key(query)
         df = df[df["player_name"].map(search_key).str.contains(needle, regex=False, na=False)]
-    df = df.sort_values(["minutes", "player_name"], ascending=[False, True])
+        if include_champions and df.empty:
+            fallback = domestic_metric_pool(role, season)
+            df = fallback[fallback["player_name"].map(search_key).str.contains(needle, regex=False, na=False)]
+    if "minutes" in df.columns:
+        df = df.assign(_minutes_sort=pd.to_numeric(df["minutes"], errors="coerce").fillna(-1))
+        df = df.sort_values(["_minutes_sort", "player_name"], ascending=[False, True]).drop(columns=["_minutes_sort"])
+    elif "player_name" in df.columns:
+        df = df.sort_values("player_name")
     return {"players": rows_for_response(df)}
 
 
@@ -581,19 +766,43 @@ def target_peers(params: dict[str, list[str]]) -> dict[str, Any]:
     team = params.get("team", [""])[0]
     season = params.get("season", ["2025-2026"])[0]
     min_minutes = float(params.get("min_minutes", ["300"])[0] or 0)
-    df = apply_team_overrides(unique_players(apply_season(role_df(role), season)), role)
-    if team:
-        matching_ids = [
-            team_id for team_id, team_name in team_name_overrides(role).items()
-            if search_key(team) in search_key(team_name)
-        ]
-        by_name = df["team_name"].map(search_key).str.contains(search_key(team), regex=False, na=False)
-        by_id = df["team_id"].astype(str).isin(matching_ids) if matching_ids else False
-        df = df[by_name | by_id]
-    if min_minutes:
-        df = df[pd.to_numeric(df["minutes"], errors="coerce").fillna(0) >= min_minutes]
-    df = df.sort_values(["minutes", "player_name"], ascending=[False, True])
-    return {"players": rows_for_response(df)}
+    include_champions = params.get("include_champions", ["0"])[0] in {"1", "true", "yes", "on"}
+    warning = ""
+    if include_champions:
+        df = combined_champions_metric_pool(role, season)
+        if df.empty:
+            df = combined_minutes_peer_pool(role, season)
+        filtered = filter_peer_pool(df, role, team, min_minutes)
+        if filtered.empty:
+            df = domestic_metric_pool(role, season)
+            filtered = filter_peer_pool(df, role, team, min_minutes)
+            if not filtered.empty:
+                warning = "Champions League scope unavailable for this team/season; using domestic league only."
+    else:
+        df = domestic_metric_pool(role, season)
+        filtered = filter_peer_pool(df, role, team, min_minutes)
+    players = rows_for_response(filtered)
+    error = ""
+    if not players:
+        parts = [role]
+        if team:
+            parts.append(f"team '{team}'")
+        if season:
+            parts.append(f"season '{season}'")
+        if min_minutes:
+            parts.append(f"min {int(min_minutes)} minutes")
+        scope = "domestic + Champions League" if include_champions else "domestic role artifact"
+        error = "No target-team peers found for " + ", ".join(parts) + f" in {scope}."
+    competition_scope = ""
+    if players:
+        competition_scope = str(filtered.iloc[0].get("competition", ""))
+    return {
+        "players": players,
+        "error": error,
+        "warning": warning,
+        "include_champions": include_champions and competition_scope == COMBINED_CHAMPIONS_COMPETITION,
+        "competition_scope": competition_scope,
+    }
 
 
 def source_peers(params: dict[str, list[str]]) -> dict[str, Any]:
@@ -601,7 +810,16 @@ def source_peers(params: dict[str, list[str]]) -> dict[str, Any]:
     player_id = params.get("player_id", [""])[0]
     season = params.get("season", ["2025-2026"])[0]
     min_minutes = float(params.get("min_minutes", ["300"])[0] or 0)
-    df = apply_team_overrides(unique_players(apply_season(role_df(role), season)), role)
+    include_champions = params.get("include_champions", ["0"])[0] in {"1", "true", "yes", "on"}
+    warning = ""
+    if include_champions:
+        df = combined_champions_metric_pool(role, season)
+        subject_rows = df[df["player_id"].astype(str).eq(str(player_id))] if "player_id" in df.columns else pd.DataFrame()
+        if subject_rows.empty:
+            df = domestic_metric_pool(role, season)
+            warning = "Champions League scope unavailable for this source team/season; using domestic league only."
+    else:
+        df = domestic_metric_pool(role, season)
     subject_rows = df[df["player_id"].astype(str).eq(str(player_id))]
     if subject_rows.empty:
         return {"players": [], "subject": None, "error": "subject not found in role layer"}
@@ -616,7 +834,14 @@ def source_peers(params: dict[str, list[str]]) -> dict[str, Any]:
     if min_minutes:
         peers = peers[pd.to_numeric(peers["minutes"], errors="coerce").fillna(0) >= min_minutes]
     peers = peers.sort_values(["minutes", "player_name"], ascending=[False, True])
-    return {"subject": rows_for_response(pd.DataFrame([subject]))[0], "players": rows_for_response(peers)}
+    competition_scope = str(subject.get("competition", ""))
+    return {
+        "subject": rows_for_response(pd.DataFrame([subject]))[0],
+        "players": rows_for_response(peers),
+        "warning": warning,
+        "include_champions": include_champions and competition_scope == COMBINED_CHAMPIONS_COMPETITION,
+        "competition_scope": competition_scope,
+    }
 
 
 def validate_workflow_payload(data: dict[str, Any]) -> tuple[str, str, str, bool]:
@@ -635,8 +860,12 @@ def validate_workflow_payload(data: dict[str, Any]) -> tuple[str, str, str, bool
     if not str(data.get("main_comparison_peer_ids") or "").strip():
         raise ValueError("select at least one main/radar peer for report_role")
     season = str(data.get("season") or "")
+    comparison_season = str(data.get("comparison_season") or season)
+    subject_competition = str(data.get("subject_competition_scope") or data.get("competition") or "")
+    comparison_competition = str(data.get("comparison_competition_scope") or data.get("competition") or "")
+    context_competition = str(data.get("source_context_competition_scope") or subject_competition or data.get("competition") or "")
     player_id = str(data.get("player_id") or "")
-    subject_rows = records_by_ids(report_role, player_id, season)
+    subject_rows = records_by_ids(report_role, player_id, season, subject_competition)
     if subject_rows.empty:
         override_path = FEATURES / f"scouting_view_metrics_v1_{report_role.lower()}_with_overrides.parquet"
         if override_path.exists():
@@ -654,9 +883,30 @@ def validate_workflow_payload(data: dict[str, Any]) -> tuple[str, str, str, bool
                 f"player_id {player_id} is not present in {report_role} metrics. "
                 f"Generate the report as {source_role} or rebuild the analytics role layer before using {report_role}."
             )
-    target_peer_rows = records_by_ids(report_role, str(data.get("main_comparison_peer_ids") or ""), season)
+    target_peer_rows = records_by_ids(
+        report_role,
+        str(data.get("main_comparison_peer_ids") or ""),
+        comparison_season,
+        comparison_competition,
+    )
     found_target_ids = set(target_peer_rows["player_id"].astype(str).tolist()) if not target_peer_rows.empty else set()
     missing_target = [pid for pid in split_ids(data.get("main_comparison_peer_ids")) if pid not in found_target_ids]
+    if missing_target and comparison_competition:
+        fallback_target_rows = records_by_ids(
+            report_role,
+            str(data.get("main_comparison_peer_ids") or ""),
+            comparison_season,
+            None,
+        )
+        fallback_ids = set(fallback_target_rows["player_id"].astype(str).tolist()) if not fallback_target_rows.empty else set()
+        if all(pid in fallback_ids for pid in split_ids(data.get("main_comparison_peer_ids"))):
+            scopes = fallback_target_rows["competition"].dropna().astype(str).unique().tolist() if "competition" in fallback_target_rows.columns else []
+            if len(scopes) == 1:
+                comparison_competition = scopes[0]
+                data["comparison_competition_scope"] = comparison_competition
+                target_peer_rows = fallback_target_rows
+                found_target_ids = fallback_ids
+                missing_target = []
     if missing_target:
         override_path = FEATURES / f"scouting_view_metrics_v1_{report_role.lower()}_with_overrides.parquet"
         if override_path.exists():
@@ -681,7 +931,7 @@ def validate_workflow_payload(data: dict[str, Any]) -> tuple[str, str, str, bool
             raise ValueError(f"main/radar peers must belong to target team {target_team}: {bad}")
     source_ids = str(data.get("source_team_peer_ids") or "").strip()
     if source_ids:
-        source_rows = records_by_ids(source_role, source_ids, season)
+        source_rows = records_by_ids(source_role, source_ids, season, context_competition)
         found_source_ids = set(source_rows["player_id"].astype(str).tolist()) if not source_rows.empty else set()
         missing_source = [pid for pid in split_ids(source_ids) if pid not in found_source_ids]
         if missing_source:
@@ -752,7 +1002,7 @@ Editorial brief source: {brief_source}
 
 def build_create_command(data: dict[str, Any], dry_run: bool) -> list[str]:
     source_role, report_role, reason, source_context_exported = validate_workflow_payload(data)
-    slug = slugify_name(data.get("player_name")) or str(data.get("slug") or "").strip()
+    slug = str(data.get("slug") or "").strip() or slugify_name(data.get("player_name"))
     data["slug"] = slug
     cmd = [
         str(PYTHON if PYTHON.exists() else Path(sys.executable)),
@@ -774,6 +1024,12 @@ def build_create_command(data: dict[str, Any], dry_run: bool) -> list[str]:
         "--report-status", data.get("report_status", "live"),
         "--overwrite",
     ]
+    if data.get("subject_competition_scope"):
+        cmd.extend(["--subject-competition", str(data["subject_competition_scope"])])
+    if data.get("comparison_competition_scope"):
+        cmd.extend(["--comparison-competition", str(data["comparison_competition_scope"])])
+    if data.get("source_context_competition_scope"):
+        cmd.extend(["--context-competition", str(data["source_context_competition_scope"])])
     if reason:
         cmd.extend(["--role-override-reason", reason])
     if data.get("source_team_peer_ids"):
@@ -1323,7 +1579,7 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         params = urllib.parse.parse_qs(parsed.query)
         try:
-            if parsed.path == "/":
+            if parsed.path in {"/", "/report_builder.html"}:
                 self.serve_file(ROOT / "tools" / "report_builder.html", "text/html")
             elif parsed.path == "/report_builder.js":
                 self.serve_file(ROOT / "tools" / "report_builder.js", "text/javascript")

@@ -85,6 +85,19 @@ textarea { resize: vertical; }
 }
 .button.primary { background: var(--accent); color: white; }
 .button.subtle { border-color: #94a3b8; color: white; background: transparent; }
+.button.scope-toggle.active { background: #0f766e; border-color: #0f766e; color: white; }
+.scope-check {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: .55rem .6rem;
+  min-height: 38px;
+  background: #fbfdff;
+}
+.scope-info {
+  margin: .55rem 0 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
 .peer-block {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -114,6 +127,30 @@ textarea { resize: vertical; }
   max-height: 280px;
   overflow: auto;
 }
+.row-button {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: .5rem .6rem;
+  background: #fbfdff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.row-button:hover,
+.row-button:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(15, 106, 180, .12);
+  outline: none;
+}
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  color: var(--ink);
+}
+.check-row input { width: auto; margin-top: .2rem; }
 .row {
   border: 1px solid var(--line);
   border-radius: 6px;

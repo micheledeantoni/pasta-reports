@@ -75,6 +75,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--team-name", required=True)
     parser.add_argument("--source-club")
     parser.add_argument("--competition", required=True)
+    parser.add_argument("--subject-competition", default="")
+    parser.add_argument("--comparison-competition", default="")
+    parser.add_argument("--context-competition", default="")
     parser.add_argument("--season", required=True)
     parser.add_argument("--target-team", required=True)
     parser.add_argument("--target-role-peer-ids", dest="target_role_peer_ids", default="", help="Deprecated metadata alias; use --target-team-peer-ids for main/radar peers.")
@@ -392,9 +395,19 @@ def main() -> int:
             args.main_comparison_peer_ids,
             "--comparison-label",
             args.comparison_label,
+            "--season",
+            normalize_season(args.season),
+            "--competition",
+            args.competition,
             "--output",
             str(snapshot_path),
         ]
+        if args.subject_competition:
+            export_command.extend(["--subject-competition", args.subject_competition])
+        if args.comparison_competition:
+            export_command.extend(["--comparison-competition", args.comparison_competition])
+        if args.context_competition:
+            export_command.extend(["--context-competition", args.context_competition])
         if args.use_manual_role_overrides:
             export_command.append("--use-manual-role-overrides")
             if args.source_role != args.role:

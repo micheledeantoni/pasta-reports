@@ -5,9 +5,19 @@ const state = {
   selectedTargetPeerIds: new Set(["297390", "54968", "82399"]),
   selectedSourcePeerIds: new Set(["425115", "494398", "505567"]),
   overrideStatus: null,
+  includeChampionsLeague: false,
+  subjectCompetitionScope: "",
+  targetCompetitionScope: "",
+  sourceContextCompetitionScope: "",
 };
 
+if (window.location.protocol === "file:") {
+  window.location.replace("http://127.0.0.1:8011/");
+}
+
 const $ = (id) => document.getElementById(id);
+const COMBINED_CHAMPIONS_COMPETITION = "ENG-Premier League + UEFA-Champions League";
+const COMBINED_CHAMPIONS_LABEL = "Domestic + UCL";
 
 function value(id) {
   return $(id).value.trim();
@@ -64,11 +74,38 @@ function reportRole() {
   return value("role");
 }
 
+function targetPeerSeason() {
+  return value("targetPeerSeason") || value("season");
+}
+
+function targetCompetitionScope() {
+  const selectedScope = selectedTargetCompetitionScope();
+  if (selectedScope) return selectedScope;
+  if (state.targetCompetitionScope) return state.targetCompetitionScope;
+  return state.includeChampionsLeague ? COMBINED_CHAMPIONS_COMPETITION : value("competition");
+}
+
+function selectedTargetCompetitionScope() {
+  const scopes = selectedPlayers(state.targetPeers, state.selectedTargetPeerIds)
+    .map((player) => player.competition)
+    .filter(Boolean);
+  return scopes.length ? scopes[0] : "";
+}
+
+function subjectCompetitionScope() {
+  return state.subjectCompetitionScope || value("competition");
+}
+
+function sourceContextCompetitionScope() {
+  return state.sourceContextCompetitionScope || subjectCompetitionScope();
+}
+
 function describePlayer(player) {
   const minutes = player.minutes === "" ? "n/a" : `${player.minutes} min`;
   const role = player.macro_role || reportRole();
   const team = player.team_name || "Unknown team";
-  return `${player.player_name} · ${player.player_id} · ${team} · ${role} · ${minutes} · ${player.availability || "unknown"}`;
+  const season = player.season ? ` · ${player.season}` : "";
+  return `${player.player_name} · ${player.player_id} · ${team} · ${role}${season} · ${minutes} · ${player.availability || "unknown"}`;
 }
 
 function escapeHtml(raw) {
@@ -95,7 +132,7 @@ async function postJson(url, body) {
     body: JSON.stringify(body),
   });
   const payload = await response.json();
-  if (!response.ok || payload.ok === false) {
+  if (!response.ok) {
     throw new Error(payload.error || `Request failed: ${url}`);
   }
   return payload;
@@ -110,6 +147,27 @@ function rowButton(player, onClick) {
   return button;
 }
 
+function selectPlayer(selected) {
+  setValue("playerId", selected.player_id);
+  setValue("playerName", selected.player_name);
+  setValue("teamName", selected.team_name);
+  setValue("competition", selected.competition);
+  state.subjectCompetitionScope = selected.competition || "";
+  state.targetCompetitionScope = "";
+  state.sourceContextCompetitionScope = "";
+  setValue("season", selected.season);
+  setValue("targetPeerSeason", selected.season);
+  if (selected.macro_role) {
+    setValue("sourceRole", selected.macro_role);
+    if (!checked("allowCrossRole")) {
+      setValue("role", selected.macro_role);
+    }
+  }
+  syncSlugFromName();
+  updateLabels();
+  updateReview();
+}
+
 function renderPlayerResults() {
   const wrap = $("playerResults");
   wrap.innerHTML = "";
@@ -118,22 +176,7 @@ function renderPlayerResults() {
     return;
   }
   state.playerResults.forEach((player) => {
-    wrap.appendChild(rowButton(player, (selected) => {
-      setValue("playerId", selected.player_id);
-      setValue("playerName", selected.player_name);
-      setValue("teamName", selected.team_name);
-      setValue("competition", selected.competition);
-      setValue("season", selected.season);
-      if (selected.macro_role) {
-        setValue("sourceRole", selected.macro_role);
-        if (!checked("allowCrossRole")) {
-          setValue("role", selected.macro_role);
-        }
-      }
-      syncSlugFromName();
-      updateLabels();
-      updateReview();
-    }));
+    wrap.appendChild(rowButton(player, selectPlayer));
   });
 }
 
@@ -189,6 +232,11 @@ function validationErrors() {
   const errors = [];
   if (!idsFromSet(state.selectedTargetPeerIds)) {
     errors.push("Select at least one main/radar peer for the report role.");
+  }
+  const selectedTargetPlayers = selectedPlayers(state.targetPeers, state.selectedTargetPeerIds);
+  const missingTargetRows = selectedTargetPlayers.filter((player) => player.availability === "not loaded");
+  if (missingTargetRows.length) {
+    errors.push("Reload target peers for the selected team/season before generating.");
   }
   if (sourceRole() !== reportRole() && !checked("allowCrossRole")) {
     errors.push("Enable cross-role report before generating with different source/report roles.");
@@ -266,7 +314,7 @@ async function createOverride() {
     source_role: sourceRole(),
     report_role: reportRole(),
     season: value("season"),
-    competition: value("competition"),
+    competition: targetCompetitionScope(),
     team_name: value("teamName"),
     target_team: value("targetTeam"),
     reason,
@@ -298,12 +346,18 @@ function buildPayload() {
     allow_cross_role_report: checked("allowCrossRole"),
     role_override_reason: value("roleOverrideReason"),
     season: value("season"),
+    comparison_season: targetPeerSeason(),
+    include_champions_league: state.includeChampionsLeague,
+    competition_scope: subjectCompetitionScope(),
+    subject_competition_scope: subjectCompetitionScope(),
+    comparison_competition_scope: targetCompetitionScope(),
+    source_context_competition_scope: sourceContextCompetitionScope(),
     player_id: value("playerId"),
     player_name: value("playerName"),
     slug: value("slug"),
     team_name: value("teamName"),
     source_club: value("teamName"),
-    competition: value("competition"),
+    competition: subjectCompetitionScope(),
     target_team: value("targetTeam"),
     visibility: value("visibility"),
     report_status: value("reportStatus"),
@@ -327,8 +381,9 @@ function buildPayload() {
 }
 
 function updateLabels() {
-  if (!value("comparisonLabel") || value("comparisonLabel").match(/^(Inter|Napoli|Genoa|Team .+) (GK|DEF|MID|ATT)$/)) {
-    setValue("comparisonLabel", `${value("targetTeam")} ${reportRole()}`);
+  if (!value("comparisonLabel") || value("comparisonLabel").match(/^(Inter|Napoli|Genoa|Manchester City|Team .+) (GK|DEF|MID|ATT)( [0-9]{4})?( (PL\\+UCL|Domestic \+ UCL))?$/)) {
+    const scopeSuffix = state.includeChampionsLeague ? ` ${COMBINED_CHAMPIONS_LABEL}` : "";
+    setValue("comparisonLabel", `${value("targetTeam")} ${reportRole()} ${targetPeerSeason()}${scopeSuffix}`);
   }
   if (!value("sourcePeerLabel") || value("sourcePeerLabel").match(/^(Inter|Napoli|Genoa|Team .+) (GK|DEF|MID|ATT)$/)) {
     setValue("sourcePeerLabel", `${value("teamName")} ${sourceRole()}`);
@@ -347,6 +402,10 @@ function updateReview() {
   $("roleWarning").textContent = roleWarning;
   const isOverrideMode = needsOverride() && overrideReady();
   const modeLabel = isOverrideMode ? "Manual role override report" : "Canonical role report";
+  $("includeChampionsLeague").checked = state.includeChampionsLeague;
+  $("championsScopeInfo").textContent = state.includeChampionsLeague
+    ? "Search and peer loaders use domestic league + UEFA Champions League when that scope exists; otherwise they fall back to the domestic league."
+    : "Search and peer loaders use the domestic league layer only.";
 
   let blocksHtml = "";
   if (state.overrideStatus && sourceRole() !== reportRole()) {
@@ -375,7 +434,9 @@ function updateReview() {
       ${blocksHtml}
       <div>
         <h3>Main/radar peers: ${escapeHtml(value("comparisonLabel"))}</h3>
-        <p>Uses report role ${escapeHtml(reportRole())}; passed to exporter as comparison IDs.</p>
+        <p>Uses report role ${escapeHtml(reportRole())}; loaded from season ${escapeHtml(targetPeerSeason())}; scope: ${escapeHtml(targetCompetitionScope())}; passed to exporter as comparison IDs.</p>
+        ${state.includeChampionsLeague ? `<p class="warn">Champions aggregation is selected: subject uses ${escapeHtml(subjectCompetitionScope())}; radar peers use ${escapeHtml(targetCompetitionScope())}.</p>` : ""}
+        ${targetPeerSeason() !== value("season") ? `<p class="warn">Cross-season peer group selected: subject season ${escapeHtml(value("season"))}, target peer season ${escapeHtml(targetPeerSeason())}.</p>` : ""}
         <ul>${targetLines || "<li>No main comparison peers selected.</li>"}</ul>
       </div>
       <div>
@@ -398,17 +459,24 @@ function showOutput(payload) {
 }
 
 async function searchPlayers() {
-  const url = `/api/search_players?role=${encodeURIComponent(value("searchRole"))}&query=${encodeURIComponent(value("playerQuery"))}&season=${encodeURIComponent(value("season"))}`;
+  const includeChampions = state.includeChampionsLeague ? "1" : "0";
+  const url = `/api/search_players?role=${encodeURIComponent(value("searchRole"))}&query=${encodeURIComponent(value("playerQuery"))}&season=${encodeURIComponent(value("season"))}&include_champions=${includeChampions}`;
   const payload = await getJson(url);
   state.playerResults = payload.players || [];
   renderPlayerResults();
+  if (state.playerResults.length === 1) {
+    selectPlayer(state.playerResults[0]);
+  }
 }
 
 async function loadTargetPeers(addMode) {
   const role = value("targetPeerRole") || reportRole();
-  const url = `/api/target_peers?role=${encodeURIComponent(role)}&team=${encodeURIComponent(value("targetPeerTeam"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("targetMinMinutes"))}`;
+  const season = targetPeerSeason();
+  const includeChampions = state.includeChampionsLeague ? "1" : "0";
+  const url = `/api/target_peers?role=${encodeURIComponent(role)}&team=${encodeURIComponent(value("targetPeerTeam"))}&season=${encodeURIComponent(season)}&min_minutes=${encodeURIComponent(value("targetMinMinutes"))}&include_champions=${includeChampions}`;
   const payload = await getJson(url);
-  const newPeers = (payload.players || []).map(p => ({ ...p, _loaded_role: role }));
+  const newPeers = (payload.players || []).map(p => ({ ...p, _loaded_role: role, _loaded_season: season }));
+  state.targetCompetitionScope = payload.competition_scope || (newPeers[0] && newPeers[0].competition) || targetCompetitionScope();
   if (addMode) {
     const existingIds = new Set(state.targetPeers.map(p => String(p.player_id)));
     for (const p of newPeers) {
@@ -420,7 +488,8 @@ async function loadTargetPeers(addMode) {
     state.targetPeers = newPeers;
     keepOnlyLoaded(state.targetPeers, state.selectedTargetPeerIds);
   }
-  renderCheckboxList("targetPeers", state.targetPeers, state.selectedTargetPeerIds, "No target-team peers found.");
+  renderCheckboxList("targetPeers", state.targetPeers, state.selectedTargetPeerIds, payload.error || `No target-team peers found for ${value("targetPeerTeam")} in ${season}.`);
+  if (payload.warning) showOutput(payload.warning);
   updateCrossRolePanel();
   updateReview();
 }
@@ -456,11 +525,11 @@ async function createPeerOverrides() {
       player_name: p.player_name,
       source_role: p._loaded_role || p.macro_role,
       report_role: reportRole(),
-      season: value("season"),
+      season: p._loaded_season || p.season || targetPeerSeason(),
       competition: p.competition || value("competition"),
       team_name: p.team_name || "",
       target_team: value("targetTeam"),
-      reason: `Cross-role peer: ${p._loaded_role} analyzed as ${reportRole()} for ${value("targetTeam")} target group`,
+      reason: `Cross-role peer: ${p._loaded_role} analyzed as ${reportRole()} for ${value("targetTeam")} target group in ${p._loaded_season || p.season || targetPeerSeason()}`,
     };
     const result = await postJson("/api/upsert_role_override", payload);
     out.textContent += `  ${result.action}: ${p.player_name} (${p._loaded_role}→${reportRole()})\n`;
@@ -480,11 +549,14 @@ async function rebuildPeerOverrides() {
 }
 
 async function loadSourcePeers() {
-  const url = `/api/source_peers?role=${encodeURIComponent(sourceRole())}&player_id=${encodeURIComponent(value("playerId"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("sourceMinMinutes"))}`;
+  const includeChampions = state.includeChampionsLeague ? "1" : "0";
+  const url = `/api/source_peers?role=${encodeURIComponent(sourceRole())}&player_id=${encodeURIComponent(value("playerId"))}&season=${encodeURIComponent(value("season"))}&min_minutes=${encodeURIComponent(value("sourceMinMinutes"))}&include_champions=${includeChampions}`;
   const payload = await getJson(url);
   state.sourcePeers = payload.players || [];
+  state.sourceContextCompetitionScope = payload.competition_scope || state.sourceContextCompetitionScope || subjectCompetitionScope();
   keepOnlyLoaded(state.sourcePeers, state.selectedSourcePeerIds);
   renderCheckboxList("sourcePeers", state.sourcePeers, state.selectedSourcePeerIds, payload.error || "No source-team peers found.");
+  if (payload.warning) showOutput(payload.warning);
   updateReview();
 }
 
@@ -579,7 +651,7 @@ function bind(id, event, fn) {
 
 [
   "searchRole", "sourceRole", "role", "allowCrossRole", "roleOverrideReason",
-  "season", "playerId", "playerName", "slug", "teamName", "competition",
+  "season", "targetPeerSeason", "playerId", "playerName", "slug", "teamName", "competition",
   "targetTeam", "visibility", "reportStatus", "comparisonLabel", "sourcePeerLabel",
 ].forEach((id) => {
   $(id).addEventListener("input", () => { updateLabels(); updateReview(); });
@@ -594,6 +666,14 @@ $("playerName").addEventListener("input", () => {
 bind("searchPlayer", "click", searchPlayers);
 bind("loadTargetPeers", "click", () => loadTargetPeers(false));
 bind("loadTargetPeersAdd", "click", () => loadTargetPeers(true));
+$("includeChampionsLeague").addEventListener("change", () => {
+  state.includeChampionsLeague = checked("includeChampionsLeague");
+  state.subjectCompetitionScope = value("competition");
+  state.targetCompetitionScope = "";
+  state.sourceContextCompetitionScope = "";
+  updateLabels();
+  updateReview();
+});
 bind("createPeerOverrides", "click", createPeerOverrides);
 bind("rebuildPeerOverrides", "click", rebuildPeerOverrides);
 bind("loadSourcePeers", "click", loadSourcePeers);

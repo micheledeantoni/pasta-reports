@@ -22,8 +22,10 @@
         <label>Search role<select id="searchRole"><option>ALL</option><option selected>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
         <label>Season<input id="season" value="2526" /></label>
         <label>Search player<input id="playerQuery" value="ostigard" /></label>
+        <label class="inline-check scope-check"><input id="includeChampionsLeague" type="checkbox" /> Include Champions League if available</label>
         <button id="searchPlayer" class="button">Search</button>
       </div>
+      <p id="championsScopeInfo" class="scope-info"></p>
       <div id="playerResults" class="results"></div>
       <div class="role-interpretation">
         <h3>Role interpretation</h3>
@@ -62,6 +64,7 @@
         <p>Load peers by role. Select players from multiple roles to build a cross-role target group.</p>
         <div class="grid two">
           <label>Target team search<input id="targetPeerTeam" value="Inter" /></label>
+          <label>Target peer season<input id="targetPeerSeason" value="2526" /></label>
           <label>Min minutes<input id="targetMinMinutes" value="300" /></label>
           <label>Load role<select id="targetPeerRole"><option>DEF</option><option>MID</option><option>ATT</option><option>GK</option></select></label>
           <div style="display:flex;gap:.4rem;align-items:end">
