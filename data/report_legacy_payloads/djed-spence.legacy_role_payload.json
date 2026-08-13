@@ -169,11 +169,11 @@
       "id": 362219,
       "label": "Djed Spence",
       "values": [
-        36.35,
-        25.29,
-        43.7,
-        77.65,
-        71.12
+        35.23,
+        27.62,
+        44.8,
+        77.6,
+        72.6
       ]
     },
     "target": {
@@ -185,11 +185,11 @@
         415415
       ],
       "values": [
-        26.39,
-        47.36,
-        46.03,
-        55.43,
-        89.25
+        26.44,
+        47.41,
+        45.86,
+        55.37,
+        90.46
       ]
     },
     "sourceTeam": {
@@ -199,11 +199,11 @@
         401044
       ],
       "values": [
-        55.55,
-        33.21,
-        45.99,
-        74.05,
-        82.99
+        55.54,
+        20.95,
+        43.76,
+        73.96,
+        84.11
       ]
     },
     "scale": "0-100 global role percentile from detailed metrics",
@@ -213,44 +213,44 @@
         "id": 255929,
         "label": "Federico Dimarco",
         "values": [
-          44.26,
-          38.91,
-          62.43,
-          69.99,
-          98.31
+          45.45,
+          38.97,
+          62.03,
+          69.91,
+          98.44
         ]
       },
       {
         "id": 388567,
         "label": "Luis Henrique",
         "values": [
-          13.77,
+          13.26,
           63.63,
-          56.1,
-          58.04,
-          87.25
+          56.01,
+          57.94,
+          88.67
         ]
       },
       {
         "id": 322153,
         "label": "Denzel Dumfries",
         "values": [
-          11.11,
-          53.73,
-          17.47,
-          35.9,
-          82.8
+          10.68,
+          53.8,
+          15.24,
+          35.92,
+          84.1
         ]
       },
       {
         "id": 415415,
         "label": "Andy Diouf",
         "values": [
-          36.42,
-          33.15,
-          48.12,
-          57.77,
-          88.62
+          36.37,
+          33.25,
+          50.16,
+          57.69,
+          90.62
         ]
       }
     ]
@@ -330,7 +330,7 @@
     },
     "Aerial attempts per90": {
       "min": 0.0,
-      "max": 7.335558,
+      "max": 7.752101,
       "count": 331,
       "scale": "role_minmax_raw"
     },
@@ -390,7 +390,7 @@
     },
     "Dribbling tentati per 90": {
       "min": 0.0,
-      "max": 5.442765,
+      "max": 8.641471,
       "count": 331,
       "scale": "role_minmax_raw"
     },
@@ -464,7 +464,7 @@
       "Interceptions per90": 8.62119,
       "Defensive actions share team": 0.05577,
       "Aerial win rate": 0.469388,
-      "Aerial attempts per90": 0.0,
+      "Aerial attempts per90": 2.133527,
       "Tackle success rate": 0.75,
       "Interception to tackle ratio": 4.5,
       "Pass completion": 0.814139,
@@ -474,7 +474,7 @@
       "Progressive pass share": 0.197263,
       "Progressive carries per90": 3.744557,
       "Average progressive carry distance": 25.000988,
-      "Dribbling tentati per 90": 4.005806,
+      "Dribbling tentati per 90": 8.011611,
       "Dribbling riusciti": 35.869565,
       "Altezza media dei dribbling": 62.69413,
       "Passes into final third per90": 12.626996,
@@ -624,7 +624,7 @@
       "Progressive pass share": 0.330256,
       "Progressive carries per90": 2.108626,
       "Average progressive carry distance": 20.511591,
-      "Dribbling tentati per 90": 1.789137,
+      "Dribbling tentati per 90": 3.578275,
       "Dribbling riusciti": 33.928571,
       "Altezza media dei dribbling": 51.785625,
       "Passes into final third per90": 17.028754,
@@ -654,7 +654,7 @@
       "Progressive pass share": 0.167254,
       "Progressive carries per90": 2.607727,
       "Average progressive carry distance": 25.531154,
-      "Dribbling tentati per 90": 1.939079,
+      "Dribbling tentati per 90": 3.878158,
       "Dribbling riusciti": 20.689655,
       "Altezza media dei dribbling": 69.191379,
       "Passes into final third per90": 11.701337,
@@ -774,13 +774,13 @@
         "metrics": [
           {
             "metric": "Aerial attempts per90",
-            "subjectValue": 0.0,
+            "subjectValue": 2.133527,
             "baselineValue": 1.061901,
-            "subjectScore": 0.0,
-            "baselineScore": 14.48,
+            "subjectScore": 27.52,
+            "baselineScore": 13.7,
             "range": {
               "min": 0.0,
-              "max": 7.335558,
+              "max": 7.752101,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -985,13 +985,13 @@
           },
           {
             "metric": "Dribbling tentati per 90",
-            "subjectValue": 4.005806,
+            "subjectValue": 8.011611,
             "baselineValue": 2.319428,
-            "subjectScore": 73.6,
-            "baselineScore": 42.61,
+            "subjectScore": 92.71,
+            "baselineScore": 26.84,
             "range": {
               "min": 0.0,
-              "max": 5.442765,
+              "max": 8.641471,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -1209,13 +1209,13 @@
         "metrics": [
           {
             "metric": "Aerial attempts per90",
-            "subjectValue": 0.0,
+            "subjectValue": 2.133527,
             "baselineValue": 1.371523,
-            "subjectScore": 0.0,
-            "baselineScore": 18.7,
+            "subjectScore": 27.52,
+            "baselineScore": 17.69,
             "range": {
               "min": 0.0,
-              "max": 7.335558,
+              "max": 7.752101,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -1420,13 +1420,13 @@
           },
           {
             "metric": "Dribbling tentati per 90",
-            "subjectValue": 4.005806,
-            "baselineValue": 1.864108,
-            "subjectScore": 73.6,
-            "baselineScore": 34.25,
+            "subjectValue": 8.011611,
+            "baselineValue": 3.728217,
+            "subjectScore": 92.71,
+            "baselineScore": 43.14,
             "range": {
               "min": 0.0,
-              "max": 5.442765,
+              "max": 8.641471,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -16523,17 +16523,17 @@
         {
           "id": 255929,
           "name": "Federico Dimarco",
-          "score": 83.8
+          "score": 85.1
         },
         {
           "id": 388567,
           "name": "Luis Henrique",
-          "score": 79.5
+          "score": 80.8
         },
         {
           "id": 415415,
           "name": "Andy Diouf",
-          "score": 77.9
+          "score": 78.6
         }
       ]
     },
@@ -16592,40 +16592,40 @@
   ],
   "RADAR_AXIS_RANGES": [
     {
-      "min": 18.47,
-      "max": 78.72,
+      "min": 17.88,
+      "max": 78.78,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
       "strategy": "p05_p95"
     },
     {
-      "min": 25.3,
-      "max": 75.43,
+      "min": 24.38,
+      "max": 77.34,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
       "strategy": "p05_p95"
     },
     {
-      "min": 14.0,
-      "max": 84.95,
+      "min": 12.06,
+      "max": 86.8,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
       "strategy": "p05_p95"
     },
     {
-      "min": 23.88,
-      "max": 75.36,
+      "min": 23.77,
+      "max": 75.24,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
       "strategy": "p05_p95"
     },
     {
-      "min": 14.5,
-      "max": 86.71,
+      "min": 14.16,
+      "max": 88.05,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
@@ -16634,8 +16634,8 @@
   ],
   "payloadMeta": {
     "payloadType": "legacy_role_payload",
-    "sourcePage": "djed-spence.html#20260813_135141_891754.html",
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260813_135141_891754.html",
+    "sourcePage": "djed-spence.html#20260813_175356_797525.html",
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260813_175356_797525.html",
     "loadedByProductionRuntime": true,
     "fallbackInlineAvailable": false,
     "extractedGlobals": [
