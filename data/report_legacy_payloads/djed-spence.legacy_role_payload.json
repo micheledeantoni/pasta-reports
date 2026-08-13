@@ -170,9 +170,9 @@
       "label": "Djed Spence",
       "values": [
         35.23,
-        27.62,
+        28.43,
         44.8,
-        77.6,
+        77.61,
         72.6
       ]
     },
@@ -186,10 +186,10 @@
       ],
       "values": [
         26.44,
-        47.41,
+        36.66,
         45.86,
-        55.37,
-        90.46
+        55.28,
+        90.38
       ]
     },
     "sourceTeam": {
@@ -200,9 +200,9 @@
       ],
       "values": [
         55.54,
-        20.95,
+        21.38,
         43.76,
-        73.96,
+        73.97,
         84.11
       ]
     },
@@ -214,10 +214,10 @@
         "label": "Federico Dimarco",
         "values": [
           45.45,
-          38.97,
+          24.28,
           62.03,
-          69.91,
-          98.44
+          69.68,
+          98.43
         ]
       },
       {
@@ -225,10 +225,10 @@
         "label": "Luis Henrique",
         "values": [
           13.26,
-          63.63,
+          49.36,
           56.01,
-          57.94,
-          88.67
+          57.82,
+          88.52
         ]
       },
       {
@@ -236,10 +236,10 @@
         "label": "Denzel Dumfries",
         "values": [
           10.68,
-          53.8,
+          46.1,
           15.24,
           35.92,
-          84.1
+          84.0
         ]
       },
       {
@@ -247,10 +247,10 @@
         "label": "Andy Diouf",
         "values": [
           36.37,
-          33.25,
+          26.89,
           50.16,
           57.69,
-          90.62
+          90.57
         ]
       }
     ]
@@ -329,8 +329,8 @@
       "scale": "role_minmax_raw"
     },
     "Aerial attempts per90": {
-      "min": 0.0,
-      "max": 7.752101,
+      "min": 0.282427,
+      "max": 8.853721,
       "count": 331,
       "scale": "role_minmax_raw"
     },
@@ -584,7 +584,7 @@
       "Interceptions per90": 6.220302,
       "Defensive actions share team": 0.010781,
       "Aerial win rate": 0.6,
-      "Aerial attempts per90": 0.0,
+      "Aerial attempts per90": 1.943844,
       "Tackle success rate": 0.666667,
       "Interception to tackle ratio": 2.666667,
       "Pass completion": 0.867521,
@@ -775,12 +775,12 @@
           {
             "metric": "Aerial attempts per90",
             "subjectValue": 2.133527,
-            "baselineValue": 1.061901,
-            "subjectScore": 27.52,
-            "baselineScore": 13.7,
+            "baselineValue": 1.547862,
+            "subjectScore": 21.6,
+            "baselineScore": 14.76,
             "range": {
-              "min": 0.0,
-              "max": 7.752101,
+              "min": 0.282427,
+              "max": 8.853721,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -1211,11 +1211,11 @@
             "metric": "Aerial attempts per90",
             "subjectValue": 2.133527,
             "baselineValue": 1.371523,
-            "subjectScore": 27.52,
-            "baselineScore": 17.69,
+            "subjectScore": 21.6,
+            "baselineScore": 12.71,
             "range": {
-              "min": 0.0,
-              "max": 7.752101,
+              "min": 0.282427,
+              "max": 8.853721,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -16523,17 +16523,17 @@
         {
           "id": 255929,
           "name": "Federico Dimarco",
-          "score": 85.1
+          "score": 89.1
         },
         {
           "id": 388567,
           "name": "Luis Henrique",
-          "score": 80.8
+          "score": 83.4
         },
         {
           "id": 415415,
           "name": "Andy Diouf",
-          "score": 78.6
+          "score": 80.7
         }
       ]
     },
@@ -16567,17 +16567,17 @@
         {
           "id": 255929,
           "name": "Federico Dimarco",
-          "score": 84.8
+          "score": 84.7
         },
         {
           "id": 415415,
           "name": "Andy Diouf",
-          "score": 50.5
+          "score": 50.4
         },
         {
           "id": 322153,
           "name": "Denzel Dumfries",
-          "score": 45.2
+          "score": 45.0
         }
       ]
     }
@@ -16600,8 +16600,8 @@
       "strategy": "p05_p95"
     },
     {
-      "min": 24.38,
-      "max": 77.34,
+      "min": 19.87,
+      "max": 77.05,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
@@ -16616,7 +16616,7 @@
       "strategy": "p05_p95"
     },
     {
-      "min": 23.77,
+      "min": 23.75,
       "max": 75.24,
       "count": 331,
       "scale": "role_axis_minmax",
@@ -16624,8 +16624,8 @@
       "strategy": "p05_p95"
     },
     {
-      "min": 14.16,
-      "max": 88.05,
+      "min": 14.12,
+      "max": 88.04,
       "count": 331,
       "scale": "role_axis_minmax",
       "role": "DEF",
@@ -16634,8 +16634,8 @@
   ],
   "payloadMeta": {
     "payloadType": "legacy_role_payload",
-    "sourcePage": "djed-spence.html#20260813_175356_797525.html",
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260813_175356_797525.html",
+    "sourcePage": "djed-spence.html#20260813_184947_367444.html",
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260813_184947_367444.html",
     "loadedByProductionRuntime": true,
     "fallbackInlineAvailable": false,
     "extractedGlobals": [
