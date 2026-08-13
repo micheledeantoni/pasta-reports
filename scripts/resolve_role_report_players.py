@@ -384,9 +384,6 @@ def search_teams_in_pool(pool: pd.DataFrame, args: argparse.Namespace) -> pd.Dat
 
 
 def duckdb_team_fallback(args: argparse.Namespace, roots: DataRoots) -> pd.DataFrame:
-    db_path = next((path for path in roots.duckdb_files if path.exists()), None)
-    if db_path is None:
-        return pd.DataFrame(columns=TEAM_COLUMNS)
     try:
         import duckdb
     except ImportError:
@@ -394,54 +391,57 @@ def duckdb_team_fallback(args: argparse.Namespace, roots: DataRoots) -> pd.DataF
 
     query = args.query_team or args.target_team
     frames = []
-    con = duckdb.connect(str(db_path), read_only=True)
-    try:
-        tables = con.execute(
-            """
-            select table_schema, table_name
-            from information_schema.tables
-            where table_type = 'BASE TABLE'
-            """
-        ).fetchall()
-        for schema, table in tables:
-            cols = {
-                row[3]
-                for row in con.execute(
-                    """
-                    select * from information_schema.columns
-                    where table_schema = ? and table_name = ?
-                    """,
-                    [schema, table],
-                ).fetchall()
-            }
-            if not {"team_id", "team_name"}.issubset(cols):
-                continue
-            qualified = f'"{schema}"."{table}"'
-            where = []
-            params: list[Any] = []
-            if args.target_team_id:
-                where.append("team_id = ?")
-                params.append(args.target_team_id)
-            if query:
-                where.append("lower(cast(team_name as varchar)) like ?")
-                params.append(f"%{query.casefold()}%")
-            if not where:
-                continue
-            sql = f"""
-                select distinct
-                    cast(team_name as varchar) as team_name,
-                    team_id,
-                    '' as competition,
-                    '' as season,
-                    '{db_path}:{schema}.{table}' as source_file
-                from {qualified}
-                where {' and '.join(where)}
-                order by team_name
-                limit 200
-            """
-            frames.append(con.execute(sql, params).fetchdf())
-    finally:
-        con.close()
+    for db_path in roots.duckdb_files:
+        if not db_path.exists():
+            continue
+        con = duckdb.connect(str(db_path), read_only=True)
+        try:
+            tables = con.execute(
+                """
+                select table_schema, table_name
+                from information_schema.tables
+                where table_type = 'BASE TABLE'
+                """
+            ).fetchall()
+            for schema, table in tables:
+                cols = {
+                    row[3]
+                    for row in con.execute(
+                        """
+                        select * from information_schema.columns
+                        where table_schema = ? and table_name = ?
+                        """,
+                        [schema, table],
+                    ).fetchall()
+                }
+                if not {"team_id", "team_name"}.issubset(cols):
+                    continue
+                qualified = f'"{schema}"."{table}"'
+                where = []
+                params: list[Any] = []
+                if args.target_team_id:
+                    where.append("team_id = ?")
+                    params.append(args.target_team_id)
+                if query:
+                    where.append("lower(cast(team_name as varchar)) like ?")
+                    params.append(f"%{query.casefold()}%")
+                if not where:
+                    continue
+                sql = f"""
+                    select distinct
+                        cast(team_name as varchar) as team_name,
+                        team_id,
+                        '' as competition,
+                        '' as season,
+                        '{db_path}:{schema}.{table}' as source_file
+                    from {qualified}
+                    where {' and '.join(where)}
+                    order by team_name
+                    limit 200
+                """
+                frames.append(con.execute(sql, params).fetchdf())
+        finally:
+            con.close()
     if not frames:
         return pd.DataFrame(columns=TEAM_COLUMNS)
     return pd.concat(frames, ignore_index=True).drop_duplicates(subset=["team_id", "team_name"])
