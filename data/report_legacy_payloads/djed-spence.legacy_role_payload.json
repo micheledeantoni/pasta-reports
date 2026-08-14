@@ -390,14 +390,14 @@
     },
     "Dribbling tentati per 90": {
       "min": 0.0,
-      "max": 8.641471,
+      "max": 5.442765,
       "count": 331,
       "scale": "role_minmax_raw"
     },
     "Dribbling riusciti": {
       "min": 0.0,
       "max": 100.0,
-      "count": 317,
+      "count": 321,
       "scale": "role_minmax_raw"
     },
     "Altezza media dei dribbling": {
@@ -474,7 +474,7 @@
       "Progressive pass share": 0.197263,
       "Progressive carries per90": 3.744557,
       "Average progressive carry distance": 25.000988,
-      "Dribbling tentati per 90": 8.011611,
+      "Dribbling tentati per 90": 4.005806,
       "Dribbling riusciti": 35.869565,
       "Altezza media dei dribbling": 62.69413,
       "Passes into final third per90": 12.626996,
@@ -624,7 +624,7 @@
       "Progressive pass share": 0.330256,
       "Progressive carries per90": 2.108626,
       "Average progressive carry distance": 20.511591,
-      "Dribbling tentati per 90": 3.578275,
+      "Dribbling tentati per 90": 1.789137,
       "Dribbling riusciti": 33.928571,
       "Altezza media dei dribbling": 51.785625,
       "Passes into final third per90": 17.028754,
@@ -654,7 +654,7 @@
       "Progressive pass share": 0.167254,
       "Progressive carries per90": 2.607727,
       "Average progressive carry distance": 25.531154,
-      "Dribbling tentati per 90": 3.878158,
+      "Dribbling tentati per 90": 1.939079,
       "Dribbling riusciti": 20.689655,
       "Altezza media dei dribbling": 69.191379,
       "Passes into final third per90": 11.701337,
@@ -985,13 +985,13 @@
           },
           {
             "metric": "Dribbling tentati per 90",
-            "subjectValue": 8.011611,
+            "subjectValue": 4.005806,
             "baselineValue": 2.319428,
-            "subjectScore": 92.71,
-            "baselineScore": 26.84,
+            "subjectScore": 73.6,
+            "baselineScore": 42.61,
             "range": {
               "min": 0.0,
-              "max": 8.641471,
+              "max": 5.442765,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -1006,7 +1006,7 @@
             "range": {
               "min": 0.0,
               "max": 100.0,
-              "count": 317,
+              "count": 321,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling riusciti"
@@ -1420,13 +1420,13 @@
           },
           {
             "metric": "Dribbling tentati per 90",
-            "subjectValue": 8.011611,
-            "baselineValue": 3.728217,
-            "subjectScore": 92.71,
-            "baselineScore": 43.14,
+            "subjectValue": 4.005806,
+            "baselineValue": 1.864108,
+            "subjectScore": 73.6,
+            "baselineScore": 34.25,
             "range": {
               "min": 0.0,
-              "max": 8.641471,
+              "max": 5.442765,
               "count": 331,
               "scale": "role_minmax_raw"
             },
@@ -1441,7 +1441,7 @@
             "range": {
               "min": 0.0,
               "max": 100.0,
-              "count": 317,
+              "count": 321,
               "scale": "role_minmax_raw"
             },
             "label": "Dribbling riusciti"
@@ -16634,8 +16634,8 @@
   ],
   "payloadMeta": {
     "payloadType": "legacy_role_payload",
-    "sourcePage": "djed-spence.html#20260813_184947_367444.html",
-    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260813_184947_367444.html",
+    "sourcePage": "djed-spence.html#20260814_110052_556628.html",
+    "archiveSource": "archive/frontend_payload_fallback_snapshots/djed-spence.with_inline_payload_20260814_110052_556628.html",
     "loadedByProductionRuntime": true,
     "fallbackInlineAvailable": false,
     "extractedGlobals": [
