@@ -66,7 +66,7 @@ ATT_GOALMOUTH_PANEL = """                <div class="sr-pitch-wrap sr-att-goalmo
 PLAYER_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png")
 COMMON_ASSET_VERSION = "sprint1-mobile-20260605-role-percent"
 THEME_ASSET_VERSION = "sprint1-mobile-20260605-gk-bars"
-GK_ASSET_VERSION = "gk-mobile-20260605-r4"
+GK_ASSET_VERSION = "gk-template-dynamic-target-20260819"
 ROLE_RUNTIME_VERSION = "direct-engagement-display-20260623"
 
 
@@ -186,6 +186,25 @@ def gk_payload_minutes(player: dict):
     return None
 
 
+def payload_schema(player: dict) -> str:
+    """Return the frontend payload schema for a player entry."""
+    payload_file = player.get("payload_file")
+    if not payload_file:
+        return ""
+    path = BASE_DIR / payload_file
+    if not path.exists():
+        return ""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return ""
+    if "GK_PAGE_V1_PLAYERS" in payload:
+        return "gk_page_v1"
+    if "ROLE_META" in payload:
+        return "legacy_role_payload"
+    return ""
+
+
 def payload_profile_reading(player: dict) -> str:
     """Return PROFILE_READING paragraphs from the external payload, if present."""
     payload_file = player.get("payload_file")
@@ -215,6 +234,7 @@ def note_block(text: str) -> str:
 def build_slots(player: dict) -> dict:
     """Return the substitution dict for one player."""
     macro  = player.get("macro_role", "MID")
+    schema = payload_schema(player)
     target = player.get("target_team", "")
     source = player.get("source_club") or player.get("team_name") or ""
     season = fmt_season(player.get("season", ""))
@@ -233,7 +253,7 @@ def build_slots(player: dict) -> dict:
     )
 
     # ── Role-specific CSS and JS runtime ──────────────────────────────────
-    if macro == "GK":
+    if macro == "GK" and schema == "gk_page_v1":
         role_css = f"sr-gk-report.css?v={GK_ASSET_VERSION}"
         role_scripts = (
             '<script>\n'
@@ -453,9 +473,10 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         count=1,
         flags=re.S,
     )
+    bars_title = f"Confronto individuale vs portieri {target} · {season}"
     out = re.sub(
-        r'(<p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>)\s*(?:<p class="sr-section-intro">.*?</p>\s*)*',
-        r"\1\n",
+        r'<p class="sr-section-label">Confronto individuale vs portieri .*?</p>\s*(?:<p class="sr-section-intro">.*?</p>\s*)*',
+        f'<p class="sr-section-label">{bars_title}</p>\n',
         out,
         count=1,
         flags=re.S,
@@ -468,7 +489,7 @@ def render_gk(template_text: str, player: dict, slots: dict) -> str:
         flags=re.S,
     )
     out = re.sub(
-        r'(<p class="sr-section-label">Confronto individuale vs portieri Inter · 2025–26</p>)',
+        rf'(<p class="sr-section-label">{re.escape(bars_title)}</p>)',
         r"\1" + (f"\n            {note_confronto}" if note_confronto else ""),
         out,
         count=1,
@@ -578,7 +599,7 @@ def main():
             print()
             continue
 
-        if slots["MACRO_ROLE"] == "GK":
+        if slots["MACRO_ROLE"] == "GK" and payload_schema(player) == "gk_page_v1":
             if not GK_TEMPLATE.exists():
                 sys.exit(f"GK template source not found: {GK_TEMPLATE}")
             html = render_gk(GK_TEMPLATE.read_text(encoding="utf-8"), player, slots)

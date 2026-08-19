@@ -47,6 +47,11 @@ RUNTIME_GLOBALS = [
     "FOOTNOTES",
     "RADAR_AXIS_RANGES",
 ]
+GK_RUNTIME_GLOBALS = [
+    "GK_PAGE_V1_PLAYERS",
+    "GK_PAGE_V1_TEAM_COMPARISONS",
+    "GK_PAGE_V1_SUMMARY",
+]
 
 
 class PageCreationError(RuntimeError):
@@ -135,6 +140,10 @@ def normalize_season(season: str) -> str:
     if len(value) == 9 and value[:4].isdigit() and value[5:].isdigit():
         return value[2:4] + value[7:9]
     return value
+
+
+def split_ids(raw: Any) -> list[str]:
+    return [part.strip() for part in str(raw or "").split(",") if part.strip()]
 
 
 def load_editorial_fields(args: argparse.Namespace) -> tuple[dict[str, str], dict[str, Any]]:
@@ -347,6 +356,74 @@ def write_manifest(path: Path, manifest: dict[str, Any]) -> None:
     print(f"Manifest: {path}")
 
 
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def player_names_from_gk_payload(players_payload: dict[str, Any], ids: str) -> list[str]:
+    wanted = split_ids(ids)
+    by_id = {
+        str(item.get("header", {}).get("player_id")): item.get("header", {}).get("player_name")
+        for item in players_payload.get("players", [])
+        if isinstance(item, dict)
+    }
+    return [str(by_id.get(pid) or pid) for pid in wanted]
+
+
+def run_gk_payload_builder(command: list[str], cwd: Path, dry_run: bool) -> dict[str, Any]:
+    print(f"  cwd: {cwd}")
+    print(f"  cmd: {command_text(command)}")
+    if dry_run:
+        print("  dry-run: command not executed")
+        return {"command": command, "cwd": str(cwd), "skipped": True, "returncode": None}
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(cwd) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    result = subprocess.run(command, cwd=cwd, text=True, env=env)
+    if result.returncode != 0:
+        raise PageCreationError(f"GK payload builder failed with exit code {result.returncode}: {command_text(command)}")
+    return {"command": command, "cwd": str(cwd), "skipped": False, "returncode": result.returncode}
+
+
+def build_gk_legacy_payload(args: argparse.Namespace, soccerdb_root: Path, timestamp: str) -> dict[str, Any]:
+    source_dir = soccerdb_root / "outputs" / "frontend_payloads" / "gk_page_v1"
+    players_payload = load_json(source_dir / "players.json")
+    comparisons_payload = load_json(source_dir / "team_comparisons.json")
+    summary_payload = load_json(source_dir / "summary.json")
+    comparison_names = player_names_from_gk_payload(players_payload, args.main_comparison_peer_ids)
+    context = {
+        "report_type": "gk_target_vs_team_room",
+        "target_player_name": args.player_name,
+        "target_player_id": int(args.player_id),
+        "comparison_team_name": args.target_team,
+        "comparison_players": comparison_names,
+        "primary_comparison_player": comparison_names[0] if comparison_names else "",
+        "forced_backup_player": comparison_names[1] if len(comparison_names) > 1 else "",
+    }
+    for envelope in (players_payload, comparisons_payload, summary_payload):
+        envelope["report_context"] = context
+    payload = {
+        "GK_PAGE_V1_PLAYERS": players_payload,
+        "GK_PAGE_V1_TEAM_COMPARISONS": comparisons_payload,
+        "GK_PAGE_V1_SUMMARY": summary_payload,
+        "payloadMeta": {
+            "payloadType": "legacy_gk_external_payload",
+            "source": "soccerdb",
+            "directExport": True,
+            "loadedByProductionRuntime": "sr-gk-report-loader.js",
+            "createdAt": timestamp,
+            "generatedFrom": [
+                str(source_dir / "players.json"),
+                str(source_dir / "team_comparisons.json"),
+                str(source_dir / "summary.json"),
+            ],
+        },
+    }
+    for key in GK_RUNTIME_GLOBALS:
+        if key not in payload:
+            raise PageCreationError(f"GK payload missing required global: {key}")
+    return payload
+
+
 def main() -> int:
     args = parse_args()
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
@@ -361,7 +438,8 @@ def main() -> int:
     unsupported_editorial: dict[str, Any] = {}
 
     snapshot_path = ROOT / "archive" / "frontend_payload_fallback_snapshots" / f"{args.slug}.with_inline_payload_{timestamp}.html"
-    payload_path = ROOT / "data" / "report_legacy_payloads" / f"{args.slug}.legacy_role_payload.json"
+    payload_suffix = "legacy_gk_payload" if args.role == "GK" else "legacy_role_payload"
+    payload_path = ROOT / "data" / "report_legacy_payloads" / f"{args.slug}.{payload_suffix}.json"
     index_path = ROOT / "assets" / "data" / "player_index.json"
     html_path = ROOT / f"{args.slug}.html"
     backup_dir = run_dir / "backups"
@@ -374,7 +452,10 @@ def main() -> int:
 
         soccerdb_root = args.soccerdb_root.expanduser().resolve()
         exporter = soccerdb_root / "scripts" / "exports" / "export_role_report_data.py"
-        if not exporter.exists():
+        gk_builder = soccerdb_root / "scripts" / "exports" / "build_gk_page_v1_payloads.py"
+        if args.role == "GK" and not gk_builder.exists():
+            raise PageCreationError(f"SoccerDB GK builder not found: {gk_builder}")
+        if args.role != "GK" and not exporter.exists():
             raise PageCreationError(f"SoccerDB exporter not found: {exporter}")
 
         conflicts = [path for path in (payload_path, html_path) if path.exists()]
@@ -382,45 +463,53 @@ def main() -> int:
             names = ", ".join(str(path.relative_to(ROOT)) for path in conflicts)
             raise PageCreationError(f"refusing to overwrite existing file(s): {names}. Re-run with --overwrite.")
 
-        export_command = [
-            python_for(soccerdb_root),
-            str(exporter),
-            "--role",
-            args.role,
-            "--player-id",
-            str(args.player_id),
-            "--player-name",
-            args.player_name,
-            "--comparison-ids",
-            args.main_comparison_peer_ids,
-            "--comparison-label",
-            args.comparison_label,
-            "--season",
-            normalize_season(args.season),
-            "--competition",
-            args.competition,
-            "--output",
-            str(snapshot_path),
-        ]
-        if args.subject_competition:
-            export_command.extend(["--subject-competition", args.subject_competition])
-        if args.comparison_competition:
-            export_command.extend(["--comparison-competition", args.comparison_competition])
-        if args.context_competition:
-            export_command.extend(["--context-competition", args.context_competition])
-        if args.use_manual_role_overrides:
-            export_command.append("--use-manual-role-overrides")
-            if args.source_role != args.role:
-                export_command.extend(["--source-context-role", args.source_role])
-        if args.source_team_peer_ids and not args.source_context_editorial_only:
-            export_command.extend(
-                [
-                    "--context-ids",
-                    args.source_team_peer_ids,
-                    "--context-label",
-                    args.source_team_peer_label or f"{args.team_name} {args.source_role}",
-                ]
-            )
+        if args.role == "GK":
+            export_command = [
+                python_for(soccerdb_root),
+                str(gk_builder),
+                str(args.player_id),
+                *split_ids(args.main_comparison_peer_ids),
+            ]
+        else:
+            export_command = [
+                python_for(soccerdb_root),
+                str(exporter),
+                "--role",
+                args.role,
+                "--player-id",
+                str(args.player_id),
+                "--player-name",
+                args.player_name,
+                "--comparison-ids",
+                args.main_comparison_peer_ids,
+                "--comparison-label",
+                args.comparison_label,
+                "--season",
+                normalize_season(args.season),
+                "--competition",
+                args.competition,
+                "--output",
+                str(snapshot_path),
+            ]
+            if args.subject_competition:
+                export_command.extend(["--subject-competition", args.subject_competition])
+            if args.comparison_competition:
+                export_command.extend(["--comparison-competition", args.comparison_competition])
+            if args.context_competition:
+                export_command.extend(["--context-competition", args.context_competition])
+            if args.use_manual_role_overrides:
+                export_command.append("--use-manual-role-overrides")
+                if args.source_role != args.role:
+                    export_command.extend(["--source-context-role", args.source_role])
+            if args.source_team_peer_ids and not args.source_context_editorial_only:
+                export_command.extend(
+                    [
+                        "--context-ids",
+                        args.source_team_peer_ids,
+                        "--context-label",
+                        args.source_team_peer_label or f"{args.team_name} {args.source_role}",
+                    ]
+                )
         generate_command = [sys.executable, "generate_pages.py", "--slug", args.slug]
         commands_planned.append({"name": "soccerdb_export", "command": export_command, "cwd": str(soccerdb_root)})
         commands_planned.append({"name": "generate_page", "command": generate_command, "cwd": str(ROOT)})
@@ -442,25 +531,32 @@ def main() -> int:
             if index_path.exists():
                 backups.append(str(backup_file(index_path, timestamp, backup_dir)))
 
-            print("[2/5] Export inline snapshot")
-            write_snapshot_seed(snapshot_path)
-            commands_executed.append(run_command(export_command, soccerdb_root, False))
+            if args.role == "GK":
+                print("[2/5] Build GK Page V1 payloads")
+                commands_executed.append(run_gk_payload_builder(export_command, soccerdb_root, False))
+                print("[3/5] Assemble legacy GK payload JSON")
+                payload = build_gk_legacy_payload(args, soccerdb_root, timestamp)
+                diagnostics = {"missing": []}
+            else:
+                print("[2/5] Export inline snapshot")
+                write_snapshot_seed(snapshot_path)
+                commands_executed.append(run_command(export_command, soccerdb_root, False))
 
-            print("[3/5] Extract legacy payload JSON")
-            payload, diagnostics = extract_payload(snapshot_path)
-            missing_main = missing_payload_players(payload, raw_ids=args.main_comparison_peer_ids)
-            if missing_main:
-                raise PageCreationError(
-                    "selected main comparison peer(s) cannot be resolved in "
-                    f"{args.role} metrics: {','.join(missing_main)}. "
-                    "Search replacement before generating."
-                )
-            missing_source = [] if args.source_context_editorial_only else missing_payload_players(payload, raw_ids=args.source_team_peer_ids)
-            for warning in [
-                f"source-context peer IDs missing from payload PLAYER_META: {','.join(missing_source)}"
-            ] if missing_source else []:
-                warnings.append(warning)
-                print(f"  warning: {warning}")
+                print("[3/5] Extract legacy payload JSON")
+                payload, diagnostics = extract_payload(snapshot_path)
+                missing_main = missing_payload_players(payload, raw_ids=args.main_comparison_peer_ids)
+                if missing_main:
+                    raise PageCreationError(
+                        "selected main comparison peer(s) cannot be resolved in "
+                        f"{args.role} metrics: {','.join(missing_main)}. "
+                        "Search replacement before generating."
+                    )
+                missing_source = [] if args.source_context_editorial_only else missing_payload_players(payload, raw_ids=args.source_team_peer_ids)
+                for warning in [
+                    f"source-context peer IDs missing from payload PLAYER_META: {','.join(missing_source)}"
+                ] if missing_source else []:
+                    warnings.append(warning)
+                    print(f"  warning: {warning}")
             payload_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             if diagnostics["missing"]:
                 warnings.append(f"optional/missing globals: {diagnostics['missing']}")

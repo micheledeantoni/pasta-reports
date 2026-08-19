@@ -66,6 +66,14 @@ function initGkReport() {
     let radarEnhanced = false;
 
     function $(id) { return document.getElementById(id); }
+    function comparisonTeamName() { return reportContext.comparison_team_name || 'Inter'; }
+    function teamAbbrev(name) {
+        const cleaned = String(name || '').replace(/[^A-Za-z0-9 ]+/g, ' ').trim();
+        const parts = cleaned.split(/\s+/).filter(Boolean);
+        if (!parts.length) return 'TGT';
+        if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
+        return parts.map(part => part[0]).join('').slice(0, 3).toUpperCase();
+    }
     function esc(value) {
         return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     }
@@ -94,7 +102,7 @@ function initGkReport() {
         const h = payload.header || {};
         if (h.sample_status === 'starter_sample') return 'Campione da titolare: minuti sufficienti per una lettura GK ordinaria.';
         if (h.sample_status === 'backup_sample') return 'Campione da secondo portiere: minuti sufficienti, ma ruolo e contesto restano da leggere con cautela.';
-        if (h.sample_status === 'forced_low_sample') return 'Campione ridotto: incluso solo per il confronto interno con la stanza portieri Inter, senza modificare i benchmark ufficiali.';
+        if (h.sample_status === 'forced_low_sample') return `Campione ridotto: incluso solo per il confronto interno con la stanza portieri ${comparisonTeamName()}, senza modificare i benchmark ufficiali.`;
         if (h.sample_status === 'unreliable_sample') return 'Campione poco affidabile: i valori vanno letti come indicativi.';
         return h.sample_warning_text || 'Campione disponibile per la lettura GK V1.';
     }
@@ -176,11 +184,11 @@ function initGkReport() {
                     <div class="sr-player-photo"><div class="sr-photo-placeholder">${esc((h.player_name || 'G').slice(0, 1))}</div></div>
                     <div>
                         <h2 class="sr-player-name">${esc(h.player_name || reportContext.target_player_name)}</h2>
-                        <span class="sr-clubs-line">Valutazione per Inter</span>
+                        <span class="sr-clubs-line">Valutazione per ${esc(comparisonTeamName())}</span>
                         <div class="sr-club-flow" aria-label="Percorso valutazione club">
-                            <div class="sr-club-node"><div class="sr-club-logo tottenham">TOT</div><span>${esc(h.team_name || 'Tottenham')}</span></div>
+                            <div class="sr-club-node"><div class="sr-club-logo tottenham">${esc(teamAbbrev(h.team_name || 'Source'))}</div><span>${esc(h.team_name || 'Source')}</span></div>
                             <span class="sr-club-arrow">→</span>
-                            <div class="sr-club-node"><div class="sr-club-logo inter">INT</div><span>Inter</span></div>
+                            <div class="sr-club-node"><div class="sr-club-logo inter">${esc(teamAbbrev(comparisonTeamName()))}</div><span>${esc(comparisonTeamName())}</span></div>
                         </div>
                     </div>
                 </div>
@@ -472,7 +480,7 @@ function initGkReport() {
         }
         let warning = '<p class="sr-radar-context-note">Valori principali normalizzati per90, percentuali, rate o share. I conteggi grezzi restano solo nei tooltip quando disponibili.</p>';
         if (comp2?.header?.sample_status === 'forced_low_sample') {
-            warning += `<div class="sr-gk-sample ${statusClass(comp2.header.sample_status)}"><strong>${esc(sampleLabel(comp2.header.sample_status))}</strong><span>Martínez è incluso solo come confronto interno della stanza portieri Inter; non entra nei benchmark ufficiali.</span></div>`;
+            warning += `<div class="sr-gk-sample ${statusClass(comp2.header.sample_status)}"><strong>${esc(sampleLabel(comp2.header.sample_status))}</strong><span>${esc(comp2.header?.player_name || 'Il secondo portiere')} è incluso solo come confronto interno della stanza portieri ${esc(comparisonTeamName())}; non entra nei benchmark ufficiali.</span></div>`;
         }
         el.innerHTML = `${warning}${groups.map((group, groupIdx) => `
             <div class="sr-dot-group">
@@ -973,7 +981,7 @@ ${fieldLegend('rgba(86,152,244,.88)', 'Intensità = volume coinvolgimento in zon
     function renderMethodology() {
         const el = $('gkMethodology');
         if (!el) return;
-        el.innerHTML = `<p class="sr-narrative">Questa pagina confronta Vicario con la stanza portieri dell’Inter. Martínez è incluso come riferimento interno anche se il campione è ridotto; questa inclusione non modifica i benchmark ufficiali. La V1 GK non usa una sezione di similarità.</p><div class="sr-footnotes"><span class="sr-footnote-chip">Fonte: SoccerDB role artifacts</span><span class="sr-footnote-chip">Ruolo: GK</span><span class="sr-footnote-chip">Radar GK a 4 assi</span><span class="sr-footnote-chip">Benchmark ufficiali invariati</span><span class="sr-footnote-chip">Visual geometry: ${esc(summaryEnvelope.metadata?.visual_geometry_status || 'prototype')}</span><span class="sr-footnote-chip">Source freshness: ${esc(summaryEnvelope.metadata?.source_freshness_status || 'mixed')}</span></div>`;
+        el.innerHTML = `<p class="sr-narrative">Questa pagina confronta ${esc(reportContext.target_player_name || 'il portiere analizzato')} con la stanza portieri ${esc(comparisonTeamName())}. Il secondo portiere selezionato è incluso come riferimento interno anche quando il campione è ridotto; questa inclusione non modifica i benchmark ufficiali. La V1 GK non usa una sezione di similarità.</p><div class="sr-footnotes"><span class="sr-footnote-chip">Fonte: SoccerDB role artifacts</span><span class="sr-footnote-chip">Ruolo: GK</span><span class="sr-footnote-chip">Radar GK a 4 assi</span><span class="sr-footnote-chip">Benchmark ufficiali invariati</span><span class="sr-footnote-chip">Visual geometry: ${esc(summaryEnvelope.metadata?.visual_geometry_status || 'prototype')}</span><span class="sr-footnote-chip">Source freshness: ${esc(summaryEnvelope.metadata?.source_freshness_status || 'mixed')}</span></div>`;
     }
 
     function renderAll() {
